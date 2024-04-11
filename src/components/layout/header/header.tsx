@@ -1,5 +1,4 @@
 import { cn } from "@/utils/class-name";
-import { ModeToggle } from "./mode-toggle";
 import { useSidebar } from "@/hooks/layout/use-sidebar";
 import { HeaderContent } from "./header-content";
 
@@ -16,10 +15,12 @@ export function Header() {
       )}
     >
       <div className="flex mt-2 h-12 w-full items-center justify-between px-10">
-        <div className="-ml-4 flex items-center justify-center">
+        <div className="flex items-center justify-center">
           <div className="space-y-1">
             <p className="text-gray-300 text-sm">Pages / Dashboard</p>
-            <h3 className="font-semibold text-2xl">Main Dashboard</h3>
+            <h3 className="font-semibold text-2xl text-textPrimary">
+              Main Dashboard
+            </h3>
           </div>
         </div>
         <nav className="flex items-center gap-3">

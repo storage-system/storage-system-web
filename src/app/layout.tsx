@@ -1,7 +1,11 @@
-import { Noto_Sans } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const inter = Noto_Sans({ subsets: ["latin"] });
+const mainFontFamily = DM_Sans({
+  weight: ["300", "500", "700", "900"],
+  subsets: ["latin"],
+  variable: "--font-family-main",
+});
 
 export default function RootLayout({
   children,
@@ -9,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt">
-      <body className={inter.className}>{children}</body>
+    <html lang="pt" className={mainFontFamily.variable}>
+      <body>{children}</body>
     </html>
   );
 }

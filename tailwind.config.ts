@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+          sans: ['var(--font-family-main)'],
+      },
       boxShadow: {
         default: 'var(--shadow)',
       },
@@ -54,6 +57,9 @@ const config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        textPrimary: {
+          DEFAULT: "hsl(var(--text-primary))",
         },
       },
       borderRadius: {

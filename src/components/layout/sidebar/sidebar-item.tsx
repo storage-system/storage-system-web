@@ -21,7 +21,7 @@ export function SidebarItem({ items }: DocsSidebarNavProps) {
   return items.length ? (
     <aside
       className={cn(
-        "group relative h-full w-full bg-accent p-0 px-2 pt-4 transition-all ease-in-out dark:border-r-2 dark:border-accent",
+        "group relative h-full w-full bg-accent p-0 px-2 transition-all ease-in-out dark:border-r-2 dark:border-accent",
         isCollapse ? "max-w-[80px]" : "max-w-[220px]"
       )}
     >
@@ -33,11 +33,10 @@ export function SidebarItem({ items }: DocsSidebarNavProps) {
       >
         {isCollapse ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
       </Button>
-      <div className="w-full flex flex-col items-center space-y-4 mt-6">
-        <h1 className="font-bold text-indigo-950 dark:text-white text-3xl">
-          Stor<span className="font-normal">Age</span>
+      <div className="w-full flex flex-col items-center border-b border-[#F4F7FE] dark:border-white/10 py-10">
+        <h1 className="font-extrabold text-textPrimary dark:text-white text-3xl">
+          STOR<span className="font-normal">AGE</span>
         </h1>
-        <Separator className="w-full dark:bg-white/30" />
       </div>
       <ScrollArea className="h-screen max-h-[20rem] w-full md:max-h-[26rem] 2xl:max-h-screen">
         {items.map((item, index) => (
