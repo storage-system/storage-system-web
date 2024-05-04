@@ -17,9 +17,9 @@ export function Header() {
       <div className="flex mt-2 h-12 w-full items-center justify-between px-10">
         <div className="flex items-center justify-center">
           <div className="space-y-1">
-            <p className="text-gray-300 text-sm">Pages / Dashboard</p>
+            <p className="text-gray-300 text-sm">Pages / Início</p>
             <h3 className="font-semibold text-2xl text-textPrimary">
-              Main Dashboard
+              Início
             </h3>
           </div>
         </div>
