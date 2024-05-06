@@ -18,7 +18,7 @@ export function renderStatic(item: NavItem) {
         item?.disabled && "cursor-not-allowed opacity-60",
         isCollapse && "justify-center",
         pathname.endsWith(item.href) || pathname.endsWith(`${item.href}`)
-          ? ""
+          ? "border-l-4 border-l-primary bg-background"
           : ""
       )}
       href={item?.href}
