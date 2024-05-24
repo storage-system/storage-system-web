@@ -10,6 +10,7 @@ import { SidebarMenu } from "./sidebar-menu";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import { StorageLogo } from "@/shared/storage-logo";
 
 export interface DocsSidebarNavProps {
   items: NavItem[];
@@ -26,7 +27,7 @@ export function SidebarItem({ items }: DocsSidebarNavProps) {
       )}
     >
       <Button
-        className="absolute -right-2 top-12 z-50 h-5 w-5 items-center justify-center rounded-full opacity-0 transition-all ease-in-out group-hover:md:opacity-100"
+        className="absolute -right-2 top-16 h-5 w-5 rounded-full opacity-0 transition-all ease-in-out group-hover:md:opacity-100"
         onClick={handleToggleCollapse}
         size="icon"
         variant="outline"
@@ -34,9 +35,11 @@ export function SidebarItem({ items }: DocsSidebarNavProps) {
         {isCollapse ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
       </Button>
       <div className="w-full flex flex-col items-center border-b border-[#F4F7FE] dark:border-white/10 py-10">
-        <h1 className="font-extrabold text-textPrimary dark:text-white text-3xl">
-          STOR<span className="font-normal">AGE</span>
-        </h1>
+        {isCollapse ? <StorageLogo /> : (
+          <h1 className="font-extrabold text-textPrimary dark:text-white text-3xl">
+            STOR<span className="font-normal">AGE</span>
+          </h1>
+        )}
       </div>
       <ScrollArea className="h-screen max-h-[20rem] w-full md:max-h-[26rem] 2xl:max-h-screen">
         {items.map((item, index) => (
