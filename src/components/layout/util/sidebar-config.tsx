@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { HomeIcon } from "lucide-react";
+import { HomeIcon, List } from "lucide-react";
 
 import { PrivateRoutes } from "@/constants/routes/private-routes";
 
@@ -36,6 +36,18 @@ export const sidebarConfig: SidebarConfig = {
           href: PrivateRoutes.HOME,
           items: [],
           icon: <HomeIcon className="h-4 w-4" />,
+        },
+      ],
+    },
+    {
+      href: "",
+      title: "Configurações",
+      items: [
+        {
+          title: "Categorias",
+          href: PrivateRoutes.CATEGORY,
+          items: [],
+          icon: <List className="h-4 w-4" />,
         },
       ],
     },

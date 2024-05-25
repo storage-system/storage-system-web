@@ -45,7 +45,7 @@ export function SidebarItem({ items }: DocsSidebarNavProps) {
         {items.map((item, index) => (
           <div className="flex flex-col gap-2 px-2 pb-4" key={index}>
             {!isCollapse && (
-              <h4 className="mb-1 rounded-md px-3 py-1 text-sm font-bold text-primary dark:text-secondary">
+              <h4 className="mb-1 rounded-md px-3 py-1 text-sm font-bold text-textPrimary">
                 {item.title}
               </h4>
             )}
