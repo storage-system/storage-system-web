@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -9,14 +9,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { FormRender } from "@/shared/form/form-field-dynamic/FormRender";
-import {
-  CreateCategoryType,
-} from "@/validations/create-category-schema";
+import { CreateCategoryType } from "@/validations/create-category-schema";
 import { PlusCircle } from "lucide-react";
 import { useCreateCategoryFormField } from "./create-category-form-field";
 
 export function CreateCategory() {
-  const { form, CREATE_CATEGORY_FORM_FIELD } = useCreateCategoryFormField()
+  const { form, CREATE_CATEGORY_FORM_FIELD } = useCreateCategoryFormField();
 
   return (
     <Dialog>
@@ -29,7 +27,7 @@ export function CreateCategory() {
       <DialogContent>
         <DialogTitle className="text-textPrimary">Criar categoria</DialogTitle>
         <FormRender<CreateCategoryType>
-        constant={CREATE_CATEGORY_FORM_FIELD}
+          constant={CREATE_CATEGORY_FORM_FIELD}
           form={form}
           /* onSubmit={mutateAsync} */
         >
