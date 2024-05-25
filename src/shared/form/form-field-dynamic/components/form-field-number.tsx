@@ -15,7 +15,7 @@ export function FormFieldNumber({ field, slot }: FormFieldNumberProps) {
       disabled={slot.disabled}
       inputMode="numeric"
       onChange={field.onChange}
-      placeholder={slot && 'placeholderKey' in slot ? slot.placeholderKey : ''}
+      placeholder={slot && 'placeholder' in slot ? slot.placeholder : ''}
       type="number"
       value={field.value}
       width="full"

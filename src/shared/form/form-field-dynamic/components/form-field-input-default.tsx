@@ -17,7 +17,7 @@ export function FormFieldInputDefault({
       className="h-12 bg-white dark:bg-black"
       disabled={slot.disabled}
       onChange={field.onChange}
-      placeholder={'placeholderKey' in slot ? slot.placeholderKey : ''}
+      placeholder={'placeholder' in slot ? slot.placeholder : ''}
       value={field.value}
       width="full"
     />

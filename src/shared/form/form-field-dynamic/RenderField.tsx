@@ -5,7 +5,7 @@ import { FormFields } from '@/types/form-field'
 import { cn } from '@/utils/class-name'
 
 import { FormMessage } from '../form-message'
-import { FormFieldDynamic } from './FormFieldDynamic'
+import { FormFieldDynamic } from './form-field-dynamic'
 
 interface RenderFieldProps<T> {
   form: UseFormReturn<T | any>

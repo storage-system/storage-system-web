@@ -29,7 +29,6 @@ export type IFormFieldComboboxSlot = {
   label: string
   className?: string
   type: 'combobox'
-  placeholderKey: string
   placeholder?: string
   loading?: boolean
   multiple: boolean
@@ -60,14 +59,14 @@ export type IFormFieldSelectSlot = {
 export type IFormFieldSelectTextareaSlot = {
   label: string
   className?: string
-  placeholderKey: string
+  placeholder: string
   type?: 'textarea'
   disabled?: boolean
 }
 
 export type IFormFieldDateSingleSlot = {
   label: string
-  placeholderKey: string
+  placeholder: string
   className?: string
   type: 'date-single'
   mode?: 'default' | 'multiple' | 'range' | 'single'
@@ -75,7 +74,7 @@ export type IFormFieldDateSingleSlot = {
 
 export type IFormFieldDateRangeSlot = {
   label: string
-  placeholderKey: string
+  placeholder: string
   className?: string
   type: 'date'
   mode?: 'default' | 'multiple' | 'range' | 'single'
@@ -84,7 +83,7 @@ export type IFormFieldDateRangeSlot = {
 export type IFormFieldInputDefaultSlot = {
   label: string
   className?: string
-  placeholderKey: string
+  placeholder: string
   type?: 'text' | 'email' | 'password' | 'number'
 }
 
