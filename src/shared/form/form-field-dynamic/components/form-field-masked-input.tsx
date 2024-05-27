@@ -71,7 +71,7 @@ export const FormFieldMaskedInput = forwardRef(
       <Input
         {...props}
         autoComplete={props.autoComplete ?? 'off'}
-        className="h-12 disabled:opacity-80"
+        className="h-12 disabled:opacity-80 bg-white dark:bg-black placeholder:text-gray-400"
         name={String(props.name)}
         onBlur={handleOnBlur}
         onChange={handleOnChange}
