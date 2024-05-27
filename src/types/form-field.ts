@@ -99,6 +99,7 @@ export type FormFields<T> = {
   disabled?: boolean
   label?: string
   isLoading?: boolean
+  placeholder?: string
 } & (
     | IFormFieldInputDefaultSlot
     | IFormMaskedInputSlot

@@ -11,6 +11,7 @@ import { FormFieldRadio } from './components/form-field-radio'
 import { FormFieldSelect } from './components/form-field-select'
 import { FormFieldSwitch } from './components/form-field-switch'
 import { FormFieldTextarea } from './components/form-field-textarea'
+import { FormFieldPassword } from './components/form-field-password'
 
 interface Props<T> {
   field: ControllerRenderProps<T | any>
@@ -65,6 +66,13 @@ export function FormFieldDynamic<T>({ field, slot }: Props<T>) {
     case 'number':
       return (
         <FormFieldNumber
+          field={field}
+          slot={slot}
+        />
+      )
+    case 'password':
+      return (
+        <FormFieldPassword
           field={field}
           slot={slot}
         />
