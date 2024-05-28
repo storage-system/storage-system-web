@@ -1,4 +1,4 @@
-import { FormFieldsConstant } from "@/types/form-field"
+import { FormFieldsConstant } from "@/@types/form-field"
 import { AuthenticateType, authenticateSchema } from "@/validations/authenticate-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";

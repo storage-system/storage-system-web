@@ -1,8 +1,12 @@
 import { z } from "zod"
 
 export const authenticateSchema = z.object({
-  email: z.string().email(),
-  password: z.string(),
+  email: z.string({
+    required_error: 'Campo obrigatório'
+  }).email(),
+  password: z.string({
+    required_error: 'Campo obrigatório'
+  }),
 })
 
 export type AuthenticateType = z.infer<typeof authenticateSchema>
