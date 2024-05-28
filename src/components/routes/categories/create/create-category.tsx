@@ -12,8 +12,10 @@ import { FormRender } from "@/shared/form/form-field-dynamic/FormRender";
 import { CreateCategoryType } from "@/validations/create-category-schema";
 import { PlusCircle } from "lucide-react";
 import { useCreateCategoryFormField } from "./create-category-form-field";
+import { useCreateCategory } from "./use-create-category";
 
 export function CreateCategory() {
+  const { mutateAsync, isPending } = useCreateCategory()
   const { form, CREATE_CATEGORY_FORM_FIELD } = useCreateCategoryFormField();
 
   return (
@@ -29,7 +31,7 @@ export function CreateCategory() {
         <FormRender<CreateCategoryType>
           constant={CREATE_CATEGORY_FORM_FIELD}
           form={form}
-          /* onSubmit={mutateAsync} */
+          onSubmit={mutateAsync}
         >
           <div className="w-full flex justify-end space-x-4">
             <DialogClose>
@@ -38,7 +40,7 @@ export function CreateCategory() {
               </Button>
             </DialogClose>
 
-            <Button type="submit">Criar</Button>
+            <Button type="submit" disabled={isPending}>Criar</Button>
           </div>
         </FormRender>
       </DialogContent>

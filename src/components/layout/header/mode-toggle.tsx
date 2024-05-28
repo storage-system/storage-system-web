@@ -7,12 +7,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import {
-  TooltipContent,
-  TooltipRoot,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Laptop, Moon, MoonIcon, Sun, SunIcon } from "lucide-react";
+import { Moon, MoonIcon, Sun, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 
 export function ModeToggle() {
