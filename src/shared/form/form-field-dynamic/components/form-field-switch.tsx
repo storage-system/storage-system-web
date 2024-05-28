@@ -1,7 +1,7 @@
 import { Switch } from '@/components/ui/switch'
 import { type ControllerRenderProps } from 'react-hook-form'
 
-import { type IFormFieldSwitchSlot } from '@/types/form-field'
+import { type IFormFieldSwitchSlot } from '@/@types/form-field'
 
 interface FormFieldSwitchProps {
   field: ControllerRenderProps<any>

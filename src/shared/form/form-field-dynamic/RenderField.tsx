@@ -1,7 +1,7 @@
 import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { type UseFormReturn } from 'react-hook-form'
 
-import { FormFields } from '@/types/form-field'
+import { FormFields } from '@/@types/form-field'
 import { cn } from '@/utils/class-name'
 
 import { FormMessage } from '../form-message'

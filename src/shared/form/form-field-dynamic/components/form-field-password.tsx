@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Eye, EyeOff } from 'lucide-react'
 import { type ControllerRenderProps } from 'react-hook-form'
 
-import { FormFields } from '@/types/form-field'
+import { FormFields } from '@/@types/form-field'
 
 interface FormFieldPasswordProps {
   field: ControllerRenderProps<any>
@@ -36,6 +36,7 @@ export function FormFieldPassword({ field, slot }: FormFieldPasswordProps) {
           className="absolute right-1 top-1/2 -translate-y-1/2"
           onClick={handleTogglePassword}
           size="icon"
+          type="button"
           variant="ghost"
         >
           {showPassword ? (

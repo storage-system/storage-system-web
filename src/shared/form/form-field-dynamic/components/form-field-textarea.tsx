@@ -1,7 +1,7 @@
 import { Textarea } from '@/components/ui/textarea'
 import { type ControllerRenderProps } from 'react-hook-form'
 
-import { type IFormFieldSelectTextareaSlot } from '@/types/form-field'
+import { type IFormFieldSelectTextareaSlot } from '@/@types/form-field'
 
 interface FormFieldTextareaProps {
   slot: IFormFieldSelectTextareaSlot

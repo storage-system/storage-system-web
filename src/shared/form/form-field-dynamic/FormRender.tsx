@@ -4,7 +4,7 @@ import { FormProvider, type UseFormReturn } from 'react-hook-form'
 import { cn } from '@/utils/class-name'
 
 import { RenderField } from './RenderField'
-import { FormFieldsConstant } from '@/types/form-field'
+import { FormFieldsConstant } from '@/@types/form-field'
 
 type Props<T> = {
   form: UseFormReturn<T | any>

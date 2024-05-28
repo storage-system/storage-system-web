@@ -1,7 +1,7 @@
 import { Input } from '@/components/ui/input'
 import { type ControllerRenderProps } from 'react-hook-form'
 
-import { type FormFields } from '@/types/form-field'
+import { type FormFields } from '@/@types/form-field'
 
 interface FormFieldInputDefaultProps {
   field: ControllerRenderProps<any>

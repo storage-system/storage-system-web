@@ -2,7 +2,7 @@ import { FormControl, FormItem, FormLabel } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { type ControllerRenderProps } from 'react-hook-form'
 
-import { type IFormFieldRadioSlot } from '@/types/form-field'
+import { type IFormFieldRadioSlot } from '@/@types/form-field'
 import { cn } from '@/utils/class-name'
 
 interface FormFieldRadioProps {

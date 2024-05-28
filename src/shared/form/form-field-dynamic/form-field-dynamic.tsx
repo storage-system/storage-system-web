@@ -2,7 +2,7 @@ import { Input } from '@/components/ui/input'
 import { Skeleton } from '@/components/ui/skeleton'
 import { type ControllerRenderProps } from 'react-hook-form'
 
-import { type FormFields } from '@/types/form-field'
+import { type FormFields } from '@/@types/form-field'
 
 import { FormFieldInputDefault } from './components/form-field-input-default'
 import { FormFieldMaskedInput } from './components/form-field-masked-input'

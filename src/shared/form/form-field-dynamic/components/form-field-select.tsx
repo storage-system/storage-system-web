@@ -1,7 +1,7 @@
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { type ControllerRenderProps } from 'react-hook-form'
 
-import { type IFormFieldSelectSlot } from '@/types/form-field'
+import { type IFormFieldSelectSlot } from '@/@types/form-field'
 
 interface FormFieldSelectProps {
   field: ControllerRenderProps<any>
