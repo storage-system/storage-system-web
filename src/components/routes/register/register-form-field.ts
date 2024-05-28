@@ -1,4 +1,4 @@
-import { FormFieldsConstant } from "@/types/form-field"
+import { FormFieldsConstant } from "@/@types/form-field"
 import { telMask } from "@/utils/masker";
 import { CreateAccountInput, CreateAccountType, createAccountSchema } from "@/validations/create-account-schema";
 import { zodResolver } from "@hookform/resolvers/zod";

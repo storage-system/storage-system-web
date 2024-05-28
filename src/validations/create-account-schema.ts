@@ -1,11 +1,21 @@
 import { z } from "zod"
 
 export const createAccountSchema = z.object({
-  name: z.string(),
-  email: z.string().email(),
-  contact: z.string(),
-  responsible: z.string(),
-  password: z.string(),
+  name: z.string({
+    required_error: 'Campo obrigatório'
+  }),
+  email: z.string({
+    required_error: 'Campo obrigatório'
+  }).email(),
+  contact: z.string({
+    required_error: 'Campo obrigatório'
+  }),
+  responsible: z.string({
+    required_error: 'Campo obrigatório'
+  }),
+  password: z.string({
+    required_error: 'Campo obrigatório'
+  }),
 })
 
 export type CreateAccountType = z.infer<typeof createAccountSchema>
