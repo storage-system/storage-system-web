@@ -24,12 +24,11 @@ export const authOptions: NextAuthOptions = {
         }
 
         try {
-          const response = await axios.post(`${apiUrl}sessions`, {
+          const { data } = await axios.post(`${apiUrl}sessions`, {
             email: credentials.email,
             password: credentials.password,
           });
 
-          const { data } = response;
           const userResponse = jwtDecode(data.access_token);
 
           if (userResponse) {
