@@ -1,10 +1,12 @@
-import { Category } from "@/@types/category"
+import { ListCategory } from "@/@types/category"
 import { dateFormatter } from "@/utils/format-date"
-import { Switch } from '@/components/ui/switch'
 import { ColumnDef } from "@tanstack/table-core"
+import { CategoryActiveCell } from "./cell/active-category-cell"
+import { DeleteCategoryCell } from "./cell/delete-category-cell"
+import { UpdateCategoryCell } from "./cell/update-category-cell"
 
 export function useListCategoriesColumns() {
-  const tableColumns: ColumnDef<Category>[] = [
+  const tableColumns: ColumnDef<ListCategory>[] = [
     {
       accessorKey: 'name',
       header: 'Nome',
@@ -26,10 +28,18 @@ export function useListCategoriesColumns() {
       accessorKey: 'isActive',
       header: 'Ativo',
       cell: ({ row }) => (
-        <Switch
-          defaultChecked={row.original.isActive}
-        /* onCheckedChange={field.onChange} */
-        />
+        <CategoryActiveCell row={row.original} />
+      ),
+      enableHiding: false,
+    },
+    {
+      accessorKey: 'actions',
+      header: 'Ações',
+      cell: ({ row }) => (
+        <div className="flex justify-evenly">
+          <UpdateCategoryCell row={row.original} />
+          <DeleteCategoryCell row={row.original} />
+        </div>
       ),
       enableHiding: false,
     },

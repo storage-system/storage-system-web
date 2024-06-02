@@ -4,3 +4,7 @@ export interface Category {
   createdAt: Date
   updatedAt: Date
 }
+
+export interface ListCategory extends Category {
+  id: string
+}
