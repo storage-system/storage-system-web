@@ -3,14 +3,12 @@
 import { Table, TableBody, TableHeader, TableRow, TableCell, TableHead } from '@/components/ui/table'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { flexRender } from '@tanstack/react-table'
-import { useTranslations } from 'next-intl'
 
 import { useDataTableContext } from './data-table-provider'
 import { Skeleton } from '@/components/ui/skeleton'
 
 export function DataTableMain() {
   const { table, isLoading } = useDataTableContext()
-  const translate = useTranslations('shared.table')
   const columns = table.getAllColumns()
 
   return (
@@ -78,7 +76,7 @@ export function DataTableMain() {
                 className="h-24 text-center"
                 colSpan={columns.length}
               >
-                {translate('no_data')}
+                Nenhum dado encontrado!
               </TableCell>
             </TableRow>
           )}

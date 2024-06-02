@@ -1,7 +1,6 @@
-'use client'
-
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { Select, SelectTrigger, SelectItem, SelectContent, SelectValue } from '@/components/ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -13,8 +12,34 @@ import { useDataTableContext } from './data-table-provider'
 
 export function DataTablePagination() {
   const { table, total } = useDataTableContext()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const newParams = new URLSearchParams(searchParams)
+  const pathname = usePathname()
 
   const lastPageIndex = table.getPageCount()
+  const firstPageIndex = 1
+
+  const nextPageIndex = Math.min(
+    table.getState().pagination.pageIndex + 2,
+    lastPageIndex,
+  )
+
+  const previousPageIndex = Math.max(
+    table.getState().pagination.pageIndex,
+    firstPageIndex,
+  )
+
+  const updateCurrentPage = (pageIndex: number) => {
+    newParams.set('page', `${pageIndex}`)
+    router.push(`${pathname}?${newParams.toString()}`)
+  }
+
+  const updatePageSize = (pageSize: string) => {
+    newParams.set('perPage', `${pageSize}`)
+    newParams.delete('page')
+    router.push(`${pathname}?${newParams.toString()}`)
+  }
 
   const { pagination } = table.getState()
 
@@ -28,12 +53,16 @@ export function DataTablePagination() {
       : pagination.pageSize * (pagination.pageIndex + 1)
   const betweenValue = isLess ? isLessValue : isntLessValue
 
+  console.log(table.getState().pagination.pageSize)
+
   return (
-    <div className="flex w-full flex-col-reverse items-center justify-between gap-4 px-2 md:flex-row">
+    <div className="mt-2 flex w-full flex-col-reverse items-center justify-between gap-4 px-2 md:flex-row">
       <div className="flex items-center space-x-2">
-        <p className="text-sm font-medium">Linhas por pagina</p>
+        <p className="text-sm font-medium">
+          Linhas por página
+        </p>
         <Select
-          onValueChange={(value: string) => table.setPageSize(Number(value))}
+          onValueChange={updatePageSize}
           value={`${table.getState().pagination.pageSize}`}
         >
           <SelectTrigger className="h-8 w-[70px]">
@@ -64,40 +93,40 @@ export function DataTablePagination() {
         </div>
         <div className="flex items-center space-x-2">
           <Button
-            className="h-8 w-8 p-0"
+            className="size-8 p-0"
             disabled={!table.getCanPreviousPage()}
-            onClick={() => table.setPageIndex(0)}
+            onClick={() => updateCurrentPage(firstPageIndex)}
             size="icon"
             variant="ghost"
           >
-            <ChevronsLeftIcon className="h-4 w-4" />
+            <ChevronsLeftIcon className="size-4" />
           </Button>
           <Button
-            className="h-8 w-8 p-0"
+            className="size-8 p-0"
             disabled={!table.getCanPreviousPage()}
-            onClick={() => table.previousPage()}
+            onClick={() => updateCurrentPage(previousPageIndex)}
             size="icon"
             variant="ghost"
           >
-            <ChevronLeftIcon className="h-4 w-4" />
+            <ChevronLeftIcon className="size-4" />
           </Button>
           <Button
-            className="h-8 w-8 p-0"
+            className="size-8 p-0"
             disabled={!table.getCanNextPage()}
-            onClick={() => table.nextPage()}
+            onClick={() => updateCurrentPage(nextPageIndex)}
             size="icon"
             variant="ghost"
           >
-            <ChevronRightIcon className="h-4 w-4" />
+            <ChevronRightIcon className="size-4" />
           </Button>
           <Button
-            className="h-8 w-8 p-0"
+            className="size-8 p-0"
             disabled={!table.getCanNextPage()}
-            onClick={() => table.setPageIndex(lastPageIndex)}
+            onClick={() => updateCurrentPage(lastPageIndex)}
             size="icon"
             variant="outline"
           >
-            <ChevronsRightIcon className="h-4 w-4" />
+            <ChevronsRightIcon className="size-4" />
           </Button>
         </div>
       </div>
