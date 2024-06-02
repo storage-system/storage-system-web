@@ -14,8 +14,18 @@ export function useCategoriesService() {
     return data
   }
 
+  async function updateCategoryService(anId: string, anInput: Partial<CreateCategoryInput>) {
+    await storageSystemApi.patch(`/categories/${anId}`, anInput)
+  }
+
+  async function deleteCategoryService(anId: string) {
+    await storageSystemApi.delete(`/categories/${anId}`)
+  }
+
   return {
     createCategoryService,
     listCategoriesService,
+    updateCategoryService,
+    deleteCategoryService,
   }
 }
