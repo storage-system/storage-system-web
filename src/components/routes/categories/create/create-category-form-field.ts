@@ -1,16 +1,7 @@
 import { FormFieldsConstant } from "@/@types/form-field"
-import { CreateCategoryType, createCategorySchema } from "@/validations/create-category-schema"
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { CreateCategoryType } from "@/validations/create-category-schema"
 
 export function useCreateCategoryFormField() {
-  const form = useForm<CreateCategoryType>({
-    resolver: zodResolver(createCategorySchema),
-    defaultValues: {
-      isActive: true,
-    },
-  });
-
   const CREATE_CATEGORY_FORM_FIELD: FormFieldsConstant<CreateCategoryType> = [
     [
       {
@@ -32,7 +23,6 @@ export function useCreateCategoryFormField() {
   ]
 
   return {
-    form,
     CREATE_CATEGORY_FORM_FIELD
   }
 }

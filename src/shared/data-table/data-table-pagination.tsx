@@ -53,8 +53,6 @@ export function DataTablePagination() {
       : pagination.pageSize * (pagination.pageIndex + 1)
   const betweenValue = isLess ? isLessValue : isntLessValue
 
-  console.log(table.getState().pagination.pageSize)
-
   return (
     <div className="mt-2 flex w-full flex-col-reverse items-center justify-between gap-4 px-2 md:flex-row">
       <div className="flex items-center space-x-2">

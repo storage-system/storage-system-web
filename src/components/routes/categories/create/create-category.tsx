@@ -15,11 +15,11 @@ import { useCreateCategoryFormField } from "./create-category-form-field";
 import { useCreateCategory } from "./use-create-category";
 
 export function CreateCategory() {
-  const { mutateAsync, isPending } = useCreateCategory()
-  const { form, CREATE_CATEGORY_FORM_FIELD } = useCreateCategoryFormField();
+  const { CREATE_CATEGORY_FORM_FIELD } = useCreateCategoryFormField();
+  const { mutateAsync, isPending, openDialog, setOpenDialog, form } = useCreateCategory()
 
   return (
-    <Dialog>
+    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger asChild>
         <Button className="text-white">
           <PlusCircle className="size-4 mr-2" />
