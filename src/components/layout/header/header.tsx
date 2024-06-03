@@ -1,8 +1,10 @@
 import { cn } from "@/utils/class-name";
 import { useSidebar } from "@/hooks/layout/use-sidebar";
 import { HeaderContent } from "./header-content";
+import { usePageTitle } from "@/utils/set-page-title";
 
 export function Header() {
+  const pageTitle = usePageTitle()
   const { isCollapse } = useSidebar();
 
   return (
@@ -17,9 +19,9 @@ export function Header() {
       <div className="flex mt-2 h-12 w-full items-center justify-between px-10">
         <div className="flex items-center justify-center">
           <div className="space-y-1">
-            <p className="text-gray-300 text-sm">Pages / Início</p>
+            <p className="text-gray-300 text-sm">Página / {pageTitle}</p>
             <h3 className="font-semibold text-2xl text-textPrimary">
-              Início
+              {pageTitle}
             </h3>
           </div>
         </div>
