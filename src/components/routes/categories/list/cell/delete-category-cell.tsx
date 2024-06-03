@@ -1,6 +1,6 @@
 import { ListCategory } from "@/@types/category";
 import { TooltipRoot, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogTrigger, DialogContent, DialogClose } from "@/components/ui/dialog";
 import { AlertCircle, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCategoriesService } from "@/services/categories";
