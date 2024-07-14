@@ -4,17 +4,18 @@ import { FormRender } from "@/shared/form/form-field-dynamic/FormRender";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { PublicRoutes } from "@/constants/routes/public-routes";
-import { CreateAccountType } from "@/validations/create-account-schema";
+import { CreateUserType } from "@/validations/create-user-schema";
 import { useRegisterFormField } from "./register-form-field";
 import { companiesService } from "@/services/company";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
+import { usersService } from "@/services/user";
 
 export function RegisterForm() {
   const router = useRouter()
   const { toast } = useToast()
-  const { createCompanyService } = companiesService()
+  const { createUsersService } = usersService()
   const { form, REGISTER_FORM_FIELD } = useRegisterFormField()
 
   function handleSuccess() {
@@ -26,12 +27,12 @@ export function RegisterForm() {
   }
 
   const { mutateAsync, isPending } = useMutation({
-    mutationFn: createCompanyService,
+    mutationFn: createUsersService,
     onSuccess: handleSuccess,
   })
 
   return (
-    <FormRender<CreateAccountType>
+    <FormRender<CreateUserType>
       constant={REGISTER_FORM_FIELD}
       form={form}
       onSubmit={mutateAsync}

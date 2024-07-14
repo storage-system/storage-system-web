@@ -1,21 +1,21 @@
 import { FormFieldsConstant } from "@/@types/form-field"
-import { telMask } from "@/utils/masker";
-import { CreateAccountInput, CreateAccountType, createAccountSchema } from "@/validations/create-account-schema";
+import { telMask } from "@/utils/masker"
+import { CreateUserInput, CreateUserType, createUserSchema } from "@/validations/create-user-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form"
 
 export function useRegisterFormField() {
-  const form = useForm<CreateAccountInput>({
-    resolver: zodResolver(createAccountSchema)
+  const form = useForm<CreateUserInput>({
+    resolver: zodResolver(createUserSchema),
   });
 
-  const REGISTER_FORM_FIELD: FormFieldsConstant<CreateAccountType> = [
+  const REGISTER_FORM_FIELD: FormFieldsConstant<CreateUserType> = [
     [
       {
         name: 'name',
-        label: 'Nome da sua empresa',
+        label: 'Nome',
         className: 'col-span-full',
-        placeholder: 'Ex: Pedro Eletrônicos',
+        placeholder: 'Ex: Pedro Veras',
         type: 'text',
       },
     ],
@@ -30,16 +30,9 @@ export function useRegisterFormField() {
     ],
     [
       {
-        name: 'responsible',
-        label: 'Responsável',
-        className: 'col-span-full md:col-span-6',
-        placeholder: 'Ex: Pedro Veras',
-        type: 'text',
-      },
-      {
-        name: 'contact',
+        name: 'phone',
         label: 'Contato',
-        className: 'col-span-full md:col-span-6',
+        className: 'col-span-full',
         placeholder: 'Ex: (62) 9 9999 9999',
         type: 'masked',
         mask: telMask,
