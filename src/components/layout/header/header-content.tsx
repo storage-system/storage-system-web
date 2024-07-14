@@ -1,10 +1,10 @@
-import { Input } from "@/components/ui/input";
-import { ModeToggle } from "./mode-toggle";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { LogOut } from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
-import { fallback } from "@/utils/fallback";
+import { Input } from '@/components/ui/input'
+import { ModeToggle } from './mode-toggle'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { LogOut } from 'lucide-react'
+import { signOut, useSession } from 'next-auth/react'
+import { fallback } from '@/utils/fallback'
 
 export function HeaderContent() {
   const { data: session } = useSession()
@@ -29,10 +29,10 @@ export function HeaderContent() {
       <Avatar className="w-7 h-7">
         {userPhoto ? (
           <AvatarImage src={userPhoto} />
-        ) : username && (
-          <AvatarFallback>{fallback(username)}</AvatarFallback>
+        ) : (
+          username && <AvatarFallback>{fallback(username)}</AvatarFallback>
         )}
       </Avatar>
     </div>
-  );
+  )
 }

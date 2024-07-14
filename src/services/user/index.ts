@@ -1,5 +1,5 @@
-import { storageSystemApi } from "../axios";
-import { CreateUserInput } from "@/validations/create-user-schema";
+import { storageSystemApi } from '../axios'
+import { CreateUserInput } from '@/validations/create-user-schema'
 
 export function usersService() {
   const endpoint = '/users'
@@ -9,6 +9,6 @@ export function usersService() {
   }
 
   return {
-    createUsersService
+    createUsersService,
   }
 }

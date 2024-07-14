@@ -1,7 +1,10 @@
 import { categoriesQueryKey } from '@/constants/query-key/categories-query-key'
 import { useCategoriesService } from '@/services/categories'
 import { queryClient } from '@/utils/query-client'
-import { CreateCategoryType, createCategorySchema } from '@/validations/create-category-schema'
+import {
+  CreateCategoryType,
+  createCategorySchema,
+} from '@/validations/create-category-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'
@@ -17,7 +20,7 @@ export function useCreateCategory() {
     defaultValues: {
       isActive: true,
     },
-  });
+  })
 
   async function handleSuccess() {
     await queryClient.invalidateQueries({
@@ -29,7 +32,7 @@ export function useCreateCategory() {
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: createCategoryService,
-    onSuccess: handleSuccess
+    onSuccess: handleSuccess,
   })
 
   return {

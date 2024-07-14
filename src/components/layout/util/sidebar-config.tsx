@@ -1,27 +1,27 @@
-import { type ReactNode } from "react";
-import { HomeIcon, List } from "lucide-react";
+import { type ReactNode } from 'react'
+import { HomeIcon, List } from 'lucide-react'
 
-import { PrivateRoutes } from "@/constants/routes/private-routes";
+import { PrivateRoutes } from '@/constants/routes/private-routes'
 
 export interface NavItem {
-  title?: string;
-  href: string;
-  disabled?: boolean;
-  external?: boolean;
-  items?: NavItem[];
-  icon?: ReactNode;
+  title?: string
+  href: string
+  disabled?: boolean
+  external?: boolean
+  items?: NavItem[]
+  icon?: ReactNode
 }
 
 export interface Shortcuts extends NavItem {
-  partialKey?: string;
-  completeKey?: string;
+  partialKey?: string
+  completeKey?: string
 }
 
 interface SidebarConfig {
-  mainNav: NavItem[];
-  sidebarNav: NavItem[];
-  shortcuts: Shortcuts[];
-  commandNav: NavItem[];
+  mainNav: NavItem[]
+  sidebarNav: NavItem[]
+  shortcuts: Shortcuts[]
+  commandNav: NavItem[]
 }
 
 export const sidebarConfig: SidebarConfig = {
@@ -29,10 +29,10 @@ export const sidebarConfig: SidebarConfig = {
   shortcuts: [],
   sidebarNav: [
     {
-      href: "",
+      href: '',
       items: [
         {
-          title: "Início",
+          title: 'Início',
           href: PrivateRoutes.HOME,
           items: [],
           icon: <HomeIcon className="h-4 w-4" />,
@@ -40,11 +40,11 @@ export const sidebarConfig: SidebarConfig = {
       ],
     },
     {
-      href: "",
-      title: "Configurações",
+      href: '',
+      title: 'Configurações',
       items: [
         {
-          title: "Categorias",
+          title: 'Categorias',
           href: PrivateRoutes.CATEGORY,
           items: [],
           icon: <List className="h-4 w-4" />,
@@ -54,8 +54,8 @@ export const sidebarConfig: SidebarConfig = {
   ],
   commandNav: [
     {
-      title: "Início",
+      title: 'Início',
       href: PrivateRoutes.HOME,
     },
   ],
-};
+}

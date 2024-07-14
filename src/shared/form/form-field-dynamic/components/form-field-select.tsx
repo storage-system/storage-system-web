@@ -1,4 +1,11 @@
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { type ControllerRenderProps } from 'react-hook-form'
 
 import { type IFormFieldSelectSlot } from '@/@types/form-field'
@@ -22,10 +29,7 @@ export function FormFieldSelect({ field, slot }: FormFieldSelectProps) {
         <SelectGroup className="max-h-52">
           {slot.options.map((item, index) => {
             return (
-              <SelectItem
-                key={index}
-                value={String(item.value)}
-              >
+              <SelectItem key={index} value={String(item.value)}>
                 {item.label}
               </SelectItem>
             )

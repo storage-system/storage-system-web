@@ -1,9 +1,9 @@
-import { ListCategory } from "@/@types/category"
-import { dateFormatter } from "@/utils/format-date"
-import { ColumnDef } from "@tanstack/table-core"
-import { CategoryActiveCell } from "./cell/active-category-cell"
-import { DeleteCategoryCell } from "./cell/delete-category-cell"
-import { UpdateCategoryCell } from "./cell/update-category-cell"
+import { ListCategory } from '@/@types/category'
+import { dateFormatter } from '@/utils/format-date'
+import { ColumnDef } from '@tanstack/table-core'
+import { CategoryActiveCell } from './cell/active-category-cell'
+import { DeleteCategoryCell } from './cell/delete-category-cell'
+import { UpdateCategoryCell } from './cell/update-category-cell'
 
 export function useListCategoriesColumns() {
   const tableColumns: ColumnDef<ListCategory>[] = [
@@ -27,9 +27,7 @@ export function useListCategoriesColumns() {
     {
       accessorKey: 'isActive',
       header: 'Ativo',
-      cell: ({ row }) => (
-        <CategoryActiveCell row={row.original} />
-      ),
+      cell: ({ row }) => <CategoryActiveCell row={row.original} />,
       enableHiding: false,
     },
     {
@@ -46,6 +44,6 @@ export function useListCategoriesColumns() {
   ]
 
   return {
-    tableColumns
+    tableColumns,
   }
 }

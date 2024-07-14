@@ -16,12 +16,7 @@ export function CustomLink({
   ...props
 }: CustomLinkProps) {
   return (
-    <Link
-      href={href}
-      locale={locale}
-      prefetch={prefetch}
-      {...props}
-    >
+    <Link href={href} locale={locale} prefetch={prefetch} {...props}>
       {children}
     </Link>
   )

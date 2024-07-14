@@ -1,22 +1,23 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { FormRender } from "@/shared/form/form-field-dynamic/FormRender";
-import { CreateCategoryType } from "@/validations/create-category-schema";
-import { PlusCircle } from "lucide-react";
-import { useCreateCategoryFormField } from "./create-category-form-field";
-import { useCreateCategory } from "./use-create-category";
+} from '@/components/ui/dialog'
+import { FormRender } from '@/shared/form/form-field-dynamic/FormRender'
+import { CreateCategoryType } from '@/validations/create-category-schema'
+import { PlusCircle } from 'lucide-react'
+import { useCreateCategoryFormField } from './create-category-form-field'
+import { useCreateCategory } from './use-create-category'
 
 export function CreateCategory() {
-  const { CREATE_CATEGORY_FORM_FIELD } = useCreateCategoryFormField();
-  const { mutateAsync, isPending, openDialog, setOpenDialog, form } = useCreateCategory()
+  const { CREATE_CATEGORY_FORM_FIELD } = useCreateCategoryFormField()
+  const { mutateAsync, isPending, openDialog, setOpenDialog, form } =
+    useCreateCategory()
 
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
@@ -40,10 +41,12 @@ export function CreateCategory() {
               </Button>
             </DialogClose>
 
-            <Button type="submit" disabled={isPending}>Criar</Button>
+            <Button type="submit" disabled={isPending}>
+              Criar
+            </Button>
           </div>
         </FormRender>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

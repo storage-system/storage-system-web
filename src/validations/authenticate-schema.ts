@@ -1,11 +1,13 @@
-import { z } from "zod"
+import { z } from 'zod'
 
 export const authenticateSchema = z.object({
-  email: z.string({
-    required_error: 'Campo obrigatório'
-  }).email(),
+  email: z
+    .string({
+      required_error: 'Campo obrigatório',
+    })
+    .email(),
   password: z.string({
-    required_error: 'Campo obrigatório'
+    required_error: 'Campo obrigatório',
   }),
 })
 

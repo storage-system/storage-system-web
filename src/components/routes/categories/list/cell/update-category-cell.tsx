@@ -1,18 +1,31 @@
-import { ListCategory } from "@/@types/category";
-import { TooltipRoot, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
-import { Dialog, DialogTrigger, DialogContent, DialogClose, DialogHeader } from "@/components/ui/dialog";
-import { SquarePen } from "lucide-react";
-import { FormRender } from "@/shared/form/form-field-dynamic/FormRender";
-import { UpdateCategoryType, updateCategorySchema } from "@/validations/update-category-schema";
-import { useCreateCategoryFormField } from "../../create/create-category-form-field";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { useCategoriesService } from "@/services/categories";
-import { queryClient } from "@/utils/query-client";
-import { useState } from "react";
-import { categoriesQueryKey } from "@/constants/query-key/categories-query-key";
-import { useMutation } from "@tanstack/react-query";
+import { ListCategory } from '@/@types/category'
+import {
+  TooltipRoot,
+  TooltipTrigger,
+  TooltipContent,
+} from '@/components/ui/tooltip'
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogClose,
+  DialogHeader,
+} from '@/components/ui/dialog'
+import { SquarePen } from 'lucide-react'
+import { FormRender } from '@/shared/form/form-field-dynamic/FormRender'
+import {
+  UpdateCategoryType,
+  updateCategorySchema,
+} from '@/validations/update-category-schema'
+import { useCreateCategoryFormField } from '../../create/create-category-form-field'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { Button } from '@/components/ui/button'
+import { useCategoriesService } from '@/services/categories'
+import { queryClient } from '@/utils/query-client'
+import { useState } from 'react'
+import { categoriesQueryKey } from '@/constants/query-key/categories-query-key'
+import { useMutation } from '@tanstack/react-query'
 
 interface Props {
   row: ListCategory
@@ -30,9 +43,9 @@ export function UpdateCategoryCell({ row }: Props) {
     resolver: zodResolver(updateCategorySchema),
     defaultValues: {
       name: row.name,
-      isActive: row.isActive
+      isActive: row.isActive,
     },
-  });
+  })
 
   async function handleSuccess() {
     await queryClient.invalidateQueries({
@@ -43,8 +56,9 @@ export function UpdateCategoryCell({ row }: Props) {
   }
 
   const { mutateAsync, isPending } = useMutation({
-    mutationFn: (data: UpdateCategoryType) => updateCategoryService(categoryId, data),
-    onSuccess: handleSuccess
+    mutationFn: (data: UpdateCategoryType) =>
+      updateCategoryService(categoryId, data),
+    onSuccess: handleSuccess,
   })
 
   return (
@@ -54,9 +68,7 @@ export function UpdateCategoryCell({ row }: Props) {
           <TooltipTrigger>
             <SquarePen className="size-4" />
           </TooltipTrigger>
-          <TooltipContent>
-            Editar
-          </TooltipContent>
+          <TooltipContent>Editar</TooltipContent>
         </TooltipRoot>
       </DialogTrigger>
       <DialogContent>
@@ -73,7 +85,9 @@ export function UpdateCategoryCell({ row }: Props) {
               </Button>
             </DialogClose>
 
-            <Button type="submit" disabled={isPending}>Editar</Button>
+            <Button type="submit" disabled={isPending}>
+              Editar
+            </Button>
           </div>
         </FormRender>
       </DialogContent>

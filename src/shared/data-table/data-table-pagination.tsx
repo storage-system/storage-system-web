@@ -1,6 +1,12 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -56,9 +62,7 @@ export function DataTablePagination() {
   return (
     <div className="mt-2 flex w-full flex-col-reverse items-center justify-between gap-4 px-2 md:flex-row">
       <div className="flex items-center space-x-2">
-        <p className="text-sm font-medium">
-          Linhas por página
-        </p>
+        <p className="text-sm font-medium">Linhas por página</p>
         <Select
           onValueChange={updatePageSize}
           value={`${table.getState().pagination.pageSize}`}
@@ -68,10 +72,7 @@ export function DataTablePagination() {
           </SelectTrigger>
           <SelectContent side="top">
             {[10, 20, 30, 40, 50].map((pageSize) => (
-              <SelectItem
-                key={pageSize}
-                value={`${pageSize}`}
-              >
+              <SelectItem key={pageSize} value={`${pageSize}`}>
                 {pageSize}
               </SelectItem>
             ))}

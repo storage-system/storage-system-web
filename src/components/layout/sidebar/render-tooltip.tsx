@@ -1,6 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { usePathname } from 'next/navigation'
-import { TooltipRoot, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
+import {
+  TooltipRoot,
+  TooltipTrigger,
+  TooltipContent,
+} from '@/components/ui/tooltip'
 import { MoreVertical } from 'lucide-react'
 
 import { CustomLink } from '@/shared/custom-link'
@@ -25,18 +29,11 @@ export function renderTooltip(item: NavItem, parent?: NavItem) {
           title={item.title}
         >
           <span>{item.icon}</span>
-          <MoreVertical
-            className="absolute right-4"
-            size={15}
-          />
+          <MoreVertical className="absolute right-4" size={15} />
         </TooltipTrigger>
         <TooltipContent side="right">
           {item.items?.map((child, index) => (
-            <SidebarMenu
-              item={child}
-              key={index}
-              parent={item}
-            />
+            <SidebarMenu item={child} key={index} parent={item} />
           ))}
         </TooltipContent>
       </TooltipRoot>

@@ -5,7 +5,6 @@ export interface UseSideBarProps {
   handleToggleCollapse: () => void
 }
 
-
 export const useSidebar = create<UseSideBarProps>((set) => ({
   isCollapse: false,
   handleToggleCollapse: () => {

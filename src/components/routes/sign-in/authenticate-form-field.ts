@@ -1,12 +1,15 @@
-import { FormFieldsConstant } from "@/@types/form-field"
-import { AuthenticateType, authenticateSchema } from "@/validations/authenticate-schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { FormFieldsConstant } from '@/@types/form-field'
+import {
+  AuthenticateType,
+  authenticateSchema,
+} from '@/validations/authenticate-schema'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 
 export function useAuthenticateFormField() {
   const form = useForm<AuthenticateType>({
-    resolver: zodResolver(authenticateSchema)
-  });
+    resolver: zodResolver(authenticateSchema),
+  })
 
   const AUTHENTICATE_FORM_FIELD: FormFieldsConstant<AuthenticateType> = [
     [
@@ -31,6 +34,6 @@ export function useAuthenticateFormField() {
 
   return {
     form,
-    AUTHENTICATE_FORM_FIELD
+    AUTHENTICATE_FORM_FIELD,
   }
 }

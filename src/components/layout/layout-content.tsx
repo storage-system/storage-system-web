@@ -1,22 +1,22 @@
-"use client"
+'use client'
 
-import { type ReactNode } from "react";
+import { type ReactNode } from 'react'
 
-import { useLayoutReady } from "@/hooks/layout/use-layout-ready";
+import { useLayoutReady } from '@/hooks/layout/use-layout-ready'
 
-import { Content } from "./content/content";
-import { Header } from "./header/header";
-import { Sidebar } from "./sidebar/sidebar";
-import Loading from "../loading";
-import ThemeContext from "@/providers/theme";
-import { TooltipProvider } from "../ui/tooltip";
+import { Content } from './content/content'
+import { Header } from './header/header'
+import { Sidebar } from './sidebar/sidebar'
+import Loading from '../loading'
+import ThemeContext from '@/providers/theme'
+import { TooltipProvider } from '../ui/tooltip'
 
 type LayoutContentProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export function LayoutContent({ children }: LayoutContentProps) {
-  const layoutReady = useLayoutReady();
+  const layoutReady = useLayoutReady()
 
   return (
     <ThemeContext>
@@ -32,5 +32,5 @@ export function LayoutContent({ children }: LayoutContentProps) {
         </div>
       )}
     </ThemeContext>
-  );
+  )
 }

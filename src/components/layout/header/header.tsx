@@ -1,19 +1,19 @@
-import { cn } from "@/utils/class-name";
-import { useSidebar } from "@/hooks/layout/use-sidebar";
-import { HeaderContent } from "./header-content";
-import { usePageTitle } from "@/utils/set-page-title";
+import { cn } from '@/utils/class-name'
+import { useSidebar } from '@/hooks/layout/use-sidebar'
+import { HeaderContent } from './header-content'
+import { usePageTitle } from '@/utils/set-page-title'
 
 export function Header() {
   const pageTitle = usePageTitle()
-  const { isCollapse } = useSidebar();
+  const { isCollapse } = useSidebar()
 
   return (
     <header
       className={cn(
-        "fixed left-0 top-0 z-40 w-full mt-5",
+        'fixed left-0 top-0 z-40 w-full mt-5',
         isCollapse
-          ? "md:ml-[80px] md:max-w-[calc(100vw_-_80px)]"
-          : "md:ml-[210px] md:max-w-[calc(100vw_-_220px)]"
+          ? 'md:ml-[80px] md:max-w-[calc(100vw_-_80px)]'
+          : 'md:ml-[210px] md:max-w-[calc(100vw_-_220px)]',
       )}
     >
       <div className="flex mt-2 h-12 w-full items-center justify-between px-10">
@@ -30,5 +30,5 @@ export function Header() {
         </nav>
       </div>
     </header>
-  );
+  )
 }

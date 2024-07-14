@@ -1,5 +1,5 @@
-import { AuthenticateInput } from "@/validations/authenticate-schema";
-import { storageSystemApi } from "../axios";
+import { AuthenticateInput } from '@/validations/authenticate-schema'
+import { storageSystemApi } from '../axios'
 
 export function authService() {
   async function authenticateService(anInput: AuthenticateInput) {
@@ -9,6 +9,6 @@ export function authService() {
   }
 
   return {
-    authenticateService
+    authenticateService,
   }
 }

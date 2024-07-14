@@ -101,18 +101,18 @@ export type FormFields<T> = {
   isLoading?: boolean
   placeholder?: string
 } & (
-    | IFormFieldInputDefaultSlot
-    | IFormMaskedInputSlot
-    | IFormFieldSelectTextareaSlot
-    | IFormFieldRadioSlot
-    | IFormFieldSelectSlot
-    | IFormFieldComboboxSlot
-    | IFormFieldDateRangeSlot
-    | IFormFieldDateSingleSlot
-    | IFormFieldSwitchSlot
-    | {
+  | IFormFieldInputDefaultSlot
+  | IFormMaskedInputSlot
+  | IFormFieldSelectTextareaSlot
+  | IFormFieldRadioSlot
+  | IFormFieldSelectSlot
+  | IFormFieldComboboxSlot
+  | IFormFieldDateRangeSlot
+  | IFormFieldDateSingleSlot
+  | IFormFieldSwitchSlot
+  | {
       type: 'hidden'
     }
-  )
+)
 
 export type FormFieldsConstant<T> = Array<FormFields<T> | FormFields<T>[]>

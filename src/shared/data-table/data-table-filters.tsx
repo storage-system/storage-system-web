@@ -53,10 +53,7 @@ export function DataTableFilters({ filters }: Props) {
       <div className="mx-4 my-2 flex flex-wrap gap-2">
         {filters.map((filter, index) =>
           filter.value ? (
-            <RenderTag
-              filter={filter}
-              key={`${filter.id}:${index}`}
-            />
+            <RenderTag filter={filter} key={`${filter.id}:${index}`} />
           ) : null,
         )}
       </div>

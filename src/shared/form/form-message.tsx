@@ -11,10 +11,7 @@ export function FormMessage() {
   }
 
   return (
-    <p
-      className="text-sm font-medium text-red-500"
-      id={formMessageId}
-    >
+    <p className="text-sm font-medium text-red-500" id={formMessageId}>
       {message}
     </p>
   )

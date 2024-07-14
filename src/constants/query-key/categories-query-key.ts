@@ -1,3 +1,3 @@
 export enum categoriesQueryKey {
-  LIST_CATEGORIES = 'list-categories'
+  LIST_CATEGORIES = 'list-categories',
 }

@@ -1,10 +1,10 @@
-import { jwtDecode } from "jwt-decode";
-import { NextAuthOptions } from "next-auth";
-import axios from "axios";
-import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
+import { jwtDecode } from 'jwt-decode'
+import { NextAuthOptions } from 'next-auth'
+import axios from 'axios'
+import GoogleProvider from 'next-auth/providers/google'
+import CredentialsProvider from 'next-auth/providers/credentials'
 
-const apiUrl = process.env.NEXT_PUBLIC_STORAGE_SYSTEM_API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_STORAGE_SYSTEM_API_URL
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -13,40 +13,40 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
     CredentialsProvider({
-      name: "Credentials",
+      name: 'Credentials',
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          return null;
+          return null
         }
 
         try {
           const { data } = await axios.post(`${apiUrl}sessions`, {
             email: credentials.email,
             password: credentials.password,
-          });
+          })
 
-          const userResponse = jwtDecode(data.access_token);
+          const userResponse = jwtDecode(data.access_token)
 
           if (userResponse) {
             return {
               ...data,
               ...userResponse,
-            };
+            }
           }
 
-          return null;
+          return null
         } catch (error) {
-          return null;
+          return null
         }
       },
     }),
   ],
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: 60 * 60, // 60 minutes
   },
   callbacks: {
@@ -54,18 +54,18 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token = {
           ...token,
-          user
+          user,
         }
       }
 
-      return token;
+      return token
     },
     session: ({ session, token }) => {
       if (token?.user) {
-        session.user = token.user;
-        session.user.id = String(token.id);
+        session.user = token.user
+        session.user.id = String(token.id)
       }
-      return session;
+      return session
     },
   },
-};
+}

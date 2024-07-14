@@ -1,6 +1,5 @@
 'use client'
 
-
 import { type NavItem } from '../util/sidebar-config'
 import { renderCollapsible } from './render-collapsible'
 import { renderStatic } from './render-static'

@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import { DataTable } from "@/shared/data-table";
-import { useTableCategories } from "./useTableCategories";
-import { useListCategoriesColumns } from "./useListCategoriesColumns";
+import { DataTable } from '@/shared/data-table'
+import { useTableCategories } from './useTableCategories'
+import { useListCategoriesColumns } from './useListCategoriesColumns'
 
 export function TableCategories() {
   const { tableColumns } = useListCategoriesColumns()

@@ -1,13 +1,17 @@
-import { FormFieldsConstant } from "@/@types/form-field"
-import { telMask } from "@/utils/masker"
-import { CreateUserInput, CreateUserType, createUserSchema } from "@/validations/create-user-schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form"
+import { FormFieldsConstant } from '@/@types/form-field'
+import { telMask } from '@/utils/masker'
+import {
+  CreateUserInput,
+  CreateUserType,
+  createUserSchema,
+} from '@/validations/create-user-schema'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 
 export function useRegisterFormField() {
   const form = useForm<CreateUserInput>({
     resolver: zodResolver(createUserSchema),
-  });
+  })
 
   const REGISTER_FORM_FIELD: FormFieldsConstant<CreateUserType> = [
     [
@@ -51,6 +55,6 @@ export function useRegisterFormField() {
 
   return {
     form,
-    REGISTER_FORM_FIELD
+    REGISTER_FORM_FIELD,
   }
 }

@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 export const updateCategorySchema = z.object({
   name: z.string().optional(),
-  isActive: z.boolean().optional()
+  isActive: z.boolean().optional(),
 })
 
 export type UpdateCategoryType = z.infer<typeof updateCategorySchema>

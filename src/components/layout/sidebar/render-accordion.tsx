@@ -1,6 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { usePathname } from 'next/navigation'
-import { AccordionContent, AccordionItem, AccordionRoot, AccordionTrigger } from '@/components/ui/accordion'
+import {
+  AccordionContent,
+  AccordionItem,
+  AccordionRoot,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 
 import { CustomLink } from '@/shared/custom-link'
 import { cn } from '@/utils/class-name'
@@ -22,24 +27,15 @@ export function renderAccordion(item: NavItem, parent?: NavItem) {
         disabled={item.disabled}
         type="single"
       >
-        <AccordionItem
-          className="w-full py-0"
-          value={item.title ?? ''}
-        >
+        <AccordionItem className="w-full py-0" value={item.title ?? ''}>
           <AccordionTrigger className="hover:no-underline">
-            <p
-              className="inline-flex items-center justify-center gap-2 font-normal"
-            >
+            <p className="inline-flex items-center justify-center gap-2 font-normal">
               <span>{item.icon}</span>
               <span>{item.title}</span>
             </p>
           </AccordionTrigger>
           {item.items?.map((child, index) => (
-            <SidebarMenu
-              item={child}
-              key={index}
-              parent={item}
-            />
+            <SidebarMenu item={child} key={index} parent={item} />
           ))}
         </AccordionItem>
       </AccordionRoot>
@@ -47,10 +43,7 @@ export function renderAccordion(item: NavItem, parent?: NavItem) {
   }
 
   return (
-    <AccordionContent
-      className="h-10"
-      key={item.title}
-    >
+    <AccordionContent className="h-10" key={item.title}>
       <CustomLink
         className={cn(
           'group flex w-full items-center rounded-md border-none p-2 transition-colors duration-300 ease-in-out hover:bg-accent',
@@ -62,9 +55,7 @@ export function renderAccordion(item: NavItem, parent?: NavItem) {
         rel={item?.external ? 'noreferrer' : ''}
         target={item?.external ? '_blank' : ''}
       >
-        <p
-          className="inline-flex items-center gap-2 font-normal"
-        >
+        <p className="inline-flex items-center gap-2 font-normal">
           <span>{item?.icon}</span>
           <span>{item.title}</span>
         </p>

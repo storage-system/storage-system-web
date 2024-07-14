@@ -1,29 +1,29 @@
-"use client";
+'use client'
 
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
-import { useSidebar } from "@/hooks/layout/use-sidebar";
-import { cn } from "@/utils/class-name";
+import { useSidebar } from '@/hooks/layout/use-sidebar'
+import { cn } from '@/utils/class-name'
 
-import { type NavItem } from "../util/sidebar-config";
-import { SidebarMenu } from "./sidebar-menu";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
-import { StorageLogo } from "@/shared/storage-logo";
+import { type NavItem } from '../util/sidebar-config'
+import { SidebarMenu } from './sidebar-menu'
+import { Button } from '@/components/ui/button'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Separator } from '@/components/ui/separator'
+import { StorageLogo } from '@/shared/storage-logo'
 
 export interface DocsSidebarNavProps {
-  items: NavItem[];
+  items: NavItem[]
 }
 
 export function SidebarItem({ items }: DocsSidebarNavProps) {
-  const { isCollapse, handleToggleCollapse } = useSidebar();
+  const { isCollapse, handleToggleCollapse } = useSidebar()
 
   return items.length ? (
     <aside
       className={cn(
-        "group relative h-full w-full bg-accent p-0 px-2 transition-all ease-in-out dark:border-r-2 dark:border-accent",
-        isCollapse ? "max-w-[80px]" : "max-w-[220px]"
+        'group relative h-full w-full bg-accent p-0 px-2 transition-all ease-in-out dark:border-r-2 dark:border-accent',
+        isCollapse ? 'max-w-[80px]' : 'max-w-[220px]',
       )}
     >
       <Button
@@ -35,7 +35,9 @@ export function SidebarItem({ items }: DocsSidebarNavProps) {
         {isCollapse ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
       </Button>
       <div className="w-full flex flex-col items-center border-b border-[#F4F7FE] dark:border-white/10 py-10">
-        {isCollapse ? <StorageLogo /> : (
+        {isCollapse ? (
+          <StorageLogo />
+        ) : (
           <h1 className="font-extrabold text-textPrimary dark:text-white text-3xl">
             STOR<span className="font-normal">AGE</span>
           </h1>
@@ -56,5 +58,5 @@ export function SidebarItem({ items }: DocsSidebarNavProps) {
         ))}
       </ScrollArea>
     </aside>
-  ) : null;
+  ) : null
 }

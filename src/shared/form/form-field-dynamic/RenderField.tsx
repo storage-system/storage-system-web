@@ -1,4 +1,9 @@
-import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from '@/components/ui/form'
 import { type UseFormReturn } from 'react-hook-form'
 
 import { FormFields } from '@/@types/form-field'
@@ -25,10 +30,7 @@ export function RenderField<T>({ form, slot }: RenderFieldProps<T>) {
               {'label' in slot ? slot.label : null}
             </FormLabel>
             <FormControl>
-              <FormFieldDynamic<T>
-                field={field}
-                slot={slot}
-              />
+              <FormFieldDynamic<T> field={field} slot={slot} />
             </FormControl>
             <FormMessage />
           </FormItem>

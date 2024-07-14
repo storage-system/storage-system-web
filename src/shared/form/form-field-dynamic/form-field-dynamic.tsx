@@ -34,64 +34,28 @@ export function FormFieldDynamic<T>({ field, slot }: Props<T>) {
         />
       )
     case 'radio':
-      return (
-        <FormFieldRadio
-          field={field}
-          slot={slot}
-        />
-      )
+      return <FormFieldRadio field={field} slot={slot} />
     case 'select':
       return slot?.isLoading ? (
         <Skeleton className="h-8" />
       ) : (
-        <FormFieldSelect
-          field={field}
-          slot={slot}
-        />
+        <FormFieldSelect field={field} slot={slot} />
       )
     case 'switch':
-      return (
-        <FormFieldSwitch
-          field={field}
-          slot={slot}
-        />
-      )
+      return <FormFieldSwitch field={field} slot={slot} />
     case 'textarea':
-      return (
-        <FormFieldTextarea
-          field={field}
-          slot={slot}
-        />
-      )
+      return <FormFieldTextarea field={field} slot={slot} />
     case 'number':
-      return (
-        <FormFieldNumber
-          field={field}
-          slot={slot}
-        />
-      )
+      return <FormFieldNumber field={field} slot={slot} />
     case 'password':
-      return (
-        <FormFieldPassword
-          field={field}
-          slot={slot}
-        />
-      )
+      return <FormFieldPassword field={field} slot={slot} />
     case 'hidden':
-      return (
-        <Input
-          {...field}
-          type="hidden"
-        />
-      )
+      return <Input {...field} type="hidden" />
     default:
       return slot.isLoading ? (
         <Skeleton className="h-8" />
       ) : (
-        <FormFieldInputDefault
-          field={field}
-          slot={slot}
-        />
+        <FormFieldInputDefault field={field} slot={slot} />
       )
   }
 }

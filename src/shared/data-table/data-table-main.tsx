@@ -1,6 +1,13 @@
 'use client'
 
-import { Table, TableBody, TableHeader, TableRow, TableCell, TableHead } from '@/components/ui/table'
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableRow,
+  TableCell,
+  TableHead,
+} from '@/components/ui/table'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { flexRender } from '@tanstack/react-table'
 
@@ -26,9 +33,9 @@ export function DataTableMain() {
                     {header.isPlaceholder
                       ? null
                       : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
                   </TableHead>
                 )
               })}
@@ -38,18 +45,10 @@ export function DataTableMain() {
         <TableBody>
           {isLoading ? (
             <TableRow>
-              <TableCell
-                className="h-24 text-center"
-                colSpan={columns.length}
-              >
+              <TableCell className="h-24 text-center" colSpan={columns.length}>
                 <div className="gap-4">
                   {Array.from({ length: 3 }).map((_, index) => {
-                    return (
-                      <Skeleton
-                        className="h-6 w-full"
-                        key={index}
-                      />
-                    )
+                    return <Skeleton className="h-6 w-full" key={index} />
                   })}
                 </div>
               </TableCell>
@@ -61,10 +60,7 @@ export function DataTableMain() {
                 key={row.id}
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell
-                    className="text-center text-sm"
-                    key={cell.id}
-                  >
+                  <TableCell className="text-center text-sm" key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
@@ -72,10 +68,7 @@ export function DataTableMain() {
             ))
           ) : (
             <TableRow>
-              <TableCell
-                className="h-24 text-center"
-                colSpan={columns.length}
-              >
+              <TableCell className="h-24 text-center" colSpan={columns.length}>
                 Nenhum dado encontrado!
               </TableCell>
             </TableRow>

@@ -12,9 +12,5 @@ export default async function Layout({ children }: { children: ReactNode }) {
     redirect('/sign-in')
   }
 
-  return (
-    <LayoutContent>
-      {children}
-    </LayoutContent>
-  )
+  return <LayoutContent>{children}</LayoutContent>
 }

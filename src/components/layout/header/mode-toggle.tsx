@@ -1,17 +1,17 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import { Moon, MoonIcon, Sun, SunIcon } from "lucide-react";
-import { useTheme } from "next-themes";
+} from '@/components/ui/dropdown-menu'
+import { Moon, MoonIcon, Sun, SunIcon } from 'lucide-react'
+import { useTheme } from 'next-themes'
 
 export function ModeToggle() {
-  const { setTheme } = useTheme();
+  const { setTheme } = useTheme()
 
   return (
     <DropdownMenu>
@@ -23,14 +23,14 @@ export function ModeToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem
-          onClick={() => setTheme("light")}
+          onClick={() => setTheme('light')}
           className="hover:bg-gray-100 transition ease-linear"
         >
           <Sun className="h-4 w-4 mr-2" />
           Claro
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() => setTheme("dark")}
+          onClick={() => setTheme('dark')}
           className="hover:bg-gray-100 transition ease-linear"
         >
           <Moon className="h-4 w-4 mr-2" />
@@ -38,5 +38,5 @@ export function ModeToggle() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }

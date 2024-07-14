@@ -1,7 +1,7 @@
-import { categoriesQueryKey } from "@/constants/query-key/categories-query-key"
-import { useCategoriesService } from "@/services/categories"
-import { useQuery } from "@tanstack/react-query"
-import { useSearchParams } from "next/navigation"
+import { categoriesQueryKey } from '@/constants/query-key/categories-query-key'
+import { useCategoriesService } from '@/services/categories'
+import { useQuery } from '@tanstack/react-query'
+import { useSearchParams } from 'next/navigation'
 
 export function useTableCategories() {
   const searchParams = useSearchParams()

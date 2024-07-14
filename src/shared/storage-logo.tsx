@@ -12,5 +12,5 @@ export function StorageLogo() {
         className="stroke-textPrimary dark:stroke-white stroke-2"
       />
     </svg>
-  );
+  )
 }
