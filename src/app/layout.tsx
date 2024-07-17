@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt" className={mainFontFamily.variable}>
+    <html className={mainFontFamily.variable}>
       <body>
         <SessionWrapper>
           <QueryClientProvider client={queryClient}>
