@@ -1,6 +1,4 @@
 import { AuthenticateForm } from '@/components/routes/sign-in/authenticate-form'
-import { LoginGoogle } from '@/components/routes/sign-in/login-google'
-import { Separator } from '@/components/ui/separator'
 
 export default async function SignInPage() {
   return (
@@ -12,12 +10,6 @@ export default async function SignInPage() {
             <p className="text-gray-400">
               Digite seu email e a sua senha para autenticar.
             </p>
-          </div>
-          <LoginGoogle />
-          <div className="flex justify-center items-center">
-            <Separator className="w-[100px]" />
-            <p className="p-4 text-gray-400 font-normal">ou</p>
-            <Separator className="w-[100px]" />
           </div>
           <AuthenticateForm />
         </div>
