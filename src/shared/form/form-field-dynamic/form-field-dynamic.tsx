@@ -12,6 +12,7 @@ import { FormFieldSelect } from './components/form-field-select'
 import { FormFieldSwitch } from './components/form-field-switch'
 import { FormFieldTextarea } from './components/form-field-textarea'
 import { FormFieldPassword } from './components/form-field-password'
+import { FormFieldCombobox } from './components/form-field-combobox'
 
 interface Props<T> {
   field: ControllerRenderProps<T | any>
@@ -51,6 +52,8 @@ export function FormFieldDynamic<T>({ field, slot }: Props<T>) {
       return <FormFieldPassword field={field} slot={slot} />
     case 'hidden':
       return <Input {...field} type="hidden" />
+    case 'combobox':
+      return <FormFieldCombobox field={field} slot={slot} />
     default:
       return slot.isLoading ? (
         <Skeleton className="h-8" />

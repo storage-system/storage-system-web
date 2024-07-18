@@ -9,6 +9,7 @@ type RouteTitles = {
 const routeTitles: RouteTitles = {
   [PrivateRoutes.HOME]: 'Início',
   [PrivateRoutes.CATEGORY]: 'Categorias',
+  [PrivateRoutes.COMPANY]: 'Empresa',
 }
 
 const defaultTitle = 'Aplicação'

@@ -9,7 +9,6 @@ import { type NavItem } from '../util/sidebar-config'
 import { SidebarMenu } from './sidebar-menu'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { Separator } from '@/components/ui/separator'
 import { StorageLogo } from '@/shared/storage-logo'
 
 export interface DocsSidebarNavProps {

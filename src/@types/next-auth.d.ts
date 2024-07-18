@@ -1,23 +1,17 @@
+import { UserRoles } from '@/constants/roles/user-roles'
 import type { DefaultSession, User } from 'next-auth'
 
 declare module 'next-auth' {
   export interface User {
+    access_token: string
     sub: string
     name: string
-    login: string
     email: string
-    avatar?: string
-    given_name: string
-    family_name: string
-    email_verified: boolean
-    preferred_username: string
-    access_token: string
-    refreshToken: string
-    name: string
-    email: string
-    contact: string
-    responsible: string
-    expireIn: string
+    phone: string
+    companyId?: string
+    roles: UserRoles[]
+    iat: number
+    id: string
   }
 
   export interface Session {
