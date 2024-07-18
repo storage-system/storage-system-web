@@ -6,16 +6,16 @@ import Link from 'next/link'
 import { PublicRoutes } from '@/constants/routes/public-routes'
 import { CreateUserType } from '@/validations/create-user-schema'
 import { useRegisterFormField } from './register-form-field'
-import { companiesService } from '@/services/company'
+import { useCompaniesService } from '@/services/company'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/ui/use-toast'
-import { usersService } from '@/services/user'
+import { useUsersService } from '@/services/user'
 
 export function RegisterForm() {
   const router = useRouter()
   const { toast } = useToast()
-  const { createUsersService } = usersService()
+  const { createUsersService } = useUsersService()
   const { form, REGISTER_FORM_FIELD } = useRegisterFormField()
 
   function handleSuccess() {

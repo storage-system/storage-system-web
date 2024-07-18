@@ -1,9 +1,11 @@
 import { storageSystemApi } from '../axios'
-import { CreateAccountInput } from '@/validations/create-account-schema'
+import { CreateCompanyInput } from '@/validations/create-company-schema'
 
-export function companiesService() {
-  async function createCompanyService(anInput: CreateAccountInput) {
-    await storageSystemApi.post('/accounts', anInput)
+export function useCompaniesService() {
+  const route = '/companies'
+
+  async function createCompanyService(anInput: CreateCompanyInput) {
+    await storageSystemApi.post(route, anInput)
   }
 
   return {

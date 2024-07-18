@@ -22,6 +22,7 @@ export default function RootLayout({
         <SessionWrapper>
           <QueryClientProvider client={queryClient}>
             {children}
+            <Toaster />
           </QueryClientProvider>
         </SessionWrapper>
         <Toaster />

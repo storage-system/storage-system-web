@@ -1,4 +1,5 @@
-import axios from 'axios'
+import { ApplicationError } from '@/utils/application-error'
+import axios, { AxiosError } from 'axios'
 import { getSession } from 'next-auth/react'
 
 export interface ApiResponseError {
@@ -21,6 +22,15 @@ const ApiCLient = () => {
     }
     return request
   })
+
+  instance.interceptors.response.use(
+    (response) => {
+      return response
+    },
+    (error: AxiosError<ApiResponseError>) => {
+      throw new ApplicationError(error)
+    },
+  )
 
   return instance
 }
