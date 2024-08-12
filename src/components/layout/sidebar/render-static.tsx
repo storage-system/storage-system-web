@@ -14,12 +14,12 @@ export function renderStatic(item: NavItem) {
   return (
     <CustomLink
       className={cn(
-        'flex items-center w-full gap-x-2 rounded-lg p-2.5 text-xs font-light dark:hover:bg-secondary',
+        'flex items-center w-full gap-x-2 p-2.5 text-xs font-light dark:hover:bg-secondary',
         item?.disabled && 'cursor-not-allowed opacity-60',
         isCollapse && 'justify-center',
         pathname.endsWith(item.href) || pathname.endsWith(`${item.href}`)
           ? 'border-l-4 border-l-primary bg-background'
-          : '',
+          : 'border-l-4 border-transparent',
       )}
       href={item?.href}
       rel={item?.external ? 'noreferrer' : ''}

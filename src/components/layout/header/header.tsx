@@ -10,13 +10,13 @@ export function Header() {
   return (
     <header
       className={cn(
-        'fixed left-0 top-0 z-40 w-full mt-5',
+        'fixed left-0 top-0 z-30 w-full py-5 bg-background/60 backdrop-blur-sm',
         isCollapse
           ? 'md:ml-[80px] md:max-w-[calc(100vw_-_80px)]'
-          : 'md:ml-[210px] md:max-w-[calc(100vw_-_220px)]',
+          : 'md:ml-[220px] md:max-w-[calc(100vw_-_220px)]',
       )}
     >
-      <div className="flex mt-2 h-12 w-full items-center justify-between px-10">
+      <div className="flex pt-2 h-12 w-full items-center justify-between px-10">
         <div className="flex items-center justify-center">
           <div className="space-y-1">
             <p className="text-gray-300 text-sm">Página / {pageTitle}</p>
