@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button'
 import { LogOut } from 'lucide-react'
 import { signOut, useSession } from 'next-auth/react'
 import { fallback } from '@/utils/fallback'
+import { CommandMenu } from './command/command-menu'
+import { sidebarConfig } from '../util/sidebar-config'
 
 export function HeaderContent() {
   const { data: session } = useSession()
@@ -17,10 +19,14 @@ export function HeaderContent() {
   }
 
   return (
-    <div className="flex space-x-4 bg-accent items-center justify-center rounded-full shadow-default p-2">
-      <Input
-        className="h-9 bg-gray-100 dark:bg-black/20 border-none rounded-full"
-        placeholder="Pesquise..."
+    <div className="flex space-x-4 bg-accent items-center justify-center rounded-full shadow-default pl-4 pr-6 py-2">
+      <CommandMenu
+        sideBarConfig={{
+          ...sidebarConfig,
+          commandNav: sidebarConfig.sidebarNav,
+        }}
+        placehoder="Pesquise"
+        innerPlaceholder="Procure páginas, atalhos ou temas..."
       />
       <ModeToggle />
       <Button size="icon" variant="link" onClick={handleSignOut}>

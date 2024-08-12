@@ -17,7 +17,7 @@ export interface Shortcuts extends NavItem {
   completeKey?: string
 }
 
-interface SidebarConfig {
+export interface SidebarConfig {
   mainNav: NavItem[]
   sidebarNav: NavItem[]
   shortcuts: Shortcuts[]
