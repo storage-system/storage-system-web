@@ -1,12 +1,21 @@
 import { ModeToggle } from './mode-toggle'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { LogOut } from 'lucide-react'
-import { signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
+import { fallback } from '@/utils/fallback'
 import { CommandMenu } from './command/command-menu'
 import { sidebarConfig } from '../util/sidebar-config'
-import { ProfileMenu } from './profile/profile-menu'
+import { useRouter } from 'next/navigation'
+import { PrivateRoutes } from '@/constants/routes/private-routes'
 
 export function HeaderContent() {
+  const { data: session } = useSession()
+  const router = useRouter()
+
+  const userPhoto = session?.user?.image
+  const username = session?.user?.name
+
   function handleSignOut() {
     signOut()
   }
@@ -25,7 +34,20 @@ export function HeaderContent() {
       <Button size="icon" variant="link" onClick={handleSignOut}>
         <LogOut className="size-5" />
       </Button>
-      <ProfileMenu />
+      <button
+        className="rounded-full"
+        onClick={() => {
+          router.push(PrivateRoutes.PROFILE)
+        }}
+      >
+        <Avatar className="size-7">
+          {userPhoto ? (
+            <AvatarImage src={userPhoto} />
+          ) : (
+            username && <AvatarFallback>{fallback(username)}</AvatarFallback>
+          )}
+        </Avatar>
+      </button>
     </div>
   )
 }

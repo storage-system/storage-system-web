@@ -1,16 +1,7 @@
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
-
-type RouteTitles = {
-  [key in PrivateRoutes]: string
-}
-
-const routeTitles: RouteTitles = {
-  [PrivateRoutes.HOME]: 'Início',
-  [PrivateRoutes.CATEGORY]: 'Categorias',
-  [PrivateRoutes.COMPANY]: 'Empresa',
-}
+import { routeTitles } from './route-titles'
 
 const defaultTitle = 'Aplicação'
 

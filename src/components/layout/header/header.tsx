@@ -2,10 +2,25 @@ import { cn } from '@/utils/class-name'
 import { useSidebar } from '@/hooks/layout/use-sidebar'
 import { HeaderContent } from './header-content'
 import { usePageTitle } from '@/utils/set-page-title'
+import { usePathname } from 'next/navigation'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
+import React from 'react'
+import { routeTitles } from '@/utils/route-titles'
+import { PrivateRoutes } from '@/constants/routes/private-routes'
+import Link from 'next/link'
 
 export function Header() {
   const pageTitle = usePageTitle()
   const { isCollapse } = useSidebar()
+  const pathname = usePathname()
+
+  const breadcrumb = pathname === '/' ? [] : pathname.split('/')
 
   return (
     <header
@@ -19,8 +34,34 @@ export function Header() {
       <div className="flex h-12 w-full items-center justify-between px-10 pt-2">
         <div className="flex items-center justify-center">
           <div className="space-y-1">
-            <p className="text-sm text-gray-300">Página / {pageTitle}</p>
-            <h3 className="text-2xl font-semibold text-textPrimary">
+            <Breadcrumb>
+              <BreadcrumbList className="text-sm text-gray-400">
+                {breadcrumb.length === 0 ? (
+                  <React.Fragment>
+                    <BreadcrumbItem>
+                      <BreadcrumbLink href="/">
+                        {routeTitles[PrivateRoutes.HOME]}
+                      </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    {breadcrumb[1] && <BreadcrumbSeparator />}
+                  </React.Fragment>
+                ) : (
+                  breadcrumb.map((item, index, arr) => (
+                    <React.Fragment key={item}>
+                      <BreadcrumbItem>
+                        <BreadcrumbLink>
+                          <Link href={`/${item}`}>
+                            {routeTitles[`/${item}` as PrivateRoutes]}
+                          </Link>
+                        </BreadcrumbLink>
+                      </BreadcrumbItem>
+                      {arr[index + 1] && <BreadcrumbSeparator />}
+                    </React.Fragment>
+                  ))
+                )}
+              </BreadcrumbList>
+            </Breadcrumb>
+            <h3 className="mt-2 text-2xl font-semibold text-textPrimary">
               {pageTitle}
             </h3>
           </div>

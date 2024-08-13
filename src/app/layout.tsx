@@ -13,7 +13,7 @@ const mainFontFamily = Noto_Sans({
 })
 
 export const metadata: Metadata = {
-  title: '...',
+  title: { default: 'Storage', template: 'Storage - %' },
 }
 
 export default function RootLayout({
