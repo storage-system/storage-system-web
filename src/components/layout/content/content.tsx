@@ -11,7 +11,7 @@ export function Content({ children }: { children: ReactNode }) {
   return (
     <main
       className={cn(
-        'w-full p-4 transition-all my-4 bg-background md:p-0',
+        'w-full p-4 transition-all my-4 bg-background md:p-0 scrollbar-thin',
         isCollapse
           ? 'md:ml-[80px] md:max-w-[calc(100vw_-_80px)]'
           : 'md:ml-[210px]  md:max-w-[calc(100vw_-_220px)]',

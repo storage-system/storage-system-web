@@ -55,7 +55,7 @@ export function FormFieldCombobox({ field, slot }: FormFieldComboboxProps) {
           variant="outline"
           role="combobox"
           className={cn(
-            'bg-transparent w-full justify-between',
+            'h-12 bg-white dark:bg-black w-full justify-between',
             !field.value && 'text-gray-400',
           )}
         >
@@ -77,7 +77,7 @@ export function FormFieldCombobox({ field, slot }: FormFieldComboboxProps) {
           {isShowPlaceholderAllowed && (
             <span className="text-gray-400">{slot.placeholder}</span>
           )}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[--radix-popover-trigger-width]">
@@ -94,12 +94,12 @@ export function FormFieldCombobox({ field, slot }: FormFieldComboboxProps) {
                 {options.map((option, index) => (
                   <CommandItem
                     className={cn(
-                      'my-1 gap-2 hover:cursor-pointer hover:!bg-gray-100 transition-all',
+                      'my-1 gap-2 hover:cursor-pointer hover:!bg-input transition-all',
                       field.value?.value === option.value ||
                         (multipleOptionSelected.some(
                           ({ value }) => value === option.value,
                         ) &&
-                          'bg-gray-200 aria-selected:bg-gray-200'),
+                          'bg-input aria-selected:bg-input brightness-95'),
                     )}
                     key={option.label + index}
                     onSelect={() => {

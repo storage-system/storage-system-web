@@ -26,23 +26,23 @@ export function SidebarItem({ items }: DocsSidebarNavProps) {
       )}
     >
       <Button
-        className="absolute -right-2 top-16 h-5 w-5 rounded-full opacity-0 transition-all ease-in-out group-hover:md:opacity-100"
+        className="absolute -right-2 top-16 size-5 rounded-full opacity-0 transition-all ease-in-out group-hover:md:opacity-100"
         onClick={handleToggleCollapse}
         size="icon"
         variant="outline"
       >
         {isCollapse ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
       </Button>
-      <div className="w-full flex flex-col items-center border-b border-[#F4F7FE] dark:border-white/10 py-10">
+      <div className="flex w-full flex-col items-center border-b border-[#F4F7FE] py-10 dark:border-white/10">
         {isCollapse ? (
           <StorageLogo />
         ) : (
-          <h1 className="font-extrabold text-textPrimary dark:text-white text-3xl">
-            STOR<span className="font-normal">AGE</span>
+          <h1 className="text-3xl font-extrabold text-textPrimary dark:text-white">
+            STOR<span className="text-3xl font-normal">AGE</span>
           </h1>
         )}
       </div>
-      <ScrollArea className="h-screen max-h-[20rem] w-full md:max-h-[26rem] 2xl:max-h-screen">
+      <ScrollArea className="h-screen max-h-80 w-full md:max-h-[26rem] 2xl:max-h-screen">
         {items.map((item, index) => (
           <div className="flex flex-col gap-2 px-2 pb-4" key={index}>
             {!isCollapse && (

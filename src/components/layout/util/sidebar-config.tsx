@@ -15,6 +15,7 @@ export interface NavItem {
 export interface Shortcuts extends NavItem {
   partialKey?: string
   completeKey?: string
+  items?: Shortcuts[]
 }
 
 export interface SidebarConfig {
@@ -26,7 +27,28 @@ export interface SidebarConfig {
 
 export const sidebarConfig: SidebarConfig = {
   mainNav: [],
-  shortcuts: [],
+  shortcuts: [
+    {
+      href: '',
+      title: 'Atalhos',
+      items: [
+        {
+          title: 'Atalho 1',
+          href: PrivateRoutes.CATEGORY,
+          items: [],
+          partialKey: 'ctrl',
+          completeKey: 'a',
+        },
+        {
+          title: 'Atalho 2',
+          href: PrivateRoutes.COMPANY,
+          items: [],
+          partialKey: 'ctrl',
+          completeKey: 'b',
+        },
+      ],
+    },
+  ],
   sidebarNav: [
     {
       href: '',
@@ -35,7 +57,7 @@ export const sidebarConfig: SidebarConfig = {
           title: 'Início',
           href: PrivateRoutes.HOME,
           items: [],
-          icon: <HomeIcon className="h-4 w-4" />,
+          icon: <HomeIcon className="size-4" />,
         },
       ],
     },
@@ -47,13 +69,13 @@ export const sidebarConfig: SidebarConfig = {
           title: 'Categorias',
           href: PrivateRoutes.CATEGORY,
           items: [],
-          icon: <List className="h-4 w-4" />,
+          icon: <List className="size-4" />,
         },
         {
           title: 'Empresa',
           href: PrivateRoutes.COMPANY,
           items: [],
-          icon: <BriefcaseBusiness className="h-4 w-4" />,
+          icon: <BriefcaseBusiness className="size-4" />,
         },
       ],
     },

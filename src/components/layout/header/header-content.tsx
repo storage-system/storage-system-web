@@ -1,4 +1,3 @@
-import { Input } from '@/components/ui/input'
 import { ModeToggle } from './mode-toggle'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -19,20 +18,20 @@ export function HeaderContent() {
   }
 
   return (
-    <div className="flex space-x-4 bg-accent items-center justify-center rounded-full shadow-default pl-4 pr-6 py-2">
+    <div className="flex items-center justify-center space-x-4 rounded-full bg-accent py-2 pl-4 pr-6 shadow-default">
       <CommandMenu
         sideBarConfig={{
           ...sidebarConfig,
           commandNav: sidebarConfig.sidebarNav,
         }}
-        placehoder="Pesquise"
+        placehoder="Pesquise..."
         innerPlaceholder="Procure páginas, atalhos ou temas..."
       />
       <ModeToggle />
       <Button size="icon" variant="link" onClick={handleSignOut}>
-        <LogOut className="h-5 w-5" />
+        <LogOut className="size-5" />
       </Button>
-      <Avatar className="w-7 h-7">
+      <Avatar className="size-7">
         {userPhoto ? (
           <AvatarImage src={userPhoto} />
         ) : (
