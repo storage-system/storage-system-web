@@ -16,11 +16,11 @@ export function Header() {
           : 'md:ml-[220px] md:max-w-[calc(100vw_-_220px)]',
       )}
     >
-      <div className="flex pt-2 h-12 w-full items-center justify-between px-10">
+      <div className="flex h-12 w-full items-center justify-between px-10 pt-2">
         <div className="flex items-center justify-center">
           <div className="space-y-1">
-            <p className="text-gray-300 text-sm">Página / {pageTitle}</p>
-            <h3 className="font-semibold text-2xl text-textPrimary">
+            <p className="text-sm text-gray-300">Página / {pageTitle}</p>
+            <h3 className="text-2xl font-semibold text-textPrimary">
               {pageTitle}
             </h3>
           </div>

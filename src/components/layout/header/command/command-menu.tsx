@@ -60,9 +60,6 @@ export function CommandMenu({
         onClick={() => setOpen((state) => !state)}
       >
         {placehoder}
-        <kbd className="rounded-xl bg-accent px-2 py-1 text-xs font-bold brightness-[85%] dark:brightness-[140%]">
-          alt + k
-        </kbd>
       </button>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder={innerPlaceholder} />

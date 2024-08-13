@@ -1,22 +1,11 @@
 'use client'
 
-import { type ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { Package } from 'lucide-react'
 
-const RootStyle = ({ children }: { children: ReactNode }) => {
-  return (
-    <>
-      <div className="fixed bottom-0 right-0 z-[9999] flex size-full items-center justify-center bg-accent opacity-80">
-        {children}
-      </div>
-    </>
-  )
-}
-
 export default function Loading() {
   return (
-    <RootStyle>
+    <div className="fixed bottom-0 right-0 z-[9999] flex size-full items-center justify-center bg-accent opacity-80">
       <motion.div
         animate={{
           scale: [1, 0.9, 0.9, 1, 1],
@@ -55,6 +44,6 @@ export default function Loading() {
           repeat: Infinity,
         }}
       />
-    </RootStyle>
+    </div>
   )
 }
