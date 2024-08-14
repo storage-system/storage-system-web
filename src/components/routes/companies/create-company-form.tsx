@@ -15,7 +15,7 @@ export function CreateCompanyForm() {
       form={form}
       onSubmit={handleCreateCompany}
     >
-      <div className="w-full flex justify-end">
+      <div className="flex w-full justify-end">
         <Button disabled={isPending}>Cadastrar</Button>
       </div>
     </FormRender>
