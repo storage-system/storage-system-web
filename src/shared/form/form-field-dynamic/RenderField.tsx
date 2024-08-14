@@ -26,7 +26,7 @@ export function RenderField<T>({ form, slot }: RenderFieldProps<T>) {
       render={({ field }) => {
         return (
           <FormItem className={cn('className' in slot && slot.className)}>
-            <FormLabel className="font-normal">
+            <FormLabel className="font-normal" htmlFor={slot.name as string}>
               {'label' in slot ? slot.label : null}
             </FormLabel>
             <FormControl>

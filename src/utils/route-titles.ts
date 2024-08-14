@@ -9,4 +9,6 @@ export const routeTitles: RouteTitles = {
   [PrivateRoutes.CATEGORY]: 'Categorias',
   [PrivateRoutes.COMPANY]: 'Empresa',
   [PrivateRoutes.PROFILE]: 'Perfil',
+  [PrivateRoutes.PRODUCT]: 'Produto',
+  [PrivateRoutes.CREATE_PRODUCT]: 'Criação de produto',
 }

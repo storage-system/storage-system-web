@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card'
 
 export default async function CategoriesPage() {
   return (
-    <div className="space-y-4 flex flex-col items-end">
+    <div className="flex flex-col items-end space-y-4">
       <CreateCategory />
       <Card className="w-full">
         <TableCategories />

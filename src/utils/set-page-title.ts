@@ -8,11 +8,14 @@ const defaultTitle = 'Aplicação'
 export function usePageTitle() {
   const [title, setTitle] = useState('')
   const pathname = usePathname()
+  const slicedPathname = pathname.split('/').map((item) => `/${item}`)
 
   useEffect(() => {
-    const newTitle = routeTitles[pathname as PrivateRoutes] || defaultTitle
+    const newTitle =
+      routeTitles[slicedPathname[slicedPathname.length - 1] as PrivateRoutes] ||
+      defaultTitle
     setTitle(newTitle)
-  }, [pathname])
+  }, [slicedPathname])
 
   return title
 }

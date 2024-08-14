@@ -23,13 +23,14 @@ export function FormFieldPassword({ field, slot }: FormFieldPasswordProps) {
   return (
     <div className="relative">
       <Input
-        className="h-12 bg-white dark:bg-black placeholder:text-gray-400"
+        className="h-12 bg-white placeholder:text-gray-400 dark:bg-black"
         disabled={slot.disabled}
         onChange={field.onChange}
         placeholder={slot.placeholder}
         type={showPassword ? 'text' : 'password'}
         value={field.value}
         width="full"
+        id={field.name}
       />
       {slot.type === 'password' && (
         <Button
@@ -40,9 +41,9 @@ export function FormFieldPassword({ field, slot }: FormFieldPasswordProps) {
           variant="ghost"
         >
           {showPassword ? (
-            <Eye className="h-4 w-4" />
+            <Eye className="size-4" />
           ) : (
-            <EyeOff className="h-4 w-4" />
+            <EyeOff className="size-4" />
           )}
         </Button>
       )}

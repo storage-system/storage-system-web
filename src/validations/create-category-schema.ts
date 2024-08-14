@@ -1,12 +1,101 @@
+import { StatusProduct } from '@/constants/product/product-status-enum'
 import { z } from 'zod'
 
-export const createCategorySchema = z.object({
+/*
+z.object({
+  name: z.string(),
+  description: z.string(),
+  originalPrice: z.number(),
+  finalPrice: z.number(),
+  discountPercentage: z.number(),
+  quantityInStock: z.number(),
+  manufactureDate: z.date().optional(),
+  validityInDays: z.number(),
+  unitOfMeasure: z.string(),
+  weight: z.number(),
+  dimensions_height: z.string(),
+  dimensions_width: z.string(),
+  dimensions_depth: z.string(),
+  manufacturer: z.string().optional(),
+  batch: z.string().optional(),
+  status: z.nativeEnum(StatusProduct),
+  companyId: z.string().uuid(),
+  categoryIds: z.array(z.string())
+})
+
+*/
+
+export const createProductSchema = z.object({
   name: z
     .string({ required_error: 'O nome é obrigatório' })
     .min(1, { message: 'Mínimo de 1 caractere' }),
-  isActive: z.boolean(),
+
+  description: z
+    .string({ required_error: 'A descrição é obrigatória' })
+    .min(1, { message: 'Mínimo de 1 caractere' }),
+
+  originalPrice: z.coerce
+    .number({ required_error: 'O preço original é obrigatório' })
+    .positive({ message: 'O preço original deve ser um valor positivo' }),
+
+  finalPrice: z.coerce
+    .number({ required_error: 'O preço final é obrigatório' })
+    .positive({ message: 'O preço final deve ser um valor positivo' }),
+
+  discountPercentage: z.coerce
+    .number({ required_error: 'A porcentagem de desconto é obrigatória' })
+    .min(0, { message: 'A porcentagem de desconto não pode ser negativa' })
+    .max(100, { message: 'A porcentagem de desconto não pode exceder 100%' }),
+
+  quantityInStock: z
+    .number({ required_error: 'A quantidade em estoque é obrigatória' })
+    .int({ message: 'A quantidade em estoque deve ser um número inteiro' })
+    .nonnegative({ message: 'A quantidade em estoque não pode ser negativa' }),
+
+  manufactureDate: z.date().optional(),
+
+  validityInDays: z.coerce
+    .number({ required_error: 'A validade em dias é obrigatória' })
+    .int({ message: 'A validade em dias deve ser um número inteiro' })
+    .positive({ message: 'A validade em dias deve ser um valor positivo' }),
+
+  unitOfMeasure: z
+    .string({ required_error: 'A unidade de medida é obrigatória' })
+    .min(1, { message: 'Mínimo de 1 caractere' }),
+
+  weight: z.coerce
+    .number({ required_error: 'O peso é obrigatório' })
+    .positive({ message: 'O peso deve ser um valor positivo' }),
+
+  dimensionsHeight: z
+    .string({ required_error: 'A altura é obrigatória' })
+    .min(1, { message: 'Mínimo de 1 caractere' }),
+
+  dimensionsWidth: z
+    .string({ required_error: 'A largura é obrigatória' })
+    .min(1, { message: 'Mínimo de 1 caractere' }),
+
+  dimensionsDepth: z
+    .string({ required_error: 'A profundidade é obrigatória' })
+    .min(1, { message: 'Mínimo de 1 caractere' }),
+
+  manufacturer: z.string().optional(),
+
+  batch: z.string().optional(),
+
+  status: z.nativeEnum(StatusProduct, {
+    required_error: 'O status é obrigatório',
+  }),
+
+  companyId: z
+    .string({ required_error: 'O ID da empresa é obrigatório' })
+    .uuid({ message: 'O ID da empresa deve ser um UUID válido' }),
+
+  categoryIds: z
+    .array(z.string({ required_error: 'O ID da categoria é obrigatório' }))
+    .min(1, { message: 'É necessário pelo menos uma categoria' }),
 })
 
-export type CreateCategoryType = z.infer<typeof createCategorySchema>
-export type CreateCategoryInput = z.input<typeof createCategorySchema>
-export type CreateCategoryOutput = z.output<typeof createCategorySchema>
+export type CreateProductType = z.infer<typeof createProductSchema>
+export type CreateProductInput = z.input<typeof createProductSchema>
+export type CreateProductOutput = z.output<typeof createProductSchema>

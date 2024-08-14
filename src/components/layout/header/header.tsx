@@ -39,8 +39,10 @@ export function Header() {
                 {breadcrumb.length === 0 ? (
                   <React.Fragment>
                     <BreadcrumbItem>
-                      <BreadcrumbLink href="/">
-                        {routeTitles[PrivateRoutes.HOME]}
+                      <BreadcrumbLink asChild>
+                        <Link href={PrivateRoutes.HOME}>
+                          {routeTitles[PrivateRoutes.HOME]}
+                        </Link>
                       </BreadcrumbLink>
                     </BreadcrumbItem>
                     {breadcrumb[1] && <BreadcrumbSeparator />}
@@ -49,7 +51,7 @@ export function Header() {
                   breadcrumb.map((item, index, arr) => (
                     <React.Fragment key={item}>
                       <BreadcrumbItem>
-                        <BreadcrumbLink>
+                        <BreadcrumbLink asChild>
                           <Link href={`/${item}`}>
                             {routeTitles[`/${item}` as PrivateRoutes]}
                           </Link>

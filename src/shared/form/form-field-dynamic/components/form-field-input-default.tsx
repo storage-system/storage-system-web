@@ -14,7 +14,8 @@ export function FormFieldInputDefault({
 }: FormFieldInputDefaultProps) {
   return (
     <Input
-      className="h-12 bg-white dark:bg-black placeholder:text-gray-400"
+      className="h-12 bg-white placeholder:text-gray-400 dark:bg-black"
+      id={field.name as string}
       disabled={slot.disabled}
       onChange={field.onChange}
       placeholder={'placeholder' in slot ? slot.placeholder : ''}

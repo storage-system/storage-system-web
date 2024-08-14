@@ -50,7 +50,7 @@ export function FormFieldCombobox({ field, slot }: FormFieldComboboxProps) {
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger id={field.name} asChild>
         <Button
           variant="outline"
           role="combobox"

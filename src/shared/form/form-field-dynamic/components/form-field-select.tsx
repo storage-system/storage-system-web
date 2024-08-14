@@ -22,8 +22,15 @@ export function FormFieldSelect({ field, slot }: FormFieldSelectProps) {
       onValueChange={field.onChange}
       value={field.value}
     >
-      <SelectTrigger className="h-12 dark:bg-black [&[data-placeholder='']]:text-gray300 dark:[&[data-placeholder='']]:text-gray600">
-        <SelectValue placeholder={slot.placeHolder ?? ''} />
+      <SelectTrigger
+        id={field.name}
+        className="[&[data-placeholder='']]:text-gray300 dark:[&[data-placeholder='']]:text-gray600 h-12 bg-white dark:bg-black"
+      >
+        <SelectValue
+          placeholder={
+            <span className="text-gray-400">{slot.placeHolder}</span> ?? ''
+          }
+        />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup className="max-h-52">

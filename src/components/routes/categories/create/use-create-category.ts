@@ -36,10 +36,10 @@ export function useCreateCategory() {
   })
 
   return {
-    mutateAsync,
     isPending,
     openDialog,
-    setOpenDialog,
     form,
+    setOpenDialog,
+    mutateAsync,
   }
 }

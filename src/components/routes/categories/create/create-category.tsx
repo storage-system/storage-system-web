@@ -23,7 +23,7 @@ export function CreateCategory() {
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger asChild>
         <Button className="text-white">
-          <PlusCircle className="size-4 mr-2" />
+          <PlusCircle className="mr-2 size-4" />
           Criar categoria
         </Button>
       </DialogTrigger>
@@ -34,7 +34,7 @@ export function CreateCategory() {
           form={form}
           onSubmit={mutateAsync}
         >
-          <div className="w-full flex justify-end space-x-4">
+          <div className="flex w-full justify-end space-x-4">
             <DialogClose>
               <Button type="button" variant="outline">
                 Cancelar

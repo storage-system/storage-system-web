@@ -29,7 +29,7 @@ export function FormRender<T>({
       >
         {constant.map((slot, key) =>
           Array.isArray(slot) ? (
-            <div key={key} className="grid grid-cols-12 gap-4 items-baseline">
+            <div key={key} className="grid grid-cols-12 items-baseline gap-4">
               {slot.map((s) => (
                 <RenderField<T> form={form} key={s.name as string} slot={s} />
               ))}
