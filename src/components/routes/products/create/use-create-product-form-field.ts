@@ -3,9 +3,28 @@ import {
   formattedStatusProduct,
   StatusProduct,
 } from '@/constants/product/product-status-enum'
+import { categoriesQueryKey } from '@/constants/query-key/categories-query-key'
+import { useCategoriesService } from '@/services/categories'
 import { CreateProductType } from '@/validations/create-category-schema'
+import { useQuery } from '@tanstack/react-query'
 
 export function useCreateProductFormField() {
+  const { listCategoriesService } = useCategoriesService()
+
+  const { data: categoryList } = useQuery({
+    queryKey: [categoriesQueryKey.LIST_CATEGORIES],
+    queryFn: async () => {
+      const { items } = await listCategoriesService()
+      return items
+    },
+  })
+
+  const formattedCategoryList =
+    categoryList?.map((category) => ({
+      label: category.name,
+      value: category.id,
+    })) ?? []
+
   const formattedStatusOptions = Object.values(StatusProduct).map((item) => ({
     label: formattedStatusProduct[item],
     value: item,
@@ -20,6 +39,7 @@ export function useCreateProductFormField() {
           className: 'col-span-12',
           label: 'Nome do produto',
           placeholder: 'Ex. Bobina de Aço',
+          autoComplete: 'off',
         },
       ],
       [
@@ -56,18 +76,25 @@ export function useCreateProductFormField() {
       ],
       [
         {
+          name: 'manufactureDate',
+          type: 'date-single',
+          label: 'Data de manufatura',
+          placeholder: 'Selecione uma data',
+          className: 'col-span-2',
+        },
+        {
           name: 'manufacturer',
           type: 'text',
           label: 'Fabricante',
           placeholder: 'Ex. ABC Indústria',
-          className: 'col-span-3',
+          className: 'col-span-2',
         },
         {
           name: 'batch',
           type: 'text',
           label: 'Lote',
           placeholder: 'Ex. Lote 1234',
-          className: 'col-span-3',
+          className: 'col-span-2',
         },
         {
           name: 'status',
@@ -75,14 +102,16 @@ export function useCreateProductFormField() {
           label: 'Status',
           placeHolder: 'Ex. Fora de estoque',
           options: formattedStatusOptions,
-          className: 'col-span-3',
+          className: 'col-span-2',
         },
         {
           name: 'categoryIds',
-          type: 'text',
+          type: 'combobox',
           label: 'Categorias',
           placeholder: 'Ex. Metais, Ferramentas',
-          className: 'col-span-3',
+          className: 'col-span-4',
+          multiple: true,
+          options: formattedCategoryList,
         },
       ],
       [
@@ -92,13 +121,23 @@ export function useCreateProductFormField() {
           label: 'Validade em dias',
           placeholder: 'Ex. 365',
           className: 'col-span-5',
+          autoComplete: 'off',
+        },
+        {
+          name: 'quantityInStock',
+          type: 'text',
+          label: 'Quantidade no estoque',
+          placeholder: 'Ex. 10',
+          className: 'col-span-5',
+          autoComplete: 'off',
         },
         {
           name: 'unitOfMeasure',
           type: 'text',
           label: 'Unidade de medida',
           placeholder: 'Ex. Kg, m³',
-          className: 'col-span-7',
+          className: 'col-span-2',
+          autoComplete: 'off',
         },
       ],
       [
@@ -110,21 +149,21 @@ export function useCreateProductFormField() {
           className: 'col-span-3',
         },
         {
-          name: 'dimensionsHeight',
+          name: 'dimensions_height',
           type: 'number',
           label: 'Altura',
           placeholder: 'Ex. 1,5 m',
           className: 'col-span-3',
         },
         {
-          name: 'dimensionsWidth',
+          name: 'dimensions_width',
           type: 'number',
           label: 'Largura',
           placeholder: 'Ex. 0,75 m',
           className: 'col-span-3',
         },
         {
-          name: 'dimensionsDepth',
+          name: 'dimensions_depth',
           type: 'number',
           label: 'Comprimento',
           placeholder: 'Ex. 2,0 m',

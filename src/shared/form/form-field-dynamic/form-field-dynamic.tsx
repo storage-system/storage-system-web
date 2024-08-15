@@ -13,6 +13,8 @@ import { FormFieldSwitch } from './components/form-field-switch'
 import { FormFieldTextarea } from './components/form-field-textarea'
 import { FormFieldPassword } from './components/form-field-password'
 import { FormFieldCombobox } from './components/form-field-combobox'
+import { FormFieldSingleDatePicker } from './components/form-field-single-date-picker'
+import { FormFieldRangeDatePicker } from './components/form-field-range-date-picker'
 
 interface Props<T> {
   field: ControllerRenderProps<T | any>
@@ -30,6 +32,7 @@ export function FormFieldDynamic<T>({ field, slot }: Props<T>) {
             slot.onChange?.(e)
             field.onChange(e)
           }}
+          autoComplete={slot.autoComplete}
           title={slot.label}
           value={field.value ?? ''}
         />
@@ -54,6 +57,25 @@ export function FormFieldDynamic<T>({ field, slot }: Props<T>) {
       return <Input {...field} type="hidden" />
     case 'combobox':
       return <FormFieldCombobox field={field} slot={slot} />
+
+    case 'date-range':
+      return (
+        <FormFieldRangeDatePicker
+          date={field.value}
+          disabled={slot.disabled}
+          placeholder={slot.placeholder}
+          setDate={field.onChange}
+        />
+      )
+    case 'date-single':
+      return (
+        <FormFieldSingleDatePicker
+          date={field.value}
+          disabled={slot.disabled}
+          placeholder={slot.placeholder}
+          setDate={field.onChange}
+        />
+      )
     default:
       return slot.isLoading ? (
         <Skeleton className="h-8" />

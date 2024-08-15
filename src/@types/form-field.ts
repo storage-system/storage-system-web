@@ -69,21 +69,22 @@ export type IFormFieldDateSingleSlot = {
   placeholder: string
   className?: string
   type: 'date-single'
-  mode?: 'default' | 'multiple' | 'range' | 'single'
+  mode?: 'default' | 'range' | 'single'
 }
 
 export type IFormFieldDateRangeSlot = {
   label: string
   placeholder: string
   className?: string
-  type: 'date'
-  mode?: 'default' | 'multiple' | 'range' | 'single'
+  type: 'date-range'
+  mode?: 'default' | 'range' | 'single'
 }
 
 export type IFormFieldInputDefaultSlot = {
   label: string
   className?: string
   placeholder: string
+  autoComplete?: string
   type?: 'text' | 'email' | 'password' | 'number'
 }
 

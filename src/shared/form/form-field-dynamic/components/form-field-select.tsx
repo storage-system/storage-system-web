@@ -24,7 +24,7 @@ export function FormFieldSelect({ field, slot }: FormFieldSelectProps) {
     >
       <SelectTrigger
         id={field.name}
-        className="[&[data-placeholder='']]:text-gray300 dark:[&[data-placeholder='']]:text-gray600 h-12 bg-white dark:bg-black"
+        className="h-12 bg-white dark:bg-black [&[data-placeholder='']]:text-gray-300 dark:[&[data-placeholder='']]:text-gray-600"
       >
         <SelectValue
           placeholder={

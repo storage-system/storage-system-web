@@ -47,7 +47,7 @@ export const createProductSchema = z.object({
     .min(0, { message: 'A porcentagem de desconto não pode ser negativa' })
     .max(100, { message: 'A porcentagem de desconto não pode exceder 100%' }),
 
-  quantityInStock: z
+  quantityInStock: z.coerce
     .number({ required_error: 'A quantidade em estoque é obrigatória' })
     .int({ message: 'A quantidade em estoque deve ser um número inteiro' })
     .nonnegative({ message: 'A quantidade em estoque não pode ser negativa' }),
@@ -67,15 +67,15 @@ export const createProductSchema = z.object({
     .number({ required_error: 'O peso é obrigatório' })
     .positive({ message: 'O peso deve ser um valor positivo' }),
 
-  dimensionsHeight: z
+  dimensions_height: z
     .string({ required_error: 'A altura é obrigatória' })
     .min(1, { message: 'Mínimo de 1 caractere' }),
 
-  dimensionsWidth: z
+  dimensions_width: z
     .string({ required_error: 'A largura é obrigatória' })
     .min(1, { message: 'Mínimo de 1 caractere' }),
 
-  dimensionsDepth: z
+  dimensions_depth: z
     .string({ required_error: 'A profundidade é obrigatória' })
     .min(1, { message: 'Mínimo de 1 caractere' }),
 
@@ -91,9 +91,19 @@ export const createProductSchema = z.object({
     .string({ required_error: 'O ID da empresa é obrigatório' })
     .uuid({ message: 'O ID da empresa deve ser um UUID válido' }),
 
-  categoryIds: z
-    .array(z.string({ required_error: 'O ID da categoria é obrigatório' }))
-    .min(1, { message: 'É necessário pelo menos uma categoria' }),
+  categoryIds: z.array(
+    z
+      .object({
+        label: z.string(),
+        value: z.string(),
+      })
+      .optional()
+      .transform((item) => (item?.value ? item.value : null))
+      .nullable(),
+    {
+      required_error: 'O ID da categoria é obrigatório',
+    },
+  ),
 })
 
 export type CreateProductType = z.infer<typeof createProductSchema>
