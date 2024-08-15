@@ -1,12 +1,12 @@
 'use client'
 
 import { DataTable } from '@/shared/data-table'
-import { useTableCategories } from './useTableCategories'
-import { useListCategoriesColumns } from './useListCategoriesColumns'
+import { useListProductsColumns } from './useListCategoriesColumns'
+import { useTableProducts } from './useTableCategories'
 
-export function TableCategories() {
-  const { tableColumns } = useListCategoriesColumns()
-  const { page, perPage, items, total, isLoading } = useTableCategories()
+export function TableProducts() {
+  const { tableColumns } = useListProductsColumns()
+  const { page, perPage, items, total, isLoading } = useTableProducts()
 
   return (
     <DataTable.Root

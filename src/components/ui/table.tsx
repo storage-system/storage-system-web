@@ -1,19 +1,31 @@
 import * as React from 'react'
 
 import { cn } from '@/utils/class-name'
+import { useDraggable } from 'react-use-draggable-scroll'
 
 const Table = React.forwardRef<
   HTMLTableElement,
-  React.HTMLAttributes<HTMLTableElement>
->(({ className, ...props }, ref) => (
-  <div className="relative w-full overflow-auto">
-    <table
-      ref={ref}
-      className={cn('w-full caption-bottom text-sm', className)}
-      {...props}
-    />
-  </div>
-))
+  React.HTMLAttributes<HTMLTableElement> & { isDraggable?: boolean }
+>(({ className, isDraggable = false, ...props }, ref) => {
+  const dragRef =
+    React.useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>
+
+  const { events } = useDraggable(dragRef, {
+    applyRubberBandEffect: false,
+    isMounted: isDraggable,
+  })
+
+  return (
+    <div className="w-full overflow-auto" {...events} ref={dragRef}>
+      <table
+        className={cn('w-full caption-bottom rounded-md text-sm', className)}
+        ref={ref}
+        {...props}
+      />
+    </div>
+  )
+})
+
 Table.displayName = 'Table'
 
 const TableHeader = React.forwardRef<
