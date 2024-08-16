@@ -1,15 +1,11 @@
-import { toastVariants } from '@/components/ui/toast'
-import { VariantProps } from 'class-variance-authority'
+import { ErrorMessagesProps } from '@/@types/toast-messages'
 
-interface ProductToastMessagesProps extends VariantProps<typeof toastVariants> {
-  title: string
-  text?: string
+interface ProductToastMessagesProps {
+  createSuccess: ErrorMessagesProps
+  createError: ErrorMessagesProps
 }
 
-export const productToastMessages: {
-  createSuccess: ProductToastMessagesProps
-  createError: ProductToastMessagesProps
-} = {
+export const productErrorMessages: ProductToastMessagesProps = {
   createSuccess: { title: 'Produto criado com sucesso', variant: 'success' },
   createError: { title: 'Erro ao criar o produto', variant: 'success' },
 }

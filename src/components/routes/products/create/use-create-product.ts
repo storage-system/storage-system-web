@@ -1,5 +1,5 @@
 import { toast } from '@/components/ui/use-toast'
-import { productToastMessages } from '@/constants/product/product-toast-messages'
+import { productErrorMessages } from '@/constants/product/product-toast-messages'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
 import { useProductsService } from '@/services/product'
 import {
@@ -59,11 +59,11 @@ export function useCreateProduct() {
     form.reset({}, { keepValues: false })
     router.push(PrivateRoutes.PRODUCT)
     setOpenDialog(false)
-    toast(productToastMessages.createSuccess)
+    toast(productErrorMessages.createSuccess)
   }
 
   function handleError() {
-    toast(productToastMessages.createError)
+    toast(productErrorMessages.createError)
   }
 
   companyId && form.setValue('companyId', companyId)

@@ -8,15 +8,30 @@ import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
 import { PublicRoutes } from '@/constants/routes/public-routes'
+import { useRouter } from 'next/navigation'
+import { signinErrorMessages } from '@/constants/sign-in/sign-in-toast-messages'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { AlertCircle } from 'lucide-react'
 
 export function AuthenticateForm() {
-  const { form, AUTHENTICATE_FORM_FIELD } = useAuthenticateFormField()
+  const router = useRouter()
+
+  const { form, AUTHENTICATE_FORM_FIELD, alertError, setAlertError } =
+    useAuthenticateFormField()
 
   async function onSubmit({ email, password }: AuthenticateType) {
     signIn('credentials', {
       email,
       password,
-      callbackUrl: PrivateRoutes.HOME,
+      redirect: false,
+    }).then((data) => {
+      if (data?.ok) {
+        router.replace(PrivateRoutes.HOME)
+        setAlertError(undefined)
+      }
+      if (data?.error) {
+        setAlertError(signinErrorMessages.invalidCredentials)
+      }
     })
   }
 
@@ -26,7 +41,14 @@ export function AuthenticateForm() {
       form={form}
       onSubmit={onSubmit}
     >
-      <div className="w-full flex flex-col space-y-4">
+      <div className="flex w-full flex-col space-y-4">
+        {alertError && (
+          <Alert variant={alertError.variant as never}>
+            <AlertCircle className="size-4" />
+            <AlertTitle>{alertError.title}</AlertTitle>
+            <AlertDescription>{alertError.text}</AlertDescription>
+          </Alert>
+        )}
         <Button className="w-full" type="submit">
           Entrar
         </Button>
@@ -34,7 +56,7 @@ export function AuthenticateForm() {
           Ainda não tem uma conta ?
           <Link
             href={PublicRoutes.REGISTER}
-            className="text-primary ml-1 hover:underline"
+            className="ml-1 text-primary hover:underline"
           >
             Crie uma conta
           </Link>
