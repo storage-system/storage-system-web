@@ -4,7 +4,7 @@ import { queryClient } from '@/utils/query-client'
 import {
   CreateCategoryType,
   createCategorySchema,
-} from '@/validations/create-category-schema'
+} from '@/validations/create-category-schema_1'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'

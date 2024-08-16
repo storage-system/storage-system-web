@@ -1,4 +1,4 @@
-import { CreateProductInput } from '@/validations/create-category-schema'
+import { CreateProductInput } from '@/validations/create-product-schema'
 import { storageSystemApi } from '../axios'
 import { Pagination } from '@/@types/pagination'
 import { AxiosRequestConfig } from 'axios'

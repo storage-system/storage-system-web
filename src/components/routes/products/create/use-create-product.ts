@@ -5,7 +5,7 @@ import { useProductsService } from '@/services/product'
 import {
   createProductSchema,
   CreateProductType,
-} from '@/validations/create-category-schema'
+} from '@/validations/create-category-schema_1'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
