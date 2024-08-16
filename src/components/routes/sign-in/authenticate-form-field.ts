@@ -1,22 +1,7 @@
 import { FormFieldsConstant } from '@/@types/form-field'
-import { ErrorMessagesProps } from '@/@types/toast-messages'
-import {
-  AuthenticateType,
-  authenticateSchema,
-} from '@/validations/authenticate-schema'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { AuthenticateType } from '@/validations/authenticate-schema'
 
 export function useAuthenticateFormField() {
-  const form = useForm<AuthenticateType>({
-    resolver: zodResolver(authenticateSchema),
-  })
-
-  const [alertError, setAlertError] = useState<ErrorMessagesProps | undefined>(
-    undefined,
-  )
-
   const AUTHENTICATE_FORM_FIELD: FormFieldsConstant<AuthenticateType> = [
     [
       {
@@ -39,9 +24,6 @@ export function useAuthenticateFormField() {
   ]
 
   return {
-    form,
     AUTHENTICATE_FORM_FIELD,
-    alertError,
-    setAlertError,
   }
 }

@@ -5,35 +5,15 @@ import { useAuthenticateFormField } from './authenticate-form-field'
 import { AuthenticateType } from '@/validations/authenticate-schema'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { signIn } from 'next-auth/react'
-import { PrivateRoutes } from '@/constants/routes/private-routes'
 import { PublicRoutes } from '@/constants/routes/public-routes'
-import { useRouter } from 'next/navigation'
-import { signinErrorMessages } from '@/constants/sign-in/sign-in-toast-messages'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { AlertCircle } from 'lucide-react'
+import { useAuthenticate } from './use-authenticate'
 
 export function AuthenticateForm() {
-  const router = useRouter()
+  const { AUTHENTICATE_FORM_FIELD } = useAuthenticateFormField()
 
-  const { form, AUTHENTICATE_FORM_FIELD, alertError, setAlertError } =
-    useAuthenticateFormField()
-
-  async function onSubmit({ email, password }: AuthenticateType) {
-    signIn('credentials', {
-      email,
-      password,
-      redirect: false,
-    }).then((data) => {
-      if (data?.ok) {
-        router.replace(PrivateRoutes.HOME)
-        setAlertError(undefined)
-      }
-      if (data?.error) {
-        setAlertError(signinErrorMessages.invalidCredentials)
-      }
-    })
-  }
+  const { alertError, form, onSubmit } = useAuthenticate()
 
   return (
     <FormRender<AuthenticateType>
