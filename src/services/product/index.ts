@@ -12,9 +12,13 @@ export function useProductsService() {
   }
 
   async function listProductsService(
+    { companyId }: { companyId: string }, // FIXME:
     params?: AxiosRequestConfig,
   ): Promise<Pagination<ListProduct>> {
-    const { data } = await storageSystemApi.get(route, params)
+    const { data } = await storageSystemApi.get(
+      `${route}/company/${companyId}`,
+      params,
+    )
     return data
   }
 
