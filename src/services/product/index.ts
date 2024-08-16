@@ -22,8 +22,13 @@ export function useProductsService() {
     return data
   }
 
+  async function deleteProductService(productId: string) {
+    storageSystemApi.delete(`${route}/${productId}`)
+  }
+
   return {
     createProductService,
     listProductsService,
+    deleteProductService,
   }
 }

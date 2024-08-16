@@ -1,8 +1,8 @@
 'use client'
 
 import { DataTable } from '@/shared/data-table'
-import { useListProductsColumns } from './useListCategoriesColumns'
-import { useTableProducts } from './useTableCategories'
+import { useListProductsColumns } from './use-list-products-columns'
+import { useTableProducts } from './use-table-categories'
 
 export function TableProducts() {
   const { tableColumns } = useListProductsColumns()

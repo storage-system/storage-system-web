@@ -15,9 +15,9 @@ export function LoginGoogle() {
     <Button
       onClick={handleSignIn}
       variant="secondary"
-      className="gap-2 w-full bg-gray-200 text-textPrimary dark:text-black"
+      className="w-full gap-2 bg-gray-200 text-textPrimary dark:text-black"
     >
-      <img className="w-4 h-4" src="./google-icon.png" />
+      <img className="size-4" src="./google-icon.png" />
       Fazer login com Google
     </Button>
   )

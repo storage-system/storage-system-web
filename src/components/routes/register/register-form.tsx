@@ -37,7 +37,7 @@ export function RegisterForm() {
       form={form}
       onSubmit={mutateAsync}
     >
-      <div className="w-full flex flex-col space-y-4">
+      <div className="flex w-full flex-col space-y-4">
         <Button className="w-full" type="submit">
           Cadastrar
         </Button>
@@ -45,7 +45,7 @@ export function RegisterForm() {
           Já tem uma conta ?
           <Link
             href={PublicRoutes.SIGN_IN}
-            className="text-primary ml-1 hover:underline"
+            className="ml-1 text-primary hover:underline"
           >
             Entrar
           </Link>

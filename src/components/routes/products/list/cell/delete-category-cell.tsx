@@ -1,4 +1,4 @@
-import { ListCategory } from '@/@types/category'
+import { ListProduct } from '@/@types/product'
 import {
   TooltipRoot,
   TooltipTrigger,
@@ -12,28 +12,28 @@ import {
 } from '@/components/ui/dialog'
 import { AlertCircle, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useCategoriesService } from '@/services/categories'
 import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'
 import { queryClient } from '@/utils/query-client'
-import { categoriesQueryKey } from '@/constants/query-key/categories-query-key'
+import { productsQueryKey } from '@/constants/query-key/products-query-key'
+import { useProductsService } from '@/services/product'
 
 interface Props {
-  row: ListCategory
+  row: ListProduct
 }
 
-export function DeleteCategoryCell({ row }: Props) {
+export function DeleteProductCell({ row }: Props) {
   const [openDialog, setOpenDialog] = useState(false)
 
-  const { deleteCategoryService } = useCategoriesService()
+  const { deleteProductService } = useProductsService()
 
   async function handleDeleteCell() {
-    await deleteCategoryService(row.id)
+    await deleteProductService(row.id)
   }
 
   async function handleSuccess() {
     await queryClient.invalidateQueries({
-      queryKey: [categoriesQueryKey.LIST_CATEGORIES],
+      queryKey: [productsQueryKey.LIST_PRODUCTS],
     })
     setOpenDialog(false)
   }
@@ -56,7 +56,7 @@ export function DeleteCategoryCell({ row }: Props) {
       <DialogContent>
         <div className="flex items-center">
           <AlertCircle className="mr-2 size-5" />
-          Tem certeza que deseja excluir esta categoria?
+          Tem certeza que deseja excluir este produto?
         </div>
         <div className="flex justify-end gap-4">
           <DialogClose>

@@ -78,7 +78,7 @@ export function UpdateCategoryCell({ row }: Props) {
           form={form}
           onSubmit={mutateAsync}
         >
-          <div className="w-full flex justify-end space-x-4">
+          <div className="flex w-full justify-end space-x-4">
             <DialogClose>
               <Button type="button" variant="outline">
                 Cancelar

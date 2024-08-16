@@ -1,4 +1,3 @@
-import { TableCategories } from '@/components/routes/categories/list/table-categories'
 import { TableProducts } from '@/components/routes/products/list/table-products'
 import { buttonVariants } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'

@@ -2,6 +2,7 @@ import { ListProduct } from '@/@types/product'
 import { formattedDateFNS } from '@/utils/format-date'
 import { ColumnDef } from '@tanstack/table-core'
 import { parseISO } from 'date-fns'
+import { DeleteProductCell } from './cell/delete-category-cell'
 
 export function useListProductsColumns() {
   const tableColumns: ColumnDef<ListProduct>[] = [
@@ -40,6 +41,16 @@ export function useListProductsColumns() {
     {
       accessorKey: 'status',
       header: 'Status',
+    },
+    {
+      accessorKey: 'actions',
+      header: 'Ações',
+      cell: ({ row }) => (
+        <div className="flex justify-evenly">
+          <DeleteProductCell row={row.original} />
+        </div>
+      ),
+      enableHiding: false,
     },
   ]
 
