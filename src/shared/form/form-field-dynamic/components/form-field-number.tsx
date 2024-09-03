@@ -11,7 +11,7 @@ interface FormFieldNumberProps {
 export function FormFieldNumber({ field, slot }: FormFieldNumberProps) {
   return (
     <Input
-      className="h-12  bg-white placeholder:text-gray-400 dark:bg-black"
+      className="h-12  bg-white placeholder:text-gray-400 dark:bg-background"
       disabled={slot.disabled}
       inputMode="numeric"
       id={field.name}

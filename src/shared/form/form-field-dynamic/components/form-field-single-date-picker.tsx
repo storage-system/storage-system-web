@@ -34,7 +34,7 @@ export function FormFieldSingleDatePicker({
         <Button
           variant={'outline'}
           className={cn(
-            'relative h-12  w-full bg-white dark:bg-black justify-start text-left font-normal',
+            'relative h-12  w-full bg-white dark:bg-background justify-start text-left font-normal',
             !date && 'text-muted-foreground',
           )}
         >

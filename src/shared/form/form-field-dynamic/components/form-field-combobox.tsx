@@ -55,14 +55,14 @@ export function FormFieldCombobox({ field, slot }: FormFieldComboboxProps) {
           variant="outline"
           role="combobox"
           className={cn(
-            'h-12 bg-white dark:bg-black w-full justify-between',
+            'h-12 bg-white dark:bg-background w-full justify-between',
             !field.value && 'text-gray-400',
           )}
         >
           {isMultiple && (
             <div className="space-x-2">
               {multipleOptionSelected.map((option) => (
-                <Badge className="text-white" key={option.value}>
+                <Badge className="text-white dark:bg-black" key={option.value}>
                   {option.label}
                 </Badge>
               ))}

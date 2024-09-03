@@ -23,7 +23,7 @@ export function FormFieldPassword({ field, slot }: FormFieldPasswordProps) {
   return (
     <div className="relative">
       <Input
-        className="h-12 bg-white placeholder:text-gray-400 dark:bg-black"
+        className="h-12 bg-white placeholder:text-gray-400 dark:bg-background"
         disabled={slot.disabled}
         onChange={field.onChange}
         placeholder={slot.placeholder}

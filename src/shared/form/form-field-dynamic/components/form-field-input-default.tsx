@@ -19,7 +19,7 @@ export function FormFieldInputDefault({
 
   return (
     <Input
-      className="h-12 bg-white placeholder:text-gray-400 dark:bg-black"
+      className="h-12 bg-white placeholder:text-gray-400 dark:bg-background"
       id={field.name as string}
       disabled={slot.disabled}
       autoComplete={autoComplete ?? 'off'}

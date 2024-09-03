@@ -33,6 +33,7 @@ type Props = {
 export const FormFieldMaskedInput = forwardRef(
   (
     { mask, onChange, onBlur, value, ...props }: Props,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _: ForwardedRef<HTMLInputElement | null>,
   ) => {
     const inputRef = useRef(null)
@@ -71,7 +72,7 @@ export const FormFieldMaskedInput = forwardRef(
       <Input
         {...props}
         autoComplete={props.autoComplete ?? 'off'}
-        className="h-12 bg-white placeholder:text-gray-400 disabled:opacity-80 dark:bg-black"
+        className="h-12 bg-white placeholder:text-gray-400 disabled:opacity-80 dark:bg-background"
         name={String(props.name)}
         onBlur={handleOnBlur}
         onChange={handleOnChange}
