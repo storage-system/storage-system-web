@@ -3,9 +3,9 @@ import { productErrorMessages } from '@/constants/product/product-toast-messages
 import { PrivateRoutes } from '@/constants/routes/private-routes'
 import { useProductsService } from '@/services/product'
 import {
-  createProductSchema,
   CreateProductType,
-} from '@/validations/create-category-schema_1'
+  createProductSchema,
+} from '@/validations/create-product-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
@@ -53,9 +53,6 @@ export function useCreateProduct() {
   })
 
   async function handleSuccess() {
-    // await queryClient.invalidateQueries({
-    //   queryKey: [categoriesQueryKey.],
-    // })
     form.reset({}, { keepValues: false })
     router.push(PrivateRoutes.PRODUCT)
     setOpenDialog(false)

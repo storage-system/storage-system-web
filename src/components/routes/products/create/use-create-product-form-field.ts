@@ -5,7 +5,7 @@ import {
 } from '@/constants/product/product-status-enum'
 import { categoriesQueryKey } from '@/constants/query-key/categories-query-key'
 import { useCategoriesService } from '@/services/categories'
-import { CreateProductType } from '@/validations/create-category-schema_1'
+import { CreateProductType } from '@/validations/create-product-schema'
 import { useQuery } from '@tanstack/react-query'
 
 export function useCreateProductFormField() {

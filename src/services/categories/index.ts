@@ -1,4 +1,4 @@
-import { CreateCategoryInput } from '@/validations/create-category-schema_1'
+import { CreateCategoryInput } from '@/validations/create-category-schema'
 import { storageSystemApi } from '../axios'
 import { AxiosRequestConfig } from 'axios'
 import { ListCategory } from '@/@types/category'

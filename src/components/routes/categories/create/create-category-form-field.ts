@@ -1,5 +1,5 @@
 import { FormFieldsConstant } from '@/@types/form-field'
-import { CreateCategoryType } from '@/validations/create-category-schema_1'
+import { CreateCategoryType } from '@/validations/create-category-schema'
 
 export function useCreateCategoryFormField() {
   const CREATE_CATEGORY_FORM_FIELD: FormFieldsConstant<CreateCategoryType> = [

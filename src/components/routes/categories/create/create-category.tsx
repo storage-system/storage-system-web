@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { FormRender } from '@/shared/form/form-field-dynamic/FormRender'
-import { CreateCategoryType } from '@/validations/create-category-schema_1'
+import { CreateCategoryType } from '@/validations/create-category-schema'
 import { PlusCircle } from 'lucide-react'
 import { useCreateCategoryFormField } from './create-category-form-field'
 import { useCreateCategory } from './use-create-category'

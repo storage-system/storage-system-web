@@ -8,7 +8,6 @@ import {
   TableCell,
   TableHead,
 } from '@/components/ui/table'
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { flexRender } from '@tanstack/react-table'
 
 import { useDataTableContext } from './data-table-provider'
@@ -49,7 +48,7 @@ export function DataTableMain({ isDraggable }: DataTableMainProps) {
         {isLoading ? (
           <TableRow>
             <TableCell className="h-24 text-center" colSpan={columns.length}>
-              <div className="gap-4">
+              <div className="space-y-4">
                 {Array.from({ length: 3 }).map((_, index) => {
                   return <Skeleton className="h-6 w-full" key={index} />
                 })}

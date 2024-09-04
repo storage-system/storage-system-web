@@ -1,30 +1,6 @@
 import { StatusProduct } from '@/constants/product/product-status-enum'
 import { z } from 'zod'
 
-/*
-z.object({
-  name: z.string(),
-  description: z.string(),
-  originalPrice: z.number(),
-  finalPrice: z.number(),
-  discountPercentage: z.number(),
-  quantityInStock: z.number(),
-  manufactureDate: z.date().optional(),
-  validityInDays: z.number(),
-  unitOfMeasure: z.string(),
-  weight: z.number(),
-  dimensions_height: z.string(),
-  dimensions_width: z.string(),
-  dimensions_depth: z.string(),
-  manufacturer: z.string().optional(),
-  batch: z.string().optional(),
-  status: z.nativeEnum(StatusProduct),
-  companyId: z.string().uuid(),
-  categoryIds: z.array(z.string())
-})
-
-*/
-
 export const createProductSchema = z.object({
   name: z
     .string({ required_error: 'O nome é obrigatório' })

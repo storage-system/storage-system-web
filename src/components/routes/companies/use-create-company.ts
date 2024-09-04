@@ -10,7 +10,7 @@ import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
 
 export function useCreateCompany() {
-  const { reset, ...form } = useForm<CreateCompanyType>({
+  const form = useForm<CreateCompanyType>({
     resolver: zodResolver(createCompanySchema),
     defaultValues: {
       contact: '',
@@ -25,7 +25,7 @@ export function useCreateCompany() {
   const { createCompanyService } = useCompaniesService()
 
   function handleSuccess() {
-    reset()
+    form.reset({})
     toast({ variant: 'success', title: 'Empresa criada com sucesso' })
   }
 

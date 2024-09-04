@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { PublicRoutes } from '@/constants/routes/public-routes'
 import { CreateUserType } from '@/validations/create-user-schema'
 import { useRegisterFormField } from './register-form-field'
-import { useCompaniesService } from '@/services/company'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/ui/use-toast'
@@ -38,7 +37,7 @@ export function RegisterForm() {
       onSubmit={mutateAsync}
     >
       <div className="flex w-full flex-col space-y-4">
-        <Button className="w-full" type="submit">
+        <Button className="w-full" type="submit" isLoading={isPending}>
           Cadastrar
         </Button>
         <p className="text-sm">
