@@ -3,6 +3,7 @@ import { formattedDateFNS } from '@/utils/format-date'
 import { ColumnDef } from '@tanstack/table-core'
 import { parseISO } from 'date-fns'
 import { DeleteProductCell } from './cell/delete-category-cell'
+import { ProductStatusCell } from './cell/product-status-cell'
 
 export function useListProductsColumns() {
   const tableColumns: ColumnDef<ListProduct>[] = [
@@ -11,10 +12,6 @@ export function useListProductsColumns() {
       header: 'Nome',
       enableHiding: false,
     },
-    // {
-    //   accessorKey: 'description',
-    //   header: 'Descrição',
-    // },
     {
       accessorKey: 'quantityInStock',
       header: 'Quantidade em Estoque',
@@ -41,6 +38,7 @@ export function useListProductsColumns() {
     {
       accessorKey: 'status',
       header: 'Status',
+      cell: ({ row }) => <ProductStatusCell status={row.original.status} />,
     },
     {
       accessorKey: 'actions',

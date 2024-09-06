@@ -1,3 +1,5 @@
+import { StatusProduct } from './status-product'
+
 export interface Product {
   name: string
   description: string
@@ -14,7 +16,7 @@ export interface Product {
   dimensions_depth: string
   manufacturer: string
   batch: string
-  status: string
+  status: StatusProduct
   companyId: string
   categoryIds: string[]
 }

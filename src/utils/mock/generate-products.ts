@@ -1,4 +1,5 @@
 import { ListProduct } from '@/@types/product'
+import { StatusProduct } from '@/@types/status-product'
 import { faker } from '@faker-js/faker'
 
 export function generateProducts(count: number): ListProduct[] {
@@ -21,7 +22,7 @@ export function generateProducts(count: number): ListProduct[] {
     dimensions_depth: `${faker.number.int({ min: 10, max: 100 })} cm`,
     manufacturer: faker.company.name(),
     batch: faker.string.alphanumeric({ length: 10 }).toUpperCase(),
-    status: faker.helpers.arrayElement(['ACTIVE', 'INACTIVE']),
+    status: faker.helpers.enumValue(StatusProduct),
     companyId: faker.string.uuid(),
     categoryIds: Array.from({
       length: faker.number.int({ min: 1, max: 3 }),
