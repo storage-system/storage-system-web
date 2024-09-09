@@ -14,7 +14,7 @@ export function ProductDetailContent() {
           <img
             className="size-[300px] rounded-lg bg-cover shadow-md"
             src={
-              product.photo
+              product?.photo
                 ? 'https://compraco.com.br/cdn/shop/products/Bobinas_de_Aco_23.jpg?v=1591218720'
                 : 'https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg'
             }
