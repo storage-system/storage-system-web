@@ -2,7 +2,7 @@ import { CreateProductInput } from '@/validations/create-product-schema'
 import { storageSystemApi } from '../axios'
 import { Pagination } from '@/@types/pagination'
 import { AxiosRequestConfig } from 'axios'
-import { ListProduct } from '@/@types/product'
+import { ListProduct, Product } from '@/@types/product'
 
 export function useProductsService() {
   const route = '/products'
@@ -22,6 +22,11 @@ export function useProductsService() {
     return data
   }
 
+  async function getProductByIdService(anId: string): Promise<Product> {
+    const { data } = await storageSystemApi.get(`${route}/${anId}`)
+    return data
+  }
+
   async function deleteProductService(productId: string) {
     storageSystemApi.delete(`${route}/${productId}`)
   }
@@ -29,6 +34,7 @@ export function useProductsService() {
   return {
     createProductService,
     listProductsService,
+    getProductByIdService,
     deleteProductService,
   }
 }
