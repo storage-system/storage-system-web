@@ -21,6 +21,7 @@ export function useProductsService() {
     const { data } = await storageSystemApi.get('/api/products/{id}', {
       routeParams: { id: anId },
     })
+
     return data
   }
 
