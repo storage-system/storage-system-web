@@ -6,13 +6,13 @@ import { Pagination } from '@/@types/pagination'
 
 export function useCategoriesService() {
   async function createCategoryService(anInput: CreateCategoryInput) {
-    await storageSystemApi.post('/categories', anInput)
+    await storageSystemApi.post('/api/categories', anInput)
   }
 
   async function listCategoriesService(
     params?: AxiosRequestConfig,
   ): Promise<Pagination<ListCategory>> {
-    const { data } = await storageSystemApi.get('/categories', params)
+    const { data } = await storageSystemApi.get('/api/categories', params)
     return data
   }
 
@@ -20,11 +20,15 @@ export function useCategoriesService() {
     anId: string,
     anInput: Partial<CreateCategoryInput>,
   ) {
-    await storageSystemApi.patch(`/categories/${anId}`, anInput)
+    await storageSystemApi.patch(`/api/categories/{id}`, anInput, {
+      routeParams: { id: anId },
+    })
   }
 
   async function deleteCategoryService(anId: string) {
-    await storageSystemApi.delete(`/categories/${anId}`)
+    await storageSystemApi.delete('/api/categories/{id}', {
+      routeParams: { id: anId },
+    })
   }
 
   return {

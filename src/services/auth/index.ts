@@ -3,7 +3,7 @@ import { storageSystemApi } from '../axios'
 
 export function authService() {
   async function authenticateService(anInput: AuthenticateInput) {
-    const { data } = await storageSystemApi.post('/sessions', anInput)
+    const { data } = await storageSystemApi.post('/api/sessions', anInput)
 
     return data
   }

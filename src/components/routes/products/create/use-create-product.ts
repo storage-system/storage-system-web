@@ -1,5 +1,5 @@
 import { toast } from '@/components/ui/use-toast'
-import { productErrorMessages } from '@/constants/product/product-toast-messages'
+import { productErrorMessages } from '@/constants/product/product-error-messages'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
 import { useProductsService } from '@/services/product'
 import {

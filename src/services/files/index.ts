@@ -1,17 +1,10 @@
 import { storageSystemApi } from '../axios'
 
 export function useFilesService() {
-  const baseUrl = '/files'
-
   async function uploadFileService(formData: FormData) {
-    const { data } = await storageSystemApi.post(
-      `${baseUrl}/upload`,
+    const { data } = await storageSystemApi.postForm(
+      '/api/files/upload',
       formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      },
     )
     return data
   }
