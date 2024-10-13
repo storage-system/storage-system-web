@@ -7,11 +7,12 @@ import {
 } from '@/validations/create-category-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 export function useCreateCategory() {
   const [openDialog, setOpenDialog] = useState(false)
+  const [fileId, setFileId] = useState<string | undefined>(undefined)
 
   const { createCategoryService } = useCategoriesService()
 
@@ -35,11 +36,19 @@ export function useCreateCategory() {
     onSuccess: handleSuccess,
   })
 
+  useEffect(() => {
+    if (fileId) {
+      form.setValue('fileId', fileId)
+    }
+  }, [fileId])
+
   return {
     isPending,
     openDialog,
     form,
     setOpenDialog,
     mutateAsync,
+    fileId,
+    setFileId,
   }
 }

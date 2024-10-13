@@ -14,13 +14,18 @@ import { PlusCircle } from 'lucide-react'
 import { useCreateCategoryFormField } from './create-category-form-field'
 import { useCreateCategory } from './use-create-category'
 import { ImageAttachmentInput } from '@/components/image-attachment-input/image-attachment-input'
-import { useState } from 'react'
 
 export function CreateCategory() {
-  const [fileId, setFileId] = useState<string | undefined>(undefined)
   const { CREATE_CATEGORY_FORM_FIELD } = useCreateCategoryFormField()
-  const { mutateAsync, isPending, openDialog, setOpenDialog, form } =
-    useCreateCategory()
+  const {
+    mutateAsync,
+    isPending,
+    openDialog,
+    setOpenDialog,
+    form,
+    fileId,
+    setFileId,
+  } = useCreateCategory()
 
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
@@ -37,7 +42,11 @@ export function CreateCategory() {
           form={form}
           onSubmit={mutateAsync}
         >
-          <ImageAttachmentInput setFileId={setFileId} fileId={fileId} />
+          <ImageAttachmentInput
+            setFileId={setFileId}
+            fileId={fileId}
+            errorMessage={form.formState.errors.fileId?.message}
+          />
           <div className="flex w-full justify-end space-x-4">
             <DialogClose>
               <Button type="button" variant="outline">

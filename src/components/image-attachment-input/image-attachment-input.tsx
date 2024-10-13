@@ -7,11 +7,13 @@ import { useImageAttachmentInput } from './use-image-attachment-input'
 interface ImageAttachmentInputProp {
   fileId: string | undefined
   setFileId: Dispatch<SetStateAction<string | undefined>>
+  errorMessage?: string
 }
 
 export function ImageAttachmentInput({
   fileId,
   setFileId,
+  errorMessage,
 }: ImageAttachmentInputProp) {
   const {
     fileData,
@@ -37,6 +39,9 @@ export function ImageAttachmentInput({
           <span className="text-primary">Busque nos seus arquivos</span>
         </p>
       </div>
+      {errorMessage && (
+        <p className="text-sm font-medium text-red-500">{errorMessage}</p>
+      )}
       {fileData && (
         <div className="flex items-center justify-between rounded-sm border-2 border-dashed border-input bg-white px-2 py-1">
           <img
