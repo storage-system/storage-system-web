@@ -10,11 +10,14 @@ import {
 } from '@/components/ui/dialog'
 import { FormRender } from '@/shared/form/form-field-dynamic/FormRender'
 import { CreateCategoryType } from '@/validations/create-category-schema'
-import { PlusCircle } from 'lucide-react'
+import { ImageUp, PlusCircle } from 'lucide-react'
 import { useCreateCategoryFormField } from './create-category-form-field'
 import { useCreateCategory } from './use-create-category'
+import { ImageAttachmentInput } from '@/components/image-attachment-input/image-attachment-input'
+import { useState } from 'react'
 
 export function CreateCategory() {
+  const [fileId, setFileId] = useState<string | undefined>(undefined)
   const { CREATE_CATEGORY_FORM_FIELD } = useCreateCategoryFormField()
   const { mutateAsync, isPending, openDialog, setOpenDialog, form } =
     useCreateCategory()
@@ -34,6 +37,7 @@ export function CreateCategory() {
           form={form}
           onSubmit={mutateAsync}
         >
+          <ImageAttachmentInput setFileId={setFileId} fileId={fileId} />
           <div className="flex w-full justify-end space-x-4">
             <DialogClose>
               <Button type="button" variant="outline">

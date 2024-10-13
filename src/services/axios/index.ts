@@ -116,7 +116,7 @@ class Rest {
 }
 
 export const storageSystemApi = new Rest({
-  baseURL: process.env.NEXT_PUBLIC_KSI_CUSTOMER_CARE_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     'Content-Type': 'application/json',
     'Cache-Control': 'no-cache',

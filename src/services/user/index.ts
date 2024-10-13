@@ -4,14 +4,12 @@ import { CreateUserInput } from '@/validations/create-user-schema'
 import { Pagination } from '@/@types/pagination'
 
 export function useUsersService() {
-  const endpoint = '/users'
-
   async function createUsersService(anInput: CreateUserInput) {
-    await storageSystemApi.post(endpoint, anInput)
+    await storageSystemApi.post('/api/users', anInput)
   }
 
   async function fetchUsersService(): Promise<Pagination<ListUsers>> {
-    const { data } = await storageSystemApi.get(endpoint)
+    const { data } = await storageSystemApi.get('/api/users')
 
     return data
   }

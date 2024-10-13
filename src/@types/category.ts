@@ -1,10 +1,6 @@
-export interface Category {
-  name: string
-  isActive: boolean
-  createdAt: Date
-  updatedAt: Date
-}
+import { components } from './openapi'
 
-export interface ListCategory extends Category {
-  id: string
-}
+export type Category =
+  components['schemas']['HttpCategoryListResponse']['items'][number]
+
+export type ListCategory = components['schemas']['HttpCategoryListResponse']

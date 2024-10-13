@@ -408,7 +408,7 @@ export interface components {
             fileId?: string;
         };
         HttpEachCategoryListResponse: {
-            /** @example df872e48-23ee-49f7-ab3e-8dfb8e4dd249 */
+            /** @example a2c66c35-d553-4851-8ff3-9edacffb2395 */
             id: string;
             name: string;
             isActive?: boolean;
@@ -467,13 +467,13 @@ export interface components {
             categoryIds: string[];
         };
         HttpItemResponse: {
-            /** @example 44ef9881-aa9f-4c5a-a607-d5cdaa87c352 */
+            /** @example 385a99b7-b6c6-4fcf-97ff-75aa838a2f6c */
             id: string;
-            /** @example Eduardo Kunde */
+            /** @example Nathan Mann */
             name: string;
         };
         HttpEachProductListResponse: {
-            /** @example d12af112-ee3d-4f44-8260-2db0afd9cb41 */
+            /** @example 4dc33846-185d-45b2-badf-4e8a4be70a0d */
             id: string;
             name: string;
             quantityInStock: number;
@@ -502,7 +502,7 @@ export interface components {
             items: components["schemas"]["HttpEachProductListResponse"][];
         };
         HttpProductGetResponse: {
-            /** @example bd35546a-2146-459a-a6d8-1da6252911d2 */
+            /** @example 6e513752-ac99-45cf-882a-495d3c155b3e */
             id: string;
             name: string;
             description: string;
@@ -565,11 +565,11 @@ export interface components {
             reportFrequency: "diary" | "weekly" | "month" | "year";
         };
         HttpConfigurationGetResponse: {
-            /** @example e2b5bce5-e08a-47e2-aa9d-5e8d1299ee52 */
+            /** @example 8f05987e-be82-4426-9b0c-7cf5cd91c2e6 */
             id: string;
-            /** @example 84171466-3f77-4f71-adab-fc9558e39b05 */
+            /** @example d0e95d0c-9b53-40de-8e5e-8be2bcd55de3 */
             userId: string;
-            /** @example 2cb5c101-e04d-4527-8cdb-461c7aa0124e */
+            /** @example 1aefaf75-7303-4584-a531-77ded765bbfa */
             companyId: string;
             daysBeforeOldStock: number;
             warningDays: number;
@@ -607,9 +607,9 @@ export interface components {
             tertiaryColor: string;
         };
         HttpEachStyleListResponse: {
-            /** @example 374d0155-65c9-4a50-a6ed-a7a3b107e262 */
+            /** @example 175ca594-7aa7-4bb6-865a-ffcf1c163349 */
             id: string;
-            /** @example 12f10c47-91b6-44a0-af71-9a88a6e64bf3 */
+            /** @example af34f4ce-3c01-4792-a06f-5219b054ec22 */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -630,9 +630,9 @@ export interface components {
             items: components["schemas"]["HttpEachStyleListResponse"][];
         };
         HttpStyleGetResponse: {
-            /** @example 36acb4a1-a09b-49a4-ba16-bd0a36863d84 */
+            /** @example 49570e5a-d487-4eac-b634-c9a6b26a8007 */
             id: string;
-            /** @example 10d1d20e-97a7-414c-845a-d89bec62e768 */
+            /** @example 9716d87a-05da-44d2-807d-a8b40f16c6ec */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -653,6 +653,14 @@ export interface components {
             primaryColor?: string;
             secondaryColor?: string;
             tertiaryColor?: string;
+        };
+        HttpFileCreatedResponse: {
+            /** @example 549a3b74-3e57-4a62-83db-7bebe8565d59 */
+            id: string;
+        };
+        HttpGetFileUrlResponse: {
+            /** @example string */
+            fileUrl: string;
         };
     };
     responses: never;
@@ -1277,11 +1285,13 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            201: {
+            200: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["HttpFileCreatedResponse"];
+                };
             };
         };
     };
@@ -1300,7 +1310,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["HttpGetFileUrlResponse"];
+                };
             };
         };
     };

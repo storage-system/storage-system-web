@@ -4,7 +4,7 @@ import axios from 'axios'
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
-const apiUrl = process.env.NEXT_PUBLIC_STORAGE_SYSTEM_API_URL
+const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -24,7 +24,9 @@ export const authOptions: NextAuthOptions = {
         }
 
         try {
-          const { data } = await axios.post(`${apiUrl}sessions`, {
+          const url = new URL('/api/sessions', apiUrl)
+
+          const { data } = await axios.post(url.toString(), {
             email: credentials.email,
             password: credentials.password,
           })
