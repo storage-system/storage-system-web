@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dialog'
 import { FormRender } from '@/shared/form/form-field-dynamic/FormRender'
 import { CreateCategoryType } from '@/validations/create-category-schema'
-import { ImageUp, PlusCircle } from 'lucide-react'
+import { PlusCircle } from 'lucide-react'
 import { useCreateCategoryFormField } from './create-category-form-field'
 import { useCreateCategory } from './use-create-category'
 import { ImageAttachmentInput } from '@/components/image-attachment-input/image-attachment-input'
