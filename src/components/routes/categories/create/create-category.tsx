@@ -23,8 +23,9 @@ export function CreateCategory() {
     openDialog,
     setOpenDialog,
     form,
-    fileId,
-    setFileId,
+    files,
+    setFiles,
+    uploadStatus,
   } = useCreateCategory()
 
   return (
@@ -43,9 +44,11 @@ export function CreateCategory() {
           onSubmit={mutateAsync}
         >
           <ImageAttachmentInput
-            setFileId={setFileId}
-            fileId={fileId}
-            errorMessage={form.formState.errors.fileId?.message}
+            setFiles={setFiles}
+            files={files}
+            errorMessage={
+              uploadStatus instanceof Error ? uploadStatus.message : undefined
+            }
           />
           <div className="flex w-full justify-end space-x-4">
             <DialogClose>

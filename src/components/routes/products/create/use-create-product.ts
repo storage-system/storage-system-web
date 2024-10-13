@@ -14,6 +14,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 export function useCreateProduct() {
+  const [files, setFiles] = useState<File[]>([])
   const [openDialog, setOpenDialog] = useState(false)
   const { data: session } = useSession()
   const router = useRouter()
@@ -65,5 +66,13 @@ export function useCreateProduct() {
 
   companyId && form.setValue('companyId', companyId)
 
-  return { openDialog, isPending, form, mutateAsync, setOpenDialog }
+  return {
+    openDialog,
+    isPending,
+    form,
+    mutateAsync,
+    setOpenDialog,
+    files,
+    setFiles,
+  }
 }

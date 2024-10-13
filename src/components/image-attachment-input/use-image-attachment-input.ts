@@ -1,58 +1,53 @@
-import { filesQueryKey } from '@/constants/query-key/file-query-key'
-import { useFilesService } from '@/services/files'
-import { useMutation, useQuery } from '@tanstack/react-query'
 import { Dispatch, SetStateAction, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-interface ImageAttachmentInputProps {
-  fileId: string | undefined
-  setFileId: Dispatch<SetStateAction<string | undefined>>
+export interface UseImageAttachmentInputProps {
+  files: File[]
+  setFiles: Dispatch<SetStateAction<File[]>>
+  maxFiles?: number
 }
 
 export function useImageAttachmentInput({
-  fileId,
-  setFileId,
-}: ImageAttachmentInputProps) {
-  const { uploadFileService, getFileUrlService, deleteFileService } =
-    useFilesService()
-
-  const { data: fileData } = useQuery({
-    queryKey: [filesQueryKey.GET_FILE_BY_ID, fileId],
-    queryFn: async () => (fileId ? await getFileUrlService(fileId) : null),
-    enabled: fileId !== undefined,
-  })
-
-  const { mutateAsync: handleUploadFile } = useMutation({
-    mutationFn: async (data: FormData) => await uploadFileService(data),
-    onSuccess: (data) => {
-      setFileId(data.id)
+  files,
+  setFiles,
+  maxFiles = 1,
+}: UseImageAttachmentInputProps) {
+  const onDrop = useCallback(
+    async (acceptedFiles: File[]) => {
+      setFiles((currentFiles) => {
+        const newFiles = [...currentFiles, ...acceptedFiles]
+        if (newFiles.length > maxFiles) {
+          return newFiles.slice(0, maxFiles)
+        }
+        return newFiles
+      })
     },
+    [maxFiles, setFiles],
+  )
+
+  const isMaxFilesReached = files.length >= maxFiles
+
+  function removeFile(filename: string, indexToRemove: number) {
+    setFiles((currentFiles) =>
+      currentFiles.filter(
+        (file, index) => !(file.name === filename && index === indexToRemove),
+      ),
+    )
+  }
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    maxFiles,
+    disabled: isMaxFilesReached,
   })
-
-  const { mutateAsync: handleDeleteFile } = useMutation({
-    mutationFn: async (anId: string) => {
-      await deleteFileService(anId)
-    },
-    onSuccess: () => {
-      setFileId(undefined)
-    },
-  })
-
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    const formData = new FormData()
-
-    formData.append('file', acceptedFiles[0])
-
-    await handleUploadFile(formData)
-  }, [])
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
   return {
-    fileData,
-    handleDeleteFile,
+    files,
+    setFiles,
+    removeFile,
     getRootProps,
     getInputProps,
     isDragActive,
+    isMaxFilesReached,
   }
 }
