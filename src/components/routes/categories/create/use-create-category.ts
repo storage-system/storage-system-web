@@ -10,6 +10,7 @@ import {
 } from '@/validations/create-category-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
+import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -19,12 +20,14 @@ export function useCreateCategory() {
   const [uploadStatus, setUploadStatus] = useState<string | Error>('')
 
   const { uploadFileService } = useFilesService()
+  const { data: session } = useSession()
   const { createCategoryService } = useCategoriesService()
 
   const form = useForm<CreateCategoryType>({
     resolver: zodResolver(createCategorySchema),
     defaultValues: {
       isActive: true,
+      companyId: session?.user.companyId,
     },
   })
 
@@ -39,7 +42,11 @@ export function useCreateCategory() {
   async function handleCreateCategory(anInput: CreateCategoryInput) {
     try {
       const fileIds = await handleUploadFiles(files)
-      await createCategoryService({ ...anInput, fileId: fileIds[0] })
+      await createCategoryService({
+        ...anInput,
+        fileId: fileIds[0],
+        companyId: session?.user?.companyId ?? '',
+      })
     } catch (error) {
       if (uploadStatus instanceof Error) {
         toast({ variant: 'destructive', title: uploadStatus.message })
