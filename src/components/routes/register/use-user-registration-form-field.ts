@@ -8,12 +8,12 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
-export function useRegisterFormField() {
+export function useRegistrationFormField() {
   const form = useForm<CreateUserInput>({
     resolver: zodResolver(createUserSchema),
   })
 
-  const REGISTER_FORM_FIELD: FormFieldsConstant<CreateUserType> = [
+  const REGISTRATION_FORM_FIELD: FormFieldsConstant<CreateUserType> = [
     [
       {
         name: 'name',
@@ -55,6 +55,6 @@ export function useRegisterFormField() {
 
   return {
     form,
-    REGISTER_FORM_FIELD,
+    REGISTRATION_FORM_FIELD,
   }
 }

@@ -2,7 +2,6 @@ import { CreateCategoryInput } from '@/validations/create-category-schema'
 import { storageSystemApi } from '../axios'
 import { AxiosRequestConfig } from 'axios'
 import { ListCategory } from '@/@types/category'
-import { Pagination } from '@/@types/pagination'
 
 export function useCategoriesService() {
   async function createCategoryService(anInput: CreateCategoryInput) {
@@ -11,7 +10,7 @@ export function useCategoriesService() {
 
   async function listCategoriesService(
     params?: AxiosRequestConfig,
-  ): Promise<Pagination<ListCategory>> {
+  ): Promise<ListCategory> {
     const { data } = await storageSystemApi.get('/api/categories', params)
     return data
   }

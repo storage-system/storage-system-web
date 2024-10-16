@@ -1,6 +1,6 @@
-import { RegisterForm } from '@/components/routes/register/register-form'
+import { RegistrationStepper } from '@/components/routes/register/registration-stepper'
 
-export default async function RegisterPage() {
+export default async function RegistrationPage() {
   return (
     <div className="flex h-screen max-h-screen w-screen max-w-[100vw] items-start justify-between">
       <div>
@@ -16,7 +16,7 @@ export default async function RegisterPage() {
               Crie a sua conta
             </h3>
           </div>
-          <RegisterForm />
+          <RegistrationStepper />
         </div>
       </div>
     </div>

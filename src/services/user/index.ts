@@ -5,7 +5,9 @@ import { Pagination } from '@/@types/pagination'
 
 export function useUsersService() {
   async function createUsersService(anInput: CreateUserInput) {
-    await storageSystemApi.post('/api/users', anInput)
+    const { data } = await storageSystemApi.post('/api/users', anInput)
+
+    return { data }
   }
 
   async function fetchUsersService(): Promise<Pagination<ListUsers>> {

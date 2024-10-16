@@ -10,7 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 export function useCreateProduct() {
@@ -46,6 +46,10 @@ export function useCreateProduct() {
       weight: '' as any,
     },
   })
+
+  useEffect(() => {
+    console.log(form.formState.errors)
+  }, [form.formState.errors])
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: createProductService,
