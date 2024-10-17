@@ -6,6 +6,7 @@ import { useState } from 'react'
 const { useStepper } = defineStepper(
   { id: 'user-form' },
   { id: 'company-form' },
+  { id: 'address-form' },
 )
 
 export function useRegistrationStepper() {

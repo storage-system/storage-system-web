@@ -5,6 +5,8 @@ import { Check } from 'lucide-react'
 import { RegistrationForm } from './user-registration-form'
 import { CompanyRegistrationForm } from './company-registration-form'
 import { useRegistrationStepper } from './use-registration-stepper'
+import * as React from 'react'
+import { AddressRegistrationForm } from './address-registration-form'
 
 export function RegistrationStepper() {
   const {
@@ -21,12 +23,11 @@ export function RegistrationStepper() {
       <div className="flex items-center">
         {stepper.all.map((step, index, array) => {
           return (
-            <>
+            <React.Fragment key={step.id}>
               {completedIds.some((id) => id === step.id) ? (
                 <div
-                  key={step.id}
                   className={cn(
-                    'size-14 rounded-full flex items-center justify-center text-lg border-2 border-primary',
+                    'size-14 rounded-full flex items-center justify-center text-lg border-2 border-primary bg-primary text-white',
                     stepper.current.id === step.id && 'border-2 border-primary',
                   )}
                 >
@@ -56,7 +57,7 @@ export function RegistrationStepper() {
                   />
                 </div>
               )}
-            </>
+            </React.Fragment>
           )
         })}
       </div>
@@ -70,6 +71,13 @@ export function RegistrationStepper() {
           ),
           'company-form': () => (
             <CompanyRegistrationForm
+              submit={handleNextStep}
+              prevStep={handlePrevStep}
+              setCompanyData={setCompanyData}
+            />
+          ),
+          'address-form': () => (
+            <AddressRegistrationForm
               submit={handleNextStep}
               prevStep={handlePrevStep}
               setCompanyData={setCompanyData}
