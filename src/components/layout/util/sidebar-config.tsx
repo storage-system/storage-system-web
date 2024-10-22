@@ -3,6 +3,7 @@ import {
   BriefcaseBusiness,
   HomeIcon,
   List,
+  Palette,
   Settings2,
   ShoppingCart,
 } from 'lucide-react'
@@ -100,6 +101,12 @@ export const sidebarConfig: SidebarConfig = {
           href: PrivateRoutes.CONFIGURATIONS,
           items: [],
           icon: <Settings2 className="size-4" />,
+        },
+        {
+          title: 'Estilos',
+          href: PrivateRoutes.STYLES,
+          items: [],
+          icon: <Palette className="size-4" />,
         },
       ],
     },
