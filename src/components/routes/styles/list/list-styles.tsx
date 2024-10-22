@@ -9,7 +9,7 @@ import {
 
 function getRandomColor(): string {
   const randomColor = Math.floor(Math.random() * 16777215).toString(16)
-  return `#${randomColor.padStart(6, '0')}` // Garantir que a cor tenha 6 dígitos
+  return `#${randomColor.padStart(6, '0')}`
 }
 
 function ColorPreview({ label }: { label: string }) {
