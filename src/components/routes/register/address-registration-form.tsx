@@ -40,7 +40,7 @@ export function AddressRegistrationForm({
         <Button type="button" onClick={() => prevStep()}>
           Voltar
         </Button>
-        <Button type="submit">Próximo passo</Button>
+        <Button type="submit">Finalizar Cadastro</Button>
       </div>
       <p className="text-sm">
         Já tem uma conta?

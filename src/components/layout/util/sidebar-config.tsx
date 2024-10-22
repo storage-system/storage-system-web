@@ -1,5 +1,11 @@
 import { type ReactNode } from 'react'
-import { BriefcaseBusiness, HomeIcon, List, ShoppingCart } from 'lucide-react'
+import {
+  BriefcaseBusiness,
+  HomeIcon,
+  List,
+  Settings2,
+  ShoppingCart,
+} from 'lucide-react'
 
 import { PrivateRoutes } from '@/constants/routes/private-routes'
 
@@ -88,6 +94,12 @@ export const sidebarConfig: SidebarConfig = {
           href: PrivateRoutes.COMPANY,
           items: [],
           icon: <BriefcaseBusiness className="size-4" />,
+        },
+        {
+          title: 'Configurações',
+          href: PrivateRoutes.CONFIGURATIONS,
+          items: [],
+          icon: <Settings2 className="size-4" />,
         },
       ],
     },
