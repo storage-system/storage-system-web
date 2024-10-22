@@ -1,6 +1,14 @@
-import { CreateCompanyType } from '@/validations/create-company-schema'
+import { PublicRoutes } from '@/constants/routes/public-routes'
+import { useCompaniesService } from '@/services/company'
+import { useUsersService } from '@/services/user'
+import {
+  CreateCompanyAddressType,
+  CreateCompanyType,
+} from '@/validations/create-company-schema'
 import { CreateUserType } from '@/validations/create-user-schema'
 import { defineStepper } from '@stepperize/react'
+import { useMutation } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const { useStepper } = defineStepper(
@@ -16,8 +24,13 @@ export function useRegistrationStepper() {
   const [userData, setUserData] = useState<CreateUserType | undefined>(
     undefined,
   )
+  const [companyAddressData, setCompanyAddressData] = useState<
+    CreateCompanyAddressType | undefined
+  >(undefined)
+
   const [completedIds, setCompletedIds] = useState<string[]>([])
   const stepper = useStepper()
+  const router = useRouter()
 
   function handleNextStep() {
     setCompletedIds((state) => [...state, stepper.current.id])
@@ -41,24 +54,33 @@ export function useRegistrationStepper() {
     stepper.prev()
   }
 
-  // const {} = useMutation({
-  //   mutationFn: async () =>
-  //     userData && companyData && handleSubmit(userData, companyData),
-  // })
+  const { mutateAsync } = useMutation({
+    mutationFn: async () =>
+      userData &&
+      companyData &&
+      companyAddressData &&
+      handleSubmit(userData, companyData, companyAddressData),
+    onSuccess: () => {
+      router.push(PublicRoutes.SIGN_IN)
+    },
+  })
 
-  // const { createUsersService } = useUsersService()
-  // const { createCompanyService } = useCompaniesService()
+  const { createUsersService } = useUsersService()
+  const { createCompanyService } = useCompaniesService()
 
-  // async function handleSubmit(
-  //   userData: CreateUserType,
-  //   companyData: CreateCompanyType,
-  // ) {
-  //   try {
-  //     const { data } = await createUsersService(userData)
-  //   } catch (error) {
-  //     toast({ variant: 'destructive', title: 'Erro ao cadastrat usuário' })
-  //   }
-  // }
+  async function handleSubmit(
+    userData: CreateUserType,
+    companyData: CreateCompanyType,
+    companyAddressData: CreateCompanyAddressType,
+  ) {
+    const { data } = await createUsersService(userData)
+    const company = {
+      ...companyData,
+      address: companyAddressData,
+      responsibleId: data.userId,
+    }
+    await createCompanyService(company)
+  }
 
   return {
     stepper,
@@ -70,5 +92,8 @@ export function useRegistrationStepper() {
     setCompletedIds,
     handleNextStep,
     handlePrevStep,
+    setCompanyAddressData,
+    companyAddressData,
+    mutateAsync,
   }
 }

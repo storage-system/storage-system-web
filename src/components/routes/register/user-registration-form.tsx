@@ -9,15 +9,19 @@ import { useRegistrationFormField } from './use-user-registration-form-field'
 import { Dispatch, SetStateAction } from 'react'
 
 interface RegistrationFormProps {
+  userData?: CreateUserType
   setUserData: Dispatch<SetStateAction<CreateUserType | undefined>>
   nextStep: () => void
 }
 
 export function RegistrationForm({
   nextStep,
+  userData,
   setUserData,
 }: RegistrationFormProps) {
-  const { form, REGISTRATION_FORM_FIELD } = useRegistrationFormField()
+  const { form, REGISTRATION_FORM_FIELD } = useRegistrationFormField({
+    userData,
+  })
 
   function handleStoreUserData(data: CreateUserType) {
     console.log(setUserData)

@@ -7,6 +7,7 @@ import axios, {
 import { ApplicationError } from '@/utils/application-error'
 import { getSession } from 'next-auth/react'
 import { type paths } from '@/@types/openapi'
+import { toast } from '@/components/ui/use-toast'
 
 type AxiosRequestConfigWithRouteParams<D> = AxiosRequestConfig<D> & {
   routeParams?: Record<string, string>
@@ -138,6 +139,7 @@ storageSystemApi.axios.interceptors.response.use(
     return response
   },
   (error: AxiosError<ApiResponseError>) => {
+    toast({ title: error.message, variant: 'destructive' })
     throw new ApplicationError(error)
   },
 )

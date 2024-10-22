@@ -9,6 +9,7 @@
     "@typescript-eslint/no-explicit-any": "off",
     "@next/next/no-img-element": "off",
     "no-use-before-define": "off",
-    "@typescript-eslint/ban-types": "warn"
+    "@typescript-eslint/ban-types": "warn",
+    "react-hooks/exhaustive-deps": "off"
   }
 }

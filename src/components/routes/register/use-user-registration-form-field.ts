@@ -6,9 +6,14 @@ import {
   createUserSchema,
 } from '@/validations/create-user-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-export function useRegistrationFormField() {
+export function useRegistrationFormField({
+  userData,
+}: {
+  userData?: CreateUserInput
+}) {
   const form = useForm<CreateUserInput>({
     resolver: zodResolver(createUserSchema),
   })
@@ -52,6 +57,15 @@ export function useRegistrationFormField() {
       },
     ],
   ]
+
+  useEffect(() => {
+    if (userData) {
+      form.setValue('name', userData.name)
+      form.setValue('email', userData.email)
+      form.setValue('phone', userData.phone)
+      form.setValue('password', userData.password)
+    }
+  }, [userData])
 
   return {
     form,

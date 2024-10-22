@@ -9,21 +9,25 @@ import { Dispatch, SetStateAction } from 'react'
 import { useCompanyRegistrationFormField } from './use-company-registration-form-field'
 
 interface CompanyRegistrationFormProps {
+  companyData?: CreateCompanyType
   setCompanyData: Dispatch<SetStateAction<CreateCompanyType | undefined>>
-  submit: () => void
+  nextStep: () => void
   prevStep: () => void
 }
 
 export function CompanyRegistrationForm({
-  submit,
+  nextStep,
   prevStep,
+  companyData,
   setCompanyData,
 }: CompanyRegistrationFormProps) {
-  const { form, REGISTRATION_FORM_FIELD } = useCompanyRegistrationFormField()
+  const { form, REGISTRATION_FORM_FIELD } = useCompanyRegistrationFormField({
+    companyData,
+  })
 
   function handleStoreCompanyData(data: CreateCompanyType) {
     setCompanyData(data)
-    submit()
+    nextStep()
   }
 
   return (

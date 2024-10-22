@@ -4,12 +4,13 @@ import { FormRender } from '@/shared/form/form-field-dynamic/FormRender'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { PublicRoutes } from '@/constants/routes/public-routes'
-import { CreateAddressType } from '@/validations/create-address-schema'
 import { Dispatch, SetStateAction } from 'react'
 import { useAddressRegistrationFormField } from './use-address-registration-form-field'
+import { CreateCompanyAddressType } from '@/validations/create-company-schema'
 
 interface AddressRegistrationFormProps {
-  setAddressData: Dispatch<SetStateAction<CreateAddressType | undefined>>
+  companyAdressData?: CreateCompanyAddressType
+  setAddressData: Dispatch<SetStateAction<CreateCompanyAddressType | undefined>>
   submit: () => void
   prevStep: () => void
 }
@@ -17,17 +18,20 @@ interface AddressRegistrationFormProps {
 export function AddressRegistrationForm({
   submit,
   prevStep,
+  companyAdressData,
   setAddressData,
 }: AddressRegistrationFormProps) {
-  const { form, REGISTRATION_FORM_FIELD } = useAddressRegistrationFormField()
+  const { form, REGISTRATION_FORM_FIELD } = useAddressRegistrationFormField({
+    companyAdressData,
+  })
 
-  function handleStoreAddressData(data: CreateAddressType) {
+  function handleStoreAddressData(data: CreateCompanyAddressType) {
     setAddressData(data)
     submit()
   }
 
   return (
-    <FormRender<CreateAddressType>
+    <FormRender<CreateCompanyAddressType>
       constant={REGISTRATION_FORM_FIELD}
       form={form}
       onSubmit={handleStoreAddressData}

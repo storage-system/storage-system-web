@@ -16,6 +16,11 @@ export function RegistrationStepper() {
     handlePrevStep,
     setCompanyData,
     setUserData,
+    setCompanyAddressData,
+    companyAddressData,
+    companyData,
+    userData,
+    mutateAsync,
   } = useRegistrationStepper()
 
   return (
@@ -65,22 +70,25 @@ export function RegistrationStepper() {
         {stepper.switch({
           'user-form': () => (
             <RegistrationForm
+              userData={userData}
               nextStep={handleNextStep}
               setUserData={setUserData}
             />
           ),
           'company-form': () => (
             <CompanyRegistrationForm
-              submit={handleNextStep}
+              nextStep={handleNextStep}
               prevStep={handlePrevStep}
+              companyData={companyData}
               setCompanyData={setCompanyData}
             />
           ),
           'address-form': () => (
             <AddressRegistrationForm
-              submit={handleNextStep}
+              submit={mutateAsync}
               prevStep={handlePrevStep}
-              setCompanyData={setCompanyData}
+              companyAdressData={companyAddressData}
+              setAddressData={setCompanyAddressData}
             />
           ),
         })}

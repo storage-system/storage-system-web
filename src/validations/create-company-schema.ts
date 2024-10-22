@@ -2,8 +2,8 @@ import { validateCNPJ } from '@/utils/cnpj-validator'
 import { z } from 'zod'
 
 const form_errors = {
-  name: { required: 'O nome é obrigatório' },
-  socialReason: { required: 'A razão é obrigatória' },
+  tradeName: { required: 'O nome é obrigatório' },
+  corporateName: { required: 'A razão é obrigatória' },
   cnpj: { required: 'O CNPJ é obrigatório', invalid: 'CNPJ inválido' },
   email: { required: 'O email é obrigatório', invalid: 'E-mail inválido' },
   contact: { required: 'O contato é obrigatório' },
@@ -11,8 +11,10 @@ const form_errors = {
 }
 
 export const createCompanySchema = z.object({
-  name: z.string({ required_error: form_errors.name.required }),
-  socialReason: z.string({ required_error: form_errors.socialReason.required }),
+  tradeName: z.string({ required_error: form_errors.tradeName.required }),
+  corporateName: z.string({
+    required_error: form_errors.corporateName.required,
+  }),
   cnpj: z
     .string({ required_error: form_errors.cnpj.required })
     .refine((string) => validateCNPJ(string), form_errors.cnpj.invalid),
@@ -23,8 +25,10 @@ export const createCompanySchema = z.object({
 })
 
 export const createCompanyInputSchema = z.object({
-  name: z.string({ required_error: form_errors.name.required }),
-  socialReason: z.string({ required_error: form_errors.socialReason.required }),
+  tradeName: z.string({ required_error: form_errors.tradeName.required }),
+  corporateName: z.string({
+    required_error: form_errors.corporateName.required,
+  }),
   cnpj: z
     .string({ required_error: form_errors.cnpj.required })
     .refine((string) => validateCNPJ(string), form_errors.cnpj.invalid),
@@ -32,7 +36,7 @@ export const createCompanyInputSchema = z.object({
     .string({ required_error: form_errors.email.required })
     .email({ message: form_errors.email.invalid }),
   contact: z.string({ required_error: form_errors.contact.required }),
-  responsible: z.string({ required_error: form_errors.responsible.required }),
+  responsibleId: z.string({ required_error: form_errors.responsible.required }),
 })
 
 export type CreateCompanyType = z.infer<typeof createCompanySchema>
@@ -42,12 +46,11 @@ export type CreateCompanyOutput = z.output<typeof createCompanySchema>
 const address_errors = {
   street: { required: 'Street is required' },
   number: { required: 'Number is required' },
-  complement: { optional: 'Complement is optional' },
-  district: { required: 'District is required' },
+  neighborhood: { required: 'Neighborhood is required' },
   city: { required: 'City is required' },
   state: { required: 'State is required' },
   country: { required: 'Country is required' },
-  postalCode: { required: 'Postal code is required' },
+  zipCode: { required: 'Postal code is required' },
   stateRegistration: { optional: 'State registration is optional' },
 }
 
@@ -55,11 +58,13 @@ export const createCompanyAddressSchema = z.object({
   street: z.string({ required_error: address_errors.street.required }),
   number: z.string({ required_error: address_errors.number.required }),
   complement: z.string().optional(),
-  district: z.string({ required_error: address_errors.district.required }),
+  neighborhood: z.string({
+    required_error: address_errors.neighborhood.required,
+  }),
   city: z.string({ required_error: address_errors.city.required }),
   state: z.string({ required_error: address_errors.state.required }),
   country: z.string({ required_error: address_errors.country.required }),
-  postalCode: z.string({ required_error: address_errors.postalCode.required }),
+  zipCode: z.string({ required_error: address_errors.zipCode.required }),
   stateRegistration: z.string().optional(),
 })
 

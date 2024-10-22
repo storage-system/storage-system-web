@@ -5,9 +5,14 @@ import {
   CreateCompanyType,
 } from '@/validations/create-company-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-export function useCompanyRegistrationFormField() {
+export function useCompanyRegistrationFormField({
+  companyData,
+}: {
+  companyData?: CreateCompanyType
+}) {
   const form = useForm<CreateCompanyType>({
     resolver: zodResolver(createCompanySchema),
   })
@@ -15,14 +20,14 @@ export function useCompanyRegistrationFormField() {
   const REGISTRATION_FORM_FIELD: FormFieldsConstant<CreateCompanyType> = [
     [
       {
-        name: 'name',
+        name: 'tradeName',
         label: 'Nome fantasia',
         className: 'col-span-6',
         placeholder: 'Ex: Empresa XYZ',
         type: 'text',
       },
       {
-        name: 'socialReason',
+        name: 'corporateName',
         label: 'Razão Social',
         className: 'col-span-6',
         placeholder: 'Ex: Empresa XYZ Ltda',
@@ -42,7 +47,7 @@ export function useCompanyRegistrationFormField() {
     [
       {
         name: 'email',
-        label: 'Email',
+        label: 'Email empresarial',
         className: 'col-span-full',
         placeholder: 'Ex: contato@empresa.com',
         type: 'text',
@@ -59,6 +64,16 @@ export function useCompanyRegistrationFormField() {
       },
     ],
   ]
+
+  useEffect(() => {
+    if (companyData) {
+      form.setValue('tradeName', companyData.tradeName)
+      form.setValue('corporateName', companyData.corporateName)
+      form.setValue('cnpj', companyData.cnpj)
+      form.setValue('email', companyData.email)
+      form.setValue('contact', companyData.contact)
+    }
+  }, [companyData])
 
   return {
     form,
