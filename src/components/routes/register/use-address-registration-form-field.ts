@@ -37,7 +37,7 @@ export function useAddressRegistrationFormField({
 
   async function handleGetAddressByZipCode() {
     try {
-      if (zipCode && zipCode.length >= 8) {
+      if (zipCode && zipCode.length === 8) {
         setFillFieldsManually(true)
         return await addressService(debouncedZipCode)
       }

@@ -26,15 +26,10 @@ export const authOptions: NextAuthOptions = {
         try {
           const url = new URL('/api/sessions', apiUrl)
 
-          const { data, ...request } = await axios
-            .post(url.toString(), {
-              email: credentials.email,
-              password: credentials.password,
-            })
-            .catch((e) => {
-              console.log(e)
-            })
-          console.log(request)
+          const { data } = await axios.post(url.toString(), {
+            email: credentials.email,
+            password: credentials.password,
+          })
 
           const userResponse = jwtDecode(data.access_token)
 

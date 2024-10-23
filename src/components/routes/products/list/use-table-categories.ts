@@ -45,8 +45,6 @@ export function useTableProducts() {
   const items = data?.items ?? []
   const total = data?.total ?? 0
 
-  console.log(items)
-
   return {
     items,
     total,

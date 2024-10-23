@@ -30,9 +30,7 @@ export function useCreateConfigurations() {
 
   const { mutateAsync: handleCreateConfigurations, isPending } = useMutation({
     mutationFn: async (data: CreateConfigurationsType) => {
-      console.log(session && session.user.companyId)
       if (session && session.user.companyId) {
-        console.log('TESTE')
         return await createConfigurationsService({
           ...data,
           userId: session?.user.sub,

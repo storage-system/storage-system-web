@@ -47,10 +47,6 @@ export function useCreateProduct() {
     },
   })
 
-  useEffect(() => {
-    console.log(form.formState.errors)
-  }, [form.formState.errors])
-
   const { mutateAsync, isPending } = useMutation({
     mutationFn: createProductService,
     onSuccess: handleSuccess,

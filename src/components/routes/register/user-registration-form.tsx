@@ -24,7 +24,6 @@ export function RegistrationForm({
   })
 
   function handleStoreUserData(data: CreateUserType) {
-    console.log(setUserData)
     setUserData(data)
     nextStep()
   }
