@@ -1,4 +1,4 @@
-import { ListEachStyle, ListStyle } from '@/@types/style'
+import { ListEachStyle } from '@/@types/style'
 import {
   TooltipRoot,
   TooltipTrigger,
