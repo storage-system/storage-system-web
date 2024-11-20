@@ -1,6 +1,6 @@
 import { Product } from '@/@types/product'
 import { toast } from '@/components/ui/use-toast'
-import { productErrorMessages } from '@/constants/product/product-toast-messages'
+import { productErrorMessages } from '@/constants/product/product-error-messages'
 import { productsQueryKey } from '@/constants/query-key/products-query-key'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
 import { useProductsService } from '@/services/product'
@@ -33,9 +33,9 @@ export function useUpdateProduct() {
       categoryIds: [],
       companyId: '',
       description: '',
-      dimensions_depth: '',
-      dimensions_height: '',
-      dimensions_width: '',
+      depth: '',
+      height: '',
+      width: '',
       discountPercentage: '' as any,
       finalPrice: '' as any,
       manufactureDate: null as any,
@@ -61,9 +61,9 @@ export function useUpdateProduct() {
     form.setValue('categoryIds', product.categoryIds)
     form.setValue('companyId', product.companyId)
     form.setValue('description', product.description)
-    form.setValue('dimensions_depth', product.dimensions_depth)
-    form.setValue('dimensions_height', product.dimensions_height)
-    form.setValue('dimensions_width', product.dimensions_width)
+    form.setValue('depth', product.dimensions.depth)
+    form.setValue('height', product.dimensions.height)
+    form.setValue('width', product.dimensions.width)
     form.setValue('discountPercentage', product.discountPercentage)
     form.setValue('finalPrice', product.finalPrice)
     form.setValue('manufactureDate', parseISO(product.manufactureDate))

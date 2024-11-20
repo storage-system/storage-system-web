@@ -52,17 +52,17 @@ export const updateProductSchema = z.object({
     .positive({ message: 'O peso deve ser um valor positivo' })
     .optional(),
 
-  dimensions_height: z
+  height: z
     .string({ required_error: 'A altura é obrigatória' })
     .min(1, { message: 'Mínimo de 1 caractere' })
     .optional(),
 
-  dimensions_width: z
+  width: z
     .string({ required_error: 'A largura é obrigatória' })
     .min(1, { message: 'Mínimo de 1 caractere' })
     .optional(),
 
-  dimensions_depth: z
+  depth: z
     .string({ required_error: 'A profundidade é obrigatória' })
     .min(1, { message: 'Mínimo de 1 caractere' })
     .optional(),

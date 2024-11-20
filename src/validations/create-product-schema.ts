@@ -43,15 +43,15 @@ export const createProductSchema = z.object({
     .number({ required_error: 'O peso é obrigatório' })
     .positive({ message: 'O peso deve ser um valor positivo' }),
 
-  dimensions_height: z
+  height: z
     .string({ required_error: 'A altura é obrigatória' })
     .min(1, { message: 'Mínimo de 1 caractere' }),
 
-  dimensions_width: z
+  width: z
     .string({ required_error: 'A largura é obrigatória' })
     .min(1, { message: 'Mínimo de 1 caractere' }),
 
-  dimensions_depth: z
+  depth: z
     .string({ required_error: 'A profundidade é obrigatória' })
     .min(1, { message: 'Mínimo de 1 caractere' }),
 
@@ -80,6 +80,8 @@ export const createProductSchema = z.object({
       required_error: 'O ID da categoria é obrigatório',
     },
   ),
+
+  fileIds: z.array(z.string().uuid()).optional(),
 })
 
 export type CreateProductType = z.infer<typeof createProductSchema>
