@@ -28,7 +28,7 @@ export function ImageAttachmentInput({
     <div className="space-y-2">
       <div
         className={cn(
-          'flex cursor-pointer flex-col items-center justify-center gap-4 rounded-sm border-2 border-dashed border-input bg-white py-8',
+          'flex cursor-pointer flex-col items-center justify-center gap-4 rounded-sm border-2 border-dashed border-input bg-white dark:bg-background py-8',
           isMaxFilesReached && 'opacity-50 cursor-default',
           isDragActive && 'border-primary',
         )}
