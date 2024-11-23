@@ -1,10 +1,27 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { useMetricsSection } from './metrics-section'
+import { SectionsType } from '@/@types/metrics'
+import { useMetrics } from './use-metrics'
+import { MetricItem } from './metric-item'
+import { getSections } from '@/constants/metrics/get-sections'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export function CardsMetrics() {
-  const { sections } = useMetricsSection()
+  const { data } = useMetrics()
+
+  const sections: SectionsType[] = getSections(data)
+
+  if (!data) {
+    return Array.from({ length: 5 }).map((_, index) => {
+      return (
+        <Skeleton
+          className="h-12 w-full bg-accent shadow-default"
+          key={index}
+        />
+      )
+    })
+  }
 
   return (
     <div className="flex w-full flex-col space-y-6">
@@ -20,20 +37,7 @@ export function CardsMetrics() {
           <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <AnimatePresence>
               {section.items.map((item, i) => (
-                <motion.div
-                  className="flex w-full cursor-pointer flex-col justify-between rounded-lg bg-white p-3 shadow-default transition duration-500 hover:scale-105 hover:bg-gray-100 dark:bg-accent dark:shadow-none dark:hover:bg-gray-700"
-                  key={i}
-                >
-                  <div className="flex items-center gap-2">
-                    {item.icon}
-                    <p className="text-sm text-gray-500 dark:text-gray-300">
-                      {item.label}
-                    </p>
-                  </div>
-                  <p className="mt-2 text-3xl font-bold text-gray-500 dark:text-gray-200">
-                    {item.value}
-                  </p>
-                </motion.div>
+                <MetricItem key={i} item={item} />
               ))}
             </AnimatePresence>
           </div>

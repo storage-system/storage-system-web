@@ -11,6 +11,7 @@ export function useMetrics() {
   const { data, isLoading } = useQuery({
     queryKey: [metricsQueryKey.GET_METRICS, companyId],
     queryFn: async () => await getMetricsService(companyId ?? ''),
+    enabled: !!companyId,
   })
 
   return {
