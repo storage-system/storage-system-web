@@ -50,7 +50,7 @@ export function ImageAttachmentInput({
 
           return (
             <div
-              className="flex items-center justify-between rounded-sm border-2 border-dashed border-input bg-white px-2 py-1"
+              className="flex items-center justify-between rounded-sm border-2 border-dashed border-input bg-white px-2 py-1 dark:bg-background"
               key={file.name + index}
             >
               <img

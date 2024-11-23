@@ -13,12 +13,12 @@ export function ProductDetailItem({
 }: ProductDetailProps) {
   return (
     <div {...props}>
-      <p className="text-sm font-semibold text-gray-700">{title}</p>
+      <p className="text-sm font-normal text-gray-500">{title}</p>
       <div>
         {children && !name ? (
           children
         ) : (
-          <p className="text-[16px] font-semibold text-primary">{name}</p>
+          <p className="text-[16px] font-semibold text-textPrimary">{name}</p>
         )}
       </div>
     </div>
