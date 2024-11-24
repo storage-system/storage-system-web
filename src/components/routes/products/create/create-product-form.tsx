@@ -12,7 +12,8 @@ export function CreateProductForm() {
   const { CREATE_PRODUCT_FORM_FIELD } = useCreateProductFormField()
   const router = useRouter()
 
-  const { form, isPending, mutateAsync, files, setFiles } = useCreateProduct()
+  const { form, isPending, mutateAsync, files, setFiles, uploadStatus } =
+    useCreateProduct()
 
   return (
     <FormRender<CreateProductType>
@@ -20,7 +21,14 @@ export function CreateProductForm() {
       form={form}
       onSubmit={mutateAsync}
     >
-      <ImageAttachmentInput files={files} setFiles={setFiles} />
+      <ImageAttachmentInput
+        files={files}
+        setFiles={setFiles}
+        maxFiles={5}
+        errorMessage={
+          uploadStatus instanceof Error ? uploadStatus.message : undefined
+        }
+      />
       <div className="flex w-full justify-end space-x-4">
         <Button
           type="button"

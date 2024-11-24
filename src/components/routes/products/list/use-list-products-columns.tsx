@@ -47,9 +47,9 @@ export function useListProductsColumns() {
       header: 'Ações',
       cell: ({ row }) => (
         <div className="flex justify-evenly gap-4">
-          <DeleteProductCell row={row.original} />
           <ProductDetailCell row={row.original} />
           <ProductEditCell row={row.original} />
+          <DeleteProductCell row={row.original} />
         </div>
       ),
       enableHiding: false,

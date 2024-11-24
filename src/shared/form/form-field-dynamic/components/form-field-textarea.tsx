@@ -14,7 +14,7 @@ export function FormFieldTextarea({ field, slot }: FormFieldTextareaProps) {
       {...field}
       id={field.name}
       aria-label={slot.label as never}
-      className="bg-white placeholder:text-gray-400  disabled:bg-background disabled:opacity-100 dark:bg-background"
+      className="resize-none bg-white  placeholder:text-gray-400 disabled:bg-background disabled:opacity-100 dark:bg-background"
       disabled={slot.disabled}
       placeholder={slot.placeholder as never}
       title={slot.label as never}

@@ -19,15 +19,12 @@ export function useTableProducts() {
     : 10
 
   async function handleGetProducts(companyId: string) {
-    const data = await listProductsService(
-      { companyId },
-      {
-        params: {
-          page,
-          perPage,
-        },
+    const data = await listProductsService(companyId, {
+      params: {
+        page,
+        perPage,
       },
-    )
+    })
 
     return data
   }

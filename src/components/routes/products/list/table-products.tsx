@@ -2,7 +2,7 @@
 
 import { DataTable } from '@/shared/data-table'
 import { useListProductsColumns } from './use-list-products-columns'
-import { useTableProducts } from './use-table-categories'
+import { useTableProducts } from './use-table-products'
 
 export function TableProducts() {
   const { tableColumns } = useListProductsColumns()

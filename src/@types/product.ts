@@ -1,5 +1,18 @@
 import { StatusProduct } from './status-product'
 
+export interface AttachmentProps {
+  id: string
+  filename: string
+  type: string
+  url: string
+}
+
+export interface DimensionsProduct {
+  height: string
+  width: string
+  depth: string
+}
+
 export interface Product {
   name: string
   description: string
@@ -11,14 +24,14 @@ export interface Product {
   validityInDays: number
   unitOfMeasure: string
   weight: number
-  dimensions_height: string
-  dimensions_width: string
-  dimensions_depth: string
+  dimensions: DimensionsProduct
   manufacturer: string
   batch: string
   status: StatusProduct
   companyId: string
   categoryIds: string[]
+  attachments: AttachmentProps[]
+  dueDate: string
 }
 
 export interface ListProduct extends Product {
