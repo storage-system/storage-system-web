@@ -1,4 +1,15 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import {
+  Package,
+  Percent,
+  Box,
+  Calendar,
+  Clock,
+  Ruler,
+  Factory,
+  Hash,
+  ArrowUpDown,
+} from 'lucide-react'
 import { ProductDetailItem } from './product-detail-item'
 import { useProductInfo } from './use-product-info'
 import { dateFormatter } from '@/utils/format-date'
@@ -12,30 +23,75 @@ export function ProductDetailContent() {
   if (!product) return null
 
   const productDetails = [
-    { title: 'Nome do produto', content: product.name },
+    {
+      title: 'Nome do produto',
+      content: product.name,
+      icon: <Package size={16} />,
+    },
     {
       title: 'Preço Original',
       content: formatMetricValue(product.originalPrice),
     },
-    { title: 'Preço Final', content: formatMetricValue(product.finalPrice) },
-    { title: 'Desconto', content: `${product.discountPercentage}%` },
-    { title: 'Quantidade em Estoque', content: product.quantityInStock },
+    {
+      title: 'Preço Final',
+      content: formatMetricValue(product.finalPrice),
+    },
+    {
+      title: 'Desconto',
+      content: `${product.discountPercentage}%`,
+      icon: <Percent size={16} />,
+    },
+    {
+      title: 'Quantidade em Estoque',
+      content: product.quantityInStock,
+      icon: <Box size={16} />,
+    },
     {
       title: 'Data de Fabricação',
       content: dateFormatter.format(new Date(product.manufactureDate)),
+      icon: <Calendar size={16} />,
     },
     {
       title: 'Data de Vencimento',
       content: dateFormatter.format(new Date(product.dueDate)),
+      icon: <Calendar size={16} />,
     },
-    { title: 'Validade (em dias)', content: product.validityInDays },
-    { title: 'Unidade de Medida', content: product.unitOfMeasure },
-    { title: 'Peso', content: `${product.weight} ${product.unitOfMeasure}` },
-    { title: 'Fabricante', content: product.manufacturer },
-    { title: 'Lote', content: product.batch },
-    { title: 'Altura', content: product.dimensions?.height },
-    { title: 'Largura', content: product.dimensions?.width },
-    { title: 'Profundidade', content: product.dimensions?.depth },
+    {
+      title: 'Validade (em dias)',
+      content: product.validityInDays,
+      icon: <Clock size={16} />,
+    },
+    {
+      title: 'Unidade de Medida',
+      content: product.unitOfMeasure,
+      icon: <Ruler size={16} />,
+    },
+    {
+      title: 'Peso',
+      content: `${product.weight} ${product.unitOfMeasure}`,
+      icon: <Box size={16} />,
+    },
+    {
+      title: 'Fabricante',
+      content: product.manufacturer,
+      icon: <Factory size={16} />,
+    },
+    { title: 'Lote', content: product.batch, icon: <Hash size={16} /> },
+    {
+      title: 'Altura',
+      content: product.dimensions?.height,
+      icon: <ArrowUpDown size={16} />,
+    },
+    {
+      title: 'Largura',
+      content: product.dimensions?.width,
+      icon: <ArrowUpDown size={16} />,
+    },
+    {
+      title: 'Profundidade',
+      content: product.dimensions?.depth,
+      icon: <ArrowUpDown size={16} />,
+    },
     {
       title: 'Status',
       content: <ProductStatusCell status={product.status} />,
@@ -64,6 +120,7 @@ export function ProductDetailContent() {
                 title={item.title}
                 content={item.content}
                 className={item.className}
+                icon={item.icon}
               />
             ))}
           </div>
