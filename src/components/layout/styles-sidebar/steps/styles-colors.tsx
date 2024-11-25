@@ -80,7 +80,7 @@ export function ColorPickerWithLabel({
           />
         </PopoverContent>
       </Popover>
-      <p className="text-gray-700">{description}</p>
+      <p className="text-foreground opacity-60">{description}</p>
     </div>
   )
 }
