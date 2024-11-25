@@ -3,9 +3,9 @@ import { StylesInitialStep } from './steps/styles-initial-step'
 import { StylesColors } from './steps/styles-colors'
 
 export function SidebarContent() {
-  const { step } = useStyles()
+  const { currentStep } = useStyles()
 
-  switch (step) {
+  switch (currentStep) {
     case CurrentStep.INITIAL:
       return <StylesInitialStep />
     case CurrentStep.SITE_STYLE:

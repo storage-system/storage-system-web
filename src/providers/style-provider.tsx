@@ -19,7 +19,7 @@ interface IColor {
 }
 
 interface StylesContext {
-  step: CurrentStep
+  currentStep: CurrentStep
   setCurrentStep: Dispatch<SetStateAction<CurrentStep>>
   colors: {
     primary: IColor
@@ -42,7 +42,9 @@ interface StylesProviderProps {
 }
 
 export function StylesProvider({ children }: StylesProviderProps) {
-  const [step, setCurrentStep] = useState<CurrentStep>(CurrentStep.INITIAL)
+  const [currentStep, setCurrentStep] = useState<CurrentStep>(
+    CurrentStep.INITIAL,
+  )
 
   const [colors, setColors] = useState({
     primary: {
@@ -63,7 +65,9 @@ export function StylesProvider({ children }: StylesProviderProps) {
   })
 
   return (
-    <StylesContext.Provider value={{ step, setCurrentStep, colors, setColors }}>
+    <StylesContext.Provider
+      value={{ currentStep, setCurrentStep, colors, setColors }}
+    >
       {children}
     </StylesContext.Provider>
   )
