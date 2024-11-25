@@ -11,7 +11,7 @@ export default function Configurations() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Minhas Configurações</CardTitle>
+        <CardTitle className="text-textPrimary">Minhas Configurações</CardTitle>
         <CardDescription>
           Customize as suas configurações no formulário abaixo
         </CardDescription>

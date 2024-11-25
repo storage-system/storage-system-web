@@ -15,6 +15,7 @@ export function FormFieldSwitch({ field }: FormFieldSwitchProps) {
       defaultChecked={field.value}
       onCheckedChange={field.onChange}
       value={field.value}
+      className="ml-2"
     />
   )
 }
