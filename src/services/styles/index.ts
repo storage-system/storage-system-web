@@ -1,13 +1,13 @@
-// import { CreateStyleInput } from '@/validations/create-style-schema'
+import { CreateStyleOutput } from '@/validations/create-style-schema'
 import { storageSystemApi } from '../axios'
 import { Pagination } from '@/@types/pagination'
 import { AxiosRequestConfig } from 'axios'
 import { ListStyle, ListEachStyle } from '@/@types/style'
 
 export function useStylesService() {
-  // async function createStyleService(anInput: CreateStyleInput) {
-  //   await storageSystemApi.post('/api/styles', anInput)
-  // }
+  async function createStyleService(anInput: CreateStyleOutput) {
+    await storageSystemApi.post('/api/styles', anInput)
+  }
 
   async function listStylesService(
     params?: AxiosRequestConfig,
@@ -29,7 +29,7 @@ export function useStylesService() {
   }
 
   return {
-    // createStyleService,
+    createStyleService,
     listStylesService,
     getStyleByIdService,
     deleteStyleService,

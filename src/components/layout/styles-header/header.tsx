@@ -5,13 +5,9 @@ import { useRouter } from 'next/navigation'
 
 export function Header() {
   const router = useRouter()
-  const { setCurrentStep, currentStep } = useStyles()
+  const { currentStep } = useStyles()
 
   function handleNavigate() {
-    if (currentStep === CurrentStep.SITE_STYLE) {
-      return setCurrentStep(CurrentStep.INITIAL)
-    }
-
     if (currentStep === CurrentStep.INITIAL) {
       router.push(PrivateRoutes.STYLES)
     }
@@ -21,6 +17,7 @@ export function Header() {
     <header className="fixed left-0 top-0 z-40 flex h-16 w-full items-center justify-between bg-accent shadow-md">
       <div className="flex">
         <button
+          type="button"
           className="flex w-[100px] justify-center"
           onClick={handleNavigate}
         >
@@ -32,8 +29,8 @@ export function Header() {
         </div>
       </div>
       <div className="h-full">
-        <button className="flex h-full items-center bg-primary px-4 text-white transition-all duration-200 active:scale-95 dark:text-black ">
-          <p>Publicar</p>
+        <button className="flex h-full items-center bg-primary px-4 text-white transition-all duration-200 active:scale-95 dark:text-black">
+          Publicar
         </button>
       </div>
     </header>

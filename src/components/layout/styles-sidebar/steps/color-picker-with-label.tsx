@@ -1,7 +1,7 @@
 import {
   Popover,
-  PopoverTrigger,
   PopoverContent,
+  PopoverTrigger,
 } from '@/components/ui/popover'
 import { ColorPicker, IColor } from 'react-color-palette'
 

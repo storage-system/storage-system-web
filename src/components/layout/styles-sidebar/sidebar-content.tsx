@@ -8,7 +8,7 @@ export function SidebarContent() {
   switch (currentStep) {
     case CurrentStep.INITIAL:
       return <StylesInitialStep />
-    case CurrentStep.SITE_STYLE:
+    case CurrentStep.CUSTOM_THEME:
       return <StylesColors />
   }
 }

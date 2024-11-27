@@ -8,7 +8,7 @@ export function Content({ children }: { children: ReactNode }) {
   return (
     <main
       className={cn(
-        'w-full transition-all bg-background scrollbar-thin mx-5 md:ml-[290px] md:max-w-[calc(100vw_-_290px)]',
+        'w-full transition-all bg-background scrollbar-thin mx-5 md:ml-[330px] md:max-w-[calc(100vw_-_290px)]',
       )}
     >
       {children}

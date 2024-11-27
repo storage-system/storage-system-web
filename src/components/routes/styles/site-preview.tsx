@@ -1,31 +1,44 @@
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { useStyles } from '@/providers/style-provider'
+import { ColorIdEnum, useStyles } from '@/providers/style-provider'
 import { Images } from 'lucide-react'
 
 export function SitePreview() {
   const { colors } = useStyles()
 
-  const getColorById = (colorId: string) =>
+  const getColorById = (colorId: ColorIdEnum | string) =>
     colors.find((color) => color.colorId === colorId)?.hex || '#fff'
 
   return (
-    <div style={{ backgroundColor: getColorById('backgroundColor') }}>
+    <div
+      className="h-full"
+      style={{ backgroundColor: getColorById(ColorIdEnum.BACKGROUND_COLOR) }}
+    >
       <div
         className="h-16"
-        style={{ backgroundColor: getColorById('secondary') }}
+        style={{ backgroundColor: getColorById(ColorIdEnum.SECONDARY_COLOR) }}
       ></div>
 
       <div className="my-14">
         <div className="flex flex-col items-center gap-3">
           <div className="flex items-center justify-center gap-4">
-            <Separator style={{ backgroundColor: getColorById('highlight') }} />
-            <p style={{ color: getColorById('highlight') }}>Destaques</p>
-            <Separator style={{ backgroundColor: getColorById('highlight') }} />
+            <Separator
+              style={{
+                backgroundColor: getColorById(ColorIdEnum.TERTIARY_COLOR),
+              }}
+            />
+            <p style={{ color: getColorById(ColorIdEnum.TERTIARY_COLOR) }}>
+              Destaques
+            </p>
+            <Separator
+              style={{
+                backgroundColor: getColorById(ColorIdEnum.TERTIARY_COLOR),
+              }}
+            />
           </div>
           <p
             className="text-3xl font-medium"
-            style={{ color: getColorById('primary') }}
+            style={{ color: getColorById(ColorIdEnum.PRIMARY_COLOR) }}
           >
             Os mais vendidos
           </p>
@@ -37,36 +50,48 @@ export function SitePreview() {
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               className="h-72 w-56 overflow-hidden rounded-xl border-2"
-              style={{ borderColor: getColorById('primary') }}
+              style={{ borderColor: getColorById(ColorIdEnum.PRIMARY_COLOR) }}
               key={index}
             >
               <div
                 className="flex h-1/2 items-center justify-center border-b-2"
                 style={{
-                  backgroundColor: getColorById('secondary'),
-                  borderColor: getColorById('primary'),
+                  backgroundColor: getColorById(ColorIdEnum.SECONDARY_COLOR),
+                  borderColor: getColorById(ColorIdEnum.PRIMARY_COLOR),
                 }}
               >
                 <Images
                   className="size-12"
-                  style={{ color: getColorById('primary') }}
+                  style={{ color: getColorById(ColorIdEnum.PRIMARY_COLOR) }}
                 />
               </div>
               <div className="flex flex-col gap-4 px-3 py-2">
                 <div>
-                  <p style={{ color: getColorById('highlight') }}>R$ 2.789</p>
+                  <p
+                    style={{ color: getColorById(ColorIdEnum.TERTIARY_COLOR) }}
+                  >
+                    R$ 2.789
+                  </p>
                   <p>
-                    <span style={{ color: getColorById('primary') }}>
+                    <span
+                      style={{
+                        color: getColorById(ColorIdEnum.PRIMARY_COLOR),
+                      }}
+                    >
                       10x R$278,90{' '}
                     </span>
-                    <span style={{ color: getColorById('secondary') }}>
+                    <span
+                      style={{
+                        color: getColorById(ColorIdEnum.SECONDARY_COLOR),
+                      }}
+                    >
                       sem juros
                     </span>
                   </p>
                 </div>
                 <p
                   className="h-[200px]"
-                  style={{ color: getColorById('primary') }}
+                  style={{ color: getColorById(ColorIdEnum.PRIMARY_COLOR) }}
                 >
                   Smart TV LG AI ThinQ ...
                 </p>
@@ -79,8 +104,8 @@ export function SitePreview() {
       <div className="my-4 flex justify-center">
         <Button
           style={{
-            backgroundColor: getColorById('primary'),
-            color: getColorById('textColor'),
+            backgroundColor: getColorById(ColorIdEnum.PRIMARY_COLOR),
+            color: getColorById(ColorIdEnum.TEXT_COLOR),
           }}
         >
           Ver todos os produtos
