@@ -6,63 +6,42 @@ import {
   useContext,
   useState,
 } from 'react'
+import { IColor as ColorType } from 'react-color-palette'
 
 export enum CurrentStep {
   INITIAL = 'initial',
   SITE_STYLE = 'site-style',
 }
 
-interface IColor {
-  hex: string
-  rgb: { r: number; g: number; b: number; a: number }
-  hsv: { h: number; s: number; v: number; a: number }
+interface IColor extends ColorType {
+  colorId: string
+  description: string
+  title: string
 }
 
 interface StylesContext {
   currentStep: CurrentStep
   setCurrentStep: Dispatch<SetStateAction<CurrentStep>>
-  colors: {
-    primary: IColor
-    secondary: IColor
-    highlight: IColor
-  }
-  setColors: Dispatch<
-    SetStateAction<{
-      primary: IColor
-      secondary: IColor
-      highlight: IColor
-    }>
-  >
+  colors: IColor[]
+  setColors: Dispatch<SetStateAction<IColor[]>>
 }
 
 export const StylesContext = createContext<StylesContext | null>(null)
 
 interface StylesProviderProps {
+  initialColorConfig: IColor[]
   children: ReactNode
 }
 
-export function StylesProvider({ children }: StylesProviderProps) {
+export function StylesProvider({
+  children,
+  initialColorConfig = [],
+}: StylesProviderProps) {
   const [currentStep, setCurrentStep] = useState<CurrentStep>(
     CurrentStep.INITIAL,
   )
 
-  const [colors, setColors] = useState({
-    primary: {
-      hex: '#3b82f6e8',
-      rgb: { r: 59, g: 130, b: 246, a: 100 },
-      hsv: { h: 212, s: 76, v: 96, a: 100 },
-    },
-    secondary: {
-      hex: '#f97316e8',
-      rgb: { r: 249, g: 115, b: 22, a: 100 },
-      hsv: { h: 24, s: 91, v: 98, a: 100 },
-    },
-    highlight: {
-      hex: '#10b981e8',
-      rgb: { r: 16, g: 185, b: 129, a: 100 },
-      hsv: { h: 160, s: 91, v: 73, a: 100 },
-    },
-  })
+  const [colors, setColors] = useState<IColor[]>(initialColorConfig)
 
   return (
     <StylesContext.Provider
