@@ -11,7 +11,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 
-export function StylesColors() {
+export function CustomStyle() {
   const {
     colors,
     setColors,
@@ -23,16 +23,16 @@ export function StylesColors() {
   }, [formState.errors])
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex items-center">
+    <div className="mx-3 my-2 flex flex-1 flex-col gap-2">
+      <div className="mb-4 flex items-center">
         <FormField
           control={control}
           name="name"
           render={({ field }) => (
-            <div>
+            <div className="flex-1">
               <input
                 autoComplete="off"
-                className="text-2xl text-primary outline-none"
+                className="w-full text-xl text-primary outline-none"
                 placeholder="Nome do estilo"
                 {...field}
               />

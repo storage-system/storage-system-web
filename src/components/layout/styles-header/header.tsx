@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
 import { CurrentStep, useStyles } from '@/providers/style-provider'
 import { ChevronLeft, List } from 'lucide-react'
@@ -5,16 +6,20 @@ import { useRouter } from 'next/navigation'
 
 export function Header() {
   const router = useRouter()
-  const { currentStep } = useStyles()
+  const { currentStep, setCurrentStep } = useStyles()
 
   function handleNavigate() {
+    if (currentStep === CurrentStep.CUSTOM_THEME) {
+      return setCurrentStep(CurrentStep.INITIAL)
+    }
+
     if (currentStep === CurrentStep.INITIAL) {
       router.push(PrivateRoutes.STYLES)
     }
   }
 
   return (
-    <header className="fixed left-0 top-0 z-40 flex h-16 w-full items-center justify-between bg-accent shadow-md">
+    <header className="fixed left-0 top-0 z-40 flex h-16 w-full items-center justify-between border-b border-input bg-accent">
       <div className="flex">
         <button
           type="button"
@@ -28,10 +33,11 @@ export function Header() {
           <p>Guia de edição</p>
         </div>
       </div>
-      <div className="h-full">
-        <button className="flex h-full items-center bg-primary px-4 text-white transition-all duration-200 active:scale-95 dark:text-black">
-          Publicar
-        </button>
+      <div className="mr-5 flex h-full items-center justify-center">
+        <Button variant={'ghost'}>Vizualizar</Button>
+        <Button className="flex items-center bg-primary px-4 text-white dark:text-black">
+          Salvar
+        </Button>
       </div>
     </header>
   )

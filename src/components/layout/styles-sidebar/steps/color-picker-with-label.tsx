@@ -19,12 +19,12 @@ export function ColorPickerWithLabel({
   onChange,
 }: ColorPickerWithLabelProps) {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-2">
       <Popover>
         <PopoverTrigger asChild>
-          <button className="flex items-center gap-4">
+          <button className="flex items-center gap-2">
             <div
-              className="size-10 rounded-full ring-2 ring-input"
+              className="size-6 rounded-sm ring-1 ring-input"
               style={{
                 backgroundColor: currentColor.hex,
               }}
@@ -36,7 +36,7 @@ export function ColorPickerWithLabel({
           <ColorPicker color={currentColor} onChange={onChange} />
         </PopoverContent>
       </Popover>
-      <p className="text-gray-600 opacity-80">{description}</p>
+      <p className="text-sm text-foreground opacity-80">{description}</p>
     </div>
   )
 }

@@ -19,7 +19,7 @@ export function Sidebar() {
         </DrawerTrigger>
         <DrawerContent className="flex w-full items-center justify-center"></DrawerContent>
       </Drawer>
-      <div className={'fixed left-0 top-16 z-10 h-screen w-[340px] bg-accent'}>
+      <div className={'fixed left-0 top-16 z-10 h-screen w-[350px] bg-accent'}>
         <SidebarContent />
       </div>
     </>
