@@ -12,9 +12,9 @@ export const initialColorConfig = [
   },
   {
     colorId: ColorIdEnum.SECONDARY_COLOR,
-    hex: '#f97316',
-    rgb: { r: 249, g: 115, b: 22, a: 1 },
-    hsv: { h: 24, s: 91, v: 98, a: 1 },
+    hex: '#2b0c4f',
+    rgb: { r: 49, g: 12, b: 78, a: 1 },
+    hsv: { h: 268, s: 85, v: 31, a: 1 },
     title: 'Cor secundária',
     description: 'Aparece na barra de anúncio.',
   },
