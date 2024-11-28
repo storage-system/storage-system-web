@@ -1,11 +1,9 @@
 import { CurrentStep, useStyles } from '@/providers/style-provider'
-import { cn } from '@/utils/class-name'
 import { StyleCard } from './style-card'
 
-// Temas destacados e cores correspondentes
 const highlightedThemes = [
   {
-    title: 'Energética',
+    title: 'Enérgica',
     description: 'Vibrante e alegre',
     paletteColors: ['#0000FF', '#FFC0CB', '#FF69B4', '#C71585'],
   },

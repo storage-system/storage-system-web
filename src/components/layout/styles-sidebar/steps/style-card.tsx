@@ -19,7 +19,7 @@ export function StyleCard({
     <div
       onClick={onClick}
       className={cn(
-        'hover:cursor-pointer hover:scale-[101%] transition-all duration-100 flex items-center justify-between overflow-hidden rounded-sm border border-gray-200 px-3',
+        'hover:cursor-pointer hover:scale-[101%] hover:bg-gray-50 dark:hover:bg-gray-50/10 transition-all duration-100 flex items-center justify-between overflow-hidden rounded-sm border border-gray-200 px-3',
         className,
       )}
     >
