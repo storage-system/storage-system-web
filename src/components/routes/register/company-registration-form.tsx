@@ -37,7 +37,12 @@ export function CompanyRegistrationForm({
       onSubmit={handleStoreCompanyData}
     >
       <div className="flex items-center justify-between space-y-4">
-        <Button type="button" onClick={() => prevStep()}>
+        <Button
+          className="border-primary"
+          variant={'outline'}
+          type="button"
+          onClick={() => prevStep()}
+        >
           Voltar
         </Button>
         <Button type="submit">Próximo passo</Button>
