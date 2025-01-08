@@ -5,7 +5,6 @@ import { parseISO } from 'date-fns'
 import { DeleteProductCell } from './cell/delete-product-cell'
 import { ProductStatusCell } from './cell/product-status-cell'
 import { ProductDetailCell } from './cell/product-detail-cell'
-import { ProductEditCell } from './cell/product-edit-cell'
 
 export function useListProductsColumns() {
   const tableColumns: ColumnDef<ListProduct>[] = [
@@ -48,7 +47,6 @@ export function useListProductsColumns() {
       cell: ({ row }) => (
         <div className="flex justify-evenly gap-4">
           <ProductDetailCell row={row.original} />
-          <ProductEditCell row={row.original} />
           <DeleteProductCell row={row.original} />
         </div>
       ),

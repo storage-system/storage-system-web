@@ -48,7 +48,7 @@ export function DeleteProductCell({ row }: Props) {
       <DialogTrigger>
         <TooltipRoot>
           <TooltipTrigger>
-            <Trash2 className="size-4" />
+            <Trash2 className="size-4 text-red-500" />
           </TooltipTrigger>
           <TooltipContent>Deletar</TooltipContent>
         </TooltipRoot>
@@ -56,7 +56,7 @@ export function DeleteProductCell({ row }: Props) {
       <DialogContent>
         <div className="flex items-center">
           <AlertCircle className="mr-2 size-5" />
-          Tem certeza que deseja excluir este produto?
+          Tem certeza que deseja excluir o produto {row.name}?
         </div>
         <div className="flex justify-end gap-4">
           <DialogClose>
