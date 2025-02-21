@@ -41,12 +41,12 @@ export function ProductDetailContent({ id, setOpenDrawer }: Props) {
     {
       value: ProductDetailsTab.GENERAL_DATA,
       label: 'Dados Gerais',
-      component: <ProductDetailGeneralData />,
+      component: <ProductDetailGeneralData product={product} />,
     },
     {
       value: ProductDetailsTab.ADDITIONAL_INFORMATION,
       label: 'Informações Adicionais',
-      component: <ProductDetailAdditionalInfo />,
+      component: <ProductDetailAdditionalInfo product={product} />,
     },
   ]
 

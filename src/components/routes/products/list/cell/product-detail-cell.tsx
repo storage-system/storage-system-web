@@ -14,7 +14,7 @@ interface Props {
 }
 
 export function ProductDetailCell({ row }: Props) {
-  const [openDrawer, setOpenDrawer] = useState<boolean>(true)
+  const [openDrawer, setOpenDrawer] = useState<boolean>(false)
 
   return (
     <Drawer direction="right" open={openDrawer} onOpenChange={setOpenDrawer}>
