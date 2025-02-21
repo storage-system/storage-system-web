@@ -30,11 +30,13 @@ export function ProductDetailContent({ id, setOpenDrawer }: Props) {
     setOpenDrawer(false)
   }
 
+  if (!product) return null
+
   const productTabs = [
     {
       value: ProductDetailsTab.PRICING,
       label: 'Precificação',
-      component: <ProductDetailPricing />,
+      component: <ProductDetailPricing product={product} />,
     },
     {
       value: ProductDetailsTab.GENERAL_DATA,
@@ -47,8 +49,6 @@ export function ProductDetailContent({ id, setOpenDrawer }: Props) {
       component: <ProductDetailAdditionalInfo />,
     },
   ]
-
-  if (!product) return null
 
   return (
     <div>
