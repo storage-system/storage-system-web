@@ -18,11 +18,13 @@ export function useAuthenticate() {
     resolver: zodResolver(authenticateSchema),
   })
 
+  const [isLoading, setIsLoading] = useState(false)
   const [alertError, setAlertError] = useState<ErrorMessagesProps | undefined>(
     undefined,
   )
 
   async function onSubmit({ email, password }: AuthenticateType) {
+    setIsLoading(true)
     signIn('credentials', {
       email,
       password,
@@ -35,8 +37,9 @@ export function useAuthenticate() {
       if (data?.error) {
         setAlertError(signinErrorMessages.invalidCredentials)
       }
+      setIsLoading(false)
     })
   }
 
-  return { form, onSubmit, alertError }
+  return { form, onSubmit, alertError, isLoading }
 }
