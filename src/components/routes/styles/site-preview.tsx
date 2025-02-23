@@ -4,10 +4,17 @@ import { ColorIdEnum, useStyles } from '@/providers/style-provider'
 import { Images } from 'lucide-react'
 
 export function SitePreview() {
-  const { colors } = useStyles()
+  const { theme: colors } = useStyles()
 
-  const getColorById = (colorId: ColorIdEnum | string) =>
-    colors.find((color) => color.colorId === colorId)?.hex || '#fff'
+  console.log(colors)
+
+  const getColorById = (colorId: ColorIdEnum) => {
+    const colorObject = colors?.paletteColors?.find(
+      (color) => Object.keys(color)[0] === colorId,
+    )
+
+    return colorObject ? Object.values(colorObject)[0].hex : 'transparent'
+  }
 
   return (
     <div
@@ -74,9 +81,7 @@ export function SitePreview() {
                   </p>
                   <p>
                     <span
-                      style={{
-                        color: getColorById(ColorIdEnum.PRIMARY_COLOR),
-                      }}
+                      style={{ color: getColorById(ColorIdEnum.PRIMARY_COLOR) }}
                     >
                       10x R$278,90{' '}
                     </span>

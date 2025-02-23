@@ -16,7 +16,7 @@ type LayoutContentProps = {
 
 export function StylesLayoutContent({ children }: LayoutContentProps) {
   return (
-    <StylesProvider initialColorConfig={initialColorConfig}>
+    <StylesProvider initialTheme={initialColorConfig}>
       <ThemeContext>
         <div className="flex min-h-screen w-full px-2 pb-5 pt-24 md:px-8">
           <TooltipProvider delayDuration={0}>
