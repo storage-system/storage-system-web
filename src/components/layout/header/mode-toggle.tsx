@@ -24,14 +24,14 @@ export function ModeToggle() {
       <DropdownMenuContent>
         <DropdownMenuItem
           onClick={() => setTheme('light')}
-          className="transition ease-linear hover:bg-gray-100"
+          className="cursor-pointer transition ease-linear hover:bg-gray-100"
         >
           <Sun className="mr-2 size-4" />
           Claro
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme('dark')}
-          className="transition ease-linear hover:bg-gray-100"
+          className="cursor-pointer transition ease-linear hover:bg-gray-100"
         >
           <Moon className="mr-2 size-4" />
           Escuro

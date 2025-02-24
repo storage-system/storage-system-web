@@ -14,11 +14,14 @@ export default async function SignInPage() {
           <AuthenticateForm />
         </div>
       </div>
-      <div>
+      <div className="relative h-screen w-[50vw]">
         <img
           src="./sign-up-bg.png"
-          className="contain h-screen w-[50vw] rounded-bl-[120px] bg-contain"
+          className="contain size-full rounded-bl-[120px] bg-contain"
         />
+        <h1 className="absolute inset-0 flex items-center justify-center text-4xl font-extrabold text-white">
+          STOR<span className="text-4xl font-normal">AGE</span>
+        </h1>
       </div>
     </div>
   )
