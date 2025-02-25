@@ -4,13 +4,9 @@ import { Metrics } from '@/@types/metrics'
 
 export function useMetricsService() {
   async function getMetricsService(
-    companyId: string,
     params?: AxiosRequestConfig,
   ): Promise<Metrics> {
-    const { data } = await storageSystemApi.get(
-      `/api/metrics/company/{companyId}`,
-      { routeParams: { companyId }, params },
-    )
+    const { data } = await storageSystemApi.get(`/api/metrics`, { params })
     return data
   }
 
