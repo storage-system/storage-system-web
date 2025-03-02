@@ -1,5 +1,4 @@
 'use client'
-import * as React from 'react'
 
 import {
   Carousel as CarouselComponent,
@@ -9,13 +8,14 @@ import {
 } from '@/components/ui/carousel'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/utils/class-name'
+import { useEffect, useState } from 'react'
 
 export function Hero() {
-  const [api, setApi] = React.useState<CarouselApi>()
-  const [current, setCurrent] = React.useState(0)
-  const [count, setCount] = React.useState(0)
+  const [api, setApi] = useState<CarouselApi>()
+  const [current, setCurrent] = useState(0)
+  const [count, setCount] = useState(0)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!api) {
       return
     }
