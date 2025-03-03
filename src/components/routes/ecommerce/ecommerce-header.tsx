@@ -4,10 +4,11 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { ChevronDown, Heart, MapPin, ShoppingBag } from 'lucide-react'
 import Image from 'next/image'
+import { NavBar } from './ecommerce-navbar'
 
 export function Header() {
   return (
-    <header className="flex w-full flex-col items-center">
+    <header className="fixed top-0 z-10 flex w-screen flex-col items-center bg-background">
       <div className="flex w-full max-w-[1200px] flex-wrap justify-between py-3 text-sm text-gray-600 sm:text-base">
         <div className="flex flex-wrap items-center gap-1">
           <MapPin />
@@ -64,6 +65,7 @@ export function Header() {
           </div>
         </div>
       </div>
+      <NavBar />
     </header>
   )
 }

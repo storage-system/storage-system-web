@@ -37,7 +37,7 @@ const navitems = [
 
 export function NavBar() {
   return (
-    <div className="flex justify-center bg-slate-700 p-4">
+    <div className="flex w-screen justify-center bg-slate-700 p-4">
       <div className="flex w-full max-w-[1200px] justify-between ">
         <ul className="flex gap-4 text-gray-300">
           {navitems.map((item) => (
