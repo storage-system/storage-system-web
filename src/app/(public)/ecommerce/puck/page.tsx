@@ -4,6 +4,7 @@ import { Header } from '@/components/routes/ecommerce/ecommerce-header'
 import { Hero } from '@/components/routes/ecommerce/ecommerce-hero'
 import { Puck } from '@measured/puck'
 import '@measured/puck/puck.css'
+import { ReactNode } from 'react'
 
 // Create Puck component config
 const config = {
@@ -14,7 +15,7 @@ const config = {
           type: 'text',
         },
       },
-      render: ({ children }) => {
+      render: ({ children }: { children: ReactNode }) => {
         return <h1>{children}</h1>
       },
     },
@@ -55,7 +56,9 @@ const config = {
 const initialData = {}
 
 // Save the data to your database
-const save = (data) => {}
+const save = (data: any) => {
+  return data
+}
 
 // Render Puck editor
 export default function Editor() {
