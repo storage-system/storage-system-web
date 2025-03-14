@@ -4,1508 +4,1563 @@
  */
 
 export interface paths {
-  '/api/sessions': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post: operations['AuthenticateController_handle']
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/companies': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post: operations['CompanyController_create']
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/companies/{companyId}': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get: operations['CompanyController_list']
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/companies/{id}': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post?: never
-    delete: operations['CompanyController_delete']
-    options?: never
-    head?: never
-    patch: operations['CompanyController_update']
-    trace?: never
-  }
-  '/api/categories': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get: operations['CategoryController_list']
-    put?: never
-    post: operations['CategoryController_create']
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/categories/{id}': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post?: never
-    delete: operations['CategoryController_delete']
-    options?: never
-    head?: never
-    patch: operations['CategoryController_update']
-    trace?: never
-  }
-  '/api/users': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get: operations['UserController_list']
-    put?: never
-    post: operations['UserController_create']
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/users/{id}': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post?: never
-    delete: operations['UserController_delete']
-    options?: never
-    head?: never
-    patch: operations['UserController_update']
-    trace?: never
-  }
-  '/api/products': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post: operations['ProductController_create']
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/products/company/{companyId}': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get: operations['ProductController_list']
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/products/{id}': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get: operations['ProductController_getById']
-    put?: never
-    post?: never
-    delete: operations['ProductController_delete']
-    options?: never
-    head?: never
-    patch: operations['ProductController_update']
-    trace?: never
-  }
-  '/api/configurations': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post: operations['ConfigurationController_create']
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/configurations/{id}': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get: operations['ConfigurationController_getConfiguration']
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch: operations['ConfigurationController_update']
-    trace?: never
-  }
-  '/api/styles': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get: operations['StyleController_list']
-    put?: never
-    post: operations['StyleController_create']
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/styles/{id}': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get: operations['StyleController_getById']
-    put?: never
-    post?: never
-    delete: operations['StyleController_delete']
-    options?: never
-    head?: never
-    patch: operations['StyleController_update']
-    trace?: never
-  }
-  '/api/styles/{id}/active-style': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch: operations['StyleController_chooseActiveStyle']
-    trace?: never
-  }
-  '/api/files/upload': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post: operations['FileController_uploadFile']
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/files/url/{fileId}': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get: operations['FileController_getFileUrl']
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/files/download/{fileId}': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get: operations['FileController_downloadFile']
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/files/delete/{fileId}': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post?: never
-    delete: operations['FileController_deleteFile']
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/metrics/company/{companyId}': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get: operations['MetricsController_productMetrics']
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/invites': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post: operations['InviteController_create']
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/invites/accept': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post: operations['InviteController_accept']
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/invites/pendings/company/{companyId}': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get: operations['InviteController_getConfiguration']
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  '/api/invites/revoke/{id}': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch: operations['InviteController_revoke']
-    trace?: never
-  }
+    "/api/sessions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["AuthenticateController_handle"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/companies": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["CompanyController_list"];
+        put?: never;
+        post: operations["CompanyController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/companies/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete: operations["CompanyController_delete"];
+        options?: never;
+        head?: never;
+        patch: operations["CompanyController_update"];
+        trace?: never;
+    };
+    "/api/categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["CategoryController_list"];
+        put?: never;
+        post: operations["CategoryController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/categories/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete: operations["CategoryController_delete"];
+        options?: never;
+        head?: never;
+        patch: operations["CategoryController_update"];
+        trace?: never;
+    };
+    "/api/users": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["UserController_list"];
+        put?: never;
+        post: operations["UserController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/users/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete: operations["UserController_delete"];
+        options?: never;
+        head?: never;
+        patch: operations["UserController_update"];
+        trace?: never;
+    };
+    "/api/products": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["ProductController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/products/template": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ProductController_downloadTemplate"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/products/company/{companyId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ProductController_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/products/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ProductController_getById"];
+        put?: never;
+        post?: never;
+        delete: operations["ProductController_delete"];
+        options?: never;
+        head?: never;
+        patch: operations["ProductController_update"];
+        trace?: never;
+    };
+    "/api/products/{id}/update-stock": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["ProductController_updateStock"];
+        trace?: never;
+    };
+    "/api/configurations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["ConfigurationController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/configurations/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ConfigurationController_getConfiguration"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["ConfigurationController_update"];
+        trace?: never;
+    };
+    "/api/styles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["StyleController_list"];
+        put?: never;
+        post: operations["StyleController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/styles/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["StyleController_getById"];
+        put?: never;
+        post?: never;
+        delete: operations["StyleController_delete"];
+        options?: never;
+        head?: never;
+        patch: operations["StyleController_update"];
+        trace?: never;
+    };
+    "/api/styles/{id}/active-style": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["StyleController_chooseActiveStyle"];
+        trace?: never;
+    };
+    "/api/files/upload": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["FileController_uploadFile"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/files/url/{fileId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["FileController_getFileUrl"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/files/download/{fileId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["FileController_downloadFile"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/files/delete/{fileId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete: operations["FileController_deleteFile"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/metrics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["MetricsController_productMetrics"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/invites": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["InviteController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/invites/accept": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["InviteController_accept"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/invites/pendings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["InviteController_getPendings"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/invites/revoke/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["InviteController_revoke"];
+        trace?: never;
+    };
 }
-export type webhooks = Record<string, never>
+export type webhooks = Record<string, never>;
 export interface components {
-  schemas: {
-    AuthenticateDTO: {
-      /** Format: email */
-      email: string
-      password: string
-    }
-    CreateCompanyDTO: {
-      tradeName: string
-      corporateName: string
-      /** Format: email */
-      email: string
-      cnpj: string
-      contact: string
-      /** Format: uuid */
-      responsibleId: string
-      address: {
-        street: string
-        number?: string
-        zipCode?: string
-        neighborhood?: string
-        city: string
-        state: string
-        country: string
-        complement?: string
-      }
-    }
-    EditCompanyDTO: {
-      tradeName?: string
-      corporateName?: string
-      cnpj?: string
-      email?: string
-      contact?: string
-    }
-    CreateCategoryDTO: {
-      name: string
-      isActive: boolean
-      /** Format: uuid */
-      companyId: string
-      /** Format: uuid */
-      fileId?: string
-    }
-    HttpEachCategoryListResponse: {
-      /** @example 09acb63e-9c9f-4880-a828-ba185e6e2a00 */
-      id: string
-      name: string
-      isActive?: boolean
-      iconId: string
-      /** Format: date-time */
-      createdAt: string
-      /** Format: date-time */
-      updatedAt?: string
-    }
-    HttpCategoryListResponse: {
-      total: number
-      perPage: number
-      page: number
-      items: components['schemas']['HttpEachCategoryListResponse'][]
-    }
-    UpdateCategoryDTO: {
-      name?: string
-      isActive?: boolean
-      /** Format: uuid */
-      companyId: string
-    }
-    CreateUserDTO: {
-      name: string
-      /** Format: email */
-      email: string
-      password: string
-      phone: string
-      roles?: ('ADMIN' | 'MANAGER' | 'DIRECTOR' | 'RESPONSIBLE' | 'MEMBER')[]
-    }
-    UpdateUserDTO: {
-      name?: string
-      /** Format: email */
-      email?: string
-      password?: string
-      phone?: string
-      roles?: ('ADMIN' | 'MANAGER' | 'DIRECTOR' | 'RESPONSIBLE' | 'MEMBER')[]
-    }
-    CreateProductDTO: {
-      name: string
-      description: string
-      fileIds: string[]
-      originalPrice: number
-      finalPrice: number
-      discountPercentage: number
-      quantityInStock: number
-      manufactureDate: string
-      validityInDays: number
-      unitOfMeasure: string
-      weight: number
-      height: string
-      width: string
-      depth: string
-      manufacturer?: string
-      batch?: string
-      /** @enum {string} */
-      status: 'ACTIVE' | 'INACTIVE' | 'OUT_OF_STOCK'
-      /** Format: uuid */
-      companyId: string
-      categoryIds: string[]
-    }
-    HttpItemResponse: {
-      /** @example d2f79da7-b601-4492-98a1-e1718d0abe12 */
-      id: string
-      /** @example Phil Durgan Jr. */
-      name: string
-    }
-    HttpEachProductListResponse: {
-      /** @example 7069ce62-35e6-4631-b806-640ca112f3e7 */
-      id: string
-      name: string
-      quantityInStock: number
-      /** Format: date-time */
-      manufactureDate: string
-      /** Format: date-time */
-      dueDate: string
-      validityInDays: number
-      manufacturer: string
-      batch: string
-      /** @example ACTIVE */
-      status: string
-      productImage: string
-      categories: components['schemas']['HttpItemResponse'][]
-      /** Format: date-time */
-      createdAt: string
-      /** Format: date-time */
-      updatedAt?: string
-      /** Format: date-time */
-      deletedAt?: string
-    }
-    HttpProductListResponse: {
-      total: number
-      perPage: number
-      page: number
-      items: components['schemas']['HttpEachProductListResponse'][]
-    }
-    HttpProductGetResponse: {
-      /** @example c0ed79d7-d73f-442e-9bd6-188daad281c5 */
-      id: string
-      name: string
-      description: string
-      originalPrice: number
-      finalPrice: number
-      discountPercentage: number
-      quantityInStock: number
-      /** Format: date-time */
-      manufactureDate: string
-      /** Format: date-time */
-      dueDate: string
-      validityInDays: number
-      unitOfMeasure: string
-      weight: number
-      manufacturer: string
-      batch: string
-      /** @example ACTIVE */
-      status: string
-      productImage: string
-      categories: components['schemas']['HttpItemResponse'][]
-      /** Format: date-time */
-      createdAt: string
-      /** Format: date-time */
-      updatedAt?: string
-      /** Format: date-time */
-      deletedAt?: string
-    }
-    UpdateProductDTO: {
-      name?: string
-      description?: string
-      fileIds?: string[]
-      originalPrice?: number
-      finalPrice?: number
-      discountPercentage?: number
-      quantityInStock?: number
-      manufactureDate?: string
-      validityInDays?: number
-      unitOfMeasure?: string
-      weight?: number
-      height?: string
-      width?: string
-      depth?: string
-      manufacturer?: string
-      batch?: string
-      /** @enum {string} */
-      status?: 'ACTIVE' | 'INACTIVE' | 'OUT_OF_STOCK'
-      /** Format: uuid */
-      companyId?: string
-      categoryIds?: string[]
-    }
-    CreateConfigurationDTO: {
-      /** Format: uuid */
-      userId: string
-      /** Format: uuid */
-      companyId: string
-      daysBeforeOldStock: number
-      warningDays: number
-      emailNotification: boolean
-      systemNotification: boolean
-      autoDiscardAfterExpiration: boolean
-      freeShippingOnOldStock: boolean
-      /** @enum {string} */
-      reportFrequency: 'diary' | 'weekly' | 'month' | 'year'
-    }
-    HttpConfigurationGetResponse: {
-      /** @example 9d76c58b-810c-4df3-a696-eb7330196b83 */
-      id: string
-      /** @example 9a4e0443-e2d3-458f-9c5b-b7638ecbf609 */
-      userId: string
-      /** @example 5a853284-5a98-4b42-b521-167e7425c2c4 */
-      companyId: string
-      daysBeforeOldStock: number
-      warningDays: number
-      emailNotification: boolean
-      systemNotification: boolean
-      autoDiscardAfterExpiration: boolean
-      freeShippingOnOldStock: boolean
-      /** @example diary */
-      reportFrequency: string
-      /** Format: date-time */
-      createdAt: string
-      /** Format: date-time */
-      updatedAt?: string
-    }
-    UpdateConfigurationDTO: {
-      daysBeforeOldStock?: number
-      warningDays?: number
-      emailNotification?: boolean
-      systemNotification?: boolean
-      autoDiscardAfterExpiration?: boolean
-      freeShippingOnOldStock?: boolean
-      /** @enum {string} */
-      reportFrequency?: 'diary' | 'weekly' | 'month' | 'year'
-    }
-    CreateStyleDTO: {
-      /** Format: uuid */
-      companyId: string
-      name: string
-      /** @default false */
-      isActive: boolean
-      backgroundColor: string
-      textColor: string
-      primaryColor: string
-      secondaryColor: string
-      tertiaryColor: string
-    }
-    HttpEachStyleListResponse: {
-      /** @example 91ea23a9-d7a9-433f-9929-04d24557c9a6 */
-      id: string
-      /** @example 2f472a91-0593-4f7f-8073-bc3909a59861 */
-      companyId: string
-      name: string
-      isActive?: boolean
-      backgroundColor: string
-      textColor: string
-      primaryColor: string
-      secondaryColor: string
-      tertiaryColor: string
-      /** Format: date-time */
-      createdAt: string
-      /** Format: date-time */
-      updatedAt?: string
-    }
-    HttpStyleListResponse: {
-      total: number
-      perPage: number
-      page: number
-      items: components['schemas']['HttpEachStyleListResponse'][]
-    }
-    HttpStyleGetResponse: {
-      /** @example 275c0217-4175-44f2-8a44-1611a8c68a80 */
-      id: string
-      /** @example 1d0a94be-7537-4a8e-827b-f36c536c86b7 */
-      companyId: string
-      name: string
-      isActive?: boolean
-      backgroundColor: string
-      textColor: string
-      primaryColor: string
-      secondaryColor: string
-      tertiaryColor: string
-      /** Format: date-time */
-      createdAt: string
-      /** Format: date-time */
-      updatedAt?: string
-    }
-    UpdateStyleDTO: {
-      name?: string
-      backgroundColor?: string
-      textColor?: string
-      primaryColor?: string
-      secondaryColor?: string
-      tertiaryColor?: string
-    }
-    HttpFileCreatedResponse: {
-      /** @example 10b004be-f84e-483e-8140-cf581c97f215 */
-      id: string
-    }
-    HttpGetFileUrlResponse: {
-      /** @example string */
-      fileUrl: string
-    }
-    HttpOldStockMetricsResponse: {
-      totalProductOldStock: number
-      totalOldStockValue: number
-      expiringIn30Days: number
-      expiringIn60Days: number
-      expiringIn90Days: number
-    }
-    HttpProductsMetricsResponse: {
-      totalStockQuantity: number
-      totalStockValue: number
-      productsInWarningDays: number
-    }
-    HttpGetMetricsResponse: {
-      oldStockMetrics: components['schemas']['HttpOldStockMetricsResponse']
-      productMetrics: components['schemas']['HttpProductsMetricsResponse']
-    }
-    CreateInviteDTO: {
-      /** Format: email */
-      email: string
-      roles?: string[]
-      /** Format: uuid */
-      authorId: string
-    }
-    AcceptInviteDTO: {
-      /** Format: uuid */
-      inviteId: string
-      userAccount: {
-        name: string
-        password: string
-        phone: string
-      }
-    }
-    HttpInviteGetResponse: {
-      /** @example c2bdfa5a-9e3a-4a90-bb89-bebf388ce820 */
-      id: string
-      /** @example Issac67@hotmail.com */
-      email: string
-      /** @example [
-       *       "MEMBER"
-       *     ] */
-      roles: string[]
-      /** Format: date-time */
-      createdAt: string
-      /** Format: date-time */
-      expiresIn?: string
-    }
-  }
-  responses: never
-  parameters: never
-  requestBodies: never
-  headers: never
-  pathItems: never
+    schemas: {
+        AuthenticateDTO: {
+            /** Format: email */
+            email: string;
+            password: string;
+        };
+        CreateCompanyDTO: {
+            tradeName: string;
+            corporateName: string;
+            /** Format: email */
+            email: string;
+            cnpj: string;
+            contact: string;
+            /** Format: uuid */
+            responsibleId: string;
+            address: {
+                street: string;
+                number?: string;
+                zipCode?: string;
+                neighborhood?: string;
+                city: string;
+                state: string;
+                country: string;
+                complement?: string;
+            };
+        };
+        EditCompanyDTO: {
+            tradeName?: string;
+            corporateName?: string;
+            cnpj?: string;
+            email?: string;
+            contact?: string;
+        };
+        CreateCategoryDTO: {
+            name: string;
+            isActive: boolean;
+            /** Format: uuid */
+            companyId: string;
+            /** Format: uuid */
+            fileId?: string;
+        };
+        HttpEachCategoryListResponse: {
+            /** @example 29121f4f-ad8b-4e9f-b561-532597c868f2 */
+            id: string;
+            name: string;
+            isActive?: boolean;
+            iconId: string;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt?: string;
+        };
+        HttpCategoryListResponse: {
+            total: number;
+            perPage: number;
+            page: number;
+            items: components["schemas"]["HttpEachCategoryListResponse"][];
+        };
+        UpdateCategoryDTO: {
+            name?: string;
+            isActive?: boolean;
+            /** Format: uuid */
+            companyId: string;
+        };
+        CreateUserDTO: {
+            name: string;
+            /** Format: email */
+            email: string;
+            password: string;
+            phone: string;
+            roles?: ("ADMIN" | "MANAGER" | "DIRECTOR" | "RESPONSIBLE" | "MEMBER")[];
+        };
+        UpdateUserDTO: {
+            name?: string;
+            /** Format: email */
+            email?: string;
+            password?: string;
+            phone?: string;
+            roles?: ("ADMIN" | "MANAGER" | "DIRECTOR" | "RESPONSIBLE" | "MEMBER")[];
+        };
+        CreateProductDTO: {
+            name: string;
+            description: string;
+            fileIds: string[];
+            originalPrice: number;
+            finalPrice: number;
+            discountPercentage: number;
+            quantityInStock: number;
+            minimumStock: number;
+            manufactureDate: string;
+            validityInDays: number;
+            unitOfMeasure: string;
+            weight: number;
+            height: string;
+            width: string;
+            depth: string;
+            manufacturer?: string;
+            batch?: string;
+            /** @enum {string} */
+            status: "ACTIVE" | "INACTIVE" | "OUT_OF_STOCK";
+            /** Format: uuid */
+            companyId: string;
+            categoryIds: string[];
+        };
+        HttpItemResponse: {
+            /** @example e7569da7-9c56-4d66-bff1-0780ad7ab8af */
+            id: string;
+            /** @example Lindsey Gottlieb */
+            name: string;
+        };
+        HttpEachProductListResponse: {
+            /** @example aa8d30ff-74ec-49db-8af2-97c6654cc42d */
+            id: string;
+            name: string;
+            quantityInStock: number;
+            /** Format: date-time */
+            manufactureDate: string;
+            /** Format: date-time */
+            dueDate: string;
+            validityInDays: number;
+            manufacturer: string;
+            batch: string;
+            /** @example ACTIVE */
+            status: string;
+            productImage: string;
+            categories: components["schemas"]["HttpItemResponse"][];
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt?: string;
+            /** Format: date-time */
+            deletedAt?: string;
+        };
+        HttpProductListResponse: {
+            total: number;
+            perPage: number;
+            page: number;
+            items: components["schemas"]["HttpEachProductListResponse"][];
+        };
+        HttpProductGetResponse: {
+            /** @example 7c21d269-5718-4c6f-bac3-a37dddd4168a */
+            id: string;
+            name: string;
+            description: string;
+            originalPrice: number;
+            finalPrice: number;
+            discountPercentage: number;
+            quantityInStock: number;
+            /** Format: date-time */
+            manufactureDate: string;
+            /** Format: date-time */
+            dueDate: string;
+            validityInDays: number;
+            unitOfMeasure: string;
+            weight: number;
+            manufacturer: string;
+            batch: string;
+            /** @example ACTIVE */
+            status: string;
+            productImage: string;
+            categories: components["schemas"]["HttpItemResponse"][];
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt?: string;
+            /** Format: date-time */
+            deletedAt?: string;
+        };
+        UpdateProductDTO: {
+            name?: string;
+            description?: string;
+            fileIds?: string[];
+            originalPrice?: number;
+            finalPrice?: number;
+            discountPercentage?: number;
+            quantityInStock?: number;
+            minimumStock?: number;
+            manufactureDate?: string;
+            validityInDays?: number;
+            unitOfMeasure?: string;
+            weight?: number;
+            height?: string;
+            width?: string;
+            depth?: string;
+            manufacturer?: string;
+            batch?: string;
+            /** @enum {string} */
+            status?: "ACTIVE" | "INACTIVE" | "OUT_OF_STOCK";
+            /** Format: uuid */
+            companyId?: string;
+            categoryIds?: string[];
+        };
+        UpdateProductStockDTO: {
+            quantity: number;
+            /** @enum {string} */
+            operation: "increase" | "decrease";
+        };
+        CreateConfigurationDTO: {
+            /** Format: uuid */
+            userId: string;
+            /** Format: uuid */
+            companyId: string;
+            daysBeforeOldStock: number;
+            warningDays: number;
+            emailNotification: boolean;
+            systemNotification: boolean;
+            autoDiscardAfterExpiration: boolean;
+            freeShippingOnOldStock: boolean;
+            /** @enum {string} */
+            reportFrequency: "diary" | "weekly" | "month" | "year";
+        };
+        HttpConfigurationGetResponse: {
+            /** @example f1a559cd-47ca-47e1-8100-fcaa3b887ddc */
+            id: string;
+            /** @example e15dd9b7-3418-4dc1-be7b-c797d0da6fec */
+            userId: string;
+            /** @example dd7fb2a0-7398-4999-b772-b5ca726af304 */
+            companyId: string;
+            daysBeforeOldStock: number;
+            warningDays: number;
+            emailNotification: boolean;
+            systemNotification: boolean;
+            autoDiscardAfterExpiration: boolean;
+            freeShippingOnOldStock: boolean;
+            /** @example diary */
+            reportFrequency: string;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt?: string;
+        };
+        UpdateConfigurationDTO: {
+            daysBeforeOldStock?: number;
+            warningDays?: number;
+            emailNotification?: boolean;
+            systemNotification?: boolean;
+            autoDiscardAfterExpiration?: boolean;
+            freeShippingOnOldStock?: boolean;
+            /** @enum {string} */
+            reportFrequency?: "diary" | "weekly" | "month" | "year";
+        };
+        CreateStyleDTO: {
+            name: string;
+            /** @default false */
+            isActive: boolean;
+            backgroundColor: string;
+            textColor: string;
+            primaryColor: string;
+            secondaryColor: string;
+            tertiaryColor: string;
+        };
+        HttpEachStyleListResponse: {
+            /** @example ec6cbc38-88c0-439b-b8dc-a9787f656cab */
+            id: string;
+            /** @example 0ddbffe9-5254-464a-8585-81dd7484c1ab */
+            companyId: string;
+            name: string;
+            isActive?: boolean;
+            backgroundColor: string;
+            textColor: string;
+            primaryColor: string;
+            secondaryColor: string;
+            tertiaryColor: string;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt?: string;
+        };
+        HttpStyleListResponse: {
+            total: number;
+            perPage: number;
+            page: number;
+            items: components["schemas"]["HttpEachStyleListResponse"][];
+        };
+        HttpStyleGetResponse: {
+            /** @example 8c7f3e9a-4f83-4110-99c6-b8e9e16a7dec */
+            id: string;
+            /** @example 81ee2bab-6745-4a70-942f-d3da465d9d9c */
+            companyId: string;
+            name: string;
+            isActive?: boolean;
+            backgroundColor: string;
+            textColor: string;
+            primaryColor: string;
+            secondaryColor: string;
+            tertiaryColor: string;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt?: string;
+        };
+        UpdateStyleDTO: {
+            name?: string;
+            backgroundColor?: string;
+            textColor?: string;
+            primaryColor?: string;
+            secondaryColor?: string;
+            tertiaryColor?: string;
+        };
+        HttpFileCreatedResponse: {
+            /** @example d6ce4f21-1df9-4f34-9da9-9170ca5379c5 */
+            id: string;
+        };
+        HttpGetFileUrlResponse: {
+            /** @example string */
+            fileUrl: string;
+        };
+        HttpOldStockMetricsResponse: {
+            totalProductOldStock: number;
+            totalOldStockValue: number;
+            expiringIn30Days: number;
+            expiringIn60Days: number;
+            expiringIn90Days: number;
+        };
+        HttpProductsMetricsResponse: {
+            totalStockQuantity: number;
+            totalStockValue: number;
+            productsInWarningDays: number;
+        };
+        HttpGetMetricsResponse: {
+            oldStockMetrics: components["schemas"]["HttpOldStockMetricsResponse"];
+            productMetrics: components["schemas"]["HttpProductsMetricsResponse"];
+        };
+        CreateInviteDTO: {
+            /** Format: email */
+            email: string;
+            roles?: string[];
+            /** Format: uuid */
+            authorId: string;
+        };
+        AcceptInviteDTO: {
+            /** Format: uuid */
+            inviteId: string;
+            userAccount: {
+                name: string;
+                password: string;
+                phone: string;
+            };
+        };
+        HttpInviteGetResponse: {
+            /** @example 216faaf0-7e5e-4112-a6ee-464af02c27a2 */
+            id: string;
+            /** @example Nichole_Kreiger76@gmail.com */
+            email: string;
+            /** @example [
+             *       "MEMBER"
+             *     ] */
+            roles: string[];
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            expiresIn?: string;
+        };
+    };
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
-export type $defs = Record<string, never>
+export type $defs = Record<string, never>;
 export interface operations {
-  AuthenticateController_handle: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['AuthenticateDTO']
-      }
-    }
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  CompanyController_create: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['CreateCompanyDTO']
-      }
-    }
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  CompanyController_list: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        companyId: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  CompanyController_delete: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  CompanyController_update: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['EditCompanyDTO']
-      }
-    }
-    responses: {
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  CategoryController_list: {
-    parameters: {
-      query: {
-        page: number
-        perPage: number
-      }
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          'application/json': components['schemas']['HttpCategoryListResponse']
-        }
-      }
-    }
-  }
-  CategoryController_create: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['CreateCategoryDTO']
-      }
-    }
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  CategoryController_delete: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  CategoryController_update: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['UpdateCategoryDTO']
-      }
-    }
-    responses: {
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  UserController_list: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  UserController_create: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['CreateUserDTO']
-      }
-    }
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  UserController_delete: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  UserController_update: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['UpdateUserDTO']
-      }
-    }
-    responses: {
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  ProductController_create: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['CreateProductDTO']
-      }
-    }
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  ProductController_list: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        companyId: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          'application/json': components['schemas']['HttpProductListResponse']
-        }
-      }
-    }
-  }
-  ProductController_getById: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          'application/json': components['schemas']['HttpProductGetResponse']
-        }
-      }
-    }
-  }
-  ProductController_delete: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  ProductController_update: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['UpdateProductDTO']
-      }
-    }
-    responses: {
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  ConfigurationController_create: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['CreateConfigurationDTO']
-      }
-    }
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  ConfigurationController_getConfiguration: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          'application/json': components['schemas']['HttpConfigurationGetResponse']
-        }
-      }
-    }
-  }
-  ConfigurationController_update: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['UpdateConfigurationDTO']
-      }
-    }
-    responses: {
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  StyleController_list: {
-    parameters: {
-      query?: {
-        perPage?: number
-        page?: number
-      }
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          'application/json': components['schemas']['HttpStyleListResponse']
-        }
-      }
-    }
-  }
-  StyleController_create: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['CreateStyleDTO']
-      }
-    }
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  StyleController_getById: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          'application/json': components['schemas']['HttpStyleGetResponse']
-        }
-      }
-    }
-  }
-  StyleController_delete: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  StyleController_update: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['UpdateStyleDTO']
-      }
-    }
-    responses: {
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  StyleController_chooseActiveStyle: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      204: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  FileController_uploadFile: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          'application/json': components['schemas']['HttpFileCreatedResponse']
-        }
-      }
-    }
-  }
-  FileController_getFileUrl: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        fileId: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          'application/json': components['schemas']['HttpGetFileUrlResponse']
-        }
-      }
-    }
-  }
-  FileController_downloadFile: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        fileId: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  FileController_deleteFile: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        fileId: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  MetricsController_productMetrics: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        companyId: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          'application/json': components['schemas']['HttpGetMetricsResponse']
-        }
-      }
-    }
-  }
-  InviteController_create: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['CreateInviteDTO']
-      }
-    }
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  InviteController_accept: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['AcceptInviteDTO']
-      }
-    }
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
-  InviteController_getConfiguration: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        companyId: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          'application/json': components['schemas']['HttpInviteGetResponse'][]
-        }
-      }
-    }
-  }
-  InviteController_revoke: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content?: never
-      }
-    }
-  }
+    AuthenticateController_handle: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AuthenticateDTO"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CompanyController_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CompanyController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateCompanyDTO"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CompanyController_delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CompanyController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EditCompanyDTO"];
+            };
+        };
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CategoryController_list: {
+        parameters: {
+            query: {
+                page: number;
+                perPage: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HttpCategoryListResponse"];
+                };
+            };
+        };
+    };
+    CategoryController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateCategoryDTO"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CategoryController_delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CategoryController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateCategoryDTO"];
+            };
+        };
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    UserController_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    UserController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateUserDTO"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    UserController_delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    UserController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateUserDTO"];
+            };
+        };
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    ProductController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateProductDTO"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    ProductController_downloadTemplate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    ProductController_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                companyId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HttpProductListResponse"];
+                };
+            };
+        };
+    };
+    ProductController_getById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HttpProductGetResponse"];
+                };
+            };
+        };
+    };
+    ProductController_delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    ProductController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateProductDTO"];
+            };
+        };
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    ProductController_updateStock: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateProductStockDTO"];
+            };
+        };
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    ConfigurationController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateConfigurationDTO"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    ConfigurationController_getConfiguration: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HttpConfigurationGetResponse"];
+                };
+            };
+        };
+    };
+    ConfigurationController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateConfigurationDTO"];
+            };
+        };
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    StyleController_list: {
+        parameters: {
+            query?: {
+                perPage?: number;
+                page?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HttpStyleListResponse"];
+                };
+            };
+        };
+    };
+    StyleController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateStyleDTO"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    StyleController_getById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HttpStyleGetResponse"];
+                };
+            };
+        };
+    };
+    StyleController_delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    StyleController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateStyleDTO"];
+            };
+        };
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    StyleController_chooseActiveStyle: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    FileController_uploadFile: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HttpFileCreatedResponse"];
+                };
+            };
+        };
+    };
+    FileController_getFileUrl: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                fileId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HttpGetFileUrlResponse"];
+                };
+            };
+        };
+    };
+    FileController_downloadFile: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                fileId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    FileController_deleteFile: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                fileId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    MetricsController_productMetrics: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HttpGetMetricsResponse"];
+                };
+            };
+        };
+    };
+    InviteController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateInviteDTO"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    InviteController_accept: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AcceptInviteDTO"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    InviteController_getPendings: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HttpInviteGetResponse"][];
+                };
+            };
+        };
+    };
+    InviteController_revoke: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
 }

@@ -34,7 +34,28 @@ export function useProductsService() {
   }
 
   async function deleteProductService(anId: string) {
-    storageSystemApi.delete(`/api/products/{id}`, { routeParams: { id: anId } })
+    return await storageSystemApi.delete(`/api/products/{id}`, {
+      routeParams: { id: anId },
+    })
+  }
+
+  async function getProductsTemplate() {
+    const response = await storageSystemApi.get('/api/products/template', {
+      responseType: 'blob',
+    })
+
+    const blob = new Blob([response.data], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    })
+
+    const url = window.URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'modelo_produtos.xlsx'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    window.URL.revokeObjectURL(url)
   }
 
   return {
@@ -43,5 +64,6 @@ export function useProductsService() {
     getProductByIdService,
     updateProductService,
     deleteProductService,
+    getProductsTemplate,
   }
 }
