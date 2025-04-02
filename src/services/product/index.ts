@@ -1,3 +1,4 @@
+import * as XLSX from 'xlsx'
 import { CreateProductInput } from '@/validations/create-product-schema'
 import { storageSystemApi } from '../axios'
 import { Pagination } from '@/@types/pagination'
@@ -58,6 +59,23 @@ export function useProductsService() {
     window.URL.revokeObjectURL(url)
   }
 
+  async function readSpreadsheetProducts(file: File): Promise<any[]> {
+    const reader = new FileReader()
+
+    return new Promise((resolve) => {
+      reader.onload = (e) => {
+        const data = new Uint8Array(e.target?.result as ArrayBuffer)
+        const workbook = XLSX.read(data, { type: 'array' })
+        const sheetName = workbook.SheetNames[0]
+        const sheet = workbook.Sheets[sheetName]
+        const parsedData = XLSX.utils.sheet_to_json(sheet)
+        resolve(parsedData)
+      }
+
+      reader.readAsArrayBuffer(file)
+    })
+  }
+
   return {
     createProductService,
     listProductsService,
@@ -65,5 +83,6 @@ export function useProductsService() {
     updateProductService,
     deleteProductService,
     getProductsTemplate,
+    readSpreadsheetProducts,
   }
 }

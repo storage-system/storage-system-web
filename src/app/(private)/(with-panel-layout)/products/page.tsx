@@ -1,5 +1,5 @@
 import { TableProducts } from '@/components/routes/products/list/table-products'
-import { GetProdutSpreadsheet } from '@/components/routes/products/spreadsheet/get-product-spreadsheet'
+import { ImportProductsSpreadsheet } from '@/components/routes/products/spreadsheet/import-products-spreadsheet'
 import { buttonVariants } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
@@ -9,8 +9,8 @@ import Link from 'next/link'
 export default async function Products() {
   return (
     <div className="flex flex-col items-end space-y-4">
-      <div className="space-x-4">
-        <GetProdutSpreadsheet />
+      <div className="flex space-x-4">
+        <ImportProductsSpreadsheet />
         <Link
           href={PrivateRoutes.PRODUCT + PrivateRoutes.CREATE_PRODUCT}
           className={buttonVariants({ variant: 'default' })}
