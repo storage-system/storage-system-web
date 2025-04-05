@@ -52,6 +52,7 @@ export function useCreateProduct() {
   })
 
   async function handleUploadFiles(files: File[]) {
+    if (!files) return
     try {
       setUploadStatus('Enviando imagem ...')
       const fileIds = await Promise.all(
@@ -106,7 +107,10 @@ export function useCreateProduct() {
   }
 
   function handleError() {
-    toast(productErrorMessages.createError)
+    toast({
+      title: 'Erro ao criar produto',
+      variant: 'destructive',
+    })
   }
 
   companyId && form.setValue('companyId', companyId)

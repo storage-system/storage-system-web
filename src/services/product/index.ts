@@ -8,7 +8,7 @@ import { UpdateProductOutput } from '@/validations/update-product-schema'
 
 export function useProductsService() {
   async function createProductService(anInput: CreateProductInput) {
-    await storageSystemApi.post('/api/products', anInput)
+    return await storageSystemApi.post('/api/products', anInput)
   }
 
   async function listProductsService(

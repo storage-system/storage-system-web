@@ -28,6 +28,11 @@ export const createProductSchema = z.object({
     .int({ message: 'A quantidade em estoque deve ser um número inteiro' })
     .nonnegative({ message: 'A quantidade em estoque não pode ser negativa' }),
 
+  minimumStock: z.coerce
+    .number({ required_error: 'A quantidade em estoque é obrigatória' })
+    .int({ message: 'A quantidade em estoque deve ser um número inteiro' })
+    .nonnegative({ message: 'A quantidade em estoque não pode ser negativa' }),
+
   manufactureDate: z.date().optional(),
 
   validityInDays: z.coerce
