@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react'
 import {
+  Activity,
   BriefcaseBusiness,
   HomeIcon,
   List,
@@ -77,6 +78,12 @@ export const sidebarConfig: SidebarConfig = {
           href: PrivateRoutes.PRODUCT,
           items: [],
           icon: <ShoppingCart className="size-4" />,
+        },
+        {
+          title: 'Gerenciar estoque',
+          href: PrivateRoutes.MANAGE_STOCK,
+          items: [],
+          icon: <Activity className="size-4" />,
         },
       ],
     },
