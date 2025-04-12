@@ -1,12 +1,12 @@
 import { Button } from '@/components/ui/button'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
 import { CurrentStep, useStyles } from '@/providers/style-provider'
-import { ChevronLeft, List } from 'lucide-react'
+import { ChevronLeft, List, Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 export function Header() {
   const router = useRouter()
-  const { currentStep, setCurrentStep } = useStyles()
+  const { currentStep, setCurrentStep, isPending } = useStyles()
 
   function handleNavigate() {
     if (currentStep === CurrentStep.CUSTOM_THEME) {
@@ -34,9 +34,14 @@ export function Header() {
         </div>
       </div>
       <div className="mr-5 flex h-full items-center justify-center">
-        <Button variant={'ghost'}>Vizualizar</Button>
-        <Button className="flex items-center bg-primary px-4 text-white dark:text-black">
-          Salvar
+        <Button disabled={isPending} variant={'ghost'}>
+          Vizualizar
+        </Button>
+        <Button
+          disabled={isPending}
+          className="flex w-[80px] items-center bg-primary px-4 text-white dark:text-black"
+        >
+          {isPending ? <Loader2 className="animate-spin" /> : 'Salvar'}
         </Button>
       </div>
     </header>

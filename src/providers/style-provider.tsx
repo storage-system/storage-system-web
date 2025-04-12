@@ -1,4 +1,6 @@
 import { Form } from '@/components/ui/form'
+import { toast } from '@/components/ui/use-toast'
+import { PrivateRoutes } from '@/constants/routes/private-routes'
 import { useStylesService } from '@/services/styles'
 import {
   CreateStyleOutput,
@@ -7,7 +9,7 @@ import {
 } from '@/validations/create-style-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import {
   createContext,
   Dispatch,
@@ -31,59 +33,50 @@ export enum ColorIdEnum {
   SECONDARY_COLOR = 'secondaryColor',
   TERTIARY_COLOR = 'tertiaryColor',
 }
-interface IColor extends ColorType {
-  colorId: ColorIdEnum
-  description: string
+
+export interface IColor extends ColorType {
+  description?: string
+  title?: string
+}
+
+export interface Theme {
   title: string
+  description: string
+  paletteColors: { [key: string]: IColor }[]
 }
 
 interface StylesContext {
   currentStep: CurrentStep
   setCurrentStep: Dispatch<SetStateAction<CurrentStep>>
-  colors: IColor[]
-  setColors: Dispatch<SetStateAction<IColor[]>>
+  theme: Theme
+  setTheme: Dispatch<SetStateAction<Theme>>
   form: UseFormReturn<CreateStyleType>
+  isPending: boolean
 }
 
 export const StylesContext = createContext<StylesContext | null>(null)
 
 interface StylesProviderProps {
-  initialColorConfig: IColor[]
+  initialTheme: Theme
   children: ReactNode
 }
 
 export function StylesProvider({
   children,
-  initialColorConfig = [],
+  initialTheme,
 }: StylesProviderProps) {
-  const { data: session } = useSession()
-
+  const router = useRouter()
   const [currentStep, setCurrentStep] = useState<CurrentStep>(
     CurrentStep.INITIAL,
   )
 
-  const [colors, setColors] = useState<IColor[]>(initialColorConfig)
+  const [colors, setTheme] = useState<Theme>(initialTheme)
 
   const form = useForm<CreateStyleType>({
     resolver: zodResolver(createStyleSchema),
     defaultValues: {
-      companyId: session?.user.companyId ?? '',
       isActive: false,
-      backgroundColor: initialColorConfig.find(
-        (color) => color.colorId === ColorIdEnum.BACKGROUND_COLOR,
-      )?.hex,
-      textColor: initialColorConfig.find(
-        (color) => color.colorId === ColorIdEnum.TEXT_COLOR,
-      )?.hex,
-      primaryColor: initialColorConfig.find(
-        (color) => color.colorId === ColorIdEnum.PRIMARY_COLOR,
-      )?.hex,
-      secondaryColor: initialColorConfig.find(
-        (color) => color.colorId === ColorIdEnum.SECONDARY_COLOR,
-      )?.hex,
-      tertiaryColor: initialColorConfig.find(
-        (color) => color.colorId === ColorIdEnum.TERTIARY_COLOR,
-      )?.hex,
+      ...colors,
     },
   })
 
@@ -92,13 +85,27 @@ export function StylesProvider({
     await createStyleService(input)
   }
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: handleCreateStyle,
+    onSuccess: () => {
+      router.push(PrivateRoutes.STYLES)
+      toast({
+        title: 'Estilo criado com sucesso!',
+        variant: 'success',
+      })
+    },
   })
 
   return (
     <StylesContext.Provider
-      value={{ currentStep, colors, form, setCurrentStep, setColors }}
+      value={{
+        currentStep,
+        theme: colors,
+        form,
+        setCurrentStep,
+        setTheme,
+        isPending,
+      }}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit((data) => mutateAsync(data))}>

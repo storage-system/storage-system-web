@@ -7,13 +7,13 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { PublicRoutes } from '@/constants/routes/public-routes'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { AlertCircle } from 'lucide-react'
+import { AlertCircle, Loader2 } from 'lucide-react'
 import { useAuthenticate } from './use-authenticate'
 
 export function AuthenticateForm() {
   const { AUTHENTICATE_FORM_FIELD } = useAuthenticateFormField()
 
-  const { alertError, form, onSubmit } = useAuthenticate()
+  const { alertError, form, isLoading, onSubmit } = useAuthenticate()
 
   return (
     <FormRender<AuthenticateType>
@@ -29,8 +29,8 @@ export function AuthenticateForm() {
             <AlertDescription>{alertError.text}</AlertDescription>
           </Alert>
         )}
-        <Button className="w-full" type="submit">
-          Entrar
+        <Button className="w-full" type="submit" disabled={isLoading}>
+          {!isLoading ? 'Entrar' : <Loader2 className="animate-spin" />}
         </Button>
         <p className="text-sm">
           Ainda não tem uma conta ?

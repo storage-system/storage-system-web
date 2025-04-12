@@ -10,6 +10,13 @@
     "@next/next/no-img-element": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/ban-types": "warn",
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ]
   }
 }

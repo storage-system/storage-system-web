@@ -1,31 +1,49 @@
-import { CurrentStep, useStyles } from '@/providers/style-provider'
+import { highlightedThemes } from '@/constants/styles/highlighted-themes'
+import { CurrentStep, Theme, useStyles } from '@/providers/style-provider'
 import { StyleCard } from './style-card'
-
-const highlightedThemes = [
-  {
-    title: 'Enérgica',
-    description: 'Vibrante e alegre',
-    paletteColors: ['#0000FF', '#FFC0CB', '#FF69B4', '#C71585'],
-  },
-  {
-    title: 'Retrô',
-    description: 'Nostálgico e estiloso',
-    paletteColors: ['#008080', '#FFD700', '#FF6347', '#DC143C'],
-  },
-  {
-    title: 'Dinâmico',
-    description: 'Ativo e brilhante',
-    paletteColors: ['#FFFF00', '#FF00FF', '#8A2BE2', '#4B0082'],
-  },
-  {
-    title: 'Nostálgico',
-    description: 'Aconchegante e confortável',
-    paletteColors: ['#8B0000', '#FFE4E1', '#4682B4', '#D3D3D3'],
-  },
-]
+import { initialColorConfig } from '@/constants/styles/initial-color-config'
+import { useEffect } from 'react'
 
 export function StylesInitialStep() {
-  const { setCurrentStep } = useStyles()
+  const { setCurrentStep, setTheme, form } = useStyles()
+
+  useEffect(() => {
+    console.log('form.errors', form.formState.errors)
+  }, [form.formState.errors])
+
+  function handleThemeSelection(theme: Theme) {
+    setTheme(theme)
+    const themeColors = theme.paletteColors.reduce((acc: any, colorMap) => {
+      Object.entries(colorMap).forEach(([key, value]) => {
+        switch (key) {
+          case 'backgroundColor':
+            acc.backgroundColor = value.hex
+            break
+          case 'textColor':
+            acc.textColor = value.hex
+            break
+          case 'primaryColor':
+            acc.primaryColor = value.hex
+            break
+          case 'secondaryColor':
+            acc.secondaryColor = value.hex
+            break
+          case 'tertiaryColor':
+            acc.tertiaryColor = value.hex
+            break
+          default:
+            break
+        }
+      })
+      return acc
+    }, {})
+
+    form.reset({
+      isActive: true,
+      name: theme.title,
+      ...themeColors,
+    })
+  }
 
   return (
     <div className="flex flex-col">
@@ -36,7 +54,10 @@ export function StylesInitialStep() {
       <div className="m-3 flex flex-col gap-4">
         <p className="text-[10px] uppercase text-textPrimary">Tema atual</p>
         <StyleCard
-          onClick={() => setCurrentStep(CurrentStep.CUSTOM_THEME)}
+          onClick={() => {
+            setTheme(initialColorConfig)
+            setCurrentStep(CurrentStep.CUSTOM_THEME)
+          }}
           className="border-primary"
           title="Tema personalizado"
           description="Este tema é usado em todo o site."
@@ -53,7 +74,14 @@ export function StylesInitialStep() {
             key={index}
             title={theme.title}
             description={theme.description}
-            paletteColors={theme.paletteColors}
+            paletteColors={theme.paletteColors
+              .flatMap((colorMap) =>
+                Object.values(colorMap).map((color) => color.hex),
+              )
+              .splice(0, 4)}
+            onClick={() => {
+              handleThemeSelection(theme)
+            }}
           />
         ))}
       </div>
