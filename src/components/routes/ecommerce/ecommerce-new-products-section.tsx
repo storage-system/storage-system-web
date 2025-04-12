@@ -10,8 +10,22 @@ import { cn } from '@/utils/class-name'
 import Autoplay from 'embla-carousel-autoplay'
 import { useEffect, useState } from 'react'
 import { NewProduct } from './ecommerce-new-product'
+import { useQuery } from '@tanstack/react-query'
+import { useProductsService } from '@/services/ecommerce-service/products-service'
+import { EcommerceProductsQueryKey } from '@/constants/query-key/ecommerce-products-query-key'
 
 export function NewProductsSection() {
+  const { listProducts } = useProductsService()
+
+  const { data: productsData } = useQuery({
+    queryKey: [EcommerceProductsQueryKey.LIST_PRODUCTS],
+    queryFn: async () => await listProducts(),
+  })
+
+  const productsList = productsData?.items || []
+
+  console.log('productsList', productsList)
+
   const [api, setApi] = useState<CarouselApi>()
 
   const [current, setCurrent] = useState(0)
@@ -47,9 +61,9 @@ export function NewProductsSection() {
           }}
         >
           <CarouselContent>
-            {Array.from({ length: 10 }).map((_, index) => (
+            {productsList.map((item, index) => (
               <CarouselItem key={index} className="basis-1/5">
-                <NewProduct index={index} />
+                <NewProduct {...item} index={index} />
               </CarouselItem>
             ))}
           </CarouselContent>

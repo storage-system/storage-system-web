@@ -92,11 +92,11 @@ export function CustomStyle() {
                       const updatedColors = prevColors.map((c) =>
                         c.name === name
                           ? {
-                              ...c,
-                              hex: newColor.hex,
-                              rgb: newColor.rgb,
-                              hsv: newColor.hsv,
-                            }
+                            ...c,
+                            hex: newColor.hex,
+                            rgb: newColor.rgb,
+                            hsv: newColor.hsv,
+                          }
                           : c,
                       )
 
@@ -106,14 +106,14 @@ export function CustomStyle() {
                           (colorMap) =>
                             colorMap[name]
                               ? {
-                                  ...colorMap,
-                                  [name]: {
-                                    ...colorMap[name],
-                                    hex: newColor.hex,
-                                    rgb: newColor.rgb,
-                                    hsv: newColor.hsv,
-                                  },
-                                }
+                                ...colorMap,
+                                [name]: {
+                                  ...colorMap[name],
+                                  hex: newColor.hex,
+                                  rgb: newColor.rgb,
+                                  hsv: newColor.hsv,
+                                },
+                              }
                               : colorMap,
                         ),
                       }))

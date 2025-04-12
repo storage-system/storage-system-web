@@ -1,8 +1,22 @@
+'use client'
+
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/utils/class-name'
 import { CategoriesProduct } from './ecommerce-categories-product'
+import { useQuery } from '@tanstack/react-query'
+import { EcommerceProductsQueryKey } from '@/constants/query-key/ecommerce-products-query-key'
+import { useProductsService } from '@/services/ecommerce-service/products-service'
 
 export function CategoriesSection() {
+  const { listProducts } = useProductsService()
+
+  const { data: productsData } = useQuery({
+    queryKey: [EcommerceProductsQueryKey.LIST_PRODUCTS],
+    queryFn: async () => await listProducts(),
+  })
+
+  const productsList = productsData?.items || []
+
   return (
     <div className="flex justify-center bg-slate-200 py-40">
       <div className="flex w-full max-w-[1200px] flex-col items-center px-4">
@@ -10,7 +24,7 @@ export function CategoriesSection() {
           Navegue pelas categorias
         </h2>
         <div className="flex gap-4">
-          {Array.from({ length: 6 }).map((_, index, array) => (
+          {productsList.map((_, index, array) => (
             <button className="flex items-center" key={index}>
               <div
                 className={cn(
@@ -30,8 +44,8 @@ export function CategoriesSection() {
           ))}
         </div>
         <div className="mt-14 grid w-full grid-cols-4">
-          {Array.from({ length: 8 }).map((_, index) => (
-            <CategoriesProduct index={index} key={index} />
+          {productsList.map((item, index) => (
+            <CategoriesProduct {...item} index={index} key={index} />
           ))}
         </div>
       </div>

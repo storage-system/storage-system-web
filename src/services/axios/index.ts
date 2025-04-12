@@ -143,3 +143,32 @@ storageSystemApi.axios.interceptors.response.use(
     throw new ApplicationError(error)
   },
 )
+
+// FIXME: REMOVE THIS
+export const jsonServerApi = new Rest({
+  baseURL: 'http://localhost:3338',
+  headers: {
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-cache',
+    Pragma: 'no-cache',
+    Expires: '0',
+  },
+})
+
+jsonServerApi.axios.interceptors.request.use(async (request) => {
+  const session = await getSession()
+  if (session) {
+    request.headers.Authorization = `Bearer ${session.user.access_token}`
+  }
+  return request
+})
+
+jsonServerApi.axios.interceptors.response.use(
+  (response) => {
+    return response
+  },
+  (error: AxiosError<ApiResponseError>) => {
+    toast({ title: error.message, variant: 'destructive' })
+    throw new ApplicationError(error)
+  },
+)

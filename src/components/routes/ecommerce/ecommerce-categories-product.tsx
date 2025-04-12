@@ -1,21 +1,42 @@
+import { EachProduct } from '@/@types/ecommerce/product'
 import { cn } from '@/utils/class-name'
 import { ShoppingBag, Star } from 'lucide-react'
+import Image from 'next/image'
 
-export function CategoriesProduct({ index }: { index: number }) {
+export function CategoriesProduct({
+  id,
+  category,
+  description,
+  image,
+  name,
+  price,
+  index,
+}: EachProduct & { index: number }) {
   return (
     <div
       className={cn(
-        'flex h-96 flex-col border border-primary/30 bg-background p-1',
+        'flex h-96 flex-col border border-primary/30 bg-background p-1 group',
         index >= 4 && 'border-t-0',
         index % 4 !== 3 && 'border-r-0',
       )}
     >
-      <div className="w-full flex-1 bg-gray-200"></div>
+      <div className="w-full flex-1 overflow-hidden">
+        <img
+          alt={name}
+          src={image}
+          className="size-full bg-gray-200 transition-all group-hover:scale-105"
+        />
+      </div>
       <div className="flex basis-[120px] items-center justify-between bg-background px-4">
         <div>
-          <p className="text-lg text-gray-600">Nome do produto</p>
+          <p className="text-lg text-gray-600">{name}</p>
           <div>
-            <p className="text-lg font-bold text-gray-600">RS 14,99</p>
+            <p className="text-lg font-bold text-gray-600">
+              {price.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            </p>
           </div>
           <div className="mt-2 flex gap-1">
             {Array.from({ length: 5 }).map((_, index) => (

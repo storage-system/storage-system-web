@@ -10,14 +10,12 @@ export default function Page() {
   return (
     <>
       <Header />
-      <div className="mt-[170px]">
-        <Hero />
-        <BenefitsSection />
-        <CategoriesSection />
-        <NewProductsSection />
-        <CustomersSection />
-        <Footer />
-      </div>
+      <Hero />
+      <BenefitsSection />
+      <CategoriesSection />
+      <NewProductsSection />
+      <CustomersSection />
+      <Footer />
     </>
   )
 }
