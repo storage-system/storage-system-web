@@ -4,9 +4,6 @@ import { priceFormatter } from '@/utils/format-currency'
 import { ShoppingBag, Star } from 'lucide-react'
 
 export function NewProduct({
-  category,
-  description,
-  id,
   image,
   index,
   name,

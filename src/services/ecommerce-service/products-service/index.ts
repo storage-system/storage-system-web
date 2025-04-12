@@ -1,6 +1,6 @@
 import { EachProduct } from '@/@types/ecommerce/product'
 import { Pagination } from '@/@types/pagination'
-import { jsonServerApi, storageSystemApi } from '@/services/axios'
+import { jsonServerApi } from '@/services/axios'
 
 export function useProductsService() {
   async function listProducts() {

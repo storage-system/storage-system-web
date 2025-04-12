@@ -1,12 +1,8 @@
 import { EachProduct } from '@/@types/ecommerce/product'
 import { cn } from '@/utils/class-name'
 import { ShoppingBag, Star } from 'lucide-react'
-import Image from 'next/image'
 
 export function CategoriesProduct({
-  id,
-  category,
-  description,
   image,
   name,
   price,
