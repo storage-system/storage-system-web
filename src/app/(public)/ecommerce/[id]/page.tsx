@@ -7,12 +7,12 @@ import { useProductsService } from '@/services/ecommerce-service/products-servic
 import { useQuery } from '@tanstack/react-query'
 import { Minus, Plus, ShoppingCart, Star } from 'lucide-react'
 
-export default function Product() {
+export default function Product({ params }: { params: { id: string } }) {
   const { getProduct } = useProductsService()
 
   const { data: productData } = useQuery({
     queryKey: ['retrieve-product'],
-    queryFn: () => getProduct('1'),
+    queryFn: () => getProduct(params.id),
   })
 
   console.log(productData)

@@ -4,9 +4,9 @@ import { PropsWithChildren } from 'react'
 
 export default function EcommerceLayout({ children }: PropsWithChildren) {
   return (
-    <div className="flex h-screen grid-rows-4 flex-col">
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <div className="h-full">{children}</div>
+      <main className="grow">{children}</main>
       <Footer />
     </div>
   )
