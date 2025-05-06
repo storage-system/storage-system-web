@@ -11,5 +11,12 @@ export function useProductsService() {
     return data
   }
 
-  return { listProducts }
+  async function getProduct(id: string) {
+    // TODO: FIX
+    const { data } = await jsonServerApi.get(('/product/' + id) as never)
+
+    return data
+  }
+
+  return { listProducts, getProduct }
 }

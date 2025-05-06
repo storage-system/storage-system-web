@@ -1,4 +1,102 @@
 {
+    "product": [
+        {
+            "id": "1",
+            "name": "Premium Bluetooth Headphones",
+            "price": 149.99,
+            "category": "electronics",
+            "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "description": "Experience crystal-clear sound and remarkable noise cancellation with our premium headphones. Perfect for music lovers and professionals alike."
+        },
+        {
+            "id": "2",
+            "name": "Wireless Ergonomic Keyboard",
+            "price": 79.99,
+            "category": "electronics",
+            "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "description": "Type in comfort with our ergonomic keyboard, designed to reduce strain and increase productivity."
+        },
+        {
+            "id": "3",
+            "name": "Lightweight Running Shoes",
+            "price": 89.99,
+            "category": "clothing",
+            "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "description": "Ultra-lightweight and breathable running shoes that provide exceptional comfort and support for your daily runs."
+        },
+        {
+            "id": "4",
+            "name": "Organic Cotton T-Shirt",
+            "price": 24.99,
+            "category": "clothing",
+            "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "description": "Made from 100% organic cotton, this t-shirt is both eco-friendly and comfortable for everyday wear."
+        },
+        {
+            "id": "5",
+            "name": "Smart Home Hub",
+            "price": 129.99,
+            "category": "electronics",
+            "image": "https://images.unsplash.com/photo-1558089687-f282ffcbc0d4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "description": "Control your entire smart home ecosystem from one central hub. Compatible with all major smart home devices."
+        },
+        {
+            "id": "6",
+            "name": "Ceramic Pour-Over Coffee Maker",
+            "price": 42.99,
+            "category": "home",
+            "image": "https://images.unsplash.com/photo-1570654402121-3dce81815276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "description": "Brew the perfect cup of coffee with this elegant ceramic pour-over. Simple design for maximum flavor extraction."
+        },
+        {
+            "id": "7",
+            "name": "Modern Desk Lamp",
+            "price": 59.99,
+            "category": "home",
+            "image": "https://images.unsplash.com/photo-1534533983688-c7b8e13fd3b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "description": "This adjustable desk lamp provides perfect lighting for working or reading, with multiple brightness levels."
+        },
+        {
+            "id": "8",
+            "name": "Classic Novel Collection",
+            "price": 49.99,
+            "category": "books",
+            "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "description": "A curated collection of ten classic novels with beautiful hardbound covers. Perfect for collectors and literature enthusiasts."
+        },
+        {
+            "id": "9",
+            "name": "Wireless Earbuds",
+            "price": 89.99,
+            "category": "electronics",
+            "image": "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "description": "Truly wireless earbuds with exceptional sound quality and 24-hour battery life with the charging case."
+        },
+        {
+            "id": "10",
+            "name": "Minimalist Watch",
+            "price": 119.99,
+            "category": "accessories",
+            "image": "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "description": "A sleek, minimalist watch with a clean dial and premium leather band. Water-resistant and built to last."
+        },
+        {
+            "id": "11",
+            "name": "Yoga Mat",
+            "price": 29.99,
+            "category": "fitness",
+            "image": "https://images.unsplash.com/photo-1576095628096-1eef18b6c158?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "description": "Professional-grade yoga mat with excellent grip and cushioning. Eco-friendly and free from harmful chemicals."
+        },
+        {
+            "id": "12",
+            "name": "Stainless Steel Water Bottle",
+            "price": 24.99,
+            "category": "accessories",
+            "image": "https://images.unsplash.com/photo-1570087785663-0a0fdf40ee7e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+            "description": "Double-walled insulated water bottle that keeps drinks cold for 24 hours or hot for 12 hours."
+        }
+    ],
     "products": {
         "total": 12,
         "items": [

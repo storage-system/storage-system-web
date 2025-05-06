@@ -1,15 +1,18 @@
 import { EachProduct } from '@/@types/ecommerce/product'
 import { cn } from '@/utils/class-name'
 import { ShoppingBag, Star } from 'lucide-react'
+import Link from 'next/link'
 
 export function CategoriesProduct({
   image,
   name,
   price,
+  id,
   index,
 }: EachProduct & { index: number }) {
   return (
-    <div
+    <Link
+      href={`ecommerce/${id}`}
       className={cn(
         'flex h-96 flex-col border border-primary/30 bg-background p-1 group',
         index >= 4 && 'border-t-0',
@@ -52,6 +55,6 @@ export function CategoriesProduct({
           <ShoppingBag />
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
