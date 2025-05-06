@@ -1,11 +1,11 @@
 'use client'
 
+import { ProductImagesCarousel } from '@/components/routes/ecommerce/product/product-images-carousel'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { useProductsService } from '@/services/ecommerce-service/products-service'
 import { useQuery } from '@tanstack/react-query'
 import { Minus, Plus, ShoppingCart, Star } from 'lucide-react'
-
 
 export default function Product() {
   const { getProduct } = useProductsService()
@@ -20,12 +20,17 @@ export default function Product() {
   return (
     <div className="flex w-full justify-center">
       <div className="mx-6 my-24 flex w-full max-w-[1400px] gap-14">
-        <div className="rounded-[4px] border-2 border-gray-200 p-8">
-          <img
-            src={productData?.image}
-            width={616}
-            height={464}
-            alt={productData?.name}
+        <div className="flex max-w-[616px] flex-col gap-8">
+          <div className="rounded-[4px] border-2 border-gray-200 p-8">
+            <img
+              src={productData?.image}
+              width={616}
+              height={464}
+              alt={productData?.name}
+            />
+          </div>
+          <ProductImagesCarousel
+            images={Array.from({ length: 12 }).map(() => productData?.image)}
           />
         </div>
         <div className="flex flex-col gap-2">
