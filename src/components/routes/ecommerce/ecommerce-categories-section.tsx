@@ -6,16 +6,21 @@ import { CategoriesProduct } from './ecommerce-categories-product'
 import { useQuery } from '@tanstack/react-query'
 import { EcommerceProductsQueryKey } from '@/constants/query-key/ecommerce-products-query-key'
 import { useProductsService } from '@/services/ecommerce-service/products-service'
+import previewData from '../../../../public/ecommerce-preview-data.json'
+import { useStyles } from '@/providers/style-provider'
 
 export function CategoriesSection() {
   const { listProducts } = useProductsService()
+  const { isPreview } = useStyles()
 
   const { data: productsData } = useQuery({
     queryKey: [EcommerceProductsQueryKey.LIST_PRODUCTS],
     queryFn: async () => await listProducts(),
+    enabled: !isPreview,
   })
 
-  const productsList = productsData?.items || []
+  const productsList =
+    productsData?.items || isPreview ? previewData.products.items : []
 
   return (
     <div className="flex justify-center bg-slate-200 py-40">

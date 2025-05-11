@@ -1,15 +1,12 @@
 import { Form } from '@/components/ui/form'
 import { toast } from '@/components/ui/use-toast'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
-import { useStylesService } from '@/services/styles'
-import {
-  CreateStyleOutput,
-  createStyleSchema,
-  CreateStyleType,
-} from '@/validations/create-style-schema'
+import { useEcommerceManagementService } from '@/services/ecommerce-management'
+import { createStyleSchema } from '@/validations/create-style-schema'
+import { PublishEcommerceOutput } from '@/validations/publish-ecommerce-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import {
   createContext,
   Dispatch,
@@ -50,7 +47,8 @@ interface StylesContext {
   setCurrentStep: Dispatch<SetStateAction<CurrentStep>>
   theme: Theme
   setTheme: Dispatch<SetStateAction<Theme>>
-  form: UseFormReturn<CreateStyleType>
+  form: UseFormReturn<PublishEcommerceOutput>
+  isPreview: boolean
   isPending: boolean
 }
 
@@ -65,6 +63,9 @@ export function StylesProvider({
   children,
   initialTheme,
 }: StylesProviderProps) {
+  const pathname = usePathname()
+
+  const isPreview = pathname.includes('styles')
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState<CurrentStep>(
     CurrentStep.INITIAL,
@@ -72,21 +73,23 @@ export function StylesProvider({
 
   const [colors, setTheme] = useState<Theme>(initialTheme)
 
-  const form = useForm<CreateStyleType>({
+  const form = useForm<PublishEcommerceOutput>({
     resolver: zodResolver(createStyleSchema),
     defaultValues: {
-      isActive: false,
-      ...colors,
+      style: {
+        isActive: false,
+        ...colors,
+      },
     },
   })
 
-  const { createStyleService } = useStylesService()
-  async function handleCreateStyle(input: CreateStyleOutput) {
-    await createStyleService(input)
+  const { publishEcommerce } = useEcommerceManagementService()
+  async function handlePublishEcommerce(input: PublishEcommerceOutput) {
+    await publishEcommerce(input)
   }
 
   const { mutateAsync, isPending } = useMutation({
-    mutationFn: handleCreateStyle,
+    mutationFn: handlePublishEcommerce,
     onSuccess: () => {
       router.push(PrivateRoutes.STYLES)
       toast({
@@ -102,6 +105,7 @@ export function StylesProvider({
         currentStep,
         theme: colors,
         form,
+        isPreview,
         setCurrentStep,
         setTheme,
         isPending,

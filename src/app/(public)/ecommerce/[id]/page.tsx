@@ -15,8 +15,6 @@ export default function Product({ params }: { params: { id: string } }) {
     queryFn: () => getProduct(params.id),
   })
 
-  console.log(productData)
-
   return (
     <div className="flex w-full justify-center">
       <div className="mx-6 my-24 flex w-full max-w-[1400px] gap-14">

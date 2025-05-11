@@ -8,7 +8,7 @@ import { NavBar } from './ecommerce-navbar'
 
 export function Header() {
   return (
-    <header className="flex w-screen flex-col items-center bg-background">
+    <header className="flex w-full flex-col items-center bg-background">
       <div className="flex w-full max-w-[1200px] flex-wrap justify-between py-3 text-sm text-gray-600 sm:text-base">
         <div className="flex flex-wrap items-center gap-1">
           <MapPin />

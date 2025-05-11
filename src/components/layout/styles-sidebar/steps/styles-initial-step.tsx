@@ -1,15 +1,12 @@
+import { FormField } from '@/components/ui/form'
 import { highlightedThemes } from '@/constants/styles/highlighted-themes'
-import { CurrentStep, Theme, useStyles } from '@/providers/style-provider'
-import { StyleCard } from './style-card'
 import { initialColorConfig } from '@/constants/styles/initial-color-config'
-import { useEffect } from 'react'
+import { CurrentStep, Theme, useStyles } from '@/providers/style-provider'
+import { FormMessage } from '@/shared/form/form-message'
+import { StyleCard } from './style-card'
 
 export function StylesInitialStep() {
   const { setCurrentStep, setTheme, form } = useStyles()
-
-  useEffect(() => {
-    console.log('form.errors', form.formState.errors)
-  }, [form.formState.errors])
 
   function handleThemeSelection(theme: Theme) {
     setTheme(theme)
@@ -47,8 +44,25 @@ export function StylesInitialStep() {
 
   return (
     <div className="flex flex-col">
+      <div className="flex items-center gap-4 py-[14px] pl-3">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <div className="flex-1">
+              <input
+                autoComplete="off"
+                className="w-full text-xl text-primary outline-none"
+                placeholder="Nome da loja"
+                {...field}
+              />
+              <FormMessage />
+            </div>
+          )}
+        />
+      </div>
       <div className="gap-4 border-b border-input py-[14px] pl-3">
-        <p className="font-medium">Personalize o design do seu site</p>
+        <p className="font-medium">Personalize o design da sua loja</p>
       </div>
 
       <div className="m-3 flex flex-col gap-4">

@@ -52,6 +52,7 @@
     "embla-carousel-react": "^8.5.2",
     "eslint-plugin-tailwindcss": "^3.17.4",
     "framer-motion": "^11.0.14",
+    "html2canvas": "^1.4.1",
     "imask": "^7.6.1",
     "json-server": "^1.0.0-beta.3",
     "jwt-decode": "^4.0.0",

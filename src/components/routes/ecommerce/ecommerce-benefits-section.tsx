@@ -1,4 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card'
+import { ColorIdEnum, useStyles } from '@/providers/style-provider'
+import { getColorById } from '@/utils/get-color'
 import { Headphones, Package, ShoppingBag, Truck } from 'lucide-react'
 
 const benefits = [
@@ -25,16 +27,27 @@ const benefits = [
 ]
 
 export function BenefitsSection() {
+  const { theme } = useStyles()
+
   return (
     <div className="flex justify-center pb-16">
       <Card className="flex h-[168px] w-full max-w-[1200px] items-center">
         <CardContent className="grid grid-cols-4 gap-4">
           {benefits.map(({ description, title, icon: Icon }) => (
             <div key={title} className="flex items-center gap-4">
-              <Icon className="size-9 text-primary" />
+              <Icon
+                className="size-9"
+                style={{
+                  color: getColorById(theme, ColorIdEnum.PRIMARY_COLOR),
+                }}
+              />
               <div>
                 <p className="font-bold">{title}</p>
-                <p className="text-zinc-500">{description}</p>
+                <p
+                  style={{ color: getColorById(theme, ColorIdEnum.TEXT_COLOR) }}
+                >
+                  {description}
+                </p>
               </div>
             </div>
           ))}

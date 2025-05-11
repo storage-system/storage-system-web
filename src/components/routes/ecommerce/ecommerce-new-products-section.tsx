@@ -13,18 +13,21 @@ import { NewProduct } from './ecommerce-new-product'
 import { useQuery } from '@tanstack/react-query'
 import { useProductsService } from '@/services/ecommerce-service/products-service'
 import { EcommerceProductsQueryKey } from '@/constants/query-key/ecommerce-products-query-key'
+import { useStyles } from '@/providers/style-provider'
+import previewData from '../../../../public/ecommerce-preview-data.json'
 
 export function NewProductsSection() {
   const { listProducts } = useProductsService()
+  const { isPreview } = useStyles()
 
   const { data: productsData } = useQuery({
     queryKey: [EcommerceProductsQueryKey.LIST_PRODUCTS],
     queryFn: async () => await listProducts(),
+    enabled: !isPreview,
   })
 
-  const productsList = productsData?.items || []
-
-  console.log('productsList', productsList)
+  const productsList =
+    productsData?.items || isPreview ? previewData.products.items : []
 
   const [api, setApi] = useState<CarouselApi>()
 
