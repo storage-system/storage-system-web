@@ -17,7 +17,7 @@ export default function Styles() {
   const { retrieveCompanyEcommerce } = useEcommerceManagementService()
   const previewRef = useRef(null)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
-  const [isCapturing, setIsCapturing] = useState(false)
+  const [_, setIsCapturing] = useState(false)
 
   const { data, isLoading, isSuccess } = useQuery({
     queryKey: ['retrieveCompanyEcommerce'],
