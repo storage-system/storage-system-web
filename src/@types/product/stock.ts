@@ -1,26 +1,13 @@
-export type StockOperation = 'ADD' | 'REMOVE'
-
-export interface Product {
-  id: string
-  name: string
-  currentStock: number
-  description?: string
-  sku?: string
-  category?: string
-}
-
-export interface StockMovement {
-  id: string
-  productId: string
-  productName: string
-  quantity: number
-  operation: StockOperation
-  timestamp: Date
-  performedBy?: string
-}
+export type StockOperation = 'INCREASE' | 'DECREASE'
 
 export interface UpdateProductStockRequest {
   productId: string
   quantity: number
   operation: StockOperation
+}
+
+export interface UpdateStockRequest {
+  quantity: number
+  operation: StockOperation
+  performedBy: string
 }

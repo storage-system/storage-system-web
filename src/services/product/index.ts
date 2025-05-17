@@ -5,6 +5,8 @@ import { Pagination } from '@/@types/pagination'
 import { AxiosRequestConfig } from 'axios'
 import { ListProduct, Product } from '@/@types/product'
 import { UpdateProductOutput } from '@/validations/update-product-schema'
+import { StockMovement } from '@/@types/product/stock-movements'
+import { UpdateStockRequest } from '@/@types/product/stock'
 
 export function useProductsService() {
   async function createProductService(anInput: CreateProductInput) {
@@ -30,8 +32,29 @@ export function useProductsService() {
     return data
   }
 
+  async function getStockMovementsService(
+    companyId: string,
+  ): Promise<StockMovement[]> {
+    const { data } = await storageSystemApi.get(
+      '/api/products/company/{companyId}/stock-movements',
+      {
+        routeParams: { companyId },
+      },
+    )
+
+    return data
+  }
+
   async function updateProductService(anInput: UpdateProductOutput) {
     return await storageSystemApi.patch('/api/products/{id}', anInput)
+  }
+
+  async function updateStockService(anId: string, anInput: UpdateStockRequest) {
+    return await storageSystemApi.patch(
+      '/api/products/{id}/update-stock',
+      anInput,
+      { routeParams: { id: anId } },
+    )
   }
 
   async function deleteProductService(anId: string) {
@@ -84,5 +107,7 @@ export function useProductsService() {
     deleteProductService,
     getProductsTemplate,
     readSpreadsheetProducts,
+    getStockMovementsService,
+    updateStockService,
   }
 }

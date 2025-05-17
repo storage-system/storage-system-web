@@ -12,14 +12,21 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
-  Product,
   StockOperation,
   UpdateProductStockRequest,
 } from '@/@types/product/stock'
+import { ListProduct } from '@/@types/product'
+import { UseMutateFunction } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
 
 interface StockAdjustmentProps {
-  product: Product
-  updateStock: (request: UpdateProductStockRequest) => Promise<void>
+  product: ListProduct
+  updateStock: UseMutateFunction<
+    AxiosResponse<any, any>,
+    Error,
+    UpdateProductStockRequest,
+    unknown
+  >
   isLoading: boolean
 }
 
@@ -29,17 +36,19 @@ export const StockAdjustment: React.FC<StockAdjustmentProps> = ({
   isLoading,
 }) => {
   const [quantity, setQuantity] = useState<number>(1)
-  const [operation, setOperation] = useState<StockOperation>('ADD')
+  const [operation, setOperation] = useState<StockOperation>('INCREASE')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (quantity <= 0) return
 
-    await updateStock({
+    updateStock({
       productId: product.id,
       quantity,
       operation,
     })
+
+    setQuantity(1)
   }
 
   return (
@@ -50,10 +59,10 @@ export const StockAdjustment: React.FC<StockAdjustmentProps> = ({
         </CardTitle>
         <CardDescription>
           Estoque atual:{' '}
-          <span className="font-semibold">{product.currentStock}</span> units
-          {product.sku && (
+          <span className="font-semibold">{product.quantityInStock}</span> units
+          {product.batch && (
             <span className="block text-sm text-muted-foreground">
-              SKU: {product.sku}
+              Lote: {product.batch}
             </span>
           )}
         </CardDescription>
@@ -61,20 +70,20 @@ export const StockAdjustment: React.FC<StockAdjustmentProps> = ({
       <CardContent>
         <form onSubmit={handleSubmit}>
           <Tabs
-            defaultValue="add"
+            defaultValue="INCREASE"
             onValueChange={(value) => setOperation(value as StockOperation)}
           >
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="ADD" className="justify-center">
+              <TabsTrigger value="INCREASE" className="justify-center">
                 <Plus className="mr-2 size-4" />
                 Adicionar
               </TabsTrigger>
-              <TabsTrigger value="REMOVE" className="justify-center">
+              <TabsTrigger value="DECREASE" className="justify-center">
                 <Minus className="mr-2 size-4" />
                 Remover
               </TabsTrigger>
             </TabsList>
-            <TabsContent value="ADD" className="mt-4">
+            <TabsContent value="INCREASE" className="mt-4">
               <div className="space-y-2">
                 <Label htmlFor="add-quantity">Quantidade para adicionar</Label>
                 <Input
@@ -87,7 +96,7 @@ export const StockAdjustment: React.FC<StockAdjustmentProps> = ({
                 />
               </div>
             </TabsContent>
-            <TabsContent value="REMOVE" className="mt-4">
+            <TabsContent value="DECREASE" className="mt-4">
               <div className="space-y-2">
                 <Label htmlFor="remove-quantity">
                   Quantitdade para remover
@@ -96,7 +105,7 @@ export const StockAdjustment: React.FC<StockAdjustmentProps> = ({
                   id="remove-quantity"
                   type="number"
                   min={1}
-                  max={product.currentStock}
+                  max={product.quantityInStock}
                   value={quantity}
                   onChange={(e) => setQuantity(parseInt(e.target.value) || 0)}
                   placeholder="Enter quantity"

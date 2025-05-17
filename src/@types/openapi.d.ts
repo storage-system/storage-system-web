@@ -164,6 +164,22 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/products/company/{companyId}/stock-movements": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ProductController_getStockMovements"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/products/{id}": {
         parameters: {
             query?: never;
@@ -460,12 +476,10 @@ export interface components {
             name: string;
             isActive: boolean;
             /** Format: uuid */
-            companyId: string;
-            /** Format: uuid */
             fileId?: string;
         };
         HttpEachCategoryListResponse: {
-            /** @example 29121f4f-ad8b-4e9f-b561-532597c868f2 */
+            /** @example 234159c0-a757-4fd5-99f8-9d25c29b8526 */
             id: string;
             name: string;
             isActive?: boolean;
@@ -523,18 +537,16 @@ export interface components {
             batch?: string;
             /** @enum {string} */
             status: "ACTIVE" | "INACTIVE" | "OUT_OF_STOCK";
-            /** Format: uuid */
-            companyId: string;
             categoryIds: string[];
         };
         HttpItemResponse: {
-            /** @example e7569da7-9c56-4d66-bff1-0780ad7ab8af */
+            /** @example c53bbfb6-b648-4b0c-8758-e94166c239d2 */
             id: string;
-            /** @example Lindsey Gottlieb */
+            /** @example Johnnie Frami */
             name: string;
         };
         HttpEachProductListResponse: {
-            /** @example aa8d30ff-74ec-49db-8af2-97c6654cc42d */
+            /** @example 742ffa6d-a408-4b56-9064-18d58dd678c0 */
             id: string;
             name: string;
             quantityInStock: number;
@@ -563,7 +575,7 @@ export interface components {
             items: components["schemas"]["HttpEachProductListResponse"][];
         };
         HttpProductGetResponse: {
-            /** @example 7c21d269-5718-4c6f-bac3-a37dddd4168a */
+            /** @example e50a8846-50b6-48e7-b17c-565503224aba */
             id: string;
             name: string;
             description: string;
@@ -611,14 +623,13 @@ export interface components {
             batch?: string;
             /** @enum {string} */
             status?: "ACTIVE" | "INACTIVE" | "OUT_OF_STOCK";
-            /** Format: uuid */
-            companyId?: string;
             categoryIds?: string[];
         };
         UpdateProductStockDTO: {
             quantity: number;
             /** @enum {string} */
-            operation: "increase" | "decrease";
+            operation: "INCREASE" | "DECREASE";
+            performedBy: string;
         };
         CreateConfigurationDTO: {
             /** Format: uuid */
@@ -635,11 +646,11 @@ export interface components {
             reportFrequency: "diary" | "weekly" | "month" | "year";
         };
         HttpConfigurationGetResponse: {
-            /** @example f1a559cd-47ca-47e1-8100-fcaa3b887ddc */
+            /** @example a237446e-033f-4de7-a4ae-db1ae56436ce */
             id: string;
-            /** @example e15dd9b7-3418-4dc1-be7b-c797d0da6fec */
+            /** @example 8bb981a5-9f40-4b2a-81ab-817d91fd4b8e */
             userId: string;
-            /** @example dd7fb2a0-7398-4999-b772-b5ca726af304 */
+            /** @example 02f3d917-ff01-422a-afee-81803b694c0d */
             companyId: string;
             daysBeforeOldStock: number;
             warningDays: number;
@@ -675,9 +686,9 @@ export interface components {
             tertiaryColor: string;
         };
         HttpEachStyleListResponse: {
-            /** @example ec6cbc38-88c0-439b-b8dc-a9787f656cab */
+            /** @example fd5e6a5a-cd88-49e0-b636-bb73ed51171a */
             id: string;
-            /** @example 0ddbffe9-5254-464a-8585-81dd7484c1ab */
+            /** @example e45d5cd8-f09b-498e-8801-113e137fedd5 */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -698,9 +709,9 @@ export interface components {
             items: components["schemas"]["HttpEachStyleListResponse"][];
         };
         HttpStyleGetResponse: {
-            /** @example 8c7f3e9a-4f83-4110-99c6-b8e9e16a7dec */
+            /** @example 7bfc1700-a6d1-4044-bbd5-35fd1ed3b194 */
             id: string;
-            /** @example 81ee2bab-6745-4a70-942f-d3da465d9d9c */
+            /** @example 8f249000-f494-4ae0-8aef-63d94dbadd3f */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -723,7 +734,7 @@ export interface components {
             tertiaryColor?: string;
         };
         HttpFileCreatedResponse: {
-            /** @example d6ce4f21-1df9-4f34-9da9-9170ca5379c5 */
+            /** @example c6b5808b-e915-4714-bfa5-6f68ba355267 */
             id: string;
         };
         HttpGetFileUrlResponse: {
@@ -763,9 +774,9 @@ export interface components {
             };
         };
         HttpInviteGetResponse: {
-            /** @example 216faaf0-7e5e-4112-a6ee-464af02c27a2 */
+            /** @example 353f7fc6-d033-42ad-8bf8-d3c3a4537ad7 */
             id: string;
-            /** @example Nichole_Kreiger76@gmail.com */
+            /** @example Jaden48@yahoo.com */
             email: string;
             /** @example [
              *       "MEMBER"
@@ -1090,6 +1101,27 @@ export interface operations {
         };
     };
     ProductController_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                companyId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HttpProductListResponse"];
+                };
+            };
+        };
+    };
+    ProductController_getStockMovements: {
         parameters: {
             query?: never;
             header?: never;
