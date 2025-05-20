@@ -1,10 +1,11 @@
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { ColorIdEnum, useStyles } from '@/providers/style-provider'
+import { useEcommerceManagement } from '@/providers/ecommerce-management-provider'
+import { ColorIdEnum } from '@/providers/style-provider'
 import { Images } from 'lucide-react'
 
 export function SitePreview() {
-  const { colors } = useStyles()
+  const { colors } = useEcommerceManagement()
 
   const getColorById = (colorId: ColorIdEnum | string) =>
     colors.find((color) => color.colorId === colorId)?.hex || '#fff'

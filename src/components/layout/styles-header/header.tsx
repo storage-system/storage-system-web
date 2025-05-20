@@ -1,20 +1,23 @@
 import { Button } from '@/components/ui/button'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
-import { CurrentStep, useStyles } from '@/providers/style-provider'
+import { CurrentStep, useEcommerceManagement } from '@/providers/ecommerce-management-provider'
+
 import { ChevronLeft, List } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 export function Header() {
   const router = useRouter()
-  const { currentStep, setCurrentStep } = useStyles()
+  const { currentStep, setCurrentStep } = useEcommerceManagement()
 
   function handleNavigate() {
-    if (currentStep === CurrentStep.CUSTOM_THEME) {
-      return setCurrentStep(CurrentStep.INITIAL)
-    }
-
-    if (currentStep === CurrentStep.INITIAL) {
-      router.push(PrivateRoutes.STYLES)
+    switch (currentStep) {
+      case CurrentStep.INITIAL: {
+        router.push(PrivateRoutes.ECOMMERCE_MANAGEMENT)
+        break
+      }
+      default: {
+        setCurrentStep(CurrentStep.INITIAL)
+      }
     }
   }
 

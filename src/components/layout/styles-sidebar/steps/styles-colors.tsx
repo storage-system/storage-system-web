@@ -1,22 +1,22 @@
-import { useStyles } from '@/providers/style-provider'
-import 'react-color-palette/css'
-import { ColorPickerWithLabel } from './color-picker-with-label'
 import { FormField } from '@/components/ui/form'
-import { useEffect } from 'react'
-import { FormMessage } from '@/shared/form/form-message'
 import { Switch } from '@/components/ui/switch'
 import {
   TooltipContent,
   TooltipRoot,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
+import { useEcommerceManagement } from '@/providers/ecommerce-management-provider'
+import { FormMessage } from '@/shared/form/form-message'
+import { useEffect } from 'react'
+import 'react-color-palette/css'
+import { ColorPickerWithLabel } from './color-picker-with-label'
 
 export function CustomStyle() {
   const {
     colors,
     setColors,
-    form: { control, formState },
-  } = useStyles()
+    createStyleForm: { control, formState },
+  } = useEcommerceManagement()
 
   useEffect(() => {
     console.log(formState.errors)

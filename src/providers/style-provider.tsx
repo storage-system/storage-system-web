@@ -22,6 +22,7 @@ import { useForm, UseFormReturn } from 'react-hook-form'
 export enum CurrentStep {
   INITIAL = 'initial',
   CUSTOM_THEME = 'custom-theme',
+  HERO_IMAGES = 'hero-images',
 }
 
 export enum ColorIdEnum {

@@ -1,13 +1,15 @@
-import { CurrentStep, useStyles } from '@/providers/style-provider'
-import { StylesInitialStep } from './steps/styles-initial-step'
-import { CustomStyle } from './steps/styles-colors'
+import { useEcommerceManagement } from '@/providers/ecommerce-management-provider'
+import { CurrentStep } from '@/providers/style-provider'
 import { Paintbrush } from 'lucide-react'
+import { HeroImages } from './steps/hero-images'
+import { CustomStyle } from './steps/styles-colors'
+import { StylesInitialStep } from './steps/styles-initial-step'
 
 export function SidebarContent() {
-  const { currentStep } = useStyles()
+  const { currentStep } = useEcommerceManagement()
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-[calc(100vh-4rem)]">
       <div className="flex h-full w-[50px] flex-col border-r border-input">
         {Array.from({ length: 2 }).map((_, index) => (
           <div
@@ -29,6 +31,8 @@ function RenderStep({ currentStep }: { currentStep: CurrentStep }) {
   switch (currentStep) {
     case CurrentStep.INITIAL:
       return <StylesInitialStep />
+    case CurrentStep.HERO_IMAGES:
+      return <HeroImages />
     case CurrentStep.CUSTOM_THEME:
       return <CustomStyle />
   }
