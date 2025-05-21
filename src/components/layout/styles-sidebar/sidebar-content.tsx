@@ -3,7 +3,7 @@ import { CurrentStep } from '@/providers/style-provider'
 import { Paintbrush } from 'lucide-react'
 import { HeroImages } from './steps/hero-images'
 import { CustomStyle } from './steps/styles-colors'
-import { StylesInitialStep } from './steps/styles-initial-step'
+import { StylesInitialStep } from './steps/ecommerce-management-initial-step'
 
 export function SidebarContent() {
   const { currentStep } = useEcommerceManagement()

@@ -436,6 +436,70 @@ export interface paths {
         patch: operations["InviteController_revoke"];
         trace?: never;
     };
+    "/api/ecommerce/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["EcommerceController_publishEcommerce"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/ecommerce/update-products": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["EcommerceController_updateProducts"];
+        trace?: never;
+    };
+    "/api/ecommerce/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EcommerceController_retrieveEcommerce"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/ecommerce/{slug}/products": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EcommerceController_listProducts"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -479,7 +543,7 @@ export interface components {
             fileId?: string;
         };
         HttpEachCategoryListResponse: {
-            /** @example 234159c0-a757-4fd5-99f8-9d25c29b8526 */
+            /** @example 1d789e5c-441f-4f48-80f5-92357c965f26 */
             id: string;
             name: string;
             isActive?: boolean;
@@ -540,13 +604,13 @@ export interface components {
             categoryIds: string[];
         };
         HttpItemResponse: {
-            /** @example c53bbfb6-b648-4b0c-8758-e94166c239d2 */
+            /** @example 71796865-b074-4f78-8fb4-aaed6e563395 */
             id: string;
-            /** @example Johnnie Frami */
+            /** @example Barry Donnelly */
             name: string;
         };
         HttpEachProductListResponse: {
-            /** @example 742ffa6d-a408-4b56-9064-18d58dd678c0 */
+            /** @example f9d8f838-5aab-49a7-96a2-eca2f3b5d440 */
             id: string;
             name: string;
             quantityInStock: number;
@@ -575,7 +639,7 @@ export interface components {
             items: components["schemas"]["HttpEachProductListResponse"][];
         };
         HttpProductGetResponse: {
-            /** @example e50a8846-50b6-48e7-b17c-565503224aba */
+            /** @example 9773fe55-15d3-41f9-8e61-389e8dc09ebc */
             id: string;
             name: string;
             description: string;
@@ -646,11 +710,11 @@ export interface components {
             reportFrequency: "diary" | "weekly" | "month" | "year";
         };
         HttpConfigurationGetResponse: {
-            /** @example a237446e-033f-4de7-a4ae-db1ae56436ce */
+            /** @example b3f3d391-e27b-4bad-a04f-3bfbdd6ee6a6 */
             id: string;
-            /** @example 8bb981a5-9f40-4b2a-81ab-817d91fd4b8e */
+            /** @example 44e5c2b6-d43f-406f-a0d3-7d5d6592fcd9 */
             userId: string;
-            /** @example 02f3d917-ff01-422a-afee-81803b694c0d */
+            /** @example 8a1ffd63-07d4-4e60-9876-1d8b547f6274 */
             companyId: string;
             daysBeforeOldStock: number;
             warningDays: number;
@@ -686,9 +750,9 @@ export interface components {
             tertiaryColor: string;
         };
         HttpEachStyleListResponse: {
-            /** @example fd5e6a5a-cd88-49e0-b636-bb73ed51171a */
+            /** @example e533d60a-42a8-44c8-80b1-65c6039fede8 */
             id: string;
-            /** @example e45d5cd8-f09b-498e-8801-113e137fedd5 */
+            /** @example 7e02f0c6-c0c0-47b3-abc1-f7bf28e06e42 */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -709,9 +773,9 @@ export interface components {
             items: components["schemas"]["HttpEachStyleListResponse"][];
         };
         HttpStyleGetResponse: {
-            /** @example 7bfc1700-a6d1-4044-bbd5-35fd1ed3b194 */
+            /** @example 253c6bbf-3588-4089-85d9-f922be5b93b6 */
             id: string;
-            /** @example 8f249000-f494-4ae0-8aef-63d94dbadd3f */
+            /** @example 235b1f62-8bfb-43f3-9793-a2d1905e9ce5 */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -734,7 +798,7 @@ export interface components {
             tertiaryColor?: string;
         };
         HttpFileCreatedResponse: {
-            /** @example c6b5808b-e915-4714-bfa5-6f68ba355267 */
+            /** @example 0ac20685-80d4-445b-b071-362808b1b3ce */
             id: string;
         };
         HttpGetFileUrlResponse: {
@@ -774,9 +838,9 @@ export interface components {
             };
         };
         HttpInviteGetResponse: {
-            /** @example 353f7fc6-d033-42ad-8bf8-d3c3a4537ad7 */
+            /** @example 302f9595-4142-46b4-9624-cfd7e0c9f615 */
             id: string;
-            /** @example Jaden48@yahoo.com */
+            /** @example Giovanny_Stoltenberg@hotmail.com */
             email: string;
             /** @example [
              *       "MEMBER"
@@ -787,6 +851,33 @@ export interface components {
             /** Format: date-time */
             expiresIn?: string;
         };
+        PublishEcommerceDTO: {
+            name: string;
+            /** Format: uuid */
+            ecommercePreview: string;
+            style?: {
+                name: string;
+                /** @default false */
+                isActive: boolean;
+                backgroundColor: string;
+                textColor: string;
+                primaryColor: string;
+                secondaryColor: string;
+                tertiaryColor: string;
+            };
+            /** @default [] */
+            hero: {
+                text: string;
+                /** Format: uuid */
+                fileId: string;
+            }[];
+        };
+        UpdateEcommerceProductsDTO: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            action: "add" | "remove";
+        }[];
     };
     responses: never;
     parameters: never;
@@ -1582,6 +1673,92 @@ export interface operations {
             header?: never;
             path: {
                 id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    EcommerceController_publishEcommerce: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PublishEcommerceDTO"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    EcommerceController_updateProducts: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEcommerceProductsDTO"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    EcommerceController_retrieveEcommerce: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    EcommerceController_listProducts: {
+        parameters: {
+            query: {
+                /** @description Page number for pagination */
+                page?: number;
+                /** @description Number of items per page */
+                perPage?: number;
+                categoryId: string;
+            };
+            header?: never;
+            path: {
+                slug: string;
             };
             cookie?: never;
         };

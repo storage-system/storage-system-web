@@ -4,7 +4,12 @@ import {
   createStyleSchema,
   CreateStyleType,
 } from '@/validations/create-style-schema'
-import { heroSchema, HeroType } from '@/validations/publish-ecommerce-schema'
+import {
+  heroSchema,
+  HeroType,
+  publishEcommerceSchema,
+  PublishEcommerceType,
+} from '@/validations/publish-ecommerce-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSession } from 'next-auth/react'
 import {
@@ -14,6 +19,7 @@ import {
   SetStateAction,
   useContext,
   useState,
+  useRef,
 } from 'react'
 import { IColor as ColorType } from 'react-color-palette'
 import {
@@ -22,6 +28,13 @@ import {
   useForm,
   UseFormReturn,
 } from 'react-hook-form'
+import html2canvas from 'html2canvas'
+import { useFilesService } from '@/services/files'
+import { useMutation } from '@tanstack/react-query'
+import { toast } from '@/components/ui/use-toast'
+import { useEcommerceManagementService } from '@/services/ecommerce-management-service'
+import { useRouter } from 'next/navigation'
+import { PrivateRoutes } from '@/constants/routes/private-routes'
 
 export enum CurrentStep {
   INITIAL = 'initial',
@@ -47,9 +60,15 @@ interface EcommerceManagementContext {
   setCurrentStep: Dispatch<SetStateAction<CurrentStep>>
   colors: IColor[]
   setColors: Dispatch<SetStateAction<IColor[]>>
+  initialForm: UseFormReturn<PublishEcommerceType>
   createStyleForm: UseFormReturn<CreateStyleType>
   heroForm: UseFormReturn<HeroType>
   heroFieldArray: UseFieldArrayReturn<HeroType>
+  previewRef: React.RefObject<HTMLDivElement>
+  previewImage: string | null
+  isCapturing: boolean
+  isLoading: boolean
+  previewFileId: string | null
 }
 
 export const EcommerceManagementContext =
@@ -64,20 +83,86 @@ export function EcommerceManagementProvider({
   children,
   initialColorConfig = [],
 }: EcommerceManagementProviderProps) {
-  const { data: session } = useSession()
+  const { uploadFileService } = useFilesService()
 
   const [currentStep, setCurrentStep] = useState<CurrentStep>(
     CurrentStep.INITIAL,
   )
 
   const [colors, setColors] = useState<IColor[]>(initialColorConfig)
+  const [previewImage, setPreviewImage] = useState<string | null>(null)
+  const [isCapturing, setIsCapturing] = useState(false)
+  const [previewFileId, setPreviewFileId] = useState<string | null>(null)
+  const previewRef = useRef<HTMLDivElement>(null)
 
-  const form = useForm<CreateStyleType>({})
+  const capturePreview = async (): Promise<string | null> => {
+    if (!previewRef.current) return null
+
+    try {
+      setIsCapturing(true)
+
+      return new Promise((resolve) => {
+        setTimeout(async () => {
+          try {
+            const canvas = await html2canvas(previewRef.current!, {
+              scale: 2,
+              useCORS: true,
+              logging: false,
+              backgroundColor: null,
+            })
+
+            const imageUrl = canvas.toDataURL('image/png')
+            setPreviewImage(imageUrl)
+            resolve(imageUrl)
+          } catch (error) {
+            console.error('Erro ao capturar imagem:', error)
+            resolve(null)
+          } finally {
+            setIsCapturing(false)
+          }
+        }, 800)
+      })
+    } catch (error) {
+      console.error('Erro ao iniciar captura:', error)
+      setIsCapturing(false)
+      return null
+    }
+  }
+
+  const uploadPreviewImage = useMutation({
+    mutationFn: async (imageDataUrl: string): Promise<string | null> => {
+      const response = await fetch(imageDataUrl)
+      const blob = await response.blob()
+
+      const timestamp = new Date().getTime()
+      const file = new File([blob], `style-preview-${timestamp}.png`, {
+        type: 'image/png',
+      })
+
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const uploadResponse = await uploadFileService(formData)
+      return uploadResponse.id
+    },
+    onSuccess: (fileId) => {
+      initialForm.setValue('ecommercePreview', fileId ?? undefined)
+    },
+    onError: () => {
+      toast({
+        variant: 'destructive',
+        title: 'Erro ao fazer upload da imagem de preview',
+      })
+    },
+  })
+
+  const initialForm = useForm<PublishEcommerceType>({
+    resolver: zodResolver(publishEcommerceSchema),
+  })
 
   const createStyleForm = useForm<CreateStyleType>({
     resolver: zodResolver(createStyleSchema),
     defaultValues: {
-      companyId: session?.user.companyId ?? '',
       isActive: false,
       backgroundColor: initialColorConfig.find(
         (color) => color.colorId === ColorIdEnum.BACKGROUND_COLOR,
@@ -114,6 +199,32 @@ export function EcommerceManagementProvider({
     control: heroForm.control,
   })
 
+  const router = useRouter()
+  const { publishEcommerceService } = useEcommerceManagementService()
+
+  const publishEcommerce = useMutation({
+    mutationFn: async (data: PublishEcommerceType) => {
+      return await publishEcommerceService(data)
+    },
+    onSuccess: () => {
+      toast({
+        title: 'E-commerce publicado com sucesso!',
+        description: 'Seu e-commerce está agora disponível para o público.',
+      })
+      router.push(PrivateRoutes.ECOMMERCE_MANAGEMENT)
+    },
+    onError: () => {
+      toast({
+        variant: 'destructive',
+        title: 'Erro ao publicar o e-commerce',
+        description: 'Tente novamente mais tarde.',
+      })
+    },
+  })
+
+  const isLoading =
+    publishEcommerce.isPending || uploadPreviewImage.isPending || isCapturing
+
   return (
     <EcommerceManagementContext.Provider
       value={{
@@ -121,13 +232,58 @@ export function EcommerceManagementProvider({
         colors,
         createStyleForm,
         heroForm,
+        initialForm,
         heroFieldArray,
+        previewRef,
+        previewImage,
+        isCapturing,
+        isLoading,
+        previewFileId,
         setCurrentStep,
         setColors,
       }}
     >
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit((data) => {})}>{children}</form>
+      <Form {...initialForm}>
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault()
+
+            const isInitialValid = await initialForm.trigger()
+            const isStyleValid = await createStyleForm.trigger()
+            const isHeroValid = await heroForm.trigger()
+
+            if (!isInitialValid || !isStyleValid || !isHeroValid) {
+              console.warn('Algum formulário é inválido.')
+              return
+            }
+
+            // Capturar e fazer upload da imagem de preview
+            const capturedImage = await capturePreview()
+            const uploadedPreviewId = null
+
+            if (capturedImage) {
+              await uploadPreviewImage.mutateAsync(capturedImage)
+            }
+
+            const initialData = initialForm.getValues()
+            const styleData = createStyleForm.getValues()
+            const heroData = heroForm.getValues()
+
+            const allData = {
+              ...initialData,
+              style: {
+                ...styleData,
+                previewFileId: uploadedPreviewId, // Incluir o ID do arquivo de preview
+              },
+              hero: heroData.hero,
+            }
+
+            // Processar os dados com o ID da imagem de preview
+            publishEcommerce.mutate(allData)
+          }}
+        >
+          {children}
+        </form>
       </Form>
     </EcommerceManagementContext.Provider>
   )

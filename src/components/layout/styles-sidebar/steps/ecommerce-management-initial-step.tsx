@@ -29,7 +29,7 @@ const highlightedThemes = [
 ]
 
 export function StylesInitialStep() {
-  const { setCurrentStep, createStyleForm } = useEcommerceManagement()
+  const { setCurrentStep, initialForm } = useEcommerceManagement()
 
   return (
     <div className="flex flex-col">
@@ -37,17 +37,16 @@ export function StylesInitialStep() {
         <p className="font-medium">Personalize o design do seu site</p>
       </div>
 
-
       <div className="m-3 flex flex-col gap-4">
         <FormField
-          control={createStyleForm.control}
+          control={initialForm.control}
           name="name"
           render={({ field }) => (
             <div className="flex-1">
               <input
                 autoComplete="off"
                 className="w-full text-xl text-primary outline-none"
-                placeholder="Nome do estilo"
+                placeholder="Nome do ecommerce"
                 {...field}
               />
               <FormMessage />

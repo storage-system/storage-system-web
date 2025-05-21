@@ -8,7 +8,10 @@ import {
   TooltipRoot,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { useEcommerceManagement } from '@/providers/ecommerce-management-provider'
+import {
+  CurrentStep,
+  useEcommerceManagement,
+} from '@/providers/ecommerce-management-provider'
 import { useFilesService } from '@/services/files'
 import { useMutation } from '@tanstack/react-query'
 import { ImageMinus, ImagePlus, Save } from 'lucide-react'
@@ -18,7 +21,8 @@ export function HeroImages() {
   const [fileNames, setFileNames] = useState<
     { fieldId: string; filename: string }[]
   >([])
-  const { heroForm, heroFieldArray } = useEcommerceManagement()
+  const { heroForm, heroFieldArray, setCurrentStep, initialForm } =
+    useEcommerceManagement()
 
   const { uploadFileService } = useFilesService()
   const uploadFileMutation = useMutation({
@@ -28,6 +32,7 @@ export function HeroImages() {
       return await uploadFileService(formData)
     },
   })
+
   return (
     <div className="flex h-full flex-1 flex-col">
       <div className="gap-4 border-b border-input py-[14px] pl-3">
@@ -135,12 +140,15 @@ export function HeroImages() {
           <Button
             className="flex gap-2"
             type="button"
-            onClick={() => {
-              heroForm.trigger()
+            onClick={async () => {
+              const isValid = await heroForm.trigger()
+              if (isValid) {
+                setCurrentStep(CurrentStep.INITIAL)
+                initialForm.setValue('hero', heroForm.getValues('hero'))
+              }
             }}
           >
-            <Save size={14} />
-            Salvar
+            Confirmar
           </Button>
         </div>
       </ScrollArea>

@@ -1,13 +1,16 @@
 import { Button } from '@/components/ui/button'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
-import { CurrentStep, useEcommerceManagement } from '@/providers/ecommerce-management-provider'
+import {
+  CurrentStep,
+  useEcommerceManagement,
+} from '@/providers/ecommerce-management-provider'
 
 import { ChevronLeft, List } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 export function Header() {
   const router = useRouter()
-  const { currentStep, setCurrentStep } = useEcommerceManagement()
+  const { currentStep, setCurrentStep, isLoading } = useEcommerceManagement()
 
   function handleNavigate() {
     switch (currentStep) {
@@ -37,8 +40,10 @@ export function Header() {
         </div>
       </div>
       <div className="mr-5 flex h-full items-center justify-center">
-        <Button variant={'ghost'}>Vizualizar</Button>
-        <Button className="flex items-center bg-primary px-4 text-white dark:text-black">
+        <Button
+          isLoading={isLoading}
+          className="flex items-center bg-primary px-4 text-white dark:text-black"
+        >
           Salvar
         </Button>
       </div>

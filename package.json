@@ -47,6 +47,7 @@
     "date-fns": "^3.5.0",
     "eslint-plugin-tailwindcss": "^3.17.4",
     "framer-motion": "^11.0.14",
+    "html2canvas": "^1.4.1",
     "imask": "^7.6.1",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.358.0",

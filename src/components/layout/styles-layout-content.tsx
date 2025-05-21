@@ -18,7 +18,6 @@ type LayoutContentProps = {
 export function StylesLayoutContent({ children }: LayoutContentProps) {
   return (
     <EcommerceManagementProvider initialColorConfig={initialColorConfig}>
-
       <ThemeContext>
         <div className="flex min-h-screen w-full px-2 pb-5 pt-24 md:px-8">
           <TooltipProvider delayDuration={0}>
@@ -28,7 +27,6 @@ export function StylesLayoutContent({ children }: LayoutContentProps) {
           </TooltipProvider>
         </div>
       </ThemeContext>
-
     </EcommerceManagementProvider>
   )
 }

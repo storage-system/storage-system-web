@@ -10,11 +10,11 @@ export const heroSchema = z.object({
   hero: z.array(heroItemSchema),
 })
 
-const publishEcommerceSchema = z.object({
+export const publishEcommerceSchema = z.object({
   name: z.string().min(1).max(255),
-  ecommercePreview: z.string().uuid(),
+  ecommercePreview: z.string().uuid().optional(),
   style: createStyleSchema.optional(),
-  hero: z.array(heroSchema),
+  hero: z.array(heroItemSchema),
 })
 
 export type HeroType = z.infer<typeof heroSchema>
