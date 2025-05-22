@@ -102,9 +102,9 @@ export function CustomStyle() {
           <Button
             className="flex gap-2"
             type="button"
-            onClick={() => {
-              trigger()
-              formState.isValid && setCurrentStep(CurrentStep.INITIAL)
+            onClick={async () => {
+              const isValid = await trigger()
+              isValid && setCurrentStep(CurrentStep.INITIAL)
             }}
           >
             <Save size={14} />

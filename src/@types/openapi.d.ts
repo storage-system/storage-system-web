@@ -484,6 +484,22 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/ecommerce": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EcommerceController_retrieveEcommerceByCompanyId"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/ecommerce/{slug}/products": {
         parameters: {
             query?: never;
@@ -543,7 +559,7 @@ export interface components {
             fileId?: string;
         };
         HttpEachCategoryListResponse: {
-            /** @example 1d789e5c-441f-4f48-80f5-92357c965f26 */
+            /** @example 0e087f78-076d-4f18-81af-431ad0b0d7d2 */
             id: string;
             name: string;
             isActive?: boolean;
@@ -604,13 +620,13 @@ export interface components {
             categoryIds: string[];
         };
         HttpItemResponse: {
-            /** @example 71796865-b074-4f78-8fb4-aaed6e563395 */
+            /** @example a8e56240-2944-45c5-a42e-3781c13750e4 */
             id: string;
-            /** @example Barry Donnelly */
+            /** @example Christopher Walsh */
             name: string;
         };
         HttpEachProductListResponse: {
-            /** @example f9d8f838-5aab-49a7-96a2-eca2f3b5d440 */
+            /** @example f844475d-4168-4497-9009-13e2607fc44e */
             id: string;
             name: string;
             quantityInStock: number;
@@ -639,7 +655,7 @@ export interface components {
             items: components["schemas"]["HttpEachProductListResponse"][];
         };
         HttpProductGetResponse: {
-            /** @example 9773fe55-15d3-41f9-8e61-389e8dc09ebc */
+            /** @example 38131b8a-0c29-4fa0-a7f0-b05d2cb8e890 */
             id: string;
             name: string;
             description: string;
@@ -710,11 +726,11 @@ export interface components {
             reportFrequency: "diary" | "weekly" | "month" | "year";
         };
         HttpConfigurationGetResponse: {
-            /** @example b3f3d391-e27b-4bad-a04f-3bfbdd6ee6a6 */
+            /** @example bdf9afbf-1b1f-4039-8f8c-5f5304b8ea71 */
             id: string;
-            /** @example 44e5c2b6-d43f-406f-a0d3-7d5d6592fcd9 */
+            /** @example e00757e1-ffde-4e78-a2a3-4889dfea1c44 */
             userId: string;
-            /** @example 8a1ffd63-07d4-4e60-9876-1d8b547f6274 */
+            /** @example 01d43567-d866-4d19-87ac-e4129e69ed54 */
             companyId: string;
             daysBeforeOldStock: number;
             warningDays: number;
@@ -750,9 +766,9 @@ export interface components {
             tertiaryColor: string;
         };
         HttpEachStyleListResponse: {
-            /** @example e533d60a-42a8-44c8-80b1-65c6039fede8 */
+            /** @example e71e7384-8de6-464d-9216-324fafb0adaf */
             id: string;
-            /** @example 7e02f0c6-c0c0-47b3-abc1-f7bf28e06e42 */
+            /** @example c93cca91-3702-4ddb-a12d-b0596f9a4010 */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -773,9 +789,9 @@ export interface components {
             items: components["schemas"]["HttpEachStyleListResponse"][];
         };
         HttpStyleGetResponse: {
-            /** @example 253c6bbf-3588-4089-85d9-f922be5b93b6 */
+            /** @example 620613f9-ceca-489a-9dbd-e2424be79251 */
             id: string;
-            /** @example 235b1f62-8bfb-43f3-9793-a2d1905e9ce5 */
+            /** @example f955edf3-8a73-4de2-b601-c59349a95920 */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -798,7 +814,7 @@ export interface components {
             tertiaryColor?: string;
         };
         HttpFileCreatedResponse: {
-            /** @example 0ac20685-80d4-445b-b071-362808b1b3ce */
+            /** @example c404f2bc-5f81-4a8f-87b8-32c818edaae0 */
             id: string;
         };
         HttpGetFileUrlResponse: {
@@ -838,9 +854,9 @@ export interface components {
             };
         };
         HttpInviteGetResponse: {
-            /** @example 302f9595-4142-46b4-9624-cfd7e0c9f615 */
+            /** @example 555a6c27-bd97-4c30-8e1f-7f4ea38c9726 */
             id: string;
-            /** @example Giovanny_Stoltenberg@hotmail.com */
+            /** @example Bernita.MacGyver77@yahoo.com */
             email: string;
             /** @example [
              *       "MEMBER"
@@ -878,6 +894,34 @@ export interface components {
             /** @enum {string} */
             action: "add" | "remove";
         }[];
+        RetrieveEcommerceDTO: {
+            /** Format: uuid */
+            id: string;
+            createdAt: unknown;
+            productIds: string[];
+            name: string;
+            /** Format: uuid */
+            companyId: string;
+            isActive: boolean;
+            previewUrl?: string;
+            slug: {
+                value: string;
+            };
+            /** @default [] */
+            styles: {
+                /** Format: uuid */
+                id: string;
+                createdAt: unknown;
+                name: string;
+                isActive: boolean;
+                backgroundColor: string;
+                textColor: string;
+                primaryColor: string;
+                secondaryColor: string;
+                tertiaryColor: string;
+            }[];
+            updatedAt?: unknown;
+        };
     };
     responses: never;
     parameters: never;
@@ -1744,6 +1788,26 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    EcommerceController_retrieveEcommerceByCompanyId: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ecommerce retrieved successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RetrieveEcommerceDTO"];
+                };
             };
         };
     };

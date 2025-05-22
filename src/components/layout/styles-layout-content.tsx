@@ -2,14 +2,13 @@
 
 import { type ReactNode } from 'react'
 
+import { initialColorConfig } from '@/constants/styles/initial-color-config'
+import { EcommerceManagementProvider } from '@/providers/ecommerce-management-provider'
+import ThemeContext from '@/providers/theme'
+import { TooltipProvider } from '../ui/tooltip'
 import { Content } from './content/styles-content'
 import { Header } from './styles-header/header'
 import { Sidebar } from './styles-sidebar/sidebar'
-import ThemeContext from '@/providers/theme'
-import { TooltipProvider } from '../ui/tooltip'
-import { StylesProvider } from '@/providers/style-provider'
-import { initialColorConfig } from '@/constants/styles/initial-color-config'
-import { EcommerceManagementProvider } from '@/providers/ecommerce-management-provider'
 
 type LayoutContentProps = {
   children: ReactNode

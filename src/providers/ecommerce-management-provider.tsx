@@ -1,5 +1,9 @@
 'use client'
 import { Form } from '@/components/ui/form'
+import { toast } from '@/components/ui/use-toast'
+import { PrivateRoutes } from '@/constants/routes/private-routes'
+import { useEcommerceManagementService } from '@/services/ecommerce-management-service'
+import { useFilesService } from '@/services/files'
 import {
   createStyleSchema,
   CreateStyleType,
@@ -11,15 +15,17 @@ import {
   PublishEcommerceType,
 } from '@/validations/publish-ecommerce-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useSession } from 'next-auth/react'
+import { useMutation } from '@tanstack/react-query'
+import html2canvas from 'html2canvas'
+import { useRouter } from 'next/navigation'
 import {
   createContext,
   Dispatch,
   ReactNode,
   SetStateAction,
   useContext,
-  useState,
   useRef,
+  useState,
 } from 'react'
 import { IColor as ColorType } from 'react-color-palette'
 import {
@@ -28,13 +34,6 @@ import {
   useForm,
   UseFormReturn,
 } from 'react-hook-form'
-import html2canvas from 'html2canvas'
-import { useFilesService } from '@/services/files'
-import { useMutation } from '@tanstack/react-query'
-import { toast } from '@/components/ui/use-toast'
-import { useEcommerceManagementService } from '@/services/ecommerce-management-service'
-import { useRouter } from 'next/navigation'
-import { PrivateRoutes } from '@/constants/routes/private-routes'
 
 export enum CurrentStep {
   INITIAL = 'initial',
@@ -68,7 +67,6 @@ interface EcommerceManagementContext {
   previewImage: string | null
   isCapturing: boolean
   isLoading: boolean
-  previewFileId: string | null
 }
 
 export const EcommerceManagementContext =
@@ -92,7 +90,7 @@ export function EcommerceManagementProvider({
   const [colors, setColors] = useState<IColor[]>(initialColorConfig)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [isCapturing, setIsCapturing] = useState(false)
-  const [previewFileId, setPreviewFileId] = useState<string | null>(null)
+
   const previewRef = useRef<HTMLDivElement>(null)
 
   const capturePreview = async (): Promise<string | null> => {
@@ -238,7 +236,6 @@ export function EcommerceManagementProvider({
         previewImage,
         isCapturing,
         isLoading,
-        previewFileId,
         setCurrentStep,
         setColors,
       }}

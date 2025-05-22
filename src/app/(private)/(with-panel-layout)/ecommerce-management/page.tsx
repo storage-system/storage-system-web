@@ -1,4 +1,4 @@
-import { ListStyles } from '@/components/routes/styles/list/list-styles'
+import { ListEcommerce } from '@/components/routes/styles/list/list-styles'
 import { buttonVariants } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
@@ -13,11 +13,9 @@ export default async function EcommerceManagement() {
         className={buttonVariants({ variant: 'default' })}
       >
         <PlusCircle className="mr-2 size-4" />
-        Criar Estilo
+        Publicar ecommerce
       </Link>
-      <Card className="w-full">
-        <ListStyles />
-      </Card>
+      <ListEcommerce />
     </div>
   )
 }
