@@ -1,6 +1,5 @@
 import { ListEcommerce } from '@/components/routes/styles/list/list-styles'
 import { buttonVariants } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
 import { PlusCircle } from 'lucide-react'
 import Link from 'next/link'

@@ -1,38 +1,30 @@
 'use client'
 
-import { cn } from '@/utils/class-name'
-import {
-  TooltipRoot,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
-import { getRandomColor } from '@/utils/random-color'
+import { PrivateRoutes } from '@/constants/routes/private-routes'
 import { useEcommerceManagementService } from '@/services/ecommerce-management-service'
 import { useQuery } from '@tanstack/react-query'
-import { useFilesService } from '@/services/files'
 import { useRouter } from 'next/navigation'
-import { PrivateRoutes } from '@/constants/routes/private-routes'
 
-function ColorPreview({ label }: { label: string }) {
-  const randomColor = getRandomColor().toUpperCase()
-  return (
-    <TooltipRoot>
-      <TooltipTrigger>
-        <div
-          className="size-8 rounded-full"
-          style={{ background: randomColor }}
-        />
-      </TooltipTrigger>
-      <TooltipContent>
-        {label} : {randomColor}
-      </TooltipContent>
-    </TooltipRoot>
-  )
-}
+// function ColorPreview({ label }: { label: string }) {
+//   const randomColor = getRandomColor().toUpperCase()
+//   return (
+//     <TooltipRoot>
+//       <TooltipTrigger>
+//         <div
+//           className="size-8 rounded-full"
+//           style={{ background: randomColor }}
+//         />
+//       </TooltipTrigger>
+//       <TooltipContent>
+//         {label} : {randomColor}
+//       </TooltipContent>
+//     </TooltipRoot>
+//   )
+// }
 
 export function ListEcommerce() {
   const { getEcommerce } = useEcommerceManagementService()
-  const { getFileUrlService } = useFilesService()
+  // const { getFileUrlService } = useFilesService()
 
   const router = useRouter()
 

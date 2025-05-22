@@ -1,14 +1,11 @@
 'use client'
 
 import { Separator } from '@/components/ui/separator'
-import { useProductsService } from '@/services/ecommerce-service/products-service'
 import { cn } from '@/utils/class-name'
 import previewData from '../../../../public/ecommerce-preview-data.json'
 import { CategoriesProduct } from './ecommerce-categories-product'
 
 export function CategoriesSection() {
-  const { listProducts } = useProductsService()
-
   // const { data: productsData } = useQuery({
   //   queryKey: [EcommerceProductsQueryKey.LIST_PRODUCTS],
   //   queryFn: async () => await listProducts(),

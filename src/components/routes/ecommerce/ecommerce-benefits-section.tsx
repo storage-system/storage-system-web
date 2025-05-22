@@ -1,6 +1,4 @@
 import { Card, CardContent } from '@/components/ui/card'
-import { ColorIdEnum, useStyles } from '@/providers/style-provider'
-import { getColorById } from '@/utils/get-color'
 import { Headphones, Package, ShoppingBag, Truck } from 'lucide-react'
 
 const benefits = [
