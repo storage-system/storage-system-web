@@ -139,7 +139,6 @@ storageSystemApi.axios.interceptors.response.use(
     return response
   },
   (error: AxiosError<ApiResponseError>) => {
-    toast({ title: error.message, variant: 'destructive' })
     throw new ApplicationError(error)
   },
 )

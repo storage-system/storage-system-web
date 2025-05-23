@@ -19,7 +19,16 @@ export function useProductsService() {
   ): Promise<Pagination<ListProduct>> {
     const { data } = await storageSystemApi.get(
       `/api/products/company/{companyId}`,
-      { routeParams: { companyId }, params },
+      {
+        routeParams: { companyId },
+        params: {
+          page: params?.params?.page,
+          perPage: params?.params?.perPage,
+          search: params?.params?.search,
+          sortBy: params?.params?.sortBy,
+          sortOrder: params?.params?.sortOrder,
+        },
+      },
     )
     return data
   }

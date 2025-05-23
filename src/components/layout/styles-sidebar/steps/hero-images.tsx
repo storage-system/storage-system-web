@@ -18,11 +18,14 @@ import { ImageMinus, ImagePlus } from 'lucide-react'
 import { useState } from 'react'
 
 export function HeroImages() {
-  const [fileNames, setFileNames] = useState<
-    { fieldId: string; filename: string }[]
-  >([])
-  const { heroForm, heroFieldArray, setCurrentStep, initialForm } =
-    useEcommerceManagement()
+  const {
+    heroForm,
+    heroFieldArray,
+    setCurrentStep,
+    initialForm,
+    fileNames,
+    setFileNames,
+  } = useEcommerceManagement()
 
   const { uploadFileService } = useFilesService()
   const uploadFileMutation = useMutation({
@@ -40,12 +43,12 @@ export function HeroImages() {
       </div>
       <ScrollArea className="flex-1 pb-4">
         <div className="mx-3 flex flex-col gap-4">
-          {heroFieldArray.fields.map((field, index) => (
+          {heroFieldArray.fields.map((field, index, array) => (
             <div
               className="relative flex w-full flex-1 flex-col border-b border-input pb-4 pt-2"
               key={field.id}
             >
-              {index !== 0 && (
+              {(index !== 0 || array.length >= 2) && (
                 <TooltipRoot>
                   <TooltipTrigger
                     asChild
@@ -110,6 +113,8 @@ export function HeroImages() {
                             {
                               fieldId: `hero.${index}.fileId`,
                               filename: file.name,
+                              file,
+                              fileId: id,
                             },
                           ])
                           field.onChange(id)

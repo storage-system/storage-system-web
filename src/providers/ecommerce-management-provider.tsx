@@ -15,15 +15,16 @@ import {
   PublishEcommerceType,
 } from '@/validations/publish-ecommerce-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import html2canvas from 'html2canvas'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import {
   createContext,
   Dispatch,
   ReactNode,
   SetStateAction,
   useContext,
+  useEffect,
   useRef,
   useState,
 } from 'react'
@@ -61,6 +62,12 @@ interface EcommerceManagementContext {
   setColors: Dispatch<SetStateAction<IColor[]>>
   initialForm: UseFormReturn<PublishEcommerceType>
   createStyleForm: UseFormReturn<CreateStyleType>
+  fileNames: { fieldId: string; filename: string; file: File; fileId: string }[]
+  setFileNames: Dispatch<
+    SetStateAction<
+      { fieldId: string; filename: string; file: File; fileId: string }[]
+    >
+  >
   heroForm: UseFormReturn<HeroType>
   heroFieldArray: UseFieldArrayReturn<HeroType>
   previewRef: React.RefObject<HTMLDivElement>
@@ -86,6 +93,9 @@ export function EcommerceManagementProvider({
   const [currentStep, setCurrentStep] = useState<CurrentStep>(
     CurrentStep.INITIAL,
   )
+  const [fileNames, setFileNames] = useState<
+    { fieldId: string; filename: string; file: File; fileId: string }[]
+  >([])
 
   const [colors, setColors] = useState<IColor[]>(initialColorConfig)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
@@ -198,7 +208,16 @@ export function EcommerceManagementProvider({
   })
 
   const router = useRouter()
-  const { publishEcommerceService } = useEcommerceManagementService()
+  const { publishEcommerceService, getEcommerce } =
+    useEcommerceManagementService()
+
+  const { id }: { id: string } = useParams()
+
+  const activeEcommerceQuery = useQuery({
+    queryKey: ['active-ecommerce', id],
+    queryFn: getEcommerce,
+    enabled: !!id,
+  })
 
   const publishEcommerce = useMutation({
     mutationFn: async (data: PublishEcommerceType) => {
@@ -223,6 +242,38 @@ export function EcommerceManagementProvider({
   const isLoading =
     publishEcommerce.isPending || uploadPreviewImage.isPending || isCapturing
 
+  useEffect(() => {
+    console.log(activeEcommerceQuery.data)
+    if (id && activeEcommerceQuery.data) {
+      const { hero, name, styles } = activeEcommerceQuery.data
+
+      initialForm.reset({
+        name,
+      })
+
+      heroForm.reset({
+        hero: hero.map((item) => ({
+          text: item.text,
+          fileId: item.fileId,
+        })),
+      })
+
+      const activeStytle = styles.find((style) => style.isActive)
+
+      if (activeStytle) {
+        createStyleForm.reset({
+          name: activeStytle.name,
+          isActive: activeStytle.isActive,
+          backgroundColor: activeStytle.backgroundColor,
+          textColor: activeStytle.textColor,
+          primaryColor: activeStytle.primaryColor,
+          secondaryColor: activeStytle.secondaryColor,
+          tertiaryColor: activeStytle.tertiaryColor,
+        })
+      }
+    }
+  }, [activeEcommerceQuery.data])
+
   return (
     <EcommerceManagementContext.Provider
       value={{
@@ -236,6 +287,8 @@ export function EcommerceManagementProvider({
         previewImage,
         isCapturing,
         isLoading,
+        fileNames,
+        setFileNames,
         setCurrentStep,
         setColors,
       }}

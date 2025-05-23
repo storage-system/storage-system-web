@@ -1,4 +1,30 @@
 {
+    "categories": [
+        {
+            "id": "1",
+            "name": "electronics"
+        },
+        {
+            "id": "2",
+            "name": "clothing"
+        },
+        {
+            "id": "3",
+            "name": "home"
+        },
+        {
+            "id": "4",
+            "name": "books"
+        },
+        {
+            "id": "5",
+            "name": "accessories"
+        },
+        {
+            "id": "6",
+            "name": "fitness"
+        }
+    ],
     "product": [
         {
             "id": "1",
