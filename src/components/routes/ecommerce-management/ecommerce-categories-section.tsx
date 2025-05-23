@@ -21,7 +21,6 @@ export function CategoriesSection() {
   const backgroundColor = getColorByType(ColorIdEnum.BACKGROUND_COLOR)
   const textColor = getColorByType(ColorIdEnum.TEXT_COLOR)
   const primaryColor = getColorByType(ColorIdEnum.PRIMARY_COLOR)
-  const secondaryColor = getColorByType(ColorIdEnum.SECONDARY_COLOR)
 
   return (
     <div

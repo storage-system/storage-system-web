@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
 import { useEcommerceManagementService } from '@/services/ecommerce-management-service'
 import { useQuery } from '@tanstack/react-query'

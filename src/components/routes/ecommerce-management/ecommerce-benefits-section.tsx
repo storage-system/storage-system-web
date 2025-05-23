@@ -43,7 +43,6 @@ export function BenefitsSection() {
   const textColor = getColorByType(ColorIdEnum.TEXT_COLOR)
   const primaryColor = getColorByType(ColorIdEnum.PRIMARY_COLOR)
   const secondaryColor = getColorByType(ColorIdEnum.SECONDARY_COLOR)
-  const tertiaryColor = getColorByType(ColorIdEnum.TERTIARY_COLOR)
 
   return (
     <div className="flex justify-center pb-16">

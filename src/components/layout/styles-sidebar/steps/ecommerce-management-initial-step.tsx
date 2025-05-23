@@ -29,7 +29,7 @@ const highlightedThemes = [
 ]
 
 export function StylesInitialStep() {
-  const { setCurrentStep, initialForm, setColors } = useEcommerceManagement()
+  const { setCurrentStep, initialForm } = useEcommerceManagement()
 
   return (
     <div className="flex flex-col">

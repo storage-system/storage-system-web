@@ -15,7 +15,6 @@ import {
 import { useFilesService } from '@/services/files'
 import { useMutation } from '@tanstack/react-query'
 import { ImageMinus, ImagePlus } from 'lucide-react'
-import { useState } from 'react'
 
 export function HeroImages() {
   const {
