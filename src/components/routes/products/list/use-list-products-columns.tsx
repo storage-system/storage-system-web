@@ -95,7 +95,9 @@ export function useListProductsColumns() {
     {
       accessorKey: 'ecommerce',
       header: () => (
-        <div className="w-[100px] text-wrap">Disponível no ecommerce?</div>
+        <div className="w-[100px] text-center font-medium">
+          Disponível no ecommerce?
+        </div>
       ),
       cell: ({ row }) => {
         return !updateProductsMutation.isPending ? (

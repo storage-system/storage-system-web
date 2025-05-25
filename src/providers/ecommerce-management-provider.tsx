@@ -11,13 +11,15 @@ import {
 import {
   heroSchema,
   HeroType,
+  initialFormSchema,
+  InitialFormType,
   publishEcommerceSchema,
   PublishEcommerceType,
 } from '@/validations/publish-ecommerce-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import html2canvas from 'html2canvas'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 import {
   createContext,
   Dispatch,
@@ -49,6 +51,7 @@ export enum ColorIdEnum {
   SECONDARY_COLOR = 'secondaryColor',
   TERTIARY_COLOR = 'tertiaryColor',
 }
+
 interface IColor extends ColorType {
   colorId: ColorIdEnum
   description: string
@@ -60,7 +63,7 @@ interface EcommerceManagementContext {
   setCurrentStep: Dispatch<SetStateAction<CurrentStep>>
   colors: IColor[]
   setColors: Dispatch<SetStateAction<IColor[]>>
-  initialForm: UseFormReturn<PublishEcommerceType>
+  initialForm: UseFormReturn<InitialFormType>
   createStyleForm: UseFormReturn<CreateStyleType>
   fileNames: { fieldId: string; filename: string; file: File; fileId: string }[]
   setFileNames: Dispatch<
@@ -89,6 +92,14 @@ export function EcommerceManagementProvider({
   initialColorConfig = [],
 }: EcommerceManagementProviderProps) {
   const { uploadFileService } = useFilesService()
+  const { publishEcommerceService, updateEcommerceService, getEcommerce } =
+    useEcommerceManagementService()
+
+  const pathname = usePathname()
+  const isUpdate = pathname.includes('update')
+
+  const router = useRouter()
+  const { id }: { id: string } = useParams()
 
   const [currentStep, setCurrentStep] = useState<CurrentStep>(
     CurrentStep.INITIAL,
@@ -96,19 +107,86 @@ export function EcommerceManagementProvider({
   const [fileNames, setFileNames] = useState<
     { fieldId: string; filename: string; file: File; fileId: string }[]
   >([])
-
   const [colors, setColors] = useState<IColor[]>(initialColorConfig)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [isCapturing, setIsCapturing] = useState(false)
 
   const previewRef = useRef<HTMLDivElement>(null)
 
+  const initialForm = useForm<InitialFormType>({
+    resolver: zodResolver(initialFormSchema),
+  })
+
+  const createStyleForm = useForm<CreateStyleType>({
+    resolver: zodResolver(createStyleSchema),
+    defaultValues: {
+      isActive: false,
+      backgroundColor: initialColorConfig.find(
+        (c) => c.colorId === ColorIdEnum.BACKGROUND_COLOR,
+      )?.hex,
+      textColor: initialColorConfig.find(
+        (c) => c.colorId === ColorIdEnum.TEXT_COLOR,
+      )?.hex,
+      primaryColor: initialColorConfig.find(
+        (c) => c.colorId === ColorIdEnum.PRIMARY_COLOR,
+      )?.hex,
+      secondaryColor: initialColorConfig.find(
+        (c) => c.colorId === ColorIdEnum.SECONDARY_COLOR,
+      )?.hex,
+      tertiaryColor: initialColorConfig.find(
+        (c) => c.colorId === ColorIdEnum.TERTIARY_COLOR,
+      )?.hex,
+    },
+  })
+
+  const heroForm = useForm<HeroType>({
+    resolver: zodResolver(heroSchema),
+    defaultValues: {
+      hero: [{ text: '', fileId: '' }],
+    },
+  })
+
+  const heroFieldArray = useFieldArray({
+    name: 'hero',
+    control: heroForm.control,
+  })
+
+  const activeEcommerceQuery = useQuery({
+    queryKey: ['active-ecommerce', id],
+    queryFn: getEcommerce,
+    enabled: isUpdate && !!id,
+  })
+
+  const publishEcommerce = useMutation({
+    mutationFn: publishEcommerceService,
+    onSuccess: () => {
+      toast({ title: 'Publicado com sucesso!' })
+      router.push(PrivateRoutes.ECOMMERCE_MANAGEMENT)
+    },
+    onError: () => {
+      toast({ variant: 'destructive', title: 'Erro ao publicar' })
+    },
+  })
+
+  const updateEcommerce = useMutation({
+    mutationFn: updateEcommerceService,
+    onSuccess: () => {
+      toast({ title: 'Atualizado com sucesso!' })
+      router.push(PrivateRoutes.ECOMMERCE_MANAGEMENT)
+    },
+    onError: () => {
+      toast({ variant: 'destructive', title: 'Erro ao atualizar' })
+    },
+  })
+
+  const isLoading =
+    publishEcommerce.isPending || updateEcommerce.isPending || isCapturing
+
   const capturePreview = async (): Promise<string | null> => {
     if (!previewRef.current) return null
 
     try {
       setIsCapturing(true)
-
       return new Promise((resolve) => {
         setTimeout(async () => {
           try {
@@ -118,7 +196,6 @@ export function EcommerceManagementProvider({
               logging: false,
               backgroundColor: null,
             })
-
             const imageUrl = canvas.toDataURL('image/png')
             setPreviewImage(imageUrl)
             resolve(imageUrl)
@@ -137,138 +214,79 @@ export function EcommerceManagementProvider({
     }
   }
 
-  const uploadPreviewImage = useMutation({
-    mutationFn: async (imageDataUrl: string): Promise<string | null> => {
+  const handleCreate = async () => {
+    const capturedImage = await capturePreview()
+    if (capturedImage) {
+      const fileId = await uploadImage(capturedImage)
+      if (fileId) initialForm.setValue('ecommercePreview', fileId)
+    }
+
+    const data: PublishEcommerceType = {
+      ...initialForm.getValues(),
+      style: createStyleForm.getValues(),
+      hero: heroForm.getValues().hero,
+    }
+
+    publishEcommerce.mutate(data)
+  }
+
+  const handleUpdate = async () => {
+    const capturedImage = await capturePreview()
+    if (capturedImage) {
+      const fileId = await uploadImage(capturedImage)
+      if (fileId) initialForm.setValue('ecommercePreview', fileId)
+    }
+
+    const data: PublishEcommerceType & { id: string } = {
+      ...initialForm.getValues(),
+      style: createStyleForm.getValues(),
+      hero: heroForm.getValues().hero,
+      id,
+    }
+
+    updateEcommerce.mutate(data)
+  }
+
+  const uploadImage = async (imageDataUrl: string): Promise<string | null> => {
+    try {
       const response = await fetch(imageDataUrl)
       const blob = await response.blob()
-
-      const timestamp = new Date().getTime()
-      const file = new File([blob], `style-preview-${timestamp}.png`, {
+      const file = new File([blob], `style-preview-${Date.now()}.png`, {
         type: 'image/png',
       })
-
       const formData = new FormData()
       formData.append('file', file)
-
       const uploadResponse = await uploadFileService(formData)
       return uploadResponse.id
-    },
-    onSuccess: (fileId) => {
-      initialForm.setValue('ecommercePreview', fileId ?? undefined)
-    },
-    onError: () => {
-      toast({
-        variant: 'destructive',
-        title: 'Erro ao fazer upload da imagem de preview',
-      })
-    },
-  })
-
-  const initialForm = useForm<PublishEcommerceType>({
-    resolver: zodResolver(publishEcommerceSchema),
-  })
-
-  const createStyleForm = useForm<CreateStyleType>({
-    resolver: zodResolver(createStyleSchema),
-    defaultValues: {
-      isActive: false,
-      backgroundColor: initialColorConfig.find(
-        (color) => color.colorId === ColorIdEnum.BACKGROUND_COLOR,
-      )?.hex,
-      textColor: initialColorConfig.find(
-        (color) => color.colorId === ColorIdEnum.TEXT_COLOR,
-      )?.hex,
-      primaryColor: initialColorConfig.find(
-        (color) => color.colorId === ColorIdEnum.PRIMARY_COLOR,
-      )?.hex,
-      secondaryColor: initialColorConfig.find(
-        (color) => color.colorId === ColorIdEnum.SECONDARY_COLOR,
-      )?.hex,
-      tertiaryColor: initialColorConfig.find(
-        (color) => color.colorId === ColorIdEnum.TERTIARY_COLOR,
-      )?.hex,
-    },
-  })
-
-  const heroForm = useForm<HeroType>({
-    resolver: zodResolver(heroSchema),
-    defaultValues: {
-      hero: [
-        {
-          text: '',
-          fileId: '',
-        },
-      ],
-    },
-  })
-
-  const heroFieldArray = useFieldArray({
-    name: 'hero',
-    control: heroForm.control,
-  })
-
-  const router = useRouter()
-  const { publishEcommerceService, getEcommerce } =
-    useEcommerceManagementService()
-
-  const { id }: { id: string } = useParams()
-
-  const activeEcommerceQuery = useQuery({
-    queryKey: ['active-ecommerce', id],
-    queryFn: getEcommerce,
-    enabled: !!id,
-  })
-
-  const publishEcommerce = useMutation({
-    mutationFn: async (data: PublishEcommerceType) => {
-      return await publishEcommerceService(data)
-    },
-    onSuccess: () => {
-      toast({
-        title: 'E-commerce publicado com sucesso!',
-        description: 'Seu e-commerce está agora disponível para o público.',
-      })
-      router.push(PrivateRoutes.ECOMMERCE_MANAGEMENT)
-    },
-    onError: () => {
-      toast({
-        variant: 'destructive',
-        title: 'Erro ao publicar o e-commerce',
-        description: 'Tente novamente mais tarde.',
-      })
-    },
-  })
-
-  const isLoading =
-    publishEcommerce.isPending || uploadPreviewImage.isPending || isCapturing
+    } catch (error) {
+      console.error(error)
+      return null
+    }
+  }
 
   useEffect(() => {
-    console.log(activeEcommerceQuery.data)
-    if (id && activeEcommerceQuery.data) {
-      const { hero, name, styles } = activeEcommerceQuery.data
+    if (activeEcommerceQuery.data) {
+      const { name, hero, styles } = activeEcommerceQuery.data
 
-      initialForm.reset({
-        name,
-      })
+      initialForm.reset({ name })
 
       heroForm.reset({
-        hero: hero.map((item) => ({
-          text: item.text,
-          fileId: item.fileId,
+        hero: hero.map((h) => ({
+          text: h.text,
+          fileId: h.fileId,
         })),
       })
 
-      const activeStytle = styles.find((style) => style.isActive)
-
-      if (activeStytle) {
+      const activeStyle = styles.find((s) => s.isActive)
+      if (activeStyle) {
         createStyleForm.reset({
-          name: activeStytle.name,
-          isActive: activeStytle.isActive,
-          backgroundColor: activeStytle.backgroundColor,
-          textColor: activeStytle.textColor,
-          primaryColor: activeStytle.primaryColor,
-          secondaryColor: activeStytle.secondaryColor,
-          tertiaryColor: activeStytle.tertiaryColor,
+          name: activeStyle.name,
+          isActive: activeStyle.isActive,
+          backgroundColor: activeStyle.backgroundColor,
+          textColor: activeStyle.textColor,
+          primaryColor: activeStyle.primaryColor,
+          secondaryColor: activeStyle.secondaryColor,
+          tertiaryColor: activeStyle.tertiaryColor,
         })
       }
     }
@@ -302,34 +320,23 @@ export function EcommerceManagementProvider({
             const isStyleValid = await createStyleForm.trigger()
             const isHeroValid = await heroForm.trigger()
 
+            console.log(
+              'isInitialValid:',
+              isInitialValid,
+              initialForm.formState.errors,
+            )
+            console.log('isStyleValid:', isStyleValid)
+            console.log('isHeroValid:', isHeroValid)
             if (!isInitialValid || !isStyleValid || !isHeroValid) {
-              console.warn('Algum formulário é inválido.')
+              toast({ variant: 'destructive', title: 'Formulário inválido' })
               return
             }
 
-            // Capturar e fazer upload da imagem de preview
-            const capturedImage = await capturePreview()
-            const uploadedPreviewId = null
-
-            if (capturedImage) {
-              await uploadPreviewImage.mutateAsync(capturedImage)
+            if (isUpdate) {
+              await handleUpdate()
+            } else {
+              await handleCreate()
             }
-
-            const initialData = initialForm.getValues()
-            const styleData = createStyleForm.getValues()
-            const heroData = heroForm.getValues()
-
-            const allData = {
-              ...initialData,
-              style: {
-                ...styleData,
-                previewFileId: uploadedPreviewId, // Incluir o ID do arquivo de preview
-              },
-              hero: heroData.hero,
-            }
-
-            // Processar os dados com o ID da imagem de preview
-            publishEcommerce.mutate(allData)
           }}
         >
           {children}

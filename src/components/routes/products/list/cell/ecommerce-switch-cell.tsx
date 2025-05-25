@@ -29,37 +29,20 @@ export const EcommerceSwitchCell = memo(
     return (
       <Switch
         checked={isChecked}
+        className="transition-all duration-200 data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-muted"
         onCheckedChange={(checked) => {
           setUpdateList((prev) => {
-            const existing = prev.find((item) => item.id === productId)
+            const shouldKeepDefault = checked === isInitiallyActive
 
-            // Caso já esteja no estado
-            if (existing) {
-              // Se o valor do switch voltou ao estado inicial, removemos da lista
-              const shouldRemove =
-                (checked && isInitiallyActive) ||
-                (!checked && !isInitiallyActive)
-
-              if (shouldRemove) {
-                return prev.filter((item) => item.id !== productId)
-              }
-
-              // Caso contrário, mantemos como está
-              return prev
-            }
-
-            // Caso não esteja no estado e houve mudança
-            if (checked !== isInitiallyActive) {
-              return [
-                ...prev,
-                {
-                  id: productId,
-                  action: checked ? 'add' : 'remove',
-                },
-              ]
-            }
-
-            return prev
+            return shouldKeepDefault
+              ? prev.filter((item) => item.id !== productId)
+              : [
+                  ...prev.filter((item) => item.id !== productId),
+                  {
+                    id: productId,
+                    action: checked ? 'add' : 'remove',
+                  },
+                ]
           })
         }}
       />

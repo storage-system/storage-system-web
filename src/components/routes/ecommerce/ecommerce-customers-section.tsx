@@ -7,7 +7,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel'
-import { cn } from '@/utils/class-name'
+import { useEcommerce } from '@/providers/ecommerce-provider'
 import Autoplay from 'embla-carousel-autoplay'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
@@ -15,13 +15,13 @@ import { Rating } from './ecommerce-rating'
 
 export function CustomersSection() {
   const [api, setApi] = useState<CarouselApi>()
-
   const [current, setCurrent] = useState(0)
 
+  const { config } = useEcommerce()
+  const style = config.styles.find((s) => s.isActive)
+
   useEffect(() => {
-    if (!api) {
-      return
-    }
+    if (!api) return
 
     setCurrent(api.selectedScrollSnap() + 1)
 
@@ -31,14 +31,24 @@ export function CustomersSection() {
   }, [api])
 
   return (
-    <div className="flex flex-col items-center bg-gray-200">
+    <div
+      className="flex flex-col items-center"
+      style={{ backgroundColor: style?.backgroundColor }}
+    >
       <div className="my-24 w-full max-w-[1200px] space-y-12">
         <div className="flex justify-between">
           <div>
-            <h2 className="text-4xl font-bold">
+            <h2
+              className="text-4xl font-bold"
+              style={{ color: style?.textColor }}
+            >
               Veja o que nossos clientes dizem
             </h2>
-            <CustomPagination currentIndex={current} total={10} />
+            <CustomPagination
+              currentIndex={current}
+              total={10}
+              primaryColor={style?.primaryColor}
+            />
           </div>
           <div className="flex gap-4">
             <Button
@@ -59,7 +69,7 @@ export function CustomersSection() {
           setApi={setApi}
           plugins={[
             Autoplay({
-              delay: 3000,
+              delay: 6000,
             }),
           ]}
           opts={{
@@ -69,7 +79,7 @@ export function CustomersSection() {
           <CarouselContent>
             {Array.from({ length: 10 }).map((_, index) => (
               <CarouselItem key={index} className="basis-1/3">
-                <Rating index={index} />
+                <Rating />
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -82,42 +92,39 @@ export function CustomersSection() {
 function CustomPagination({
   currentIndex,
   total,
+  primaryColor = '#3b82f6',
 }: {
   currentIndex: number
   total: number
+  primaryColor?: string
 }) {
   const pages = Math.ceil(total / 3)
   const pagesBreakpoints = Array.from({ length: 3 }, (_, index) =>
     Math.floor((pages / 3) * (index + 1)),
   )
 
+  const getStyle = (isActive: boolean, isWide: boolean) => ({
+    backgroundColor: isActive ? primaryColor : primaryColor + '66',
+    width: isWide ? '4rem' : '1.5rem',
+    height: '0.25rem',
+    transition: 'all 0.3s',
+  })
+
   return (
     <div className="mt-4 flex items-center gap-2">
       <div
-        className={cn(
-          'h-1 w-6 bg-primary/40 transition-all',
-          currentIndex >= pagesBreakpoints[0] && 'bg-primary',
-          currentIndex >= pagesBreakpoints[0] &&
-            currentIndex < pagesBreakpoints[1] &&
-            'w-16',
+        style={getStyle(
+          currentIndex >= pagesBreakpoints[0],
+          currentIndex < pagesBreakpoints[1],
         )}
-      ></div>
+      />
       <div
-        className={cn(
-          'h-1 w-6 bg-primary/40 transition-all',
-          currentIndex >= pagesBreakpoints[1] && 'bg-primary',
-          currentIndex >= pagesBreakpoints[1] &&
-            currentIndex < pagesBreakpoints[2] &&
-            'w-16',
+        style={getStyle(
+          currentIndex >= pagesBreakpoints[1],
+          currentIndex < pagesBreakpoints[2],
         )}
-      ></div>
-      <div
-        className={cn(
-          'h-1 w-6 bg-primary/40 transition-all',
-          currentIndex >= pagesBreakpoints[2] && 'bg-primary',
-          currentIndex >= pagesBreakpoints[2] && 'w-16',
-        )}
-      ></div>
+      />
+      <div style={getStyle(currentIndex >= pagesBreakpoints[2], true)} />
     </div>
   )
 }

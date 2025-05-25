@@ -1,5 +1,8 @@
+'use client'
+
 import { Card, CardContent } from '@/components/ui/card'
 import { Headphones, Package, ShoppingBag, Truck } from 'lucide-react'
+import { useEcommerce } from '@/providers/ecommerce-provider'
 
 const benefits = [
   {
@@ -25,16 +28,27 @@ const benefits = [
 ]
 
 export function BenefitsSection() {
+  const { config } = useEcommerce()
+  const style = config.styles.find((s) => s.isActive)
+
   return (
     <div className="flex justify-center pb-16">
-      <Card className="flex h-[168px] w-full max-w-[1200px] items-center">
+      <Card
+        className="flex h-[168px] w-full max-w-[1200px] items-center"
+        style={{
+          backgroundColor: style?.backgroundColor,
+          color: style?.textColor,
+        }}
+      >
         <CardContent className="grid grid-cols-4 gap-4">
           {benefits.map(({ description, title, icon: Icon }) => (
             <div key={title} className="flex items-center gap-4">
-              <Icon className="size-9" />
+              <Icon className="size-9" style={{ color: style?.primaryColor }} />
               <div>
-                <p className="font-bold">{title}</p>
-                <p>{description}</p>
+                <p className="font-bold" style={{ color: style?.textColor }}>
+                  {title}
+                </p>
+                <p style={{ color: style?.textColor }}>{description}</p>
               </div>
             </div>
           ))}

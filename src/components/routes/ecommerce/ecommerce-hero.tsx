@@ -30,7 +30,10 @@ export function Hero() {
   }, [api])
 
   return (
-    <div className="relative h-[600px] w-full">
+    <div
+      className="relative h-[600px] w-full"
+      style={{ backgroundColor: style?.backgroundColor }}
+    >
       <CarouselComponent
         opts={{ loop: true }}
         setApi={setApi}
@@ -59,15 +62,21 @@ export function Hero() {
           ))}
         </CarouselContent>
       </CarouselComponent>
+
       <div className="absolute inset-x-0 bottom-8">
-        <div className="py-2 text-center text-sm text-muted-foreground ">
+        <div className="py-2 text-center text-sm">
           {Array.from({ length: count }).map((_, index) => (
             <span
               key={index}
               className={cn(
-                'mx-1 inline-block size-2 rounded-full',
-                current === index + 1 ? 'bg-white' : 'bg-gray-400',
+                'mx-1 inline-block size-2 rounded-full transition-colors duration-300',
               )}
+              style={{
+                backgroundColor:
+                  current === index + 1
+                    ? style?.primaryColor
+                    : style?.tertiaryColor,
+              }}
             />
           ))}
         </div>

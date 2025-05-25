@@ -12,6 +12,12 @@ export function useEcommerceManagementService() {
     await storageSystemApi.post('/api/ecommerce/publish', anInput)
   }
 
+  async function updateEcommerceService(
+    input: PublishEcommerceType & { id: string },
+  ): Promise<void> {
+    await storageSystemApi.patch(`/api/ecommerce`, input)
+  }
+
   async function getEcommerce() {
     const { data } =
       await storageSystemApi.get<RetrieveEcommerceDTO>('/api/ecommerce')
@@ -30,6 +36,7 @@ export function useEcommerceManagementService() {
 
   return {
     publishEcommerceService,
+    updateEcommerceService,
     getEcommerce,
     updateEcommerce,
   }
