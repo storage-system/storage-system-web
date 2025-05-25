@@ -8,7 +8,7 @@ export function CategoriesProduct({
   price,
   id,
   index,
-}: {
+}: any & {
   index: number
 }) {
   return (

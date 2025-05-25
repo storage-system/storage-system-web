@@ -1,4 +1,3 @@
-import { EachProduct } from '@/@types/ecommerce/product'
 import { cn } from '@/utils/class-name'
 import { priceFormatter } from '@/utils/format-currency'
 import { ShoppingBag, Star } from 'lucide-react'
@@ -8,7 +7,7 @@ export function NewProduct({
   index,
   name,
   price,
-}: EachProduct & { index: number }) {
+}: any & { index: number }) {
   return (
     <div
       className={cn(

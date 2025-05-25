@@ -51,10 +51,14 @@ export function DataTableProvider<TData, TValue>({
   columnsVisibility,
   total,
   perPage,
+  page,
   isLoading = false,
 }: DataTableProviderProps<TData, TValue>) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [sorting, setSorting] = useState<SortingState>([])
+
+  const pageIndex = (page ?? 1) - 1
+  const pageSize = perPage ?? 10
 
   const table = useReactTable({
     data,
@@ -62,9 +66,14 @@ export function DataTableProvider<TData, TValue>({
     state: {
       sorting,
       columnVisibility,
+      pagination: {
+        pageIndex,
+        pageSize,
+      },
     },
     onSortingChange: setSorting,
-    pageCount: Math.ceil(total / (perPage ?? 10)),
+    pageCount: Math.ceil(total / pageSize), // total vem da prop
+    manualPagination: true, // ⬅️ importante!
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -72,7 +81,6 @@ export function DataTableProvider<TData, TValue>({
       if (columnsVisibility) {
         columnsVisibility[1](u)
       }
-
       setColumnVisibility(u)
     },
   })

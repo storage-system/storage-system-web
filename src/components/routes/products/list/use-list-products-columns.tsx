@@ -7,23 +7,49 @@ import { UpdateEcommerceProductsDTO } from '@/@types/ecommerce/ecommerce-managem
 import { ListProduct } from '@/@types/product'
 import { useEcommerceManagementService } from '@/services/ecommerce-management-service'
 import { formattedDateFNS } from '@/utils/format-date'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { DeleteProductCell } from './cell/delete-product-cell'
 import { EcommerceSwitchCell } from './cell/ecommerce-switch-cell'
 import { ProductDetailCell } from './cell/product-detail-cell'
 import { ProductStatusCell } from './cell/product-status-cell'
+import { toast } from '@/components/ui/use-toast'
+import { productsQueryKey } from '@/constants/query-key/products-query-key'
+
+import { Loader2 } from 'lucide-react'
 
 export function useListProductsColumns() {
   const [immediateProducts, setImmediateProducts] = useState<
     UpdateEcommerceProductsDTO[]
   >([])
-  const [debouncedProducts] = useDebounceValue(immediateProducts, 1000)
+
+  const [debouncedProducts] = useDebounceValue(immediateProducts, 2000)
   const { updateEcommerce } = useEcommerceManagementService()
+  const queryClient = useQueryClient()
 
   const updateProductsMutation = useMutation({
     mutationKey: ['update-ecommerce-products'],
     mutationFn: async (input: UpdateEcommerceProductsDTO[]) => {
       await updateEcommerce(input)
+    },
+    onSuccess: () => {
+      toast({
+        title: 'Produtos atualizados com sucesso',
+        description: 'Os produtos foram atualizados no ecommerce.',
+        variant: 'success',
+      })
+
+      setImmediateProducts([])
+
+      queryClient.invalidateQueries({
+        queryKey: [productsQueryKey.LIST_PRODUCTS],
+      })
+    },
+    onError: () => {
+      toast({
+        title: 'Erro ao atualizar produtos',
+        description: 'Houve um erro ao atualizar os produtos no ecommerce.',
+        variant: 'destructive',
+      })
     },
   })
 
@@ -72,15 +98,17 @@ export function useListProductsColumns() {
         <div className="w-[100px] text-wrap">Disponível no ecommerce?</div>
       ),
       cell: ({ row }) => {
-        console.log(row.original.ecommerceId)
-
-        return (
+        return !updateProductsMutation.isPending ? (
           <EcommerceSwitchCell
             productId={row.original.id}
             ecommerceId={row.original.ecommerceId}
             updateList={immediateProducts}
             setUpdateList={setImmediateProducts}
           />
+        ) : (
+          <div className="flex items-center justify-center">
+            <Loader2 className="animate-spin text-primary" />
+          </div>
         )
       },
     },

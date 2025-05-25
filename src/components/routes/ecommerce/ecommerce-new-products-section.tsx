@@ -10,39 +10,20 @@ import { cn } from '@/utils/class-name'
 import Autoplay from 'embla-carousel-autoplay'
 import { useEffect, useState } from 'react'
 import { NewProduct } from './ecommerce-new-product'
-import { useQuery } from '@tanstack/react-query'
-import { useProductsService } from '@/services/ecommerce-service/products-service'
-import { EcommerceProductsQueryKey } from '@/constants/query-key/ecommerce-products-query-key'
-import { useStyles } from '@/providers/style-provider'
-import previewData from '../../../../public/ecommerce-preview-data.json'
+import type { EcommerceProductDTO } from '@/@types/ecommerce/ecommerce-categories'
 
-export function NewProductsSection() {
-  const { listProducts } = useProductsService()
-  const { isPreview } = useStyles()
+type Props = {
+  products: EcommerceProductDTO[]
+}
 
-  const { data: productsData } = useQuery({
-    queryKey: [EcommerceProductsQueryKey.LIST_PRODUCTS],
-    queryFn: async () => await listProducts(),
-    enabled: !isPreview,
-  })
-
-  const productsList =
-    productsData?.items || isPreview ? previewData.products.items : []
-
+export function NewProductsSection({ products }: Props) {
   const [api, setApi] = useState<CarouselApi>()
-
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
-    if (!api) {
-      return
-    }
-
+    if (!api) return
     setCurrent(api.selectedScrollSnap() + 1)
-
-    api.on('select', () => {
-      setCurrent(api.selectedScrollSnap() + 1)
-    })
+    api.on('select', () => setCurrent(api.selectedScrollSnap() + 1))
   }, [api])
 
   return (
@@ -50,7 +31,7 @@ export function NewProductsSection() {
       <div className="my-24 w-full max-w-[1200px] space-y-12">
         <div>
           <h2 className="text-4xl font-bold">Novos Produtos</h2>
-          <CustomPagination currentIndex={current} total={10} />
+          <CustomPagination currentIndex={current} total={products.length} />
         </div>
         <Carousel
           setApi={setApi}
@@ -59,13 +40,11 @@ export function NewProductsSection() {
               delay: 3000,
             }),
           ]}
-          opts={{
-            loop: true,
-          }}
+          opts={{ loop: true }}
         >
           <CarouselContent>
-            {productsList.map((item, index) => (
-              <CarouselItem key={index} className="basis-1/5">
+            {products.map((item, index) => (
+              <CarouselItem key={item.id} className="basis-1/5">
                 <NewProduct {...item} index={index} />
               </CarouselItem>
             ))}
@@ -98,7 +77,7 @@ function CustomPagination({
             currentIndex < pagesBreakpoints[1] &&
             'w-16',
         )}
-      ></div>
+      />
       <div
         className={cn(
           'h-1 w-6 bg-primary/40 transition-all',
@@ -107,14 +86,14 @@ function CustomPagination({
             currentIndex < pagesBreakpoints[2] &&
             'w-16',
         )}
-      ></div>
+      />
       <div
         className={cn(
           'h-1 w-6 bg-primary/40 transition-all',
           currentIndex >= pagesBreakpoints[2] && 'bg-primary',
           currentIndex >= pagesBreakpoints[2] && 'w-16',
         )}
-      ></div>
+      />
     </div>
   )
 }

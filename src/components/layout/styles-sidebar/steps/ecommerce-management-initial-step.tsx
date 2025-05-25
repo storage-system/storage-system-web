@@ -1,5 +1,7 @@
-import { useEcommerceManagement } from '@/providers/ecommerce-management-provider'
-import { CurrentStep } from '@/providers/style-provider'
+import {
+  CurrentStep,
+  useEcommerceManagement,
+} from '@/providers/ecommerce-management-provider'
 import { cn } from '@/utils/class-name'
 import { StyleCard } from './style-card'
 import { FormField } from '@/components/ui/form'

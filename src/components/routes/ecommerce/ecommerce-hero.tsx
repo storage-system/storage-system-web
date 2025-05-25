@@ -6,7 +6,7 @@ import {
   CarouselItem,
   type CarouselApi,
 } from '@/components/ui/carousel'
-import { Button } from '@/components/ui/button'
+import { useEcommerce } from '@/providers/ecommerce-provider'
 import { cn } from '@/utils/class-name'
 import { useEffect, useState } from 'react'
 
@@ -15,10 +15,11 @@ export function Hero() {
   const [current, setCurrent] = useState(0)
   const [count, setCount] = useState(0)
 
+  const { config } = useEcommerce()
+  const style = config.styles.find((s) => s.isActive)
+
   useEffect(() => {
-    if (!api) {
-      return
-    }
+    if (!api) return
 
     setCount(api.scrollSnapList().length)
     setCurrent(api.selectedScrollSnap() + 1)
@@ -36,23 +37,22 @@ export function Hero() {
         className="size-full"
       >
         <CarouselContent className="h-[600px]">
-          {Array.from({ length: 5 }).map((_, index) => (
+          {config.hero.map((hero, index) => (
             <CarouselItem
               key={index}
-              className="flex h-full justify-center bg-[url(/hero-1.png)] bg-cover bg-center"
+              className="flex h-full justify-center bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${hero.fileUrl})`,
+              }}
             >
               <div className="flex w-full max-w-[1200px] items-center">
                 <div className="flex flex-col gap-10">
-                  <p className="w-2/3 text-6xl font-semibold text-white">
-                    Sou um título. Clique aqui para editar e adicionar seu
-                    próprio texto.
-                  </p>
-                  <Button
-                    variant={'outline'}
-                    className="w-1/6 rounded-3xl bg-transparent text-background"
+                  <p
+                    className="w-2/3 text-6xl font-semibold"
+                    style={{ color: style?.textColor }}
                   >
-                    Compre agora
-                  </Button>
+                    {hero.text}
+                  </p>
                 </div>
               </div>
             </CarouselItem>

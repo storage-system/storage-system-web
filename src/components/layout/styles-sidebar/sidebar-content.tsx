@@ -1,5 +1,8 @@
-import { useEcommerceManagement } from '@/providers/ecommerce-management-provider'
-import { CurrentStep } from '@/providers/style-provider'
+import {
+  CurrentStep,
+  useEcommerceManagement,
+} from '@/providers/ecommerce-management-provider'
+
 import { Paintbrush } from 'lucide-react'
 import { HeroImages } from './steps/hero-images'
 import { CustomStyle } from './steps/styles-colors'

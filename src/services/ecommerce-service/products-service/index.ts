@@ -1,22 +1,51 @@
-import { EachProduct } from '@/@types/ecommerce/product'
-import { Pagination } from '@/@types/pagination'
-import { jsonServerApi } from '@/services/axios'
+import {
+  CategoryDTO,
+  PaginatedEcommerceProductDTO,
+} from '@/@types/ecommerce/ecommerce-categories'
+import { storageSystemApi } from '@/services/axios'
 
 export function useProductsService() {
-  async function listProducts() {
-    const { data } =
-      // TODO: FIX
-      await jsonServerApi.get<Pagination<EachProduct>>('/products' as never)
+  async function listCategory(slug: string) {
+    const { data } = await storageSystemApi.get<CategoryDTO[]>(
+      '/api/ecommerce/{slug}/categories',
+      {
+        routeParams: {
+          slug,
+        },
+      },
+    )
 
     return data
   }
 
-  async function getProduct(id: string) {
-    // TODO: FIX
-    const { data } = await jsonServerApi.get(('/product/' + id) as never)
+  async function listProductByCategory(slug: string, categoryId: string) {
+    const { data } = await storageSystemApi.get<PaginatedEcommerceProductDTO>(
+      '/api/ecommerce/{slug}/products',
+      {
+        routeParams: {
+          slug,
+        },
+        params: {
+          categoryId,
+        },
+      },
+    )
 
     return data
   }
 
-  return { listProducts, getProduct }
+  async function listProducts(slug: string) {
+    const { data } = await storageSystemApi.get<PaginatedEcommerceProductDTO>(
+      '/api/ecommerce/{slug}/products',
+      {
+        routeParams: {
+          slug,
+        },
+      },
+    )
+
+    return data
+  }
+
+  return { listCategory, listProductByCategory, listProducts }
 }

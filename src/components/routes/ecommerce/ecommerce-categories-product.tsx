@@ -1,29 +1,31 @@
+import { EcommerceProductDTO } from '@/@types/ecommerce/ecommerce-categories'
 import { cn } from '@/utils/class-name'
 import { ShoppingBag, Star } from 'lucide-react'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 
 export function CategoriesProduct({
-  image,
   name,
-  price,
   id,
   index,
-}: {
+  price,
+  productImage,
+}: EcommerceProductDTO & {
   index: number
 }) {
+  const { slug }: { slug: string } = useParams()
+
   return (
     <Link
-      href={`ecommerce/${id}`}
+      href={`/${slug}/${id}`}
       className={cn(
         'flex h-96 flex-col border border-primary/30 bg-background p-1 group',
-        index >= 4 && 'border-t-0',
-        index % 4 !== 3 && 'border-r-0',
       )}
     >
       <div className="w-full flex-1 overflow-hidden">
         <img
           alt={name}
-          src={image}
+          src={productImage}
           className="size-full bg-gray-200 transition-all group-hover:scale-105"
         />
       </div>

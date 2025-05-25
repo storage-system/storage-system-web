@@ -2,17 +2,19 @@
 
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/utils/class-name'
-import previewData from '../../../../public/ecommerce-preview-data.json'
 import { CategoriesProduct } from './ecommerce-categories-product'
+import { useState } from 'react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@radix-ui/react-tabs'
+import { CategoryWithProducts } from '@/actions/home-actions'
 
-export function CategoriesSection() {
-  // const { data: productsData } = useQuery({
-  //   queryKey: [EcommerceProductsQueryKey.LIST_PRODUCTS],
-  //   queryFn: async () => await listProducts(),
-  //   enabled: !isPreview,
-  // })
+type Props = {
+  data: CategoryWithProducts[]
+}
 
-  const productsList = previewData.products.items
+export function CategoriesSection({ data }: Props) {
+  const [activeCategory, setActiveCategory] = useState<string>(
+    data[0]?.category.id ?? '',
+  )
 
   return (
     <div className="flex justify-center bg-slate-200 py-40">
@@ -20,30 +22,40 @@ export function CategoriesSection() {
         <h2 className="mb-6 text-4xl font-semibold">
           Navegue pelas categorias
         </h2>
-        <div className="flex gap-4">
-          {productsList.map((_, index, array) => (
-            <button className="flex items-center" key={index}>
-              <div
-                className={cn(
-                  'px-3 py-2',
-                  index === 0 ? 'bg-primary/30 text-primary' : 'text-gray-700',
-                )}
-              >
-                Categoria {index}
-              </div>
-              {index !== array.length - 1 && (
-                <Separator
-                  className="ml-4 h-4 w-[1.5px] bg-primary opacity-70"
-                  orientation="vertical"
-                />
-              )}
-            </button>
-          ))}
-        </div>
-        <div className="mt-14 grid w-full grid-cols-4">
-          {productsList.map((item, index) => (
-            <CategoriesProduct {...item} index={index} key={index} />
-          ))}
+        <div className="flex items-center justify-center gap-4">
+          <Tabs value={activeCategory} onValueChange={setActiveCategory}>
+            <TabsList className="inline-flex w-full justify-center">
+              {data.map(({ category }, index, array) => (
+                <div key={category.id} className="flex items-center gap-4">
+                  <TabsTrigger
+                    className="cursor-pointer px-2 data-[state=active]:bg-primary/30 data-[state=active]:text-primary"
+                    asChild
+                    value={category.id}
+                  >
+                    <div className={cn('py-2 text-primary text-center')}>
+                      {category.name}
+                    </div>
+                  </TabsTrigger>
+                  {index !== array.length - 1 && (
+                    <Separator
+                      className="mr-4 h-4 w-[1.5px] bg-primary opacity-70"
+                      orientation="vertical"
+                    />
+                  )}
+                </div>
+              ))}
+            </TabsList>
+
+            {data.map(({ category, products }) => (
+              <TabsContent key={category.id} value={category.id}>
+                <div className="mt-14 grid w-full grid-cols-4">
+                  {products.map((item, index) => (
+                    <CategoriesProduct key={item.id} index={index} {...item} />
+                  ))}
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
         </div>
       </div>
     </div>

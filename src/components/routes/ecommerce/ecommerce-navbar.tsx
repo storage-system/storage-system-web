@@ -1,48 +1,51 @@
 import { Phone } from 'lucide-react'
-
-const navitems = [
-  {
-    name: 'Início',
-    subitems: [
-      {
-        name: 'Teste',
-      },
-    ],
-  },
-  {
-    name: 'Categorias',
-    subitems: [
-      {
-        name: 'Teste',
-      },
-    ],
-  },
-  {
-    name: 'Blog',
-    subitems: [
-      {
-        name: 'Teste',
-      },
-    ],
-  },
-  {
-    name: 'Sobre Nós',
-    subitems: [],
-  },
-  {
-    name: 'Fale Conosco',
-    subitems: [],
-  },
-]
+import { useParams } from 'next/navigation'
 
 export function NavBar() {
+  const { slug }: { slug: string } = useParams()
+
+  const navitems = [
+    {
+      name: 'Início',
+      href: `/${slug}/home`,
+      subitems: [
+        {
+          name: 'Teste',
+        },
+      ],
+    },
+    {
+      name: 'Categorias',
+      subitems: [
+        {
+          name: 'Teste',
+        },
+      ],
+    },
+    {
+      name: 'Blog',
+      subitems: [
+        {
+          name: 'Teste',
+        },
+      ],
+    },
+    {
+      name: 'Sobre Nós',
+      subitems: [],
+    },
+    {
+      name: 'Fale Conosco',
+      subitems: [],
+    },
+  ]
   return (
     <div className="flex w-full justify-center bg-slate-700 p-4">
       <div className="flex w-full max-w-[1200px] justify-between ">
         <ul className="flex gap-4 text-gray-300">
           {navitems.map((item) => (
             <li key={item.name}>
-              <a href="">{item.name}</a>
+              <a href={item.href}>{item.name}</a>
             </li>
           ))}
         </ul>

@@ -1,14 +1,14 @@
-import { EachProduct } from '@/@types/ecommerce/product'
+import { EcommerceProductDTO } from '@/@types/ecommerce/ecommerce-categories'
 import { cn } from '@/utils/class-name'
 import { priceFormatter } from '@/utils/format-currency'
 import { ShoppingBag, Star } from 'lucide-react'
 
 export function NewProduct({
-  image,
+  productImage,
   index,
   name,
   price,
-}: EachProduct & { index: number }) {
+}: EcommerceProductDTO & { index: number }) {
   return (
     <div
       className={cn(
@@ -18,11 +18,11 @@ export function NewProduct({
       <div className="w-full flex-1 overflow-hidden">
         <img
           alt={name}
-          src={image}
+          src={productImage}
           className="size-full bg-gray-200 transition-all group-hover:scale-105"
         />
       </div>
-      <div className="flex basis-[120px] items-center justify-between bg-background px-4">
+      <div className="flex basis-[120px] items-center justify-between bg-background px-4 pb-4">
         <div>
           <p className="text-lg text-gray-600">{name}</p>
           <div>
