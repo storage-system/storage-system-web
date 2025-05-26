@@ -27,7 +27,7 @@ export function ProductGeneralInfo({ product }: Props) {
         </div>
         <div className="space-y-2">
           <p>Descrição</p>
-          <Textarea value={product.description} />
+          <Textarea value={product.description} className="resize-none" />
         </div>
         <div className="space-y-2">
           <p>Status</p>
