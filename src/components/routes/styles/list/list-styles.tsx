@@ -1,33 +1,15 @@
 'use client'
 
-import { buttonVariants } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
 import { useEcommerceManagementService } from '@/services/ecommerce-management-service'
 import { useQuery } from '@tanstack/react-query'
-import { Palette, PlusCircle } from 'lucide-react'
+import { Eye, Palette, PlusCircle } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
-// function ColorPreview({ label }: { label: string }) {
-//   const randomColor = getRandomColor().toUpperCase()
-//   return (
-//     <TooltipRoot>
-//       <TooltipTrigger>
-//         <div
-//           className="size-8 rounded-full"
-//           style={{ background: randomColor }}
-//         />
-//       </TooltipTrigger>
-//       <TooltipContent>
-//         {label} : {randomColor}
-//       </TooltipContent>
-//     </TooltipRoot>
-//   )
-// }
-
 export function ListEcommerce() {
   const { getEcommerce } = useEcommerceManagementService()
-  // const { getFileUrlService } = useFilesService()
 
   const router = useRouter()
 
@@ -38,18 +20,24 @@ export function ListEcommerce() {
 
   const data = ecommerceQuery.data
 
+  function handleViewEcommerce(event: any) {
+    event.stopPropagation()
+    router.push(`/${data?.slug}/home`)
+
+  }
+
   return (
     <div className="grid w-full grid-cols-3 gap-4">
       {data ? (
         <div
-          className="group w-[350px] cursor-pointer rounded-md border-2 border-purple-100"
+          className="group w-[350px] cursor-pointer rounded-md border-2"
           onClick={() =>
             router.push(
               `${PrivateRoutes.ECOMMERCE_MANAGEMENT_UPDATE}/${data?.id}`,
             )
           }
         >
-          <div className="h-[240px] overflow-hidden bg-purple-100 px-2 pt-2">
+          <div className="h-[240px] overflow-hidden bg-purple-100 dark:bg-accent px-2 pt-2 bg-purle">
             <div className="bg-white transition-all duration-300 group-hover:scale-105">
               <img
                 className="object-cover "
@@ -58,11 +46,21 @@ export function ListEcommerce() {
               />
             </div>
           </div>
-          <div className="bg-white p-4">
-            <span className="rounded-md border border-green-500 px-2 text-lg font-medium text-green-500">
+          <div className="bg-white p-4 dark:bg-accent space-y-2">
+            <span className="rounded-md border border-green-500 px-2 text-base font-medium text-green-500">
               Publicado
             </span>
-            <p className="text-xl">{data?.name}</p>
+            <div className="flex justify-between items-center">
+              <p className="text-lg font-semibold">{data?.name}</p>
+              <Button
+                onClick={handleViewEcommerce}
+                variant="link"
+                size="icon"
+                className='cursor-pointer hover:scale-125 transition-transform duration-200'
+              >
+                <Eye className="size-5" />
+              </Button>
+            </div>
           </div>
         </div>
       ) : (

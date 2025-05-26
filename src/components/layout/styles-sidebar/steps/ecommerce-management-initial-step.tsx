@@ -34,7 +34,7 @@ export function StylesInitialStep() {
   const { setCurrentStep, initialForm } = useEcommerceManagement()
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col max-h-screen overflow-y-auto">
       <div className="gap-4 border-b border-input py-[14px] pl-3">
         <p className="font-medium">Personalize o design do seu site</p>
       </div>

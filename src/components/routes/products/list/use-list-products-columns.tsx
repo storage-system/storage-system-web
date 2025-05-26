@@ -95,8 +95,8 @@ export function useListProductsColumns() {
     {
       accessorKey: 'ecommerce',
       header: () => (
-        <div className="w-[100px] text-center font-medium">
-          Disponível no ecommerce?
+        <div className="text-center font-medium">
+          Disponível no <br /> ecommerce? 
         </div>
       ),
       cell: ({ row }) => {

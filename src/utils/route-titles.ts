@@ -16,4 +16,5 @@ export const routeTitles: RouteTitles = {
   [PrivateRoutes.CREATE_STYLES]: 'Criação de estilos',
   [PrivateRoutes.UPDATE_STYLES]: 'Atualização de estilos',
   [PrivateRoutes.MANAGE_STOCK]: 'Gerenciar estoque',
+  [PrivateRoutes.ECOMMERCE_MANAGEMENT]: 'Gerenciar e-commerce'
 }
