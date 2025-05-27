@@ -24,6 +24,7 @@ export interface Product {
   validityInDays: number
   unitOfMeasure: string
   weight: number
+  ecommerceId: string
   dimensions: DimensionsProduct
   manufacturer: string
   batch: string

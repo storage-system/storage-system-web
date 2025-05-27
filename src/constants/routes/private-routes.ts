@@ -6,8 +6,9 @@ export enum PrivateRoutes {
   CREATE_PRODUCT = '/create-product',
   COMPANY = '/companies',
   CONFIGURATIONS = '/configurations',
-  STYLES = '/styles',
-  CREATE_STYLES = '/create-styles',
+  ECOMMERCE_MANAGEMENT = '/ecommerce-management',
+  ECOMMERCE_MANAGEMENT_CREATE = '/ecommerce-management/create',
+  ECOMMERCE_MANAGEMENT_UPDATE = '/ecommerce-management/update',
   UPDATE_STYLES = '/update-styles',
   PROFILE = '/profile',
 }

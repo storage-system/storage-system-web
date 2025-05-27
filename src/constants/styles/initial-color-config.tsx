@@ -1,4 +1,4 @@
-import { ColorIdEnum } from '@/providers/style-provider'
+import { ColorIdEnum } from '@/providers/ecommerce-management-provider'
 
 export const initialColorConfig = [
   {

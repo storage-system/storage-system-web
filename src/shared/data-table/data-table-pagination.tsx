@@ -20,7 +20,7 @@ export function DataTablePagination() {
   const { table, total } = useDataTableContext()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const newParams = new URLSearchParams(searchParams)
+  const newParams = new URLSearchParams(searchParams as never)
   const pathname = usePathname()
 
   const lastPageIndex = table.getPageCount()
@@ -123,7 +123,7 @@ export function DataTablePagination() {
             disabled={!table.getCanNextPage()}
             onClick={() => updateCurrentPage(lastPageIndex)}
             size="icon"
-            variant="outline"
+            variant="ghost"
           >
             <ChevronsRightIcon className="size-4" />
           </Button>

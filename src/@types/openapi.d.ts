@@ -436,6 +436,118 @@ export interface paths {
         patch: operations["InviteController_revoke"];
         trace?: never;
     };
+    "/api/ecommerce/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["EcommerceController_publishEcommerce"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/ecommerce": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EcommerceController_retrieveEcommerceByCompanyId"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["EcommerceController_updateEcommerce"];
+        trace?: never;
+    };
+    "/api/ecommerce/update-products": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["EcommerceController_updateProducts"];
+        trace?: never;
+    };
+    "/api/ecommerce/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EcommerceController_retrieveEcommerce"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/ecommerce/{slug}/products": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EcommerceController_listProducts"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/ecommerce/{slug}/products/{productId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EcommerceController_getProduct"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/ecommerce/{slug}/categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["EcommerceController_listCategories"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -479,7 +591,7 @@ export interface components {
             fileId?: string;
         };
         HttpEachCategoryListResponse: {
-            /** @example 234159c0-a757-4fd5-99f8-9d25c29b8526 */
+            /** @example e4f3a4ec-749c-4451-bd27-31c3abb2bf53 */
             id: string;
             name: string;
             isActive?: boolean;
@@ -540,13 +652,13 @@ export interface components {
             categoryIds: string[];
         };
         HttpItemResponse: {
-            /** @example c53bbfb6-b648-4b0c-8758-e94166c239d2 */
+            /** @example 9b5131cf-9d2b-4134-bfd7-25059bf6c755 */
             id: string;
-            /** @example Johnnie Frami */
+            /** @example Laurie Vandervort */
             name: string;
         };
         HttpEachProductListResponse: {
-            /** @example 742ffa6d-a408-4b56-9064-18d58dd678c0 */
+            /** @example 7978d97e-c937-46a5-ab39-fdf0725f2636 */
             id: string;
             name: string;
             quantityInStock: number;
@@ -575,7 +687,7 @@ export interface components {
             items: components["schemas"]["HttpEachProductListResponse"][];
         };
         HttpProductGetResponse: {
-            /** @example e50a8846-50b6-48e7-b17c-565503224aba */
+            /** @example 9f23805c-faef-4e7f-b9a0-cc836215ea01 */
             id: string;
             name: string;
             description: string;
@@ -646,11 +758,11 @@ export interface components {
             reportFrequency: "diary" | "weekly" | "month" | "year";
         };
         HttpConfigurationGetResponse: {
-            /** @example a237446e-033f-4de7-a4ae-db1ae56436ce */
+            /** @example 089700c6-2055-4267-9029-4016b3fdcd56 */
             id: string;
-            /** @example 8bb981a5-9f40-4b2a-81ab-817d91fd4b8e */
+            /** @example ac75da61-8c73-44f0-a3b0-fb4f016f155a */
             userId: string;
-            /** @example 02f3d917-ff01-422a-afee-81803b694c0d */
+            /** @example 833cac78-0b28-4a51-b023-9c2eb7667649 */
             companyId: string;
             daysBeforeOldStock: number;
             warningDays: number;
@@ -686,9 +798,9 @@ export interface components {
             tertiaryColor: string;
         };
         HttpEachStyleListResponse: {
-            /** @example fd5e6a5a-cd88-49e0-b636-bb73ed51171a */
+            /** @example c406c462-30c3-4ce4-8993-c2b1a17194c8 */
             id: string;
-            /** @example e45d5cd8-f09b-498e-8801-113e137fedd5 */
+            /** @example 449c8b5e-5f9f-4857-9d35-9a339a93624a */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -709,9 +821,9 @@ export interface components {
             items: components["schemas"]["HttpEachStyleListResponse"][];
         };
         HttpStyleGetResponse: {
-            /** @example 7bfc1700-a6d1-4044-bbd5-35fd1ed3b194 */
+            /** @example e6df40c8-31dd-41d9-84fb-5a5ea392eb97 */
             id: string;
-            /** @example 8f249000-f494-4ae0-8aef-63d94dbadd3f */
+            /** @example 1d3f3f6f-c36f-4af2-b9ee-65fbba5d1506 */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -734,7 +846,7 @@ export interface components {
             tertiaryColor?: string;
         };
         HttpFileCreatedResponse: {
-            /** @example c6b5808b-e915-4714-bfa5-6f68ba355267 */
+            /** @example 4e4aa9af-1429-4f50-98fd-f1638b376e1e */
             id: string;
         };
         HttpGetFileUrlResponse: {
@@ -774,9 +886,9 @@ export interface components {
             };
         };
         HttpInviteGetResponse: {
-            /** @example 353f7fc6-d033-42ad-8bf8-d3c3a4537ad7 */
+            /** @example 9eda0646-034d-4283-b503-72afd785fa75 */
             id: string;
-            /** @example Jaden48@yahoo.com */
+            /** @example Abelardo92@hotmail.com */
             email: string;
             /** @example [
              *       "MEMBER"
@@ -787,6 +899,164 @@ export interface components {
             /** Format: date-time */
             expiresIn?: string;
         };
+        PublishEcommerceDTO: {
+            name: string;
+            /** Format: uuid */
+            ecommercePreview: string;
+            style?: {
+                name: string;
+                /** @default false */
+                isActive: boolean;
+                backgroundColor: string;
+                textColor: string;
+                primaryColor: string;
+                secondaryColor: string;
+                tertiaryColor: string;
+            };
+            /** @default [] */
+            hero: {
+                text: string;
+                /** Format: uuid */
+                fileId: string;
+            }[];
+        };
+        UpdateEcommerceDTO: {
+            /** Format: uuid */
+            ecommerceId: string;
+            name?: string;
+            /** Format: uuid */
+            ecommercePreview: string;
+            hero?: {
+                /** Format: uuid */
+                fileId: string;
+                text: string;
+            }[];
+            style?: {
+                name: string;
+                isActive: boolean;
+                backgroundColor: string;
+                textColor: string;
+                primaryColor: string;
+                secondaryColor: string;
+                tertiaryColor: string;
+            };
+        };
+        UpdateEcommerceProductsDTO: {
+            /** Format: uuid */
+            id: string;
+            /** @enum {string} */
+            action: "add" | "remove";
+        }[];
+        RetrieveEcommerceDTO: {
+            /** Format: uuid */
+            id: string;
+            createdAt: unknown;
+            productIds: string[];
+            name: string;
+            /** Format: uuid */
+            companyId: string;
+            isActive: boolean;
+            previewUrl?: string;
+            slug: {
+                value: string;
+            };
+            /** @default [] */
+            styles: {
+                /** Format: uuid */
+                id: string;
+                createdAt: unknown;
+                name: string;
+                isActive: boolean;
+                backgroundColor: string;
+                textColor: string;
+                primaryColor: string;
+                secondaryColor: string;
+                tertiaryColor: string;
+            }[];
+            /** @default [] */
+            hero: {
+                fileId: string;
+                text: string;
+                fileUrl: string;
+            }[];
+            updatedAt?: unknown;
+        };
+        EcommerceProductsDTO: {
+            items: {
+                id: string;
+                name: string;
+                quantityInStock: number;
+                minimumStock: number;
+                manufactureDate: unknown;
+                dueDate: unknown;
+                validityInDays: number;
+                manufacturer?: string;
+                batch?: string;
+                /** @enum {string} */
+                status: "ACTIVE" | "INACTIVE" | "OUT_OF_STOCK";
+                productImage?: string;
+                price: number;
+                categories: {
+                    id: string;
+                    name: string;
+                }[];
+                createdAt: unknown;
+                updatedAt?: unknown;
+                deletedAt?: unknown;
+            }[];
+            total: number;
+            page: number;
+        };
+        GetEcommerceProductDTO: {
+            id: string;
+            name: string;
+            description: string;
+            originalPrice: number;
+            finalPrice: number;
+            discountPercentage: number;
+            quantityInStock: number;
+            minimumStock: number;
+            manufactureDate: unknown;
+            dueDate: unknown;
+            validityInDays: number;
+            unitOfMeasure: string;
+            weight: number;
+            dimensions?: {
+                height: number;
+                width: number;
+                length: number;
+            };
+            manufacturer?: string;
+            batch?: string;
+            /** @enum {string} */
+            status: "ACTIVE" | "INACTIVE" | "OUT_OF_STOCK";
+            productImage?: string;
+            ecommerceId?: string;
+            categories: {
+                id: string;
+                name: string;
+                isActive: boolean;
+            }[];
+            attachments?: {
+                id: string;
+                filename: string;
+                type: string;
+                url: string;
+            }[];
+            createdAt: unknown;
+            updatedAt?: unknown;
+            deletedAt?: unknown;
+        };
+        EcommerceCategoriesDTO: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            isActive?: boolean;
+            /** Format: uuid */
+            iconId?: string;
+            createdAt: unknown;
+            updatedAt?: unknown;
+        }[];
     };
     responses: never;
     parameters: never;
@@ -1592,6 +1862,179 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    EcommerceController_publishEcommerce: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PublishEcommerceDTO"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    EcommerceController_retrieveEcommerceByCompanyId: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ecommerce retrieved successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RetrieveEcommerceDTO"];
+                };
+            };
+        };
+    };
+    EcommerceController_updateEcommerce: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEcommerceDTO"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    EcommerceController_updateProducts: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEcommerceProductsDTO"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    EcommerceController_retrieveEcommerce: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    EcommerceController_listProducts: {
+        parameters: {
+            query: {
+                /** @description Page number for pagination */
+                page?: number;
+                /** @description Number of items per page */
+                perPage?: number;
+                categoryId: string;
+            };
+            header?: never;
+            path: {
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Products retrieved successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EcommerceProductsDTO"];
+                };
+            };
+        };
+    };
+    EcommerceController_getProduct: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                slug: string;
+                productId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetEcommerceProductDTO"];
+                };
+            };
+        };
+    };
+    EcommerceController_listCategories: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EcommerceCategoriesDTO"];
+                };
             };
         };
     };

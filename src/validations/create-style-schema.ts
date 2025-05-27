@@ -1,10 +1,6 @@
 import { z } from 'zod'
 
 export const createStyleSchema = z.object({
-  companyId: z.string({
-    required_error: 'O ID da empresa é obrigatório.',
-    invalid_type_error: 'O ID da empresa deve ser uma string.',
-  }),
   name: z.string({
     required_error: 'O nome do estilo é obrigatório.',
     invalid_type_error: 'O nome deve ser uma string.',

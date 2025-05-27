@@ -110,8 +110,8 @@ export const sidebarConfig: SidebarConfig = {
           icon: <Settings2 className="size-4" />,
         },
         {
-          title: 'Estilos',
-          href: PrivateRoutes.STYLES,
+          title: 'Ecommerce',
+          href: PrivateRoutes.ECOMMERCE_MANAGEMENT,
           items: [],
           icon: <Palette className="size-4" />,
         },
