@@ -13,7 +13,7 @@ export default async function HomePage() {
       <Card className="space-y-2">
         <h3 className="font-bold text-textPrimary">Bem vindo, {username}</h3>
       </Card>
-      <Tabs>
+      <Tabs defaultValue={DashboardTabs.OLD_STOCK}>
         <TabsList>
           <TabsTrigger value={DashboardTabs.OLD_STOCK}>Old stock</TabsTrigger>
           <TabsTrigger value={DashboardTabs.NEW_STOCK}>New stock</TabsTrigger>
