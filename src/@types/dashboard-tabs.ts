@@ -1,4 +1,4 @@
 export enum DashboardTabs {
-  OLD_STOCK = 'old-stock',
-  NEW_STOCK = 'new-stock',
+  OLD_STOCK = "old-stock",
+  GENERAL_STOCK = "general-stock",
 }

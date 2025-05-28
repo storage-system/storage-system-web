@@ -1,4 +1,5 @@
 import { DashboardTabs } from '@/@types/dashboard-tabs'
+import { NewStockMetrics } from '@/components/routes/metrics/general-stock-metrics'
 import { OldStockMetrics } from '@/components/routes/metrics/old-stock-metrics'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { authOptions } from '@/lib/auth/auth-options'
@@ -20,12 +21,16 @@ export default async function HomePage() {
       <Tabs defaultValue={DashboardTabs.OLD_STOCK}>
         <TabsList>
           <TabsTrigger value={DashboardTabs.OLD_STOCK}>Old stock</TabsTrigger>
-          <TabsTrigger value={DashboardTabs.NEW_STOCK}>New stock</TabsTrigger>
+          <TabsTrigger value={DashboardTabs.GENERAL_STOCK}>
+            Stock Geral
+          </TabsTrigger>
         </TabsList>
         <TabsContent value={DashboardTabs.OLD_STOCK}>
           <OldStockMetrics />
         </TabsContent>
-        <TabsContent value={DashboardTabs.NEW_STOCK}></TabsContent>
+        <TabsContent value={DashboardTabs.GENERAL_STOCK}>
+          <NewStockMetrics />
+        </TabsContent>
       </Tabs>
     </div>
   )
