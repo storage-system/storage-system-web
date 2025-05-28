@@ -36,6 +36,8 @@ function RenderStep({ currentStep }: { currentStep: CurrentStep }) {
       return <StylesInitialStep />
     case CurrentStep.HERO_IMAGES:
       return <HeroImages />
+    case CurrentStep.BENEFITS_SECTION:
+      return <HeroImages />
     case CurrentStep.CUSTOM_THEME:
       return <CustomStyle />
   }

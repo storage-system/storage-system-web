@@ -16,9 +16,15 @@ import { useFilesService } from '@/services/files'
 import { useMutation } from '@tanstack/react-query'
 import { ImageMinus, ImagePlus } from 'lucide-react'
 
-export function HeroImages() {
-  const { heroForm, heroFieldArray, setCurrentStep, fileNames, setFileNames } =
-    useEcommerceManagement()
+export function BenefitsSection() {
+  const {
+    benefitsForm,
+    benefitsFieldArray,
+    setCurrentStep,
+    initialForm,
+    fileNames,
+    setFileNames,
+  } = useEcommerceManagement()
 
   const { uploadFileService } = useFilesService()
   const uploadFileMutation = useMutation({
@@ -36,7 +42,7 @@ export function HeroImages() {
       </div>
       <ScrollArea className="flex-1 pb-4">
         <div className="mx-3 flex flex-col gap-4">
-          {heroFieldArray.fields.map((field, index, array) => (
+          {benefitsFieldArray.fields.map((field, index, array) => (
             <div
               className="relative flex w-full flex-1 flex-col border-b border-input pb-4 pt-2"
               key={field.id}
@@ -45,7 +51,7 @@ export function HeroImages() {
                 <TooltipRoot>
                   <TooltipTrigger
                     asChild
-                    onClick={() => heroFieldArray.remove(field.id as never)}
+                    onClick={() => benefitsFieldArray.remove(field.id as never)}
                   >
                     <ImageMinus
                       className="absolute right-0 cursor-pointer text-zinc-700 hover:text-destructive dark:text-white"
@@ -57,16 +63,16 @@ export function HeroImages() {
               )}
 
               <FormField
-                control={heroForm.control}
-                name={`hero.${index}.text`}
+                control={benefitsForm.control}
+                name={`benefits.${index}.text`}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Texto do slide</FormLabel>
                     <Input {...field} />
-                    {heroForm.formState.errors?.hero?.[index]?.text && (
+                    {benefitsForm.formState.errors?.benefits?.[index]?.text && (
                       <p className="text-sm text-destructive">
                         {
-                          heroForm.formState.errors?.hero?.[index]?.text
+                          benefitsForm.formState.errors?.benefits?.[index]?.text
                             ?.message
                         }
                       </p>
@@ -75,23 +81,24 @@ export function HeroImages() {
                 )}
               />
               <FormField
-                control={heroForm.control}
-                name={`hero.${index}.fileId`}
+                control={benefitsForm.control}
+                name={`benefits.${index}.fileId`}
                 render={({ field, fieldState }) => (
                   <FormItem>
                     <FormLabel>Imagem de fundo</FormLabel>
                     <FileInput
                       placeholder={
                         fileNames.find(
-                          (item) => item.fieldId === `hero.${index}.fileId`,
+                          (item) => item.fieldId === `benefits.${index}.fileId`,
                         )?.filename ?? 'Escolha uma imagem'
                       }
                       name={field.name}
                       onClick={() => {
-                        heroForm.resetField(field.name)
+                        benefitsForm.resetField(field.name)
                         setFileNames((prev) =>
                           prev.filter(
-                            (item) => item.fieldId !== `hero.${index}.fileId`,
+                            (item) =>
+                              item.fieldId !== `benefits.${index}.fileId`,
                           ),
                         )
                       }}
@@ -130,7 +137,7 @@ export function HeroImages() {
             className="flex gap-2 text-primary"
             variant="outline"
             onClick={() => {
-              heroFieldArray.append({ text: '', fileId: '' })
+              benefitsFieldArray.append({ text: '', fileId: '' })
             }}
           >
             <ImagePlus size={14} /> Adicionar imagem ao carrossel
@@ -139,7 +146,7 @@ export function HeroImages() {
             className="flex gap-2"
             type="button"
             onClick={async () => {
-              const isValid = await heroForm.trigger()
+              const isValid = await benefitsForm.trigger()
               if (isValid) {
                 setCurrentStep(CurrentStep.INITIAL)
               }

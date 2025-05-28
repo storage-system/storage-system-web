@@ -9,11 +9,12 @@ import {
   CreateStyleType,
 } from '@/validations/create-style-schema'
 import {
+  benefitsSchema,
+  BenefitsType,
   heroSchema,
   HeroType,
   initialFormSchema,
   InitialFormType,
-  publishEcommerceSchema,
   PublishEcommerceType,
 } from '@/validations/publish-ecommerce-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -42,6 +43,7 @@ export enum CurrentStep {
   INITIAL = 'initial',
   CUSTOM_THEME = 'custom-theme',
   HERO_IMAGES = 'hero-images',
+  BENEFITS_SECTION = 'benefits-section',
 }
 
 export enum ColorIdEnum {
@@ -73,6 +75,8 @@ interface EcommerceManagementContext {
   >
   heroForm: UseFormReturn<HeroType>
   heroFieldArray: UseFieldArrayReturn<HeroType>
+  benefitsForm: UseFormReturn<BenefitsType>
+  benefitsFieldArray: UseFieldArrayReturn<BenefitsType>
   previewRef: React.RefObject<HTMLDivElement>
   previewImage: string | null
   isCapturing: boolean
@@ -151,6 +155,18 @@ export function EcommerceManagementProvider({
     control: heroForm.control,
   })
 
+  const benefitsForm = useForm<BenefitsType>({
+    resolver: zodResolver(benefitsSchema),
+    defaultValues: {
+      benefits: [{ text: '', fileId: '' }],
+    },
+  })
+
+  const benefitsFieldArray = useFieldArray({
+    name: 'benefits',
+    control: benefitsForm.control,
+  })
+
   const activeEcommerceQuery = useQuery({
     queryKey: ['active-ecommerce', id],
     queryFn: getEcommerce,
@@ -225,6 +241,7 @@ export function EcommerceManagementProvider({
       ...initialForm.getValues(),
       style: createStyleForm.getValues(),
       hero: heroForm.getValues().hero,
+      benefits: benefitsForm.getValues().benefits,
     }
 
     publishEcommerce.mutate(data)
@@ -241,6 +258,7 @@ export function EcommerceManagementProvider({
       ...initialForm.getValues(),
       style: createStyleForm.getValues(),
       hero: heroForm.getValues().hero,
+      benefits: benefitsForm.getValues().benefits,
       id,
     }
 
@@ -304,6 +322,8 @@ export function EcommerceManagementProvider({
         previewRef,
         previewImage,
         isCapturing,
+        benefitsForm,
+        benefitsFieldArray,
         isLoading,
         fileNames,
         setFileNames,
