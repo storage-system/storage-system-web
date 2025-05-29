@@ -10,7 +10,12 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/components/ui/line-tab'
 import {
   StockOperation,
   UpdateProductStockRequest,
@@ -50,9 +55,10 @@ export const StockAdjustment: React.FC<StockAdjustmentProps> = ({
 
     setQuantity(1)
 
-    product.quantityInStock = operation === 'INCREASE'
-      ? product.quantityInStock + quantity
-      : product.quantityInStock - quantity
+    product.quantityInStock =
+      operation === 'INCREASE'
+        ? product.quantityInStock + quantity
+        : product.quantityInStock - quantity
     if (product.quantityInStock < 0) {
       product.quantityInStock = 0
     }
