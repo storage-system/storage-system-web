@@ -356,7 +356,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/metrics": {
+    "/api/metrics/old-stock": {
         parameters: {
             query?: never;
             header?: never;
@@ -591,7 +591,7 @@ export interface components {
             fileId?: string;
         };
         HttpEachCategoryListResponse: {
-            /** @example e4f3a4ec-749c-4451-bd27-31c3abb2bf53 */
+            /** @example eeb5e9e4-67d9-40e5-a2a4-4eb83c354a21 */
             id: string;
             name: string;
             isActive?: boolean;
@@ -652,13 +652,13 @@ export interface components {
             categoryIds: string[];
         };
         HttpItemResponse: {
-            /** @example 9b5131cf-9d2b-4134-bfd7-25059bf6c755 */
+            /** @example c8c63494-a111-4290-bfb8-87265b445d9b */
             id: string;
-            /** @example Laurie Vandervort */
+            /** @example Terry Fisher */
             name: string;
         };
         HttpEachProductListResponse: {
-            /** @example 7978d97e-c937-46a5-ab39-fdf0725f2636 */
+            /** @example 2681ccbb-81a6-4414-8d3e-963872f6e81a */
             id: string;
             name: string;
             quantityInStock: number;
@@ -687,7 +687,7 @@ export interface components {
             items: components["schemas"]["HttpEachProductListResponse"][];
         };
         HttpProductGetResponse: {
-            /** @example 9f23805c-faef-4e7f-b9a0-cc836215ea01 */
+            /** @example f124a332-ab47-4b39-9634-7d608f4ee49c */
             id: string;
             name: string;
             description: string;
@@ -746,7 +746,6 @@ export interface components {
         CreateConfigurationDTO: {
             /** Format: uuid */
             userId: string;
-            /** Format: uuid */
             companyId: string;
             daysBeforeOldStock: number;
             warningDays: number;
@@ -758,11 +757,11 @@ export interface components {
             reportFrequency: "diary" | "weekly" | "month" | "year";
         };
         HttpConfigurationGetResponse: {
-            /** @example 089700c6-2055-4267-9029-4016b3fdcd56 */
+            /** @example d2445a12-fd8a-49af-9a48-d31f729bae40 */
             id: string;
-            /** @example ac75da61-8c73-44f0-a3b0-fb4f016f155a */
+            /** @example 40517246-108c-405f-877d-00b0b423f042 */
             userId: string;
-            /** @example 833cac78-0b28-4a51-b023-9c2eb7667649 */
+            /** @example 58292c13-aaa6-45b4-a4c1-7af5fa6905ad */
             companyId: string;
             daysBeforeOldStock: number;
             warningDays: number;
@@ -798,9 +797,9 @@ export interface components {
             tertiaryColor: string;
         };
         HttpEachStyleListResponse: {
-            /** @example c406c462-30c3-4ce4-8993-c2b1a17194c8 */
+            /** @example 62ff26bd-a6d5-4bfe-8ea9-d7577c0f9086 */
             id: string;
-            /** @example 449c8b5e-5f9f-4857-9d35-9a339a93624a */
+            /** @example 08bc0e14-df28-411b-9147-e09d8e521586 */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -821,9 +820,9 @@ export interface components {
             items: components["schemas"]["HttpEachStyleListResponse"][];
         };
         HttpStyleGetResponse: {
-            /** @example e6df40c8-31dd-41d9-84fb-5a5ea392eb97 */
+            /** @example 954117ae-9066-43e5-9cac-9a15acff8be7 */
             id: string;
-            /** @example 1d3f3f6f-c36f-4af2-b9ee-65fbba5d1506 */
+            /** @example c0f6fff6-47d6-4248-befc-07a06e3f286a */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -846,7 +845,7 @@ export interface components {
             tertiaryColor?: string;
         };
         HttpFileCreatedResponse: {
-            /** @example 4e4aa9af-1429-4f50-98fd-f1638b376e1e */
+            /** @example 0823f971-2841-4164-ba9c-0164ccec9f57 */
             id: string;
         };
         HttpGetFileUrlResponse: {
@@ -886,9 +885,9 @@ export interface components {
             };
         };
         HttpInviteGetResponse: {
-            /** @example 9eda0646-034d-4283-b503-72afd785fa75 */
+            /** @example a3a2515b-f18e-40f0-8fdc-90d360e97141 */
             id: string;
-            /** @example Abelardo92@hotmail.com */
+            /** @example Emmanuel.Cronin@hotmail.com */
             email: string;
             /** @example [
              *       "MEMBER"
@@ -921,8 +920,6 @@ export interface components {
             }[];
         };
         UpdateEcommerceDTO: {
-            /** Format: uuid */
-            ecommerceId: string;
             name?: string;
             /** Format: uuid */
             ecommercePreview: string;

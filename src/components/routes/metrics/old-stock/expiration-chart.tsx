@@ -1,3 +1,4 @@
+import { ExpirationChartDaum } from '@/@types/metrics'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   BarChart,
@@ -7,37 +8,14 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  Cell,
 } from 'recharts'
 
-const data = [
-  {
-    name: 'Vencidos',
-    quantidade: 12,
-    color: '#ef4444',
-  },
-  {
-    name: '7 dias',
-    quantidade: 8,
-    color: '#f59e0b',
-  },
-  {
-    name: '15 dias',
-    quantidade: 15,
-    color: '#eab308',
-  },
-  {
-    name: '30 dias',
-    quantidade: 23,
-    color: '#22c55e',
-  },
-  {
-    name: '30+ dias',
-    quantidade: 45,
-    color: '#3b82f6',
-  },
-]
+export interface Props {
+  data: ExpirationChartDaum[]
+}
 
-export const ExpirationChart = () => {
+export const ExpirationChart = ({ data }: Props) => {
   return (
     <Card>
       <CardHeader>
@@ -56,11 +34,11 @@ export const ExpirationChart = () => {
                 borderRadius: '6px',
               }}
             />
-            <Bar
-              dataKey="quantidade"
-              fill="hsl(var(--primary))"
-              radius={[4, 4, 0, 0]}
-            />
+            <Bar dataKey="quantidade" radius={[4, 4, 0, 0]}>
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color} />
+              ))}
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </CardContent>

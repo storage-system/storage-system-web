@@ -18,66 +18,13 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { AlertTriangle, Search, Calendar } from 'lucide-react'
+import { ProductBase } from '@/@types/metrics'
 
-// Mock data para produtos vencidos
-const expiredProductsData = [
-  {
-    id: 1,
-    name: 'Leite Integral 1L',
-    category: 'Alimentos',
-    quantity: 15,
-    expirationDate: '2025-05-25',
-    daysExpired: 2,
-    value: 'R$ 4,50',
-  },
-  {
-    id: 2,
-    name: 'Suco de Laranja 500ml',
-    category: 'Bebidas',
-    quantity: 8,
-    expirationDate: '2025-05-20',
-    daysExpired: 7,
-    value: 'R$ 3,20',
-  },
-  {
-    id: 3,
-    name: 'Iogurte Natural',
-    category: 'Alimentos',
-    quantity: 12,
-    expirationDate: '2025-05-10',
-    daysExpired: 17,
-    value: 'R$ 2,80',
-  },
-  {
-    id: 4,
-    name: 'Paracetamol 500mg',
-    category: 'Medicamentos',
-    quantity: 5,
-    expirationDate: '2025-04-30',
-    daysExpired: 27,
-    value: 'R$ 8,90',
-  },
-  {
-    id: 5,
-    name: 'Shampoo Anticaspa',
-    category: 'Cosméticos',
-    quantity: 3,
-    expirationDate: '2025-04-15',
-    daysExpired: 42,
-    value: 'R$ 12,50',
-  },
-  {
-    id: 6,
-    name: 'Biscoito Cream Cracker',
-    category: 'Alimentos',
-    quantity: 20,
-    expirationDate: '2025-04-10',
-    daysExpired: 47,
-    value: 'R$ 1,90',
-  },
-]
+interface Props {
+  expiredProductsData: ProductBase[]
+}
 
-export const ExpiredProductsTable = () => {
+export const ExpiredProductsTable = ({ expiredProductsData }: Props) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [periodFilter, setPeriodFilter] = useState('all')
 
@@ -89,7 +36,7 @@ export const ExpiredProductsTable = () => {
     let matchesPeriod = true
     if (periodFilter !== 'all') {
       const days = parseInt(periodFilter)
-      matchesPeriod = product.daysExpired <= days
+      matchesPeriod = Math.abs(product.daysToExpire) <= days
     }
 
     return matchesSearch && matchesPeriod
@@ -122,8 +69,8 @@ export const ExpiredProductsTable = () => {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+      <CardHeader className="">
+        <CardTitle className="mb-2 flex items-center gap-2">
           <AlertTriangle className="size-5 text-red-500" />
           Produtos Vencidos
         </CardTitle>
@@ -149,6 +96,7 @@ export const ExpiredProductsTable = () => {
               <SelectItem value="15">Até 15 dias</SelectItem>
               <SelectItem value="30">Até 30 dias</SelectItem>
               <SelectItem value="45">Até 45 dias</SelectItem>
+              <SelectItem value="60">Até 60 dias</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -178,14 +126,12 @@ export const ExpiredProductsTable = () => {
                     <TableCell>{product.category}</TableCell>
                     <TableCell>{product.quantity}</TableCell>
                     <TableCell>
-                      {new Date(product.expirationDate).toLocaleDateString(
-                        'pt-BR',
-                      )}
+                      {new Date(product.dueDate).toLocaleDateString('pt-BR')}
                     </TableCell>
-                    <TableCell>{product.daysExpired}</TableCell>
-                    <TableCell>{product.value}</TableCell>
+                    <TableCell>{Math.abs(product.daysToExpire)}</TableCell>
+                    <TableCell>{product.price}</TableCell>
                     <TableCell>
-                      {getExpiredBadge(product.daysExpired)}
+                      {getExpiredBadge(Math.abs(product.daysToExpire))}
                     </TableCell>
                   </TableRow>
                 ))

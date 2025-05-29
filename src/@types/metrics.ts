@@ -1,32 +1,50 @@
-import { ReactNode } from 'react'
+import { ReactNode } from "react";
 
 export type ItemsSectionsType = {
-  label: string
-  value: number | string
-  icon: ReactNode
-}
+  label: string;
+  value: number | string;
+  icon: ReactNode;
+};
 
 export type SectionsType = {
-  title: string
-  items: ItemsSectionsType[]
+  title: string;
+  items: ItemsSectionsType[];
+};
+
+export interface ExpirationChartDaum {
+  name: string;
+  quantidade: number;
+  color: string;
+}
+
+export interface ProductBase {
+  id: string;
+  name: string;
+  dueDate: Date;
+  daysToExpire: number;
+  quantity: number;
+  price: number;
+  status: string;
+  category: string;
 }
 
 export interface OldStockMetrics {
-  totalProductOldStock: number
-  totalOldStockValue: number
-  expiringIn30Days: number
-  expiringIn60Days: number
-  expiringIn90Days: number
-  percentageOldStock: number
+  expiredCount: number;
+  criticalCount: number;
+  atRiskValue: number;
+  expirationChartData: ExpirationChartDaum[];
+  criticalProducts: ProductBase[];
+  expiredProducts: ProductBase[];
+  warningProducts: ProductBase[];
 }
 
 export interface ProductMetrics {
-  totalStockQuantity: number
-  totalStockValue: number
-  productsInWarningDays: number
+  totalStockQuantity: number;
+  totalStockValue: number;
+  productsInWarningDays: number;
 }
 
 export interface Metrics {
-  oldStockMetrics: OldStockMetrics
-  productMetrics: ProductMetrics
+  oldStockMetrics: OldStockMetrics;
+  productMetrics: ProductMetrics;
 }
