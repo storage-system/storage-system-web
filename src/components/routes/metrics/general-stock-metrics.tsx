@@ -5,7 +5,6 @@ import { StatsCard } from './stats-card'
 import { CategoryOverview } from './general-stock/category-overview'
 import { CategoryBarChart } from './general-stock/category-bar-chart'
 import { ManufacturingDateChart } from './general-stock/manufacturing-date-chart'
-import { RecentActivity } from './old-stock/recent-activity'
 import { StockSummaryMetrics } from './general-stock/stock-summary-metrics'
 
 export function NewStockMetrics() {
@@ -49,8 +48,6 @@ export function NewStockMetrics() {
         <CategoryBarChart />
         <ManufacturingDateChart />
       </div>
-
-      <RecentActivity />
     </div>
   )
 }
