@@ -1,4 +1,5 @@
 import {
+  ColorIdEnum,
   CurrentStep,
   useEcommerceManagement,
 } from '@/providers/ecommerce-management-provider'
@@ -6,32 +7,11 @@ import { cn } from '@/utils/class-name'
 import { StyleCard } from './style-card'
 import { FormField } from '@/components/ui/form'
 import { FormMessage } from '@/shared/form/form-message'
-
-const highlightedThemes = [
-  {
-    title: 'Enérgica',
-    description: 'Vibrante e alegre',
-    paletteColors: ['#0000FF', '#FFC0CB', '#FF69B4', '#C71585'],
-  },
-  {
-    title: 'Retrô',
-    description: 'Nostálgico e estiloso',
-    paletteColors: ['#008080', '#FFD700', '#FF6347', '#DC143C'],
-  },
-  {
-    title: 'Dinâmico',
-    description: 'Ativo e brilhante',
-    paletteColors: ['#FFFF00', '#FF00FF', '#8A2BE2', '#4B0082'],
-  },
-  {
-    title: 'Nostálgico',
-    description: 'Aconchegante e confortável',
-    paletteColors: ['#8B0000', '#FFE4E1', '#4682B4', '#D3D3D3'],
-  },
-]
+import { predefinedThemes } from '@/constants/styles/predefined-themes'
 
 export function StylesInitialStep() {
-  const { setCurrentStep, initialForm } = useEcommerceManagement()
+  const { setCurrentStep, initialForm, createStyleForm, setColors } =
+    useEcommerceManagement()
 
   return (
     <div className="flex max-h-screen flex-col overflow-y-auto">
@@ -103,12 +83,40 @@ export function StylesInitialStep() {
         <p className="text-[10px] uppercase text-textPrimary">
           Temas em destaque
         </p>
-        {highlightedThemes.map((theme, index) => (
+        {predefinedThemes.map((theme, index) => (
           <StyleCard
             key={index}
-            title={theme.title}
+            title={theme.name}
             description={theme.description}
-            paletteColors={theme.paletteColors}
+            paletteColors={theme.colors.map((c) => c.hex).slice(0, 4)}
+            onClick={() => {
+              setColors(theme.colors)
+              const background = theme.colors.find(
+                (c) => c.colorId === ColorIdEnum.BACKGROUND_COLOR,
+              )?.hex
+              const text = theme.colors.find(
+                (c) => c.colorId === ColorIdEnum.TEXT_COLOR,
+              )?.hex
+              const primary = theme.colors.find(
+                (c) => c.colorId === ColorIdEnum.PRIMARY_COLOR,
+              )?.hex
+              const secondary = theme.colors.find(
+                (c) => c.colorId === ColorIdEnum.SECONDARY_COLOR,
+              )?.hex
+              const tertiary = theme.colors.find(
+                (c) => c.colorId === ColorIdEnum.TERTIARY_COLOR,
+              )?.hex
+
+              createStyleForm.reset({
+                name: theme.name,
+                isActive: false,
+                backgroundColor: background ?? '',
+                textColor: text ?? '',
+                primaryColor: primary ?? '',
+                secondaryColor: secondary ?? '',
+                tertiaryColor: tertiary ?? '',
+              })
+            }}
           />
         ))}
       </div>

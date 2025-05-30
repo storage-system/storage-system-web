@@ -34,7 +34,7 @@ export function CategoriesSection() {
         >
           Navegue pelas categorias
         </h2>
-        <div className="flex gap-4">
+        <div className="flex">
           {categoriesList.map((_, index, array) => (
             <button type="button" className="flex items-center" key={index}>
               <div

@@ -12,6 +12,7 @@ export const heroSchema = z.object({
 
 const benefitsItemSchema = z.object({
   text: z.string().min(1).max(255),
+  description: z.string().min(1).max(255),
   fileId: z.string().uuid().min(1),
 })
 

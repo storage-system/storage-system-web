@@ -34,16 +34,10 @@ export function Hero() {
   const heroData = heroForm.watch('hero') || []
 
   useEffect(() => {
-    if (!api) {
-      return undefined
-    }
+    if (!api) return undefined
     setCount(api.scrollSnapList().length)
     setCurrent(api.selectedScrollSnap() + 1)
-
-    const handleSelect = () => {
-      setCurrent(api.selectedScrollSnap() + 1)
-    }
-
+    const handleSelect = () => setCurrent(api.selectedScrollSnap() + 1)
     api.on('select', handleSelect)
     return () => {
       api.off('select', handleSelect)
@@ -95,18 +89,22 @@ export function Hero() {
                 }}
               >
                 <div
-                  className="absolute inset-0 bg-black/30"
+                  className="absolute inset-0"
                   style={{
-                    backgroundColor: backgroundColor
-                      ? `${backgroundColor}80`
-                      : 'rgba(0, 0, 0, 0.3)',
+                    background:
+                      backgroundColor && backgroundColor !== '#ffffff'
+                        ? `${backgroundColor}33` // ~90% opacity
+                        : 'rgba(0,0,0,0.5)',
                   }}
                 />
-                <div className="relative z-10 flex w-full max-w-[1200px] items-center">
+                <div className="relative z-10 flex w-full max-w-[1200px] items-center px-8">
                   <div className="flex flex-col gap-10">
                     <p
                       className="w-2/3 text-4xl font-semibold sm:text-6xl"
-                      style={{ color: textColor || 'white' }}
+                      style={{
+                        color: textColor || '#ffffff',
+                        textShadow: '1px 1px 2px rgba(0,0,0,0.4)',
+                      }}
                     >
                       {heroItem.text ||
                         'Sou um título. Clique aqui para editar e adicionar seu próprio texto.'}
@@ -119,6 +117,7 @@ export function Hero() {
         </CarouselContent>
       </CarouselComponent>
 
+      {/* Indicadores do carrossel */}
       <div className="absolute inset-x-0 bottom-8">
         <div className="py-2 text-center text-sm">
           {Array.from({ length: count }).map((_, index) => (
@@ -134,8 +133,8 @@ export function Hero() {
               style={{
                 backgroundColor:
                   current === index + 1
-                    ? primaryColor || 'white'
-                    : secondaryColor || '#9ca3af',
+                    ? primaryColor || '#ffffff'
+                    : secondaryColor || '#94a3b8',
               }}
               aria-label={`Ir para slide ${index + 1}`}
             />

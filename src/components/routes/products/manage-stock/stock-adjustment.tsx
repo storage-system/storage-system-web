@@ -50,9 +50,10 @@ export const StockAdjustment: React.FC<StockAdjustmentProps> = ({
 
     setQuantity(1)
 
-    product.quantityInStock = operation === 'INCREASE'
-      ? product.quantityInStock + quantity
-      : product.quantityInStock - quantity
+    product.quantityInStock =
+      operation === 'INCREASE'
+        ? product.quantityInStock + quantity
+        : product.quantityInStock - quantity
     if (product.quantityInStock < 0) {
       product.quantityInStock = 0
     }

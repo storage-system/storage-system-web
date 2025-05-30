@@ -1,3 +1,7 @@
+import {
+  useEcommerceManagement,
+  ColorIdEnum,
+} from '@/providers/ecommerce-management-provider'
 import { cn } from '@/utils/class-name'
 import { ShoppingBag, Star } from 'lucide-react'
 import Link from 'next/link'
@@ -11,47 +15,75 @@ export function CategoriesProduct({
 }: any & {
   index: number
 }) {
+  const { colors } = useEcommerceManagement()
+
+  const getColor = (type: ColorIdEnum) =>
+    colors.find((c) => c.colorId === type)?.hex
+
+  const primaryColor = getColor(ColorIdEnum.PRIMARY_COLOR)
+  const textColor = getColor(ColorIdEnum.TEXT_COLOR)
+  const backgroundColor = getColor(ColorIdEnum.BACKGROUND_COLOR)
+  const mutedColor = getColor(ColorIdEnum.SECONDARY_COLOR)
+  const borderColor = getColor(ColorIdEnum.SECONDARY_COLOR)
+
   return (
     <Link
       href={`ecommerce/${id}`}
       className={cn(
-        'flex h-96 flex-col border border-primary/30 bg-background p-1 group',
+        'group flex h-96 flex-col border p-1 transition-colors',
         index >= 4 && 'border-t-0',
         index % 4 !== 3 && 'border-r-0',
       )}
+      style={{
+        backgroundColor: backgroundColor || undefined,
+        borderColor: borderColor || undefined,
+      }}
     >
       <div className="w-full flex-1 overflow-hidden">
         <img
           alt={name}
           src={image}
-          className="size-full bg-gray-200 transition-all group-hover:scale-105"
+          className="size-full object-cover transition-all group-hover:scale-105"
+          style={{
+            backgroundColor: mutedColor || '#f3f4f6',
+          }}
         />
       </div>
-      <div className="flex basis-[120px] items-center justify-between bg-background px-4">
+
+      <div className="flex basis-[120px] items-center justify-between px-4 py-3 transition-colors">
         <div>
-          <p className="text-lg text-gray-600">{name}</p>
-          <div>
-            <p className="text-lg font-bold text-gray-600">
-              {price.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              })}
-            </p>
-          </div>
+          <p
+            className="text-base font-medium"
+            style={{ color: textColor || undefined }}
+          >
+            {name}
+          </p>
+          <p
+            className="text-lg font-bold"
+            style={{ color: primaryColor || undefined }}
+          >
+            {price.toLocaleString('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
+          </p>
           <div className="mt-2 flex gap-1">
             {Array.from({ length: 5 }).map((_, index) => (
               <Star
                 key={index}
-                className="size-4 fill-amber-600 text-amber-600"
+                className="size-4"
+                style={{ color: '#facc15', fill: '#facc15' }}
               />
             ))}
           </div>
         </div>
+
         <div
-          className={cn(
-            'rounded-full p-3',
-            index === 0 ? 'bg-primary/20 text-primary' : 'bg-gray-300',
-          )}
+          className="rounded-full p-3 transition-colors"
+          style={{
+            backgroundColor: index === 0 ? primaryColor + '33' : borderColor,
+            color: index === 0 ? primaryColor : undefined,
+          }}
         >
           <ShoppingBag />
         </div>

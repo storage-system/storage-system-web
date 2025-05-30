@@ -73,6 +73,17 @@ interface EcommerceManagementContext {
       { fieldId: string; filename: string; file: File; fileId: string }[]
     >
   >
+  benefitFileNames: {
+    fieldId: string
+    filename: string
+    file: File
+    fileId: string
+  }[]
+  setBenefitFileNames: Dispatch<
+    SetStateAction<
+      { fieldId: string; filename: string; file: File; fileId: string }[]
+    >
+  >
   heroForm: UseFormReturn<HeroType>
   heroFieldArray: UseFieldArrayReturn<HeroType>
   benefitsForm: UseFormReturn<BenefitsType>
@@ -111,6 +122,9 @@ export function EcommerceManagementProvider({
   const [fileNames, setFileNames] = useState<
     { fieldId: string; filename: string; file: File; fileId: string }[]
   >([])
+  const [benefitFileNames, setBenefitFileNames] = useState<
+    { fieldId: string; filename: string; file: File; fileId: string }[]
+  >([])
   const [colors, setColors] = useState<IColor[]>(initialColorConfig)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [isCapturing, setIsCapturing] = useState(false)
@@ -124,6 +138,7 @@ export function EcommerceManagementProvider({
   const createStyleForm = useForm<CreateStyleType>({
     resolver: zodResolver(createStyleSchema),
     defaultValues: {
+      name: 'Tema padrão',
       isActive: false,
       backgroundColor: initialColorConfig.find(
         (c) => c.colorId === ColorIdEnum.BACKGROUND_COLOR,
@@ -326,6 +341,8 @@ export function EcommerceManagementProvider({
         benefitsFieldArray,
         isLoading,
         fileNames,
+        benefitFileNames,
+        setBenefitFileNames,
         setFileNames,
         setCurrentStep,
         setColors,

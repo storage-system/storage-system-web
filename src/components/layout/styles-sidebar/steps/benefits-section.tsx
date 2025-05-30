@@ -21,9 +21,8 @@ export function BenefitsSection() {
     benefitsForm,
     benefitsFieldArray,
     setCurrentStep,
-    initialForm,
-    fileNames,
-    setFileNames,
+    benefitFileNames,
+    setBenefitFileNames,
   } = useEcommerceManagement()
 
   const { uploadFileService } = useFilesService()
@@ -38,7 +37,7 @@ export function BenefitsSection() {
   return (
     <div className="flex h-full flex-1 flex-col">
       <div className="gap-4 border-b border-input py-[14px] pl-3">
-        <p className="font-medium">Personalize o conteúdo do carrossel</p>
+        <p className="font-medium">Personalize a seção de benefícios</p>
       </div>
       <ScrollArea className="flex-1 pb-4">
         <div className="mx-3 flex flex-col gap-4">
@@ -51,14 +50,16 @@ export function BenefitsSection() {
                 <TooltipRoot>
                   <TooltipTrigger
                     asChild
-                    onClick={() => benefitsFieldArray.remove(field.id as never)}
+                    onClick={() => benefitsFieldArray.remove(index)}
                   >
                     <ImageMinus
                       className="absolute right-0 cursor-pointer text-zinc-700 hover:text-destructive dark:text-white"
                       size={14}
                     />
                   </TooltipTrigger>
-                  <TooltipContent side="right">Remover imagem</TooltipContent>
+                  <TooltipContent side="right">
+                    Remover benefício
+                  </TooltipContent>
                 </TooltipRoot>
               )}
 
@@ -67,7 +68,7 @@ export function BenefitsSection() {
                 name={`benefits.${index}.text`}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Texto do slide</FormLabel>
+                    <FormLabel>Título do benefício</FormLabel>
                     <Input {...field} />
                     {benefitsForm.formState.errors?.benefits?.[index]?.text && (
                       <p className="text-sm text-destructive">
@@ -82,20 +83,41 @@ export function BenefitsSection() {
               />
               <FormField
                 control={benefitsForm.control}
+                name={`benefits.${index}.description`}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Descrição do benefício</FormLabel>
+                    <Input {...field} />
+                    {benefitsForm.formState.errors?.benefits?.[index]
+                      ?.description && (
+                      <p className="text-sm text-destructive">
+                        {
+                          benefitsForm.formState.errors?.benefits?.[index]
+                            ?.description?.message
+                        }
+                      </p>
+                    )}
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={benefitsForm.control}
                 name={`benefits.${index}.fileId`}
                 render={({ field, fieldState }) => (
                   <FormItem>
-                    <FormLabel>Imagem de fundo</FormLabel>
+                    <FormLabel>Ícone do benefício (somente SVG)</FormLabel>
                     <FileInput
+                      multiple={false}
+                      accept=".svg,image/svg+xml"
                       placeholder={
-                        fileNames.find(
+                        benefitFileNames.find(
                           (item) => item.fieldId === `benefits.${index}.fileId`,
-                        )?.filename ?? 'Escolha uma imagem'
+                        )?.filename ?? 'Escolha um arquivo SVG'
                       }
                       name={field.name}
                       onClick={() => {
                         benefitsForm.resetField(field.name)
-                        setFileNames((prev) =>
+                        setBenefitFileNames((prev) =>
                           prev.filter(
                             (item) =>
                               item.fieldId !== `benefits.${index}.fileId`,
@@ -108,10 +130,10 @@ export function BenefitsSection() {
                         if (file) {
                           const { id } =
                             await uploadFileMutation.mutateAsync(file)
-                          setFileNames((prev) => [
+                          setBenefitFileNames((prev) => [
                             ...prev,
                             {
-                              fieldId: `hero.${index}.fileId`,
+                              fieldId: `benefits.${index}.fileId`,
                               filename: file.name,
                               file,
                               fileId: id,
@@ -136,11 +158,16 @@ export function BenefitsSection() {
             type="button"
             className="flex gap-2 text-primary"
             variant="outline"
+            disabled={benefitsFieldArray.fields.length >= 4}
             onClick={() => {
-              benefitsFieldArray.append({ text: '', fileId: '' })
+              benefitsFieldArray.append({
+                text: '',
+                fileId: '',
+                description: '',
+              })
             }}
           >
-            <ImagePlus size={14} /> Adicionar imagem ao carrossel
+            <ImagePlus size={14} /> Adicionar benefício
           </Button>
           <Button
             className="flex gap-2"

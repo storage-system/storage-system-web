@@ -7,6 +7,7 @@ import { Paintbrush } from 'lucide-react'
 import { HeroImages } from './steps/hero-images'
 import { CustomStyle } from './steps/styles-colors'
 import { StylesInitialStep } from './steps/ecommerce-management-initial-step'
+import { BenefitsSection } from './steps/benefits-section'
 
 export function SidebarContent() {
   const { currentStep } = useEcommerceManagement()
@@ -37,7 +38,7 @@ function RenderStep({ currentStep }: { currentStep: CurrentStep }) {
     case CurrentStep.HERO_IMAGES:
       return <HeroImages />
     case CurrentStep.BENEFITS_SECTION:
-      return <HeroImages />
+      return <BenefitsSection />
     case CurrentStep.CUSTOM_THEME:
       return <CustomStyle />
   }

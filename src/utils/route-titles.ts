@@ -12,9 +12,9 @@ export const routeTitles: RouteTitles = {
   [PrivateRoutes.PRODUCT]: 'Produto',
   [PrivateRoutes.CREATE_PRODUCT]: 'Criação de produto',
   [PrivateRoutes.CONFIGURATIONS]: 'Configurações',
-  [PrivateRoutes.STYLES]: 'Estilos',
-  [PrivateRoutes.CREATE_STYLES]: 'Criação de estilos',
   [PrivateRoutes.UPDATE_STYLES]: 'Atualização de estilos',
   [PrivateRoutes.MANAGE_STOCK]: 'Gerenciar estoque',
-  [PrivateRoutes.ECOMMERCE_MANAGEMENT]: 'Gerenciar e-commerce'
+  [PrivateRoutes.ECOMMERCE_MANAGEMENT]: 'Gerenciar e-commerce',
+  [PrivateRoutes.ECOMMERCE_MANAGEMENT_CREATE]: 'Criar e-commerce',
+  [PrivateRoutes.ECOMMERCE_MANAGEMENT_UPDATE]: 'Atualizar e-commerce',
 }

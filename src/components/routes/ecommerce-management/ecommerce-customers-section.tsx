@@ -12,16 +12,25 @@ import Autoplay from 'embla-carousel-autoplay'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Rating } from './ecommerce-rating'
+import {
+  useEcommerceManagement,
+  ColorIdEnum,
+} from '@/providers/ecommerce-management-provider'
 
 export function CustomersSection() {
   const [api, setApi] = useState<CarouselApi>()
-
   const [current, setCurrent] = useState(0)
 
+  const { colors } = useEcommerceManagement()
+
+  const getColorByType = (type: ColorIdEnum) =>
+    colors.find((c) => c.colorId === type)?.hex || ''
+
+  const backgroundColor = getColorByType(ColorIdEnum.BACKGROUND_COLOR)
+  const primaryColor = getColorByType(ColorIdEnum.PRIMARY_COLOR)
+
   useEffect(() => {
-    if (!api) {
-      return
-    }
+    if (!api) return
 
     setCurrent(api.selectedScrollSnap() + 1)
 
@@ -31,14 +40,21 @@ export function CustomersSection() {
   }, [api])
 
   return (
-    <div className="flex flex-col items-center bg-gray-200">
+    <div
+      className="flex flex-col items-center"
+      style={{ backgroundColor: backgroundColor || '#f3f4f6' }}
+    >
       <div className="my-24 w-full max-w-[1200px] space-y-12">
         <div className="flex justify-between">
           <div>
             <h2 className="text-4xl font-bold">
               Veja o que nossos clientes dizem
             </h2>
-            <CustomPagination currentIndex={current} total={10} />
+            <CustomPagination
+              currentIndex={current}
+              total={10}
+              primaryColor={primaryColor}
+            />
           </div>
           <div className="flex gap-4">
             <Button
@@ -57,14 +73,8 @@ export function CustomersSection() {
         </div>
         <Carousel
           setApi={setApi}
-          plugins={[
-            Autoplay({
-              delay: 3000,
-            }),
-          ]}
-          opts={{
-            loop: true,
-          }}
+          plugins={[Autoplay({ delay: 3000 })]}
+          opts={{ loop: true }}
         >
           <CarouselContent>
             {Array.from({ length: 10 }).map((_, index) => (
@@ -82,9 +92,11 @@ export function CustomersSection() {
 function CustomPagination({
   currentIndex,
   total,
+  primaryColor,
 }: {
   currentIndex: number
   total: number
+  primaryColor: string
 }) {
   const pages = Math.ceil(total / 3)
   const pagesBreakpoints = Array.from({ length: 3 }, (_, index) =>
@@ -93,31 +105,24 @@ function CustomPagination({
 
   return (
     <div className="mt-4 flex items-center gap-2">
-      <div
-        className={cn(
-          'h-1 w-6 bg-primary/40 transition-all',
-          currentIndex >= pagesBreakpoints[0] && 'bg-primary',
-          currentIndex >= pagesBreakpoints[0] &&
-            currentIndex < pagesBreakpoints[1] &&
-            'w-16',
-        )}
-      ></div>
-      <div
-        className={cn(
-          'h-1 w-6 bg-primary/40 transition-all',
-          currentIndex >= pagesBreakpoints[1] && 'bg-primary',
-          currentIndex >= pagesBreakpoints[1] &&
-            currentIndex < pagesBreakpoints[2] &&
-            'w-16',
-        )}
-      ></div>
-      <div
-        className={cn(
-          'h-1 w-6 bg-primary/40 transition-all',
-          currentIndex >= pagesBreakpoints[2] && 'bg-primary',
-          currentIndex >= pagesBreakpoints[2] && 'w-16',
-        )}
-      ></div>
+      {pagesBreakpoints.map((bp, index) => {
+        const isActive = currentIndex >= bp
+        const isWider =
+          index < 2 &&
+          currentIndex >= bp &&
+          currentIndex < pagesBreakpoints[index + 1]
+
+        return (
+          <div
+            key={index}
+            className={cn('h-1 transition-all rounded-sm')}
+            style={{
+              width: isWider || (index === 2 && isActive) ? '4rem' : '1.5rem',
+              backgroundColor: isActive ? primaryColor : `${primaryColor}66`, // 40% fallback
+            }}
+          />
+        )
+      })}
     </div>
   )
 }

@@ -23,7 +23,6 @@ export function ListEcommerce() {
   function handleViewEcommerce(event: any) {
     event.stopPropagation()
     router.push(`/${data?.slug}/home`)
-
   }
 
   return (
@@ -37,7 +36,7 @@ export function ListEcommerce() {
             )
           }
         >
-          <div className="h-[240px] overflow-hidden bg-purple-100 dark:bg-accent px-2 pt-2 bg-purle">
+          <div className="bg-purle h-[240px] overflow-hidden bg-purple-100 px-2 pt-2 dark:bg-accent">
             <div className="bg-white transition-all duration-300 group-hover:scale-105">
               <img
                 className="object-cover "
@@ -46,17 +45,17 @@ export function ListEcommerce() {
               />
             </div>
           </div>
-          <div className="bg-white p-4 dark:bg-accent space-y-2">
+          <div className="space-y-2 bg-white p-4 dark:bg-accent">
             <span className="rounded-md border border-green-500 px-2 text-base font-medium text-green-500">
               Publicado
             </span>
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <p className="text-lg font-semibold">{data?.name}</p>
               <Button
                 onClick={handleViewEcommerce}
                 variant="link"
                 size="icon"
-                className='cursor-pointer hover:scale-125 transition-transform duration-200'
+                className="cursor-pointer transition-transform duration-200 hover:scale-125"
               >
                 <Eye className="size-5" />
               </Button>
