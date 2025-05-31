@@ -10,6 +10,8 @@
     "@next/next/no-img-element": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/ban-types": "warn",
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "semi": ["error", "never"],
+    "quotes": ["error", "single"]
   }
 }
