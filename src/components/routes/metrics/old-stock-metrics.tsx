@@ -4,12 +4,13 @@ import { OldStockCards } from './old-stock/old-stock-cards'
 import { ExpirationChart } from './old-stock/expiration-chart'
 import { CriticalProductsList } from './old-stock/critical-products-list'
 import { ExpiredProductsTable } from './old-stock/expired-products-table'
-import { useMetrics } from './use-metrics'
+import { useOldStockMetrics } from './use-old-stock-metrics'
 import Loading from '@/app/loading'
 import { StockHistory } from '../products/manage-stock/stock-history'
 
 export function OldStockMetrics() {
-  const { oldStockMetrics, odStockMetricsLoading, movements } = useMetrics()
+  const { oldStockMetrics, odStockMetricsLoading, movements } =
+    useOldStockMetrics()
 
   if (odStockMetricsLoading) {
     return <Loading />

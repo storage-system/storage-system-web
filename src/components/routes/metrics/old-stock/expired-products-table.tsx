@@ -59,7 +59,7 @@ export const ExpiredProductsTable = ({ expiredProductsData }: Props) => {
       )
     } else {
       return (
-        <Badge className="flex items-center gap-1 bg-red-700 hover:bg-red-800">
+        <Badge className="flex items-center gap-1 bg-red-700 text-white hover:bg-red-800">
           <AlertTriangle className="size-3" />
           {daysExpired} dias
         </Badge>
