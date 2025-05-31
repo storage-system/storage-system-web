@@ -2,42 +2,47 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { TrendingUp, AlertTriangle, CheckCircle, Clock } from 'lucide-react'
 
-const metrics = [
-  {
-    title: 'Taxa de Rotatividade',
-    value: '78%',
-    description: 'produtos vendidos/mês',
-    progress: 78,
-    icon: TrendingUp,
-    trend: { value: 5, isPositive: true },
-  },
-  {
-    title: 'Produtos em Estoque Crítico',
-    value: '23',
-    description: 'abaixo do nível mínimo',
-    progress: 15,
-    icon: AlertTriangle,
-    trend: { value: -3, isPositive: true },
-  },
-  {
-    title: 'Taxa de Validade OK',
-    value: '94%',
-    description: 'produtos dentro da validade',
-    progress: 94,
-    icon: CheckCircle,
-    trend: { value: 2, isPositive: true },
-  },
-  {
-    title: 'Tempo Médio em Estoque',
-    value: '45 dias',
-    description: 'desde a entrada',
-    progress: 67,
-    icon: Clock,
-    trend: { value: -8, isPositive: true },
-  },
-]
+interface Props {
+  criticalStockProducts: number
+  validProducts: number
+}
 
-export const StockSummaryMetrics = () => {
+export const StockSummaryMetrics = (data: Props) => {
+  const metrics = [
+    {
+      title: 'Taxa de Rotatividade',
+      value: '78%',
+      description: 'produtos vendidos/mês',
+      progress: 78,
+      icon: TrendingUp,
+      trend: { value: 5, isPositive: true },
+    },
+    {
+      title: 'Produtos em Estoque Crítico',
+      value: data.criticalStockProducts,
+      description: 'abaixo do nível mínimo',
+      progress: 15,
+      icon: AlertTriangle,
+      trend: { value: -3, isPositive: true },
+    },
+    {
+      title: 'Taxa de Validade OK',
+      value: `${data.validProducts}%`,
+      description: 'produtos dentro da validade',
+      progress: data.validProducts,
+      icon: CheckCircle,
+      trend: { value: 2, isPositive: true },
+    },
+    {
+      title: 'Tempo Médio em Estoque',
+      value: '45 dias',
+      description: 'desde a entrada',
+      progress: 67,
+      icon: Clock,
+      trend: { value: -8, isPositive: true },
+    },
+  ]
+
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
       {metrics.map((metric, index) => (

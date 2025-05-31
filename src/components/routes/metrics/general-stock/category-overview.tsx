@@ -1,15 +1,12 @@
+import { CategoryOverviewMetric } from '@/@types/metrics'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
 
-const data = [
-  { name: 'Alimentos', value: 35, color: '#8b5cf6' },
-  { name: 'Bebidas', value: 25, color: '#06b6d4' },
-  { name: 'Medicamentos', value: 20, color: '#10b981' },
-  { name: 'Cosméticos', value: 12, color: '#f59e0b' },
-  { name: 'Outros', value: 8, color: '#ef4444' },
-]
+interface Props {
+  data: CategoryOverviewMetric[]
+}
 
-export const CategoryOverview = () => {
+export const CategoryOverview = ({ data }: Props) => {
   return (
     <Card>
       <CardHeader>

@@ -13,15 +13,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/charts'
-
-const dateData = [
-  { periodo: 'Jan/24', fabricacao: 234, validade: 198, vencidos: 36 },
-  { periodo: 'Fev/24', fabricacao: 267, validade: 223, vencidos: 44 },
-  { periodo: 'Mar/24', fabricacao: 289, validade: 251, vencidos: 38 },
-  { periodo: 'Abr/24', fabricacao: 312, validade: 278, vencidos: 34 },
-  { periodo: 'Mai/24', fabricacao: 298, validade: 264, vencidos: 34 },
-  { periodo: 'Jun/24', fabricacao: 334, validade: 301, vencidos: 33 },
-]
+import { DateData } from '@/@types/metrics'
 
 const chartConfig = {
   fabricacao: {
@@ -38,7 +30,11 @@ const chartConfig = {
   },
 }
 
-export const ManufacturingDateChart = () => {
+interface Props {
+  data: DateData[]
+}
+
+export const ManufacturingDateChart = ({ data }: Props) => {
   return (
     <Card>
       <CardHeader>
@@ -51,7 +47,7 @@ export const ManufacturingDateChart = () => {
         <ChartContainer config={chartConfig}>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart
-              data={dateData}
+              data={data}
               margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
             >
               <XAxis dataKey="periodo" />

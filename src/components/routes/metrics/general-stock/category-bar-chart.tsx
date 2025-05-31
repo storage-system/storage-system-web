@@ -6,15 +6,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/charts'
-
-const categoryData = [
-  { categoria: 'Alimentos', quantidade: 234, valor: 45600, color: '#8b5cf6' },
-  { categoria: 'Bebidas', quantidade: 156, valor: 28900, color: '#06b6d4' },
-  { categoria: 'Medicamentos', quantidade: 89, valor: 67800, color: '#10b981' },
-  { categoria: 'Cosméticos', quantidade: 78, valor: 34200, color: '#f59e0b' },
-  { categoria: 'Limpeza', quantidade: 67, valor: 19500, color: '#ef4444' },
-  { categoria: 'Outros', quantidade: 45, valor: 12300, color: '#6b7280' },
-]
+import { CategoryOverviewMetric } from '@/@types/metrics'
 
 const chartConfig = {
   quantidade: {
@@ -27,7 +19,11 @@ const chartConfig = {
   },
 }
 
-export const CategoryBarChart = () => {
+interface Props {
+  data: CategoryOverviewMetric[]
+}
+
+export const CategoryBarChart = ({ data }: Props) => {
   return (
     <Card>
       <CardHeader>
@@ -40,11 +36,11 @@ export const CategoryBarChart = () => {
         <ChartContainer config={chartConfig}>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart
-              data={categoryData}
+              data={data}
               margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
             >
               <XAxis
-                dataKey="categoria"
+                dataKey="name"
                 tick={{ fontSize: 12 }}
                 angle={-45}
                 textAnchor="end"
@@ -54,13 +50,12 @@ export const CategoryBarChart = () => {
               <ChartTooltip
                 content={<ChartTooltipContent />}
                 formatter={(value, name) => [
-                  name === 'quantidade'
+                  name === 'value'
                     ? `${value} produtos`
                     : `R$ ${value.toLocaleString()}`,
-                  name === 'quantidade' ? 'Quantidade' : 'Valor Total',
                 ]}
               />
-              <Bar dataKey="quantidade" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </ChartContainer>

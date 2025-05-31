@@ -372,6 +372,22 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/metrics/stock-general": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["MetricsController_stockGeneralMetrics"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/invites": {
         parameters: {
             query?: never;
@@ -591,7 +607,7 @@ export interface components {
             fileId?: string;
         };
         HttpEachCategoryListResponse: {
-            /** @example eeb5e9e4-67d9-40e5-a2a4-4eb83c354a21 */
+            /** @example e939dc73-c563-4136-93f3-c661753c76bb */
             id: string;
             name: string;
             isActive?: boolean;
@@ -652,13 +668,13 @@ export interface components {
             categoryIds: string[];
         };
         HttpItemResponse: {
-            /** @example c8c63494-a111-4290-bfb8-87265b445d9b */
+            /** @example b5b4c513-a101-48e0-83f0-0de1849ee8fa */
             id: string;
-            /** @example Terry Fisher */
+            /** @example Carroll Satterfield */
             name: string;
         };
         HttpEachProductListResponse: {
-            /** @example 2681ccbb-81a6-4414-8d3e-963872f6e81a */
+            /** @example 82b620ef-2208-4e5a-a5cd-4863039d522c */
             id: string;
             name: string;
             quantityInStock: number;
@@ -687,7 +703,7 @@ export interface components {
             items: components["schemas"]["HttpEachProductListResponse"][];
         };
         HttpProductGetResponse: {
-            /** @example f124a332-ab47-4b39-9634-7d608f4ee49c */
+            /** @example 8dd5d390-7b7d-437e-8036-ec80fc98115b */
             id: string;
             name: string;
             description: string;
@@ -757,11 +773,11 @@ export interface components {
             reportFrequency: "diary" | "weekly" | "month" | "year";
         };
         HttpConfigurationGetResponse: {
-            /** @example d2445a12-fd8a-49af-9a48-d31f729bae40 */
+            /** @example c9448819-deb2-484b-acb9-08d6ea604211 */
             id: string;
-            /** @example 40517246-108c-405f-877d-00b0b423f042 */
+            /** @example ea2bdb19-b349-4288-8f42-b687748ee261 */
             userId: string;
-            /** @example 58292c13-aaa6-45b4-a4c1-7af5fa6905ad */
+            /** @example 8471592d-7be3-46c9-8e29-a97008332f4f */
             companyId: string;
             daysBeforeOldStock: number;
             warningDays: number;
@@ -797,9 +813,9 @@ export interface components {
             tertiaryColor: string;
         };
         HttpEachStyleListResponse: {
-            /** @example 62ff26bd-a6d5-4bfe-8ea9-d7577c0f9086 */
+            /** @example 1a555bd4-8200-4d41-a510-181494d63671 */
             id: string;
-            /** @example 08bc0e14-df28-411b-9147-e09d8e521586 */
+            /** @example 62aa277d-dc7c-47e9-89eb-cb58a7871c4c */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -820,9 +836,9 @@ export interface components {
             items: components["schemas"]["HttpEachStyleListResponse"][];
         };
         HttpStyleGetResponse: {
-            /** @example 954117ae-9066-43e5-9cac-9a15acff8be7 */
+            /** @example c5cd3ae4-7b8d-4ace-b8ea-91dff4d25bea */
             id: string;
-            /** @example c0f6fff6-47d6-4248-befc-07a06e3f286a */
+            /** @example af34a3cb-130a-48c1-adba-189c58e27d89 */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -845,7 +861,7 @@ export interface components {
             tertiaryColor?: string;
         };
         HttpFileCreatedResponse: {
-            /** @example 0823f971-2841-4164-ba9c-0164ccec9f57 */
+            /** @example 1d72769f-8721-4de2-be2a-e604095156d5 */
             id: string;
         };
         HttpGetFileUrlResponse: {
@@ -868,6 +884,16 @@ export interface components {
             oldStockMetrics: components["schemas"]["HttpOldStockMetricsResponse"];
             productMetrics: components["schemas"]["HttpProductsMetricsResponse"];
         };
+        StockGeneralMetricsResponseDto: {
+            /** @example 1234 */
+            totalProducts: number;
+            /** @example 8 */
+            activeCategories: number;
+            /** @example 45678 */
+            totalValue: number;
+            /** @example 1199 */
+            activeProducts: number;
+        };
         CreateInviteDTO: {
             /** Format: email */
             email: string;
@@ -885,9 +911,9 @@ export interface components {
             };
         };
         HttpInviteGetResponse: {
-            /** @example a3a2515b-f18e-40f0-8fdc-90d360e97141 */
+            /** @example d2768fa4-57fa-4a75-8250-9b98b7c534b1 */
             id: string;
-            /** @example Emmanuel.Cronin@hotmail.com */
+            /** @example Ayana.Roob14@gmail.com */
             email: string;
             /** @example [
              *       "MEMBER"
@@ -1778,6 +1804,25 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HttpGetMetricsResponse"];
+                };
+            };
+        };
+    };
+    MetricsController_stockGeneralMetrics: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StockGeneralMetricsResponseDto"];
                 };
             };
         };
