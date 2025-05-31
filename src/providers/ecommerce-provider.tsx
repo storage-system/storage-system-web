@@ -1,10 +1,11 @@
 'use client'
 
 import { RetrieveEcommerceDTO } from '@/actions/product-actions'
-import { createContext, useContext, type ReactNode } from 'react'
+import { createContext, useContext, useMemo, type ReactNode } from 'react'
 
 export const EcommerceContext = createContext<{
   config: RetrieveEcommerceDTO
+  activeStyle: RetrieveEcommerceDTO['styles'][number]
 } | null>(null)
 
 interface EcommerceProviderProps {
@@ -16,8 +17,15 @@ export function EcommerceProvider({
   children,
   initialConfig,
 }: EcommerceProviderProps) {
+  const activeStyle = useMemo(() => {
+    return (
+      initialConfig.styles.find((style) => style.isActive) ||
+      initialConfig.styles[0]
+    )
+  }, [initialConfig.styles])
+
   return (
-    <EcommerceContext.Provider value={{ config: initialConfig }}>
+    <EcommerceContext.Provider value={{ config: initialConfig, activeStyle }}>
       {children}
     </EcommerceContext.Provider>
   )

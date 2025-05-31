@@ -32,35 +32,46 @@ const fallbackBenefits = [
 ]
 
 interface SvgIconStrokeProps {
-  file: File
+  file?: File
+  fileUrl?: string
   color: string
 }
 
-function SvgIconStroke({ file, color }: SvgIconStrokeProps) {
+function SvgIconStroke({ file, fileUrl, color }: SvgIconStrokeProps) {
   const [svgContent, setSvgContent] = useState<string | null>(null)
 
   useEffect(() => {
     const renderSvg = async () => {
-      const text = await file.text()
+      try {
+        const text = file
+          ? await file.text()
+          : fileUrl
+            ? await fetch(fileUrl).then((res) => res.text())
+            : null
 
-      const cleaned = text
-        .replace(/fill=".*?"/g, '')
-        .replace(/stroke=".*?"/g, '')
-        .replace(/stroke-width=".*?"/g, '')
-        .replace(
-          /<svg([^>]*)>/,
-          `<svg$1 stroke="${color}" stroke-width="2" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">`,
-        )
-        .replace(
-          /<(path|rect|circle|polygon|ellipse|line)([^>]*)(?<!\/)>/g,
-          `<$1$2 stroke="${color}" stroke-width="2">`,
-        )
+        if (!text) return
 
-      setSvgContent(cleaned)
+        const cleaned = text
+          .replace(/fill=".*?"/g, '')
+          .replace(/stroke=".*?"/g, '')
+          .replace(/stroke-width=".*?"/g, '')
+          .replace(
+            /<svg([^>]*)>/,
+            `<svg$1 stroke="${color}" stroke-width="2" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">`,
+          )
+          .replace(
+            /<(path|rect|circle|polygon|ellipse|line)([^>]*)(?<!\/)>/g,
+            `<$1$2 stroke="${color}" stroke-width="2">`,
+          )
+
+        setSvgContent(cleaned)
+      } catch (err) {
+        console.error('Erro ao carregar SVG:', err)
+      }
     }
 
     renderSvg()
-  }, [file, color])
+  }, [file, fileUrl, color])
 
   if (!svgContent) return null
 
@@ -73,7 +84,7 @@ function SvgIconStroke({ file, color }: SvgIconStrokeProps) {
 }
 
 export function BenefitsSection() {
-  const { colors, benefitsForm, benefitFileNames } = useEcommerceManagement()
+  const { colors, benefitsForm } = useEcommerceManagement()
 
   const getColorByType = (type: ColorIdEnum) =>
     colors.find((c) => c.colorId === type)?.hex || ''
@@ -84,21 +95,18 @@ export function BenefitsSection() {
   const secondaryColor = getColorByType(ColorIdEnum.SECONDARY_COLOR)
 
   const formBenefits = benefitsForm.watch('benefits')
-  const hasCustomBenefits =
-    Array.isArray(formBenefits) && formBenefits.length > 0
+  const hasCustomBenefits = formBenefits?.length > 0
 
   const benefitsToRender = hasCustomBenefits
-    ? formBenefits.map((benefit, index) => {
-        const fileEntry = benefitFileNames.find(
-          (f) => f.fileId === benefit.fileId,
-        )
-        return {
-          title: benefit.text || `Benefício ${index + 1}`,
-          description: benefit.description || '',
-          fileEntry,
-        }
-      })
+    ? formBenefits.map((benefit, index) => ({
+        title: benefit.text || `Benefício ${index + 1}`,
+        description: benefit.description || '',
+        file: benefit.file,
+        fileUrl: benefit.fileUrl,
+      }))
     : []
+
+  console.log('Benefits to render:', benefitsToRender)
 
   const iconBg = primaryColor ? `${primaryColor}22` : '#f3f4f6'
 
@@ -114,8 +122,9 @@ export function BenefitsSection() {
               const title = item.title
               const description = item.description
 
-              const fileEntry = 'fileEntry' in item ? item.fileEntry : undefined
               const Icon = 'icon' in item ? item.icon : undefined
+              const file = 'file' in item ? item.file : undefined
+              const fileUrl = 'fileUrl' in item ? item.fileUrl : undefined
 
               return (
                 <div
@@ -128,9 +137,10 @@ export function BenefitsSection() {
                       backgroundColor: iconBg,
                     }}
                   >
-                    {fileEntry ? (
+                    {file || fileUrl ? (
                       <SvgIconStroke
-                        file={fileEntry.file}
+                        file={file}
+                        fileUrl={fileUrl}
                         color={primaryColor || '#3b82f6'}
                       />
                     ) : Icon ? (
@@ -171,22 +181,14 @@ export function BenefitsSection() {
   )
 }
 
+// Funções auxiliares (sem alteração)
 function darkenHexColor(hex: string, amount = 0.1): string {
-  // Remove o # se existir
   hex = hex.replace('#', '')
-
-  // Converte para valores RGB
   const r = parseInt(hex.substring(0, 2), 16)
   const g = parseInt(hex.substring(2, 4), 16)
   const b = parseInt(hex.substring(4, 6), 16)
-
-  // Converte RGB para HSL
   const { h, s, l } = rgbToHsl(r, g, b)
-
-  // Reduz lightness
   const newL = Math.max(0, Math.min(1, l - amount))
-
-  // Converte de volta para hex
   const { r: newR, g: newG, b: newB } = hslToRgb(h, s, newL)
   return `#${toHex(newR)}${toHex(newG)}${toHex(newB)}`
 }
@@ -195,13 +197,11 @@ function rgbToHsl(r: number, g: number, b: number) {
   r /= 255
   g /= 255
   b /= 255
-
   const max = Math.max(r, g, b)
   const min = Math.min(r, g, b)
   let h = 0
   let s = 0
   const l = (max + min) / 2
-
   if (max !== min) {
     const d = max - min
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
@@ -218,13 +218,11 @@ function rgbToHsl(r: number, g: number, b: number) {
     }
     h /= 6
   }
-
   return { h, s, l }
 }
 
 function hslToRgb(h: number, s: number, l: number) {
   let r, g, b
-
   if (s === 0) {
     r = g = b = l
   } else {
@@ -236,14 +234,12 @@ function hslToRgb(h: number, s: number, l: number) {
       if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6
       return p
     }
-
     const q = l < 0.5 ? l * (1 + s) : l + s - l * s
     const p = 2 * l - q
     r = hue2rgb(p, q, h + 1 / 3)
     g = hue2rgb(p, q, h)
     b = hue2rgb(p, q, h - 1 / 3)
   }
-
   return {
     r: Math.round(r * 255),
     g: Math.round(g * 255),

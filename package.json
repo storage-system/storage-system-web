@@ -44,6 +44,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",
+    "colord": "^2.9.3",
     "date-fns": "^3.5.0",
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
@@ -73,7 +74,7 @@
     "xlsx": "^0.18.5",
     "yet-another-react-lightbox": "^3.23.2",
     "zod": "^3.22.4",
-    "zustand": "^4.5.2"
+    "zustand": "^4.5.7"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.8.1",

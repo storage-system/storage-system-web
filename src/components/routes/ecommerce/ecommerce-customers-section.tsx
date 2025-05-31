@@ -17,8 +17,11 @@ export function CustomersSection() {
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
 
-  const { config } = useEcommerce()
-  const style = config.styles.find((s) => s.isActive)
+  const { activeStyle } = useEcommerce()
+
+  const backgroundColor = activeStyle?.backgroundColor || '#ffffff'
+  const textColor = activeStyle?.textColor || '#1f2937'
+  const primaryColor = activeStyle?.primaryColor || '#3b82f6'
 
   useEffect(() => {
     if (!api) return
@@ -31,50 +34,47 @@ export function CustomersSection() {
   }, [api])
 
   return (
-    <div
-      className="flex flex-col items-center"
-      style={{ backgroundColor: style?.backgroundColor }}
-    >
+    <div className="flex flex-col items-center" style={{ backgroundColor }}>
       <div className="my-24 w-full max-w-[1200px] space-y-12">
         <div className="flex justify-between">
           <div>
-            <h2
-              className="text-4xl font-bold"
-              style={{ color: style?.textColor }}
-            >
+            <h2 className="text-4xl font-bold" style={{ color: textColor }}>
               Veja o que nossos clientes dizem
             </h2>
             <CustomPagination
               currentIndex={current}
               total={10}
-              primaryColor={style?.primaryColor}
+              primaryColor={primaryColor}
             />
           </div>
           <div className="flex gap-4">
             <Button
               onClick={() => api?.scrollPrev()}
               className="size-11 rounded-full p-0"
+              style={{
+                backgroundColor: `${primaryColor}1A`,
+                color: primaryColor,
+              }}
             >
               <ArrowLeft className="size-6" />
             </Button>
             <Button
               onClick={() => api?.scrollNext()}
               className="size-11 rounded-full p-0"
+              style={{
+                backgroundColor: `${primaryColor}1A`,
+                color: primaryColor,
+              }}
             >
               <ArrowRight className="size-6" />
             </Button>
           </div>
         </div>
+
         <Carousel
           setApi={setApi}
-          plugins={[
-            Autoplay({
-              delay: 6000,
-            }),
-          ]}
-          opts={{
-            loop: true,
-          }}
+          plugins={[Autoplay({ delay: 6000 })]}
+          opts={{ loop: true }}
         >
           <CarouselContent>
             {Array.from({ length: 10 }).map((_, index) => (
@@ -108,6 +108,7 @@ function CustomPagination({
     width: isWide ? '4rem' : '1.5rem',
     height: '0.25rem',
     transition: 'all 0.3s',
+    borderRadius: '2px',
   })
 
   return (

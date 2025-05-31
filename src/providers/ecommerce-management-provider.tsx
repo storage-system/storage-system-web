@@ -1,5 +1,7 @@
 'use client'
+
 import { Form } from '@/components/ui/form'
+import { colord } from 'colord'
 import { toast } from '@/components/ui/use-toast'
 import { PrivateRoutes } from '@/constants/routes/private-routes'
 import { useEcommerceManagementService } from '@/services/ecommerce-management-service'
@@ -67,23 +69,6 @@ interface EcommerceManagementContext {
   setColors: Dispatch<SetStateAction<IColor[]>>
   initialForm: UseFormReturn<InitialFormType>
   createStyleForm: UseFormReturn<CreateStyleType>
-  fileNames: { fieldId: string; filename: string; file: File; fileId: string }[]
-  setFileNames: Dispatch<
-    SetStateAction<
-      { fieldId: string; filename: string; file: File; fileId: string }[]
-    >
-  >
-  benefitFileNames: {
-    fieldId: string
-    filename: string
-    file: File
-    fileId: string
-  }[]
-  setBenefitFileNames: Dispatch<
-    SetStateAction<
-      { fieldId: string; filename: string; file: File; fileId: string }[]
-    >
-  >
   heroForm: UseFormReturn<HeroType>
   heroFieldArray: UseFieldArrayReturn<HeroType>
   benefitsForm: UseFormReturn<BenefitsType>
@@ -112,19 +97,12 @@ export function EcommerceManagementProvider({
 
   const pathname = usePathname()
   const isUpdate = pathname.includes('update')
-
   const router = useRouter()
   const { id }: { id: string } = useParams()
 
   const [currentStep, setCurrentStep] = useState<CurrentStep>(
     CurrentStep.INITIAL,
   )
-  const [fileNames, setFileNames] = useState<
-    { fieldId: string; filename: string; file: File; fileId: string }[]
-  >([])
-  const [benefitFileNames, setBenefitFileNames] = useState<
-    { fieldId: string; filename: string; file: File; fileId: string }[]
-  >([])
   const [colors, setColors] = useState<IColor[]>(initialColorConfig)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [isCapturing, setIsCapturing] = useState(false)
@@ -161,7 +139,7 @@ export function EcommerceManagementProvider({
   const heroForm = useForm<HeroType>({
     resolver: zodResolver(heroSchema),
     defaultValues: {
-      hero: [{ text: '', fileId: '' }],
+      hero: [{ text: '', fileId: '', file: undefined, filename: '' }],
     },
   })
 
@@ -173,7 +151,7 @@ export function EcommerceManagementProvider({
   const benefitsForm = useForm<BenefitsType>({
     resolver: zodResolver(benefitsSchema),
     defaultValues: {
-      benefits: [{ text: '', fileId: '' }],
+      benefits: [],
     },
   })
 
@@ -215,7 +193,6 @@ export function EcommerceManagementProvider({
 
   const capturePreview = async (): Promise<string | null> => {
     if (!previewRef.current) return null
-
     try {
       setIsCapturing(true)
       return new Promise((resolve) => {
@@ -245,41 +222,6 @@ export function EcommerceManagementProvider({
     }
   }
 
-  const handleCreate = async () => {
-    const capturedImage = await capturePreview()
-    if (capturedImage) {
-      const fileId = await uploadImage(capturedImage)
-      if (fileId) initialForm.setValue('ecommercePreview', fileId)
-    }
-
-    const data: PublishEcommerceType = {
-      ...initialForm.getValues(),
-      style: createStyleForm.getValues(),
-      hero: heroForm.getValues().hero,
-      benefits: benefitsForm.getValues().benefits,
-    }
-
-    publishEcommerce.mutate(data)
-  }
-
-  const handleUpdate = async () => {
-    const capturedImage = await capturePreview()
-    if (capturedImage) {
-      const fileId = await uploadImage(capturedImage)
-      if (fileId) initialForm.setValue('ecommercePreview', fileId)
-    }
-
-    const data: PublishEcommerceType & { id: string } = {
-      ...initialForm.getValues(),
-      style: createStyleForm.getValues(),
-      hero: heroForm.getValues().hero,
-      benefits: benefitsForm.getValues().benefits,
-      id,
-    }
-
-    updateEcommerce.mutate(data)
-  }
-
   const uploadImage = async (imageDataUrl: string): Promise<string | null> => {
     try {
       const response = await fetch(imageDataUrl)
@@ -297,20 +239,162 @@ export function EcommerceManagementProvider({
     }
   }
 
+  const handleCreate = async () => {
+    const capturedImage = await capturePreview()
+    if (capturedImage) {
+      const fileId = await uploadImage(capturedImage)
+      if (fileId) initialForm.setValue('ecommercePreview', fileId)
+    }
+
+    const heroFiles = heroForm.getValues().hero
+
+    const uploadedHero = await Promise.all(
+      heroFiles.map(async (hero) => {
+        if (hero.file && !hero.fileId) {
+          const formData = new FormData()
+          formData.append('file', hero.file)
+          const response = await uploadFileService(formData)
+          return {
+            ...hero,
+            fileId: response.id,
+          }
+        }
+        return hero
+      }),
+    )
+
+    heroForm.setValue('hero', uploadedHero)
+
+    const benefitFiles = benefitsForm.getValues().benefits
+
+    const uploadedBenefits = await Promise.all(
+      benefitFiles.map(async (benefit) => {
+        if (benefit.file && !benefit.fileId) {
+          const formData = new FormData()
+          formData.append('file', benefit.file)
+          const response = await uploadFileService(formData)
+          return {
+            ...benefit,
+            fileId: response.id,
+          }
+        }
+        return benefit
+      }),
+    )
+
+    benefitsForm.setValue('benefits', uploadedBenefits)
+
+    const data: PublishEcommerceType = {
+      ...initialForm.getValues(),
+      style: createStyleForm.getValues(),
+      hero: uploadedHero.map(({ text, fileId }) => ({
+        text,
+        fileId,
+      })),
+      benefits: uploadedBenefits.map(({ text, description, fileId }) => ({
+        text,
+        description,
+        fileId,
+      })),
+    }
+
+    publishEcommerce.mutate(data)
+  }
+
+  const handleUpdate = async () => {
+    const capturedImage = await capturePreview()
+    if (capturedImage) {
+      const fileId = await uploadImage(capturedImage)
+      if (fileId) initialForm.setValue('ecommercePreview', fileId)
+    }
+
+    const heroFiles = heroForm.getValues().hero
+
+    const uploadedHero = await Promise.all(
+      heroFiles.map(async (hero) => {
+        if (hero.file && !hero.fileId) {
+          const formData = new FormData()
+          formData.append('file', hero.file)
+          const response = await uploadFileService(formData)
+          return {
+            ...hero,
+            fileId: response.id,
+          }
+        }
+        return hero
+      }),
+    )
+
+    heroForm.setValue('hero', uploadedHero)
+
+    const benefitFiles = benefitsForm.getValues().benefits
+
+    const uploadedBenefits = await Promise.all(
+      benefitFiles.map(async (benefit) => {
+        if (benefit.file && !benefit.fileId) {
+          const formData = new FormData()
+          formData.append('file', benefit.file)
+          const response = await uploadFileService(formData)
+          return {
+            ...benefit,
+            fileId: response.id,
+          }
+        }
+        return benefit
+      }),
+    )
+
+    benefitsForm.setValue('benefits', uploadedBenefits)
+
+    const data: PublishEcommerceType & { id: string } = {
+      ...initialForm.getValues(),
+      style: createStyleForm.getValues(),
+      hero: uploadedHero.map(({ text, fileId }) => ({ text, fileId })),
+      benefits: uploadedBenefits.map(({ text, description, fileId }) => ({
+        text,
+        description,
+        fileId,
+      })),
+      id,
+    }
+
+    updateEcommerce.mutate(data)
+  }
+
   useEffect(() => {
     if (activeEcommerceQuery.data) {
-      const { name, hero, styles } = activeEcommerceQuery.data
+      const { name, hero, styles, benefits, previewUrl } =
+        activeEcommerceQuery.data
 
-      initialForm.reset({ name })
+      initialForm.reset({
+        name,
+        ecommercePreview: previewUrl
+          ? extractFileIdFromUrl(previewUrl)
+          : undefined,
+      })
 
       heroForm.reset({
         hero: hero.map((h) => ({
           text: h.text,
           fileId: h.fileId,
+          file: undefined,
+          filename: extractFilenameFromUrl(h.fileUrl),
+          fileUrl: h.fileUrl,
         })),
       })
 
-      const activeStyle = styles.find((s) => s.isActive)
+      benefitsForm.reset({
+        benefits: benefits.map((b) => ({
+          text: b.text,
+          description: b.description ?? '',
+          fileId: extractFileIdFromUrl(b.fileUrl),
+          file: undefined,
+          filename: extractFilenameFromUrl(b.fileUrl),
+          fileUrl: b.fileUrl,
+        })),
+      })
+
+      const activeStyle = styles[0]
       if (activeStyle) {
         createStyleForm.reset({
           name: activeStyle.name,
@@ -321,9 +405,45 @@ export function EcommerceManagementProvider({
           secondaryColor: activeStyle.secondaryColor,
           tertiaryColor: activeStyle.tertiaryColor,
         })
+
+        setColors([
+          buildColor(
+            activeStyle.backgroundColor,
+            ColorIdEnum.BACKGROUND_COLOR,
+            'Cor de fundo',
+            'Usada no fundo do carrossel e demais elementos',
+          ),
+          buildColor(
+            activeStyle.textColor,
+            ColorIdEnum.TEXT_COLOR,
+            'Cor do texto',
+            'Usada no título e descrições principais',
+          ),
+          buildColor(
+            activeStyle.primaryColor,
+            ColorIdEnum.PRIMARY_COLOR,
+            'Cor primária',
+            'Usada em destaques e botões principais',
+          ),
+          buildColor(
+            activeStyle.secondaryColor,
+            ColorIdEnum.SECONDARY_COLOR,
+            'Cor secundária',
+            'Usada em botões secundários ou textos suaves',
+          ),
+          buildColor(
+            activeStyle.tertiaryColor,
+            ColorIdEnum.TERTIARY_COLOR,
+            'Cor terciária',
+            'Usada em bordas ou elementos sutis',
+          ),
+        ])
       }
     }
-  }, [activeEcommerceQuery.data])
+
+    console.log(benefitsForm.getValues())
+    console.log(heroForm.getValues())
+  }, [activeEcommerceQuery.data, isUpdate])
 
   return (
     <EcommerceManagementContext.Provider
@@ -340,10 +460,6 @@ export function EcommerceManagementProvider({
         benefitsForm,
         benefitsFieldArray,
         isLoading,
-        fileNames,
-        benefitFileNames,
-        setBenefitFileNames,
-        setFileNames,
         setCurrentStep,
         setColors,
       }}
@@ -352,23 +468,17 @@ export function EcommerceManagementProvider({
         <form
           onSubmit={async (e) => {
             e.preventDefault()
-
             const isInitialValid = await initialForm.trigger()
             const isStyleValid = await createStyleForm.trigger()
             const isHeroValid = await heroForm.trigger()
 
-            console.log(
-              'isInitialValid:',
-              isInitialValid,
-              initialForm.formState.errors,
-            )
-            console.log('isStyleValid:', isStyleValid)
-            console.log('isHeroValid:', isHeroValid)
+            console.log('isInitialValid', initialForm.formState.errors)
+            console.log('isStyleValid', isStyleValid)
+            console.log('isHeroValid', isHeroValid)
             if (!isInitialValid || !isStyleValid || !isHeroValid) {
               toast({ variant: 'destructive', title: 'Formulário inválido' })
               return
             }
-
             if (isUpdate) {
               await handleUpdate()
             } else {
@@ -391,4 +501,35 @@ export function useEcommerceManagement(): EcommerceManagementContext {
     )
   }
   return context
+}
+
+function extractFilenameFromUrl(url: string): string {
+  try {
+    const path = new URL(url).pathname
+    return decodeURIComponent(path.split('/').pop() || '')
+  } catch {
+    return ''
+  }
+}
+
+function extractFileIdFromUrl(url: string): string {
+  const match = url.match(/\/([a-f0-9-]{36})-/)
+  return match?.[1] || ''
+}
+
+function buildColor(
+  hex: string,
+  colorId: ColorIdEnum,
+  title: string,
+  description: string,
+): IColor {
+  const color = colord(hex)
+  return {
+    colorId,
+    title,
+    description,
+    hex: color.toHex(),
+    rgb: color.toRgb(),
+    hsv: color.toHsv(),
+  }
 }

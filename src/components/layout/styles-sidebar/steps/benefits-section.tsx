@@ -12,27 +12,11 @@ import {
   CurrentStep,
   useEcommerceManagement,
 } from '@/providers/ecommerce-management-provider'
-import { useFilesService } from '@/services/files'
-import { useMutation } from '@tanstack/react-query'
 import { ImageMinus, ImagePlus } from 'lucide-react'
 
 export function BenefitsSection() {
-  const {
-    benefitsForm,
-    benefitsFieldArray,
-    setCurrentStep,
-    benefitFileNames,
-    setBenefitFileNames,
-  } = useEcommerceManagement()
-
-  const { uploadFileService } = useFilesService()
-  const uploadFileMutation = useMutation({
-    mutationFn: async (file: File) => {
-      const formData = new FormData()
-      formData.append('file', file)
-      return await uploadFileService(formData)
-    },
-  })
+  const { benefitsForm, benefitsFieldArray, setCurrentStep } =
+    useEcommerceManagement()
 
   return (
     <div className="flex h-full flex-1 flex-col">
@@ -110,37 +94,23 @@ export function BenefitsSection() {
                       multiple={false}
                       accept=".svg,image/svg+xml"
                       placeholder={
-                        benefitFileNames.find(
-                          (item) => item.fieldId === `benefits.${index}.fileId`,
-                        )?.filename ?? 'Escolha um arquivo SVG'
+                        benefitsForm.watch(`benefits.${index}.filename`) ??
+                        'Escolha um arquivo SVG'
                       }
                       name={field.name}
                       onClick={() => {
-                        benefitsForm.resetField(field.name)
-                        setBenefitFileNames((prev) =>
-                          prev.filter(
-                            (item) =>
-                              item.fieldId !== `benefits.${index}.fileId`,
-                          ),
-                        )
+                        benefitsForm.resetField(`benefits.${index}.fileId`)
+                        benefitsForm.resetField(`benefits.${index}.file`)
+                        benefitsForm.resetField(`benefits.${index}.filename`)
                       }}
-                      onChange={async (e) => {
-                        const input = e.currentTarget
-                        const file = input.files?.[0]
+                      onChange={(e) => {
+                        const file = e.currentTarget.files?.[0]
                         if (file) {
-                          const { id } =
-                            await uploadFileMutation.mutateAsync(file)
-                          setBenefitFileNames((prev) => [
-                            ...prev,
-                            {
-                              fieldId: `benefits.${index}.fileId`,
-                              filename: file.name,
-                              file,
-                              fileId: id,
-                            },
-                          ])
-                          field.onChange(id)
-                          input.value = ''
+                          benefitsForm.setValue(`benefits.${index}.file`, file)
+                          benefitsForm.setValue(
+                            `benefits.${index}.filename`,
+                            file.name,
+                          )
                         }
                       }}
                     />
@@ -164,6 +134,8 @@ export function BenefitsSection() {
                 text: '',
                 fileId: '',
                 description: '',
+                file: undefined,
+                filename: '',
               })
             }}
           >

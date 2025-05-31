@@ -12,22 +12,10 @@ import {
   CurrentStep,
   useEcommerceManagement,
 } from '@/providers/ecommerce-management-provider'
-import { useFilesService } from '@/services/files'
-import { useMutation } from '@tanstack/react-query'
 import { ImageMinus, ImagePlus } from 'lucide-react'
 
 export function HeroImages() {
-  const { heroForm, heroFieldArray, setCurrentStep, fileNames, setFileNames } =
-    useEcommerceManagement()
-
-  const { uploadFileService } = useFilesService()
-  const uploadFileMutation = useMutation({
-    mutationFn: async (file: File) => {
-      const formData = new FormData()
-      formData.append('file', file)
-      return await uploadFileService(formData)
-    },
-  })
+  const { heroForm, heroFieldArray, setCurrentStep } = useEcommerceManagement()
 
   return (
     <div className="flex h-full flex-1 flex-col">
@@ -45,7 +33,7 @@ export function HeroImages() {
                 <TooltipRoot>
                   <TooltipTrigger
                     asChild
-                    onClick={() => heroFieldArray.remove(field.id as never)}
+                    onClick={() => heroFieldArray.remove(index)}
                   >
                     <ImageMinus
                       className="absolute right-0 cursor-pointer text-zinc-700 hover:text-destructive dark:text-white"
@@ -82,36 +70,19 @@ export function HeroImages() {
                     <FormLabel>Imagem de fundo</FormLabel>
                     <FileInput
                       placeholder={
-                        fileNames.find(
-                          (item) => item.fieldId === `hero.${index}.fileId`,
-                        )?.filename ?? 'Escolha uma imagem'
+                        heroForm.watch(`hero.${index}.filename`) ??
+                        'Escolha uma imagem'
                       }
                       name={field.name}
                       onClick={() => {
-                        heroForm.resetField(field.name)
-                        setFileNames((prev) =>
-                          prev.filter(
-                            (item) => item.fieldId !== `hero.${index}.fileId`,
-                          ),
-                        )
+                        heroForm.resetField(`hero.${index}.file`)
+                        heroForm.resetField(`hero.${index}.filename`)
                       }}
-                      onChange={async (e) => {
-                        const input = e.currentTarget
-                        const file = input.files?.[0]
+                      onChange={(e) => {
+                        const file = e.currentTarget.files?.[0]
                         if (file) {
-                          const { id } =
-                            await uploadFileMutation.mutateAsync(file)
-                          setFileNames((prev) => [
-                            ...prev,
-                            {
-                              fieldId: `hero.${index}.fileId`,
-                              filename: file.name,
-                              file,
-                              fileId: id,
-                            },
-                          ])
-                          field.onChange(id)
-                          input.value = ''
+                          heroForm.setValue(`hero.${index}.file`, file)
+                          heroForm.setValue(`hero.${index}.filename`, file.name)
                         }
                       }}
                     />
@@ -130,7 +101,12 @@ export function HeroImages() {
             className="flex gap-2 text-primary"
             variant="outline"
             onClick={() => {
-              heroFieldArray.append({ text: '', fileId: '' })
+              heroFieldArray.append({
+                text: '',
+                fileId: '',
+                file: undefined,
+                filename: '',
+              })
             }}
           >
             <ImagePlus size={14} /> Adicionar imagem ao carrossel

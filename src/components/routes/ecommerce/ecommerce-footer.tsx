@@ -3,37 +3,37 @@
 import { useEcommerce } from '@/providers/ecommerce-provider'
 
 export function Footer() {
-  const { config } = useEcommerce()
-  const style = config.styles.find((s) => s.isActive)
+  const { activeStyle } = useEcommerce()
+
+  const backgroundColor = activeStyle?.backgroundColor || '#e5e7eb'
+  const textColor = activeStyle?.textColor || '#1f2937'
+  const primaryColor = activeStyle?.primaryColor || '#3b82f6'
 
   return (
     <footer
       className="flex flex-col items-center pt-16"
-      style={{ backgroundColor: style?.secondaryColor }}
+      style={{ backgroundColor }}
     >
       <div className="grid w-full max-w-[1000px] grid-cols-5 gap-36 pb-8">
         <div className="col-span-2">
-          <h3 className="mb-4 text-xl" style={{ color: style?.textColor }}>
+          <h3 className="mb-4 text-xl" style={{ color: textColor }}>
             Sobre a Loja
           </h3>
-          <p style={{ color: style?.textColor }}>
+          <p style={{ color: textColor + 'cc' }}>
             Morbi cursus porttitor enim lobortis molestie. Duis gravida turpis
             dui, eget bibendum magna congue nec.
           </p>
         </div>
         <div>
-          <h3
-            className="mb-4 text-nowrap text-xl"
-            style={{ color: style?.textColor }}
-          >
+          <h3 className="mb-4 text-nowrap text-xl" style={{ color: textColor }}>
             Minha Conta
           </h3>
           <ul>
             {Array.from({ length: 4 }).map((_, index) => (
               <li
                 key={index}
-                style={{ color: style?.primaryColor }}
                 className="cursor-pointer"
+                style={{ color: primaryColor }}
               >
                 Link {index}
               </li>
@@ -41,15 +41,15 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h3 className="mb-4 text-xl" style={{ color: style?.textColor }}>
+          <h3 className="mb-4 text-xl" style={{ color: textColor }}>
             Ajuda
           </h3>
           <ul>
             {Array.from({ length: 4 }).map((_, index) => (
               <li
                 key={index}
-                style={{ color: style?.primaryColor }}
                 className="cursor-pointer"
+                style={{ color: primaryColor }}
               >
                 Link {index}
               </li>
@@ -57,8 +57,11 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="flex w-full justify-center bg-slate-600/30 py-8">
-        <p style={{ color: style?.textColor ?? '#d1d5db' }}>
+      <div
+        className="flex w-full justify-center py-8"
+        style={{ backgroundColor: textColor + '10' }}
+      >
+        <p style={{ color: textColor + '99' }}>
           Nome da loja © 2024. Todos os direitos reservados
         </p>
       </div>

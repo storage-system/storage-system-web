@@ -24,6 +24,8 @@ export default async function EcommerceLayout({
     return notFound()
   }
 
+  console.log(config)
+
   return (
     <EcommerceProvider initialConfig={config}>
       <div className="flex min-h-screen flex-col">

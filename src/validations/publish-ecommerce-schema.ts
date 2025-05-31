@@ -3,9 +3,15 @@ import { createStyleSchema } from './create-style-schema'
 
 const heroItemSchema = z.object({
   text: z.string().min(1).max(255),
-  fileId: z.string().uuid().min(1),
+  fileId: z.string().optional(),
+  file: z
+    .custom<File>((val) => val instanceof File, {
+      message: 'Arquivo inválido',
+    })
+    .optional(),
+  fileUrl: z.string().url().optional(),
+  filename: z.string().optional(),
 })
-
 export const heroSchema = z.object({
   hero: z.array(heroItemSchema),
 })
@@ -13,7 +19,10 @@ export const heroSchema = z.object({
 const benefitsItemSchema = z.object({
   text: z.string().min(1).max(255),
   description: z.string().min(1).max(255),
-  fileId: z.string().uuid().min(1),
+  fileId: z.string().optional(),
+  file: z.custom<File>().optional(),
+  fileUrl: z.string().url().optional(),
+  filename: z.string().optional(),
 })
 
 export const benefitsSchema = z.object({
@@ -22,12 +31,12 @@ export const benefitsSchema = z.object({
 
 export const initialFormSchema = z.object({
   name: z.string().min(1).max(255),
-  ecommercePreview: z.string().uuid().optional(),
+  ecommercePreview: z.string().optional(),
 })
 
 export const publishEcommerceSchema = z.object({
   name: z.string().min(1).max(255),
-  ecommercePreview: z.string().uuid().optional(),
+  ecommercePreview: z.string().optional(),
   style: createStyleSchema.optional(),
   hero: z.array(heroItemSchema),
   benefits: z.array(benefitsItemSchema),

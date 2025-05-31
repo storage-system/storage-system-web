@@ -7,21 +7,18 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel'
 import { cn } from '@/utils/class-name'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   useEcommerceManagement,
   ColorIdEnum,
 } from '@/providers/ecommerce-management-provider'
-import { useFilesService } from '@/services/files'
-import { useQuery } from '@tanstack/react-query'
+import { useWatch } from 'react-hook-form'
 
 export function Hero() {
   const { colors, heroForm } = useEcommerceManagement()
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
   const [count, setCount] = useState(0)
-
-  const { getFileUrlService } = useFilesService()
 
   const getColorByType = (colorType: ColorIdEnum) =>
     colors.find((color) => color.colorId === colorType)?.hex || ''
@@ -31,10 +28,50 @@ export function Hero() {
   const primaryColor = getColorByType(ColorIdEnum.PRIMARY_COLOR)
   const secondaryColor = getColorByType(ColorIdEnum.SECONDARY_COLOR)
 
-  const heroData = heroForm.watch('hero') || []
+  const heroData =
+    useWatch({
+      control: heroForm.control,
+      name: 'hero',
+    }) || []
+
+  // Ref para armazenar os object URLs
+  const urlMapRef = useRef(new Map<File, string>())
+
+  // Cleanup das URLs ao desmontar
+  useEffect(() => {
+    return () => {
+      urlMapRef.current.forEach((url) => URL.revokeObjectURL(url))
+      urlMapRef.current.clear()
+    }
+  }, [])
+
+  const getImageUrl = (item: any): string => {
+    if (item.file) {
+      const cached = urlMapRef.current.get(item.file)
+      if (cached) return cached
+
+      const objectUrl = URL.createObjectURL(item.file)
+      urlMapRef.current.set(item.file, objectUrl)
+      return objectUrl
+    }
+
+    return item.fileUrl || '/hero-1.png'
+  }
+
+  const heroItems = heroData.length
+    ? heroData.map((item) => ({
+        ...item,
+        imageUrl: getImageUrl(item),
+      }))
+    : [
+        {
+          text: 'Sou um título. Clique aqui para editar e adicionar seu próprio texto.',
+          imageUrl: '/hero-1.png',
+        },
+      ]
 
   useEffect(() => {
-    if (!api) return undefined
+    if (!api) return
     setCount(api.scrollSnapList().length)
     setCurrent(api.selectedScrollSnap() + 1)
     const handleSelect = () => setCurrent(api.selectedScrollSnap() + 1)
@@ -44,25 +81,6 @@ export function Hero() {
     }
   }, [api])
 
-  const heroItems =
-    heroData.length > 0
-      ? heroData
-      : [
-          {
-            text: 'Sou um título. Clique aqui para editar e adicionar seu próprio texto.',
-            fileId: '',
-          },
-        ]
-
-  const heroFileIds = heroData.map((item) => item.fileId).filter(Boolean)
-
-  const filesQuery = useQuery({
-    queryKey: ['files', heroFileIds],
-    queryFn: async () =>
-      Promise.all(heroFileIds.map((fileId) => getFileUrlService(fileId))),
-    enabled: heroFileIds.length > 0,
-  })
-
   return (
     <div className="relative h-[600px] w-full">
       <CarouselComponent
@@ -71,49 +89,39 @@ export function Hero() {
         className="size-full"
       >
         <CarouselContent className="h-[600px]">
-          {heroItems.map((heroItem, index) => {
-            const fileIdIndex = heroFileIds.findIndex(
-              (id) => id === heroItem.fileId,
-            )
-            const fileUrl =
-              fileIdIndex !== -1
-                ? filesQuery.data?.[fileIdIndex]?.fileUrl
-                : '/hero-1.png'
-
-            return (
-              <CarouselItem
-                key={index}
-                className="relative flex h-full justify-center bg-cover bg-center"
+          {heroItems.map((heroItem, index) => (
+            <CarouselItem
+              key={index}
+              className="relative flex h-full justify-center bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${heroItem.imageUrl})`,
+              }}
+            >
+              <div
+                className="absolute inset-0"
                 style={{
-                  backgroundImage: `url(${fileUrl})`,
+                  background:
+                    backgroundColor && backgroundColor !== '#ffffff'
+                      ? `${backgroundColor}33`
+                      : 'rgba(0,0,0,0.5)',
                 }}
-              >
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      backgroundColor && backgroundColor !== '#ffffff'
-                        ? `${backgroundColor}33` // ~90% opacity
-                        : 'rgba(0,0,0,0.5)',
-                  }}
-                />
-                <div className="relative z-10 flex w-full max-w-[1200px] items-center px-8">
-                  <div className="flex flex-col gap-10">
-                    <p
-                      className="w-2/3 text-4xl font-semibold sm:text-6xl"
-                      style={{
-                        color: textColor || '#ffffff',
-                        textShadow: '1px 1px 2px rgba(0,0,0,0.4)',
-                      }}
-                    >
-                      {heroItem.text ||
-                        'Sou um título. Clique aqui para editar e adicionar seu próprio texto.'}
-                    </p>
-                  </div>
+              />
+              <div className="relative z-10 flex w-full max-w-[1200px] items-center px-8">
+                <div className="flex flex-col gap-10">
+                  <p
+                    className="w-2/3 text-4xl font-semibold sm:text-6xl"
+                    style={{
+                      color: textColor || '#ffffff',
+                      textShadow: '1px 1px 2px rgba(0,0,0,0.4)',
+                    }}
+                  >
+                    {heroItem.text ||
+                      'Sou um título. Clique aqui para editar e adicionar seu próprio texto.'}
+                  </p>
                 </div>
-              </CarouselItem>
-            )
-          })}
+              </div>
+            </CarouselItem>
+          ))}
         </CarouselContent>
       </CarouselComponent>
 
