@@ -356,7 +356,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/metrics": {
+    "/api/metrics/old-stock": {
         parameters: {
             query?: never;
             header?: never;
@@ -364,6 +364,22 @@ export interface paths {
             cookie?: never;
         };
         get: operations["MetricsController_productMetrics"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/metrics/stock-general": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["MetricsController_stockGeneralMetrics"];
         put?: never;
         post?: never;
         delete?: never;
@@ -591,7 +607,7 @@ export interface components {
             fileId?: string;
         };
         HttpEachCategoryListResponse: {
-            /** @example b490238d-8185-440f-b08a-e8346647d6d9 */
+            /** @example 776fb4ba-b90f-499a-a9dc-0baf4ed00808 */
             id: string;
             name: string;
             isActive?: boolean;
@@ -652,13 +668,13 @@ export interface components {
             categoryIds: string[];
         };
         HttpItemResponse: {
-            /** @example baf0d3af-59c0-419c-b452-8948e04bb8b8 */
+            /** @example e1a60bc5-bfed-4a7d-a70a-865136c5bb36 */
             id: string;
-            /** @example Juan Hermiston */
+            /** @example Benny Herman */
             name: string;
         };
         HttpEachProductListResponse: {
-            /** @example df310c31-160d-4fd6-97f5-dc7bb41bd281 */
+            /** @example 46d9db4c-3f04-43d2-8db0-48b434b3826a */
             id: string;
             name: string;
             quantityInStock: number;
@@ -687,7 +703,7 @@ export interface components {
             items: components["schemas"]["HttpEachProductListResponse"][];
         };
         HttpProductGetResponse: {
-            /** @example 69633052-fa64-4ff5-a004-379bbe58ce68 */
+            /** @example cbcbc2de-5119-42b4-9cad-1e05f38fb243 */
             id: string;
             name: string;
             description: string;
@@ -757,11 +773,11 @@ export interface components {
             reportFrequency: "diary" | "weekly" | "month" | "year";
         };
         HttpConfigurationGetResponse: {
-            /** @example 3b095077-56d3-477e-bd64-e0f83c3305d7 */
+            /** @example 1074fee7-7e3e-40a9-953b-b03d163534fc */
             id: string;
-            /** @example 6126ae88-0deb-41fa-ab21-4dfa975d11a3 */
+            /** @example b7c86ba3-bb19-4d02-9668-d8f1297b25de */
             userId: string;
-            /** @example 0e3392a4-8e6d-4b4d-9afb-21e2ab93149c */
+            /** @example a9e81bf5-8238-4d94-bf84-e89c6e0d848b */
             companyId: string;
             daysBeforeOldStock: number;
             warningDays: number;
@@ -797,9 +813,9 @@ export interface components {
             tertiaryColor: string;
         };
         HttpEachStyleListResponse: {
-            /** @example 00ccef56-ace5-452e-b9a4-62a38e0d0d18 */
+            /** @example 0c47c233-1b57-4668-842a-634d0422a7cf */
             id: string;
-            /** @example 0e3027c5-00f4-4dfa-9a72-a26d7949c45b */
+            /** @example 940df3eb-70e4-4918-b359-be218794cf87 */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -820,9 +836,9 @@ export interface components {
             items: components["schemas"]["HttpEachStyleListResponse"][];
         };
         HttpStyleGetResponse: {
-            /** @example 75fda430-e0f8-4c9e-a4a7-ec5d7e282986 */
+            /** @example 016b8175-16ec-4cfe-a683-95a55cf5e013 */
             id: string;
-            /** @example dcd1939f-8f3a-4a93-8d6b-d9b5bf1f48f1 */
+            /** @example 1d693bd0-624b-4877-bf44-b4ca10f319a7 */
             companyId: string;
             name: string;
             isActive?: boolean;
@@ -845,7 +861,7 @@ export interface components {
             tertiaryColor?: string;
         };
         HttpFileCreatedResponse: {
-            /** @example 6665b0cc-1fa4-41d2-ab9e-2cfa0338cf2f */
+            /** @example 077a514e-29e7-47cc-b1f1-c613335b79a0 */
             id: string;
         };
         HttpGetFileUrlResponse: {
@@ -868,6 +884,40 @@ export interface components {
             oldStockMetrics: components["schemas"]["HttpOldStockMetricsResponse"];
             productMetrics: components["schemas"]["HttpProductsMetricsResponse"];
         };
+        CategoryOverviewDto: {
+            /** @example Bobinas de Aço */
+            name: string;
+            /** @example 5 */
+            value: number;
+            /** @example #8b5cf6 */
+            color: string;
+        };
+        DateDataDto: {
+            /** @example Jan/2025 */
+            periodo: string;
+            /** @example 100 */
+            fabricacao: number;
+            /** @example 90 */
+            validade: number;
+            /** @example 10 */
+            vencidos: number;
+        };
+        StockGeneralMetricsResponseDto: {
+            /** @example 1234 */
+            totalProducts: number;
+            /** @example 8 */
+            activeCategories: number;
+            /** @example 45678 */
+            totalValue: number;
+            /** @example 1199 */
+            activeProducts: number;
+            /** @example 35 */
+            criticalStockProducts: number;
+            /** @example 37 */
+            validProducts: number;
+            categoryOverview: components["schemas"]["CategoryOverviewDto"][];
+            dateData: components["schemas"]["DateDataDto"][];
+        };
         CreateInviteDTO: {
             /** Format: email */
             email: string;
@@ -885,9 +935,9 @@ export interface components {
             };
         };
         HttpInviteGetResponse: {
-            /** @example 7c74c0f5-f6e8-4209-b187-d3cffcc353ed */
+            /** @example f8490ea6-9025-45ae-831d-ba59bc8122ea */
             id: string;
-            /** @example Yvonne.Buckridge15@hotmail.com */
+            /** @example Waino.Balistreri@gmail.com */
             email: string;
             /** @example [
              *       "MEMBER"
@@ -915,13 +965,6 @@ export interface components {
             /** @default [] */
             hero: {
                 text: string;
-                /** Format: uuid */
-                fileId: string;
-            }[];
-            /** @default [] */
-            benefits: {
-                text: string;
-                description?: string;
                 /** Format: uuid */
                 fileId: string;
             }[];
@@ -976,11 +1019,6 @@ export interface components {
                 primaryColor: string;
                 secondaryColor: string;
                 tertiaryColor: string;
-            }[];
-            benefits: {
-                fileUrl: string;
-                text: string;
-                description?: string;
             }[];
             /** @default [] */
             hero: {
@@ -1790,6 +1828,25 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HttpGetMetricsResponse"];
+                };
+            };
+        };
+    };
+    MetricsController_stockGeneralMetrics: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StockGeneralMetricsResponseDto"];
                 };
             };
         };
