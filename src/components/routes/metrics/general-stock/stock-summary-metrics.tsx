@@ -27,7 +27,7 @@ export const StockSummaryMetrics = (data: Props) => {
     },
     {
       title: 'Taxa de Validade OK',
-      value: `${data.validProducts}%`,
+      value: `${data.validProducts.toFixed(2)}%`,
       description: 'produtos dentro da validade',
       progress: data.validProducts,
       icon: CheckCircle,
