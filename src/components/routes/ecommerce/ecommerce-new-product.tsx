@@ -38,7 +38,7 @@ export function NewProduct({
         style={{ backgroundColor }}
       >
         <div>
-          <p className="text-lg" style={{ color: textColor }}>
+          <p className="text-lg truncate w-[150px]" style={{ color: textColor }}>
             {name}
           </p>
           <div>
